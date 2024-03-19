@@ -11,11 +11,12 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     function i2cWriteBuffer(buf: Buffer, repeat: boolean = false) { pins.i2cWriteBuffer(qI2C, buf, repeat) }
 
     const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
-    const cx = 128 // Pixel (Bytes von links nach rechts)
+    export const cx = 128 // max x Pixel (Bytes von links nach rechts)
     // 6 Bytes zur Cursor Positionierung vor den Daten + 1 Byte 0x40 Display Data
 
     let qI2C = eI2C.I2C_x3C
     let qArray: Buffer[] = [] // leeres Array Elemente Typ Buffer
+    export function qy() { return qArray.length * 8 } // max. y Pixel (von oben nach unten)
 
     export enum ePages {
         //% block="128x64"

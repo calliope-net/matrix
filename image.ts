@@ -5,7 +5,7 @@ namespace matrix {
     // ========== group="Image in Buffer zeichnen" subcategory=Bilder
 
     //% group="Image in Buffer zeichnen" subcategory=Bilder
-    //% block="zeichne Bild %im x %xpos y %ypos || 0-Pixel löschen %del"
+    //% block="zeichne Bild %im x %xpos y %ypos || 0-Pixel löschen %del" weight=9
     //% x.min=0 x.max=119 y.min=0 y.max=55
     //% del.shadow="toggleYesNo"
     //% inlineInputMode=inline
@@ -18,6 +18,41 @@ namespace matrix {
                     setPixel(ix + x, iy + y, true)
             }
         }
+    }
+
+    //% group="Image in Buffer zeichnen" subcategory=Bilder
+    //% block="zeichne Bild %im x %xpos y %ypos Faktor %faktor || 0-Pixel löschen %del" weight=8
+    //% x.min=0 x.max=127 y.min=0 y.max=127
+    //% faktor.min=1 faktor.max=8 faktor.defl=1
+    //% del.shadow="toggleYesNo"
+    //% inlineInputMode=inline
+    export function writeImage(im: Image, x: number, y: number, faktor = 1, del = false) {
+        if (!between(faktor, 1, 16)) faktor = 1
+        if (!between(x, 0, cx - im.width() * faktor)) x = cx - im.width() * faktor
+        if (!between(y, 0, qy() - im.height() * faktor)) y = qy() - im.height() * faktor
+
+        //if (between(x, 0, cx - im.width()) && between(y, 0, qy() - im.height())) {
+        for (let iy = 0; iy <= im.height() - 1; iy++) {
+            for (let ix = 0; ix <= im.width() - 1; ix++) {
+                if (del)  // Pixel im Buffer an und aus schalten
+                    setPixelFaktor(x, y, ix, iy, faktor, im.pixel(ix, iy))
+                else if ((im.pixel(ix, iy))) // Pixel nur an schalten (false lässt vorhandene Pixel unverändert)
+                    setPixelFaktor(x, y, ix, iy, faktor, true)
+            }
+        }
+        //}
+    }
+
+    function setPixelFaktor(x: number, y: number, ix: number, iy: number, faktor = 1, pixel = true) {
+        if (faktor == 1)
+            setPixel(ix + x, iy + y, pixel)
+        else
+            for (let fy = 0; fy < faktor; fy++) {
+                setPixel(x + ix * faktor, y + iy * faktor + fy, pixel)
+                for (let fx = 0; fx < faktor; fx++) {
+                    setPixel(x + ix * faktor + fx, y + iy * faktor + fy, pixel)
+                }
+            }
     }
 
 
