@@ -5,21 +5,23 @@ namespace matrix
 https://wiki.seeedstudio.com/Grove-OLED-Display-1.12-SH1107_V3.0/
 https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1107V2.1.pdf
 */ {
+    export enum eI2C { I2C_x3C = 0x3C, I2C_x3D = 0x3D }
 
     // OLED Display (SH1107) kann nur I²C Write; keine i2cRead-Funktion erforderlich
-    function i2cWriteBuffer(buf: Buffer, repeat: boolean = false) { pins.i2cWriteBuffer(0x3C, buf, repeat) }
+    function i2cWriteBuffer(buf: Buffer, repeat: boolean = false) { pins.i2cWriteBuffer(qI2C, buf, repeat) }
 
     const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
     const cx = 128 // Pixel (Bytes von links nach rechts)
     // 6 Bytes zur Cursor Positionierung vor den Daten + 1 Byte 0x40 Display Data
 
+    let qI2C = eI2C.I2C_x3C
     let qArray: Buffer[] = [] // leeres Array Elemente Typ Buffer
 
     export enum ePages {
-        //% block="128x128"
-        y128 = 16,
         //% block="128x64"
-        y64 = 8
+        y64 = 8,
+        //% block="128x128"
+        y128 = 16
     }
 
     enum eCONTROL { // Co Continuation bit(7); D/C# Data/Command Selection bit(6); following by six "0"s
@@ -34,9 +36,13 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     // ========== group="OLED Display"
 
     //% group="OLED Display"
-    //% block="beim Start %pPages invert %pInvert" weight=9
+    //% block="beim Start %pPages || invert %pInvert drehen %pFlip %pI2C" weight=9
     //% pInvert.shadow="toggleOnOff"
-    export function init(pPages: ePages, pInvert = false) {
+    //% pFlip.shadow="toggleOnOff"
+    // pI2C.min=60 pI2C.max=61
+    //% inlineInputMode=inline
+    export function init(pPages: ePages, pInvert = false, pFlip = false, pI2C?: eI2C) {
+        if (pI2C) qI2C = pI2C
         let bu: Buffer
         // pro Page einen Buffer(7+128) an Array anfügen (push)
         for (let page = 0; page < pPages; page++) { // Page 0..15 oder 0..7
@@ -60,10 +66,18 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         }
 
         // Display initialisieren
-        bu = Buffer.create(3)   // muss Anzahl der folgenden setUint8 entsprechen
-        bu.setUint8(0, eCONTROL.x00_xCom) // CONTROL Byte 0x00: folgende Bytes (im selben Buffer) sind alle command und kein CONTROL
-        bu.setUint8(1, (pInvert ? 0xA7 : 0xA6))  // Set display not inverted / A6 Normal A7 Inverse display
-        bu.setUint8(2, 0xAF)  // Set display ON (0xAE sleep mode)
+        let offset = 0
+        bu = Buffer.create(7)   // muss Anzahl der folgenden setUint8 entsprechen
+        bu.setUint8(offset++, eCONTROL.x00_xCom) // CONTROL Byte 0x00: folgende Bytes (im selben Buffer) sind alle command und kein CONTROL
+
+        bu.setUint8(offset++, 0x8D)  // Set Charge Pump (nur für Yellow&Blue SSD1315 erforderlich)
+        bu.setUint8(offset++, 0x14)  //     Charge Pump (0x10 Disable; 0x14 7,5V; 0x94 8,5V; 0x95 9,0V)
+
+        bu.setUint8(offset++, (pFlip ? 0xA1 : 0xA0)) // Set Segment Re-Map default 0xA0
+        bu.setUint8(offset++, (pFlip ? 0xC8 : 0xC0)) // Set Com Output Scan Direction default 0xC0
+
+        bu.setUint8(offset++, (pInvert ? 0xA7 : 0xA6))  // Set display not inverted / A6 Normal A7 Inverse display
+        bu.setUint8(offset++, 0xAF)  // Set display ON (0xAE sleep mode)
 
         i2cWriteBuffer(bu)
         control.waitMicros(100000) // 100ms Delay Recommended
