@@ -2,6 +2,7 @@
 //% color=#0000BF icon="\uf108" block="Matrix" weight=20
 namespace matrix
 /* 240306 240318 Lutz Elßner
+CALLIOPE mini V2 erforderlich (32 KB RAM)
 https://wiki.seeedstudio.com/Grove-OLED-Display-1.12-SH1107_V3.0/
 https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1107V2.1.pdf
 */ {
