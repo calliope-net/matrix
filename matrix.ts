@@ -47,6 +47,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         let bu: Buffer
         // pro Page einen Buffer(7+128) an Array anfügen (push)
         for (let page = 0; page < pPages; page++) { // Page 0..15 oder 0..7
+            //basic.showNumber(page)
             bu = Buffer.create(cOffset + cx)
             bu.fill(0)
 
