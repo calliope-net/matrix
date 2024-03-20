@@ -49,7 +49,7 @@ namespace matrix {
             setPixel(ix + x, iy + y, pixel)
         else
             for (let fy = 0; fy < faktor; fy++) {
-                setPixel(x + ix * faktor, y + iy * faktor + fy, pixel)
+                //setPixel(x + ix * faktor, y + iy * faktor + fy, pixel)
                 for (let fx = 0; fx < faktor; fx++) {
                     setPixel(x + ix * faktor + fx, y + iy * faktor + fy, pixel)
                 }
