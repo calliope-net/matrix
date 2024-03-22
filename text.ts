@@ -62,7 +62,7 @@ namespace matrix {
 
 
     function getPixel_5x8(pCharCode: number): Buffer {
-     
+
         if (between(pCharCode, 0x20, 0x7F)) {
 
             switch (pCharCode & 0xF0) { // 16 string-Elemente je 5 Byte
@@ -190,9 +190,27 @@ namespace matrix {
                     return Buffer.fromHex("FFFFFFFFFF")
             }
         }
-        else 
-            return Buffer.fromHex("FFFFFFFFFF")
+        else {
+            let b: Buffer = Buffer.fromHex("FFFFFFFFFF")
+            let s = "ÄÖÜäöüß€°"
+            for (let j = 0; j < s.length; j++) {
+                if (s.charCodeAt(j) == pCharCode) {
+                    b = Buffer.fromHex([
+                        "7D0A090A7D", // "Ä"
+                        "3D4241423D", // "Ö"
+                        "3D4040403D", // "Ü"
+                        "2154545578", // "ä"
+                        "3944443900", // "ö"
+                        "3D40407D00", // "ü"
+                        "FE09493600", // "ß"
+                        "143E555555", // "€" "143E5555551400"
+                        "0205020000"  // "°"
+                    ].get(j))
+                    break
+                }
+            }
+            return b
+        }
     }
-
 
 } // text.ts
