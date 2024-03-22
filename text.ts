@@ -35,6 +35,7 @@ namespace matrix {
 
     //% group="Text schreiben" subcategory="Text"
     //% block="Bild aus Zeichencode %charCode"
+    //% charCode.shadow="matrix_charCodeAt"
     export function writeCharImage(charCode: number): Image {
 
         let i5x8 = createImage(`
@@ -61,73 +62,136 @@ namespace matrix {
 
 
     function getPixel_5x8(pCharCode: number): Buffer {
-        let string5Byte: string
-        if (between(pCharCode, 0x30, 0x3F)) {
+     
+        if (between(pCharCode, 0x20, 0x7F)) {
 
-            //string8Byte = this.x70.get(15)
-            switch (pCharCode & 0xF0) { // 16 string-Elemente je 8 Byte = 128
-                //case 0x20: string8Byte = this.x20.get(pCharCode & 0x0F); break
+            switch (pCharCode & 0xF0) { // 16 string-Elemente je 5 Byte
+                case 0x20:
+                    return Buffer.fromHex([
+                        "0000000000", // " "
+                        "005F000000", // "!"
+                        "0007000700", // """
+                        "147F147F14", // "#"
+                        "242A7F2A12", // "$"
+                        "2313086462", // "%"
+                        "3649552250", // "&"
+                        "0005030000", // "'"
+                        "1C22410000", // "("
+                        "41221C0000", // ")"
+                        "082A1C2A08", // "*"
+                        "08083E0808", // "+"
+                        "A060000000", // ","
+                        "0808080808", // "-"
+                        "6060000000", // "."
+                        "2010080402" // "/"
+                    ].get(pCharCode & 0x0F))
+
                 case 0x30:
-                    string5Byte = [
-                        "\x3E\x51\x49\x45\x3E", // "0"
-                        "\x00\x42\x7F\x40\x00", // "1"
-                        "\x62\x51\x49\x49\x46", // "2"
-                        "\x22\x41\x49\x49\x36", // "3"
-                        "\x18\x14\x12\x7F\x10", // "4"
-                        "\x27\x45\x45\x45\x39", // "5"
-                        "\x3C\x4A\x49\x49\x30", // "6"
-                        "\x01\x71\x09\x05\x03", // "7"
-                        "\x36\x49\x49\x49\x36", // "8"
-                        "\x06\x49\x49\x29\x1E", // "9"
-                        /* "\x00\x00\x36\x36\x00\x00\x00\x00", // ":"
-                        "\x00\x00\xAC\x6C\x00\x00\x00\x00", // ";"
-                        "\x00\x08\x14\x22\x41\x00\x00\x00", // "<"
-                        "\x00\x14\x14\x14\x14\x14\x00\x00", // "="
-                        "\x00\x41\x22\x14\x08\x00\x00\x00", // ">"
-                        "\x00\x02\x01\x51\x09\x06\x00\x00" // "?" */
-                    ].get(pCharCode & 0x0F)
+                    return Buffer.fromHex([
+                        "3E5149453E", // "0"
+                        "00427F4000", // "1"
+                        "6251494946", // "2"
+                        "2241494936", // "3"
+                        "1814127F10", // "4"
+                        "2745454539", // "5"
+                        "3C4A494930", // "6"
+                        "0171090503", // "7"
+                        "3649494936", // "8"
+                        "064949291E", // "9"
+                        "0036360000", // ":"
+                        "00AC6C0000", // ";"
+                        "0814224100", // "<"
+                        "1414141414", // "="
+                        "4122140800", // ">"
+                        "0201510906"  // "?"
+                    ].get(pCharCode & 0x0F))
 
-                    /* string8Byte = [
-                        "\x00\x3E\x51\x49\x45\x3E\x00\x00", // "0"
-                        "\x00\x00\x42\x7F\x40\x00\x00\x00", // "1"
-                        "\x00\x62\x51\x49\x49\x46\x00\x00", // "2"
-                        "\x00\x22\x41\x49\x49\x36\x00\x00", // "3"
-                        "\x00\x18\x14\x12\x7F\x10\x00\x00", // "4"
-                        "\x00\x27\x45\x45\x45\x39\x00\x00", // "5"
-                        "\x00\x3C\x4A\x49\x49\x30\x00\x00", // "6"
-                        "\x00\x01\x71\x09\x05\x03\x00\x00", // "7"
-                        "\x00\x36\x49\x49\x49\x36\x00\x00", // "8"
-                        "\x00\x06\x49\x49\x29\x1E\x00\x00", // "9"
-                        "\x00\x00\x36\x36\x00\x00\x00\x00", // ":"
-                        "\x00\x00\xAC\x6C\x00\x00\x00\x00", // ";"
-                        "\x00\x08\x14\x22\x41\x00\x00\x00", // "<"
-                        "\x00\x14\x14\x14\x14\x14\x00\x00", // "="
-                        "\x00\x41\x22\x14\x08\x00\x00\x00", // ">"
-                        "\x00\x02\x01\x51\x09\x06\x00\x00" // "?"
-                    ].get(pCharCode & 0x0F) */
+                case 0x40:
+                    return Buffer.fromHex([
+                        "324979413E", // "@""
+                        "7E0909097E", // "A"
+                        "7F49494936", // "B"
+                        "3E41414122", // "C"
+                        "7F4141221C", // "D"
+                        "7F49494941", // "E"
+                        "7F09090901", // "F"
+                        "3E41415172", // "G"
+                        "7F0808087F", // "H"
+                        "417F410000", // "I"
+                        "2040413F01", // "J"
+                        "7F08142241", // "K"
+                        "7F40404040", // "L"
+                        "7F020C027F", // "M"
+                        "7F0408107F", // "N"
+                        "3E4141413E" // "O"
+                    ].get(pCharCode & 0x0F))
 
-                    break
-                //case 0x40: string8Byte = this.x40.get(pCharCode & 0x0F); break
-                //case 0x50: string8Byte = this.x50.get(pCharCode & 0x0F); break
-                //case 0x60: string8Byte = this.x60.get(pCharCode & 0x0F); break
-                //case 0x70: string8Byte = this.x70.get(pCharCode & 0x0F); break
-                //default: s8 = this.x70.get(15); break
+                case 0x50:
+                    return Buffer.fromHex([
+                        "7F09090906", // "P"
+                        "3E4151215E", // "Q"
+                        "7F09192946", // "R"
+                        "2649494932", // "S"
+                        "01017F0101", // "T"
+                        "3F4040403F", // "U"
+                        "1F2040201F", // "V"
+                        "3F4038403F", // "W"
+                        "6314081463", // "X"
+                        "0304780403", // "Y"
+                        "6151494543", // "Z"
+                        "7F41410000", // """
+                        "0204081020", // "\"
+                        "41417F0000", // """
+                        "0402010204", // "^"
+                        "8080808080" // "_"
+                    ].get(pCharCode & 0x0F))
+
+                case 0x60:
+                    return Buffer.fromHex([
+                        "0102040000", // "`"
+                        "2054545478", // "a"
+                        "7F48444438", // "b"
+                        "3844442800", // "c"
+                        "384444487F", // "d"
+                        "3854545418", // "e"
+                        "087E090200", // "f"
+                        "18A4A4A47C", // "g"
+                        "7F08040478", // "h"
+                        "007D000000", // "i"
+                        "80847D0000", // "j"
+                        "7F10284400", // "k"
+                        "417F400000", // "l"
+                        "7C04180478", // "m"
+                        "7C08047C00", // "n"
+                        "3844443800" // "o"
+                    ].get(pCharCode & 0x0F))
+
+                case 0x70:
+                    return Buffer.fromHex([
+                        "FC24241800", // "p"
+                        "182424FC00", // "q"
+                        "007C080400", // "r"
+                        "4854542400", // "s"
+                        "047F440000", // "t"
+                        "3C40407C00", // "u"
+                        "1C2040201C", // "v"
+                        "3C4030403C", // "w"
+                        "4428102844", // "x"
+                        "1CA0A07C00", // "y"
+                        "4464544C44", // "z"
+                        "0836410000", // "{"
+                        "007F000000", // "|"
+                        "4136080000", // "}"
+                        "0201010201", // "~"
+                        "FFFFFFFFFF"  // 127
+                    ].get(pCharCode & 0x0F))
+
+                default:
+                    return Buffer.fromHex("FFFFFFFFFF")
             }
-            return Buffer.fromUTF8(string5Byte)
         }
-        else {
-            let b: Buffer = Buffer.fromHex("FFFFFFFFFFFFFFFF")
-
-            /* let s = "ÄÖÜäöüß€°"
-            for (let j = 0; j < s.length; j++) {
-                if ((s.charCodeAt(j)) == (pCharCode)) {
-                    //string8Byte = this.h80.get(j)
-                    b = this.b80.slice(j * 8, 8)
-                    break
-                }
-            } */
-            return b
-        }
+        else 
+            return Buffer.fromHex("FFFFFFFFFF")
     }
 
 

@@ -258,4 +258,12 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% block="// %text"
     export function comment(text: string): void { }
 
+
+    //% blockId=matrix_charCodeAt
+    //% group="Zahl (number)" advanced=true
+    //% block="charCodeAt %text index %index" weight=6
+    export function charCodeAt(text: string, index: number) {
+        return text.charCodeAt(index)
+    }
+
 } // matrix.ts
