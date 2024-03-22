@@ -168,6 +168,11 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
     export function line(x0: number, y0: number, x1: number, y1: number, pixel?: boolean) {
+        x0 = Math.trunc(x0)
+        y0 = Math.trunc(y0)
+        x1 = Math.trunc(x1)
+        y1 = Math.trunc(y1)
+
         // https://de.wikipedia.org/wiki/Bresenham-Algorithmus
         let dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
         let dy = -Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
@@ -238,6 +243,8 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         return (i0 >= i1 && i0 <= i2)
     }
 
+    //% block advanced=true
+    export function pi() { return Math.PI }
 
     //% group="Text // Kommentar" advanced=true
     //% block="// %text"
