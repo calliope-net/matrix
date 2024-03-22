@@ -129,6 +129,10 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
     // ========== group="Pixel (Buffer)"
 
+    export function writeBuffer(x: number, page: number, srcBuffer: Buffer) {
+        qArray[page].write(cOffset + x, srcBuffer)
+    }
+
     // group="Pixel (Buffer)" deprecated=true
     // block weight=9
     /* export function setPixel1(x: number, y: number, bit: boolean) {

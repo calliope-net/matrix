@@ -11,7 +11,8 @@
         "README.md",
         "matrix.ts",
         "image.ts",
-        "clock.ts"
+        "clock.ts",
+        "text.ts"
     ],
     "testFiles": [
         "test.ts"
