@@ -192,6 +192,10 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
     export function rasterCircle(x0: number, y0: number, radius: number, pixel?: boolean) {
+        x0 = Math.trunc(x0)
+        y0 = Math.trunc(y0)
+        radius = Math.trunc(radius)
+
         // https://de.wikipedia.org/wiki/Bresenham-Algorithmus
         let f = 1 - radius;
         let ddF_x = 0;
