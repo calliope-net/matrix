@@ -10,7 +10,8 @@
         "main.ts",
         "README.md",
         "matrix.ts",
-        "image.ts"
+        "image.ts",
+        "clock.ts"
     ],
     "testFiles": [
         "test.ts"
