@@ -6,18 +6,15 @@ CALLIOPE mini V2 erforderlich (32 KB RAM)
 https://wiki.seeedstudio.com/Grove-OLED-Display-1.12-SH1107_V3.0/
 https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1107V2.1.pdf
 */ {
+    // ========== I²C ==========
     export enum eI2C { I2C_x3C = 0x3C, I2C_x3D = 0x3D }
 
     // OLED Display (SH1107) kann nur I²C Write; keine i2cRead-Funktion erforderlich
-    function i2cWriteBuffer(buf: Buffer, repeat: boolean = false) { pins.i2cWriteBuffer(qI2C, buf, repeat) }
+    function i2cWriteBuffer(pI2C: eI2C, buf: Buffer, repeat: boolean = false) { pins.i2cWriteBuffer(pI2C, buf, repeat) }
 
-    const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
-    export const cx = 128 // max x Pixel (Bytes von links nach rechts)
-    // 6 Bytes zur Cursor Positionierung vor den Daten + 1 Byte 0x40 Display Data
 
-    let qI2C = eI2C.I2C_x3C
+    // ========== Buffer ==========
     let qArray: Buffer[] = [] // leeres Array Elemente Typ Buffer
-    export function qy() { return qArray.length * 8 } // max. y Pixel (von oben nach unten)
 
     export enum ePages {
         //% block="128x64"
@@ -25,6 +22,17 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         //% block="128x128"
         y128 = 16
     }
+
+    // 6 Bytes zur Cursor Positionierung vor den Daten + 1 Byte 0x40 Display Data
+    const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
+
+    export const cx = 128 // max x Pixel (Bytes von links nach rechts)
+    let qPages3C = ePages.y64 // Display Höhe (Pages) kann pro I²C Adresse verschieden sein
+    let qPages3D = ePages.y64 // 8 oder 16 Pages
+
+    //let qI2C = eI2C.I2C_x3C
+    export function qy() { return qArray.length * 8 } // max. y Pixel (von oben nach unten)
+
 
     enum eCONTROL { // Co Continuation bit(7); D/C# Data/Command Selection bit(6); following by six "0"s
         // CONTROL ist immer das 1. Byte im Buffer
@@ -43,29 +51,33 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% pFlip.shadow="toggleOnOff"
     // pI2C.min=60 pI2C.max=61
     //% inlineInputMode=inline
-    export function init(pPages: ePages, pInvert = false, pFlip = false, pI2C?: eI2C) {
-        if (pI2C) qI2C = pI2C
+    export function init(pPages: ePages, pInvert = false, pFlip = false, pI2C = eI2C.I2C_x3C) {
+        if (pI2C == eI2C.I2C_x3D) qPages3D = pPages; else qPages3C = pPages
+        //if (pI2C) qI2C = pI2C
         let bu: Buffer
         // pro Page einen Buffer(7+128) an Array anfügen (push)
-        for (let page = 0; page < pPages; page++) { // Page 0..15 oder 0..7
-            //basic.showNumber(page)
-            bu = Buffer.create(cOffset + cx)
-            bu.fill(0)
+        if (qArray.length < pPages) {
+            qArray = []
+            for (let page = 0; page < pPages; page++) { // Page 0..15 oder 0..7
+                //basic.showNumber(page)
+                bu = Buffer.create(cOffset + cx)
+                bu.fill(0)
 
-            // der Anfang vom Buffer 0..6 wird initialisiert und ändert sich nicht mehr; Daten ab Offset 7..135
-            // Cursor Positionierung an den Anfang jeder Page
-            bu.setUint8(0, eCONTROL.x80_1Com) // CONTROL+1Command
-            bu.setUint8(1, 0xB0 | page & 0x0F) // page number 0-7 B0-B7 - beim 128x128 Display 0x0F
-            // x (Spalte) 7 Bit 0..127 ist immer 0
-            bu.setUint8(2, eCONTROL.x80_1Com) // CONTROL+1Command
-            bu.setUint8(3, 0x00) // lower start column address 0x00-0x0F 4 Bit
-            bu.setUint8(4, eCONTROL.x80_1Com) // CONTROL+1Command
-            bu.setUint8(5, 0x10) // upper start column address 0x10-0x17 3 Bit
+                // der Anfang vom Buffer 0..6 wird initialisiert und ändert sich nicht mehr; Daten ab Offset 7..135
+                // Cursor Positionierung an den Anfang jeder Page
+                bu.setUint8(0, eCONTROL.x80_1Com) // CONTROL+1Command
+                bu.setUint8(1, 0xB0 | page & 0x0F) // page number 0-7 B0-B7 - beim 128x128 Display 0x0F
+                // x (Spalte) 7 Bit 0..127 ist immer 0
+                bu.setUint8(2, eCONTROL.x80_1Com) // CONTROL+1Command
+                bu.setUint8(3, 0x00) // lower start column address 0x00-0x0F 4 Bit
+                bu.setUint8(4, eCONTROL.x80_1Com) // CONTROL+1Command
+                bu.setUint8(5, 0x10) // upper start column address 0x10-0x17 3 Bit
 
-            // nach 0x40 folgen die Daten
-            bu.setUint8(6, eCONTROL.x40_Data) // CONTROL Byte 0x40: Display Data
+                // nach 0x40 folgen die Daten
+                bu.setUint8(6, eCONTROL.x40_Data) // CONTROL Byte 0x40: Display Data
 
-            qArray.push(bu) // Array aus 8 oder 16 Buffern je 128 Byte
+                qArray.push(bu) // Array aus 8 oder 16 Buffern je 128 Byte
+            }
         }
 
         // Display initialisieren
@@ -82,22 +94,25 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         bu.setUint8(offset++, (pInvert ? 0xA7 : 0xA6))  // Set display not inverted / A6 Normal A7 Inverse display
         bu.setUint8(offset++, 0xAF)  // Set display ON (0xAE sleep mode)
 
-        i2cWriteBuffer(bu)
+        i2cWriteBuffer(pI2C, bu)
         control.waitMicros(100000) // 100ms Delay Recommended
     }
 
     //% group="OLED Display"
-    //% block="Matrix auf Display schreiben || Zeilen von %fromPage bis %toPage" weight=6
+    //% block="Matrix auf Display schreiben || Zeilen von %fromPage bis %toPage %pI2C" weight=6
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=15
+    //% inlineInputMode=inline
     //% expandableArgumentMode="toggle"
-    export function writeDisplay(fromPage = 0, toPage = 15) {
-        if (fromPage > qArray.length - 1) fromPage = qArray.length - 1
-        if (toPage > qArray.length - 1) toPage = qArray.length - 1
+    export function writeDisplay(fromPage = 0, toPage = 15, pI2C = eI2C.I2C_x3C) {
+        let lastPage = (pI2C == eI2C.I2C_x3D ? qPages3D : qPages3C) - 1
+
+        if (fromPage > lastPage) fromPage = lastPage
+        if (toPage > lastPage) toPage = lastPage
         if (fromPage > toPage) fromPage = toPage
 
         for (let page = fromPage; page <= toPage; page++) { // qArray.length ist die Anzahl der Pages 8 oder 16
-            i2cWriteBuffer(qArray[page])
+            i2cWriteBuffer(pI2C, qArray[page])
             //control.waitMicros(50)
         }
         control.waitMicros(50)

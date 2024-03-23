@@ -57,9 +57,11 @@ namespace matrix {
     }
 
 
-    // ========== subcategory="Bilder" ==========
 
 
+
+
+    // ========== group="Image Objekte" subcategory="Bilder" ==========
 
     //% group="Image Objekte" subcategory="Bilder"
     //% block="Bild 8x8" weight=8
@@ -70,7 +72,11 @@ namespace matrix {
         return im
     }
 
-    //% group="Image Objekte" subcategory="Bilder"
+
+
+    // ========== group="Image Objekte" subcategory="Bilder 16" ==========
+
+    //% group="Image Objekte" subcategory="Bilder 16"
     //% block="Bild 16x8" weight=7
     //% imageLiteral=1 imageLiteralColumns=16 imageLiteralRows=8
     //% shim=images::createImage
@@ -79,7 +85,7 @@ namespace matrix {
         return im
     }
 
-    //% group="Image Objekte" subcategory="Bilder"
+    //% group="Image Objekte" subcategory="Bilder 16"
     //% block="Bild 16x16" weight=4
     //% imageLiteral=1 imageLiteralColumns=16 imageLiteralRows=16
     //% shim=images::createImage

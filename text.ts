@@ -33,8 +33,8 @@ namespace matrix {
 
 
 
-    //% group="Text schreiben" subcategory="Text"
-    //% block="Bild aus Zeichencode %charCode"
+    //% group="Image Objekte" subcategory="Bilder"
+    //% block="Bild 5x8 aus Zeichencode %charCode"
     //% charCode.shadow="matrix_charCodeAt"
     export function writeCharImage(charCode: number): Image {
 

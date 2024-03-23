@@ -1,13 +1,11 @@
 // clock.ts
 namespace matrix {
 
-    //% group="Analog Uhr" subcategory="Uhr"
+    //% group="Analog Uhr Zeiger"
     //% block="12 Stunden %hour Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel"
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
     export function hour_mark(hour: number, x: number, y: number, l0: number, l1: number, pixel?: boolean) {
-
-
 
         if (between(hour, 0, 11))
             minute_line(hour * 5, x, y, l0, l1, pixel)
@@ -32,7 +30,7 @@ namespace matrix {
     }
 
 
-    //% group="Analog Uhr" subcategory="Uhr"
+    //% group="Analog Uhr Zeiger"
     //% block="60 Minuten %minute Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel"
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
