@@ -7,6 +7,121 @@ namespace matrix {
     export function charCode(text: string) { return text.charCodeAt(0) }
 
 
+
+    export enum eZeichenDrehen {
+        //%block="nicht drehen"
+        nicht,
+        //%block="nach links drehen"
+        links,
+        //%block="nach rechts drehen"
+        rechts,
+        //%block="spiegeln"
+        spiegeln
+    }
+
+    //% group="Bilder 8 Pixel" subcategory="Bilder"
+    //% block="Bild drehen 8x8 %i0 %pDrehen" weight=3
+    export function imageDrehen(i0: Image, pDrehen: eZeichenDrehen) {
+        let byte0: number
+        let i1 = createImage(`
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        `)
+        switch (pDrehen) {
+            case eZeichenDrehen.nicht: {
+                return i0
+            }
+            case eZeichenDrehen.links: {
+                for (let i = 0; i <= 7; i++) { // 8x8 Bit 1/4 nach links drehen
+                    //byte0 =i0.pixel() )// b0.getUint8(7 - i)
+
+                    if (i0.pixel(7 - i, 7)) { i1.setPixel(7, i, true) }
+                    if (i0.pixel(7 - i, 6)) { i1.setPixel(6, i, true) }
+                    if (i0.pixel(7 - i, 5)) { i1.setPixel(5, i, true) }
+                    if (i0.pixel(7 - i, 4)) { i1.setPixel(4, i, true) }
+                    if (i0.pixel(7 - i, 3)) { i1.setPixel(3, i, true) }
+                    if (i0.pixel(7 - i, 2)) { i1.setPixel(2, i, true) }
+                    if (i0.pixel(7 - i, 1)) { i1.setPixel(1, i, true) }
+                    if (i0.pixel(7 - i, 0)) { i1.setPixel(0, i, true) }
+                    /* 
+                                        if ((b0.getUint8(7 - i) & 2 ** 7) != 0) { b1.setUint8(7, b1.getUint8(7) | 2 ** i) }
+                                        if ((b0.getUint8(7 - i) & 2 ** 6) != 0) { b1.setUint8(6, b1.getUint8(6) | 2 ** i) }
+                                        if ((b0.getUint8(7 - i) & 2 ** 5) != 0) { b1.setUint8(5, b1.getUint8(5) | 2 ** i) }
+                                        if ((b0.getUint8(7 - i) & 2 ** 4) != 0) { b1.setUint8(4, b1.getUint8(4) | 2 ** i) }
+                                        if ((b0.getUint8(7 - i) & 2 ** 3) != 0) { b1.setUint8(3, b1.getUint8(3) | 2 ** i) }
+                                        if ((b0.getUint8(7 - i) & 2 ** 2) != 0) { b1.setUint8(2, b1.getUint8(2) | 2 ** i) }
+                                        if ((b0.getUint8(7 - i) & 2 ** 1) != 0) { b1.setUint8(1, b1.getUint8(1) | 2 ** i) }
+                                        if ((b0.getUint8(7 - i) & 2 ** 0) != 0) { b1.setUint8(0, b1.getUint8(0) | 2 ** i) }
+                                         */
+                }
+                return i1
+            }
+        }
+
+        basic.showNumber(i1.height())
+        return i1
+    }
+
+/* 
+    function drehen(b0: Buffer, pDrehen: eZeichenDrehen) { // Buffer mit 8 Byte
+        let b1 = Buffer.create(8)
+        b1.fill(0b00000000)
+
+        switch (pDrehen) {
+            case eZeichenDrehen.nicht: {
+                return b0
+            }
+            case eZeichenDrehen.links: {
+                for (let i = 0; i <= 7; i++) { // 8x8 Bit 1/4 nach links drehen
+                    if ((b0.getUint8(7 - i) & 2 ** 7) != 0) { b1.setUint8(7, b1.getUint8(7) | 2 ** i) }
+                    if ((b0.getUint8(7 - i) & 2 ** 6) != 0) { b1.setUint8(6, b1.getUint8(6) | 2 ** i) }
+                    if ((b0.getUint8(7 - i) & 2 ** 5) != 0) { b1.setUint8(5, b1.getUint8(5) | 2 ** i) }
+                    if ((b0.getUint8(7 - i) & 2 ** 4) != 0) { b1.setUint8(4, b1.getUint8(4) | 2 ** i) }
+                    if ((b0.getUint8(7 - i) & 2 ** 3) != 0) { b1.setUint8(3, b1.getUint8(3) | 2 ** i) }
+                    if ((b0.getUint8(7 - i) & 2 ** 2) != 0) { b1.setUint8(2, b1.getUint8(2) | 2 ** i) }
+                    if ((b0.getUint8(7 - i) & 2 ** 1) != 0) { b1.setUint8(1, b1.getUint8(1) | 2 ** i) }
+                    if ((b0.getUint8(7 - i) & 2 ** 0) != 0) { b1.setUint8(0, b1.getUint8(0) | 2 ** i) }
+                }
+                return b1
+            }
+            case eZeichenDrehen.rechts: {
+                for (let i = 0; i <= 7; i++) { // 8x8 Bit 1/4 nach rechts drehen
+                    if ((b0.getUint8(i) & 2 ** 0) != 0) { b1.setUint8(7, b1.getUint8(7) | 2 ** i) }
+                    if ((b0.getUint8(i) & 2 ** 1) != 0) { b1.setUint8(6, b1.getUint8(6) | 2 ** i) }
+                    if ((b0.getUint8(i) & 2 ** 2) != 0) { b1.setUint8(5, b1.getUint8(5) | 2 ** i) }
+                    if ((b0.getUint8(i) & 2 ** 3) != 0) { b1.setUint8(4, b1.getUint8(4) | 2 ** i) }
+                    if ((b0.getUint8(i) & 2 ** 4) != 0) { b1.setUint8(3, b1.getUint8(3) | 2 ** i) }
+                    if ((b0.getUint8(i) & 2 ** 5) != 0) { b1.setUint8(2, b1.getUint8(2) | 2 ** i) }
+                    if ((b0.getUint8(i) & 2 ** 6) != 0) { b1.setUint8(1, b1.getUint8(1) | 2 ** i) }
+                    if ((b0.getUint8(i) & 2 ** 7) != 0) { b1.setUint8(0, b1.getUint8(0) | 2 ** i) }
+                }
+                return b1
+            }
+            case eZeichenDrehen.spiegeln: {
+                for (let i = 0; i <= 7; i++) { // 8x8 Bit 1/2 nach rechts drehen
+                    if ((b0.getUint8(i) & 2 ** 0) != 0) { b1.setUint8(7 - i, b1.getUint8(7 - i) | 2 ** 0) }
+                    if ((b0.getUint8(i) & 2 ** 1) != 0) { b1.setUint8(7 - i, b1.getUint8(7 - i) | 2 ** 1) }
+                    if ((b0.getUint8(i) & 2 ** 2) != 0) { b1.setUint8(7 - i, b1.getUint8(7 - i) | 2 ** 2) }
+                    if ((b0.getUint8(i) & 2 ** 3) != 0) { b1.setUint8(7 - i, b1.getUint8(7 - i) | 2 ** 3) }
+                    if ((b0.getUint8(i) & 2 ** 4) != 0) { b1.setUint8(7 - i, b1.getUint8(7 - i) | 2 ** 4) }
+                    if ((b0.getUint8(i) & 2 ** 5) != 0) { b1.setUint8(7 - i, b1.getUint8(7 - i) | 2 ** 5) }
+                    if ((b0.getUint8(i) & 2 ** 6) != 0) { b1.setUint8(7 - i, b1.getUint8(7 - i) | 2 ** 6) }
+                    if ((b0.getUint8(i) & 2 ** 7) != 0) { b1.setUint8(7 - i, b1.getUint8(7 - i) | 2 ** 7) }
+                }
+                return b1
+            }
+            default: return b0
+        }
+    }
+ */
+
+
     //% imageLiteral=1 shim=images::createImage
     export function createImage(i: string): Image {
         const im = <Image><any>i;
