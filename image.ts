@@ -25,24 +25,7 @@ namespace matrix { // image.ts
 
     // ========== group="Image in Buffer zeichnen" subcategory="Bilder"
 
-    //% group="Image in Buffer zeichnen" subcategory="Bilder"
-    //% block="zeichne Bild %im x %xpos y %ypos || 0-Pixel löschen %del" weight=9 deprecated=1
-    //% x.min=0 x.max=127 y.min=0 y.max=127
-
-    //% inlineInputMode=inline
-    export function writeImageOLED(im: Image, x: number, y: number, pTransparent = eTransparent.u) {
-
-        for (let iy = 0; iy <= im.height() - 1; iy++) {
-            for (let ix = 0; ix <= im.width() - 1; ix++) {
-                if (pTransparent == eTransparent.u) // Pixel im Buffer überschreiben
-                    setPixel(ix + x, iy + y, im.pixel(ix, iy))
-                else if ((im.pixel(ix, iy))) // Pixel nur an schalten (false lässt vorhandene Pixel unverändert)
-                    setPixel(ix + x, iy + y, true)
-            }
-        }
-    }
-
-    //% group="Image in Buffer zeichnen" subcategory="Bilder"
+    //% group="Bild in Buffer zeichnen" subcategory="Bilder"
     //% block="zeichne Bild %im x %x y %y || Pixel %pTransparent vergrößern x %fx y %fy" weight=8
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
@@ -65,62 +48,84 @@ namespace matrix { // image.ts
         }
     }
 
-    function setPixelFaktor(x: number, y: number, ix: number, iy: number, faktorx = 1, faktory = 1, pixel = true) {
+    function setPixelFaktor(x: number, y: number, imagex: number, imagey: number, faktorx = 1, faktory = 1, pixel = true) {
         if (faktorx == 1 && faktory == 1)
-            setPixel(ix + x, iy + y, pixel)
+            setPixel(imagex + x, imagey + y, pixel)
         else
             for (let jy = 0; jy < faktory; jy++) {
-                //basic.showNumber(jy)
-                //setPixel(x + ix * faktor, y + iy * faktor + fy, pixel)
                 for (let jx = 0; jx < faktorx; jx++) {
-                    setPixel(x + ix * faktorx + jx, y + iy * faktory + jy, pixel)
+                    setPixel(x + imagex * faktorx + jx, y + imagey * faktory + jy, pixel)
                 }
             }
     }
 
 
+    //% group="Array (mehrere Bilder) in Buffer zeichnen" subcategory="Bilder"
+    //% block="zeichne Array %im x %x y %y || Abstand x %dx y %dy" weight=6
+    //% x.min=0 x.max=127 y.min=0 y.max=127
+    //% dx.defl=8 dy.defl=0
+    //% inlineInputMode=inline
+    export function writeImageArray(im: Image[], x: number, y: number, dx = 8, dy = 0) {
+        for (let iImage = 0; iImage < im.length; iImage++) {
+            writeImage(im.get(iImage), x + iImage * dx, y + iImage * dy)
+        }
+    }
 
-    /* function setPixelFaktor(x: number, y: number, ix: number, iy: number, fx = 1, fy = 1, pixel = true) {
-        if (fx == 1 && fy == 1)
-            setPixel(ix + x, iy + y, pixel)
-        else
-            for (let jy = 0; jy < fy; jy++) {
-                basic.showNumber(jy)
-                 for (let ix = 0; ix < fx; ix++) {
-                    setPixel(x + ix * fx + ix, y + iy * fy + iy, pixel)
-                } 
+
+
+    // ========== group="Bilder 8 Pixel" subcategory="Bilder" ==========
+
+    //% group="Bilder 8 Pixel" subcategory="Bilder"
+    //% block="Bild 5x8 aus Zeichencode %charCode" weight=6
+    //% charCode.shadow="matrix_charCode"
+    export function writeCharImage(charCode: number): Image {
+
+        let i5x8 = createImage(`
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        . . . . .
+        `)
+
+        let bu = getPixel_5x8(charCode)
+
+        for (let iy = 0; iy < i5x8.height(); iy++) {
+            for (let ix = 0; ix < i5x8.width(); ix++) {
+                i5x8.setPixel(ix, iy, (bu.getUint8(ix) & 2 ** (iy & 7)) != 0)
             }
-    } */
+        }
+
+        return i5x8
+    }
 
 
-
-    /*  function setPixelFaktor(x: number, y: number, ix: number, iy: number, fx = 1, fy = 1, pixel = true) {
-         if (fx == 1)
-             setPixel(ix + x, iy + y, pixel)
-         else
-             for (let fy = 0; fy < fx; fy++) {
-                 //setPixel(x + ix * faktor, y + iy * faktor + fy, pixel)
-                 for (let fx = 0; fx < fx; fx++) {
-                     setPixel(x + ix * fx + fx, y + iy * fx + fy, pixel)
-                 }
-             }
-     } */
-
-
-
-
-
-
-    // ========== group="Image Objekte" subcategory="Bilder" ==========
-
-    //% group="Image Objekte" subcategory="Bilder"
-    //% block="Bild 8x8" weight=8
+    //% group="Bilder 8 Pixel" subcategory="Bilder"
+    //% block="Bild 8x8" weight=2
     //% imageLiteral=1 imageLiteralColumns=8 imageLiteralRows=8
     //% shim=images::createImage
     export function matrix8x8(i: string): Image {
         const im = <Image><any>i;
         return im
     }
+
+
+
+    // ========== group="Arrays (mehrere Bilder)" subcategory="Bilder"
+
+    //% group="Arrays (mehrere Bilder)" subcategory="Bilder"
+    //% block="Array 5x8 aus Text %text" weight=4
+    export function writeTextImageArray(text: string) {
+        let ia: Image[] = []
+        for (let j = 0; j < text.length; j++) {
+            ia.push(writeCharImage(text.charCodeAt(j)))
+        }
+        return ia
+    }
+
 
 
 

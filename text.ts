@@ -7,65 +7,14 @@ namespace matrix {
     export function charCode(text: string) { return text.charCodeAt(0) }
 
 
-    //% group="Text schreiben" subcategory="Text"
-    //% block="Text %pText an x %x Page %page"
-    //% pixel.shadow="toggleOnOff" pixel.defl=1
-    //% inlineInputMode=inline
-    export function writeTextBuffer(pText: string, x: number, page: number) {
-        // schreibt in den Buffer ab offset 1 Byte 0x40 + 8 Byte pro char im Text für die 8x8 Pixel
-        // Buffer muss vorher die richtige Länge haben
-        //let font: string
-        // bu.setUint8(offset++, eCONTROL.x40_Data) // CONTROL Byte 0x40: Display Data
-
-        for (let j = 0; j < pText.length; j++) {
-
-            writeBuffer(x, page, getPixel_5x8(pText.charCodeAt(j)))
-
-            //bu.write(offset, getPixel_8x8(pText.charCodeAt(j)))
-            x += 5
-        }
-        //this.i2cWriteBuffer(bu)
-        //control.waitMicros(50)
-    }
-
-
     //% imageLiteral=1 shim=images::createImage
-    function createImage(i: string): Image {
+    export function createImage(i: string): Image {
         const im = <Image><any>i;
         return im
     }
 
 
-
-    //% group="Image Objekte" subcategory="Bilder"
-    //% block="Bild 5x8 aus Zeichencode %charCode"
-    //% charCode.shadow="matrix_charCode"
-    export function writeCharImage(charCode: number): Image {
-
-        let i5x8 = createImage(`
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        `)
-
-        let bu = getPixel_5x8(charCode)
-
-        for (let iy = 0; iy < i5x8.height(); iy++) {
-            for (let ix = 0; ix < i5x8.width(); ix++) {
-                i5x8.setPixel(ix, iy, (bu.getUint8(ix) & 2 ** (iy & 7)) != 0)
-            }
-        }
-
-        return i5x8
-    }
-
-
-    function getPixel_5x8(pCharCode: number): Buffer {
+    export function getPixel_5x8(pCharCode: number): Buffer {
 
         if (between(pCharCode, 0x20, 0x7F)) {
 
