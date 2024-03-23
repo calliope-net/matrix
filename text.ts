@@ -22,8 +22,10 @@ namespace matrix {
     //% group="Bilder 8 Pixel" subcategory="Bilder"
     //% block="Bild drehen 8x8 %i0 %pDrehen" weight=3
     export function imageDrehen(i0: Image, pDrehen: eZeichenDrehen) {
-        let byte0: number
-        let i1 = createImage(`
+        if (pDrehen == eZeichenDrehen.nicht)
+            return i0
+        else {
+            let i1 = createImage(`            
         . . . . . . . .
         . . . . . . . .
         . . . . . . . .
@@ -33,57 +35,32 @@ namespace matrix {
         . . . . . . . .
         . . . . . . . .
         `)
-        switch (pDrehen) {
-            case eZeichenDrehen.nicht: {
-                return i0
-            }
-            case eZeichenDrehen.links: {
-                let maxx = i0.width()
-                let maxy = i0.height()
-                //basic.showNumber(i0.width())
-                for (let i = 0; i <= 7; i++) { // 8x8 Bit 1/4 nach links drehen
-                    //byte0 =i0.pixel() )// b0.getUint8(7 - i)
-
-
-
-                    for (let j = 0; j <= 7; j++) {
-
-                        if ((7 - i) < i0.width() && j < i0.height()) {
-
-                            //basic.showNumber(7 - i)
-
-                            i1.setPixel(j, i,
-                                i0.pixel(7 - i, j)
-                            )
-                        }
-                    }
-                    /* 
-                                        if (i0.pixel(7 - i, 7)) { i1.setPixel(7, i, true) }
-                                        if (i0.pixel(7 - i, 6)) { i1.setPixel(6, i, true) }
-                                        if (i0.pixel(7 - i, 5)) { i1.setPixel(5, i, true) }
-                                        if (i0.pixel(7 - i, 4)) { i1.setPixel(4, i, true) }
-                                        if (i0.pixel(7 - i, 3)) { i1.setPixel(3, i, true) }
-                                        if (i0.pixel(7 - i, 2)) { i1.setPixel(2, i, true) }
-                                        if (i0.pixel(7 - i, 1)) { i1.setPixel(1, i, true) }
-                                        if (i0.pixel(7 - i, 0)) { i1.setPixel(0, i, true) }
-                                         */
-                    /* 
-                                        if ((b0.getUint8(7 - i) & 2 ** 7) != 0) { b1.setUint8(7, b1.getUint8(7) | 2 ** i) }
-                                        if ((b0.getUint8(7 - i) & 2 ** 6) != 0) { b1.setUint8(6, b1.getUint8(6) | 2 ** i) }
-                                        if ((b0.getUint8(7 - i) & 2 ** 5) != 0) { b1.setUint8(5, b1.getUint8(5) | 2 ** i) }
-                                        if ((b0.getUint8(7 - i) & 2 ** 4) != 0) { b1.setUint8(4, b1.getUint8(4) | 2 ** i) }
-                                        if ((b0.getUint8(7 - i) & 2 ** 3) != 0) { b1.setUint8(3, b1.getUint8(3) | 2 ** i) }
-                                        if ((b0.getUint8(7 - i) & 2 ** 2) != 0) { b1.setUint8(2, b1.getUint8(2) | 2 ** i) }
-                                        if ((b0.getUint8(7 - i) & 2 ** 1) != 0) { b1.setUint8(1, b1.getUint8(1) | 2 ** i) }
-                                        if ((b0.getUint8(7 - i) & 2 ** 0) != 0) { b1.setUint8(0, b1.getUint8(0) | 2 ** i) }
-                                         */
+            switch (pDrehen) {
+                case eZeichenDrehen.links: {
+                    for (let i = 0; i <= 7; i++)  // 8x8 Bit 1/4 nach links drehen
+                        for (let j = 0; j <= 7; j++)
+                            if ((7 - i) < i0.width() && j < i0.height())
+                                i1.setPixel(j, i, i0.pixel(7 - i, j))
+                    return i1
                 }
-                return i1
+                case eZeichenDrehen.rechts: {
+                    for (let i = 0; i <= 7; i++)  // 8x8 Bit 1/4 nach rechts drehen
+                        for (let j = 0; j <= 7; j++)
+                            if (i < i0.width() && j < i0.height())
+                                i1.setPixel(7 - j, i, i0.pixel(i, j))
+                    return i1
+                }
+                case eZeichenDrehen.spiegeln: {
+                    for (let i = 0; i <= 7; i++)  // 8x8 Bit 1/2 nach rechts drehen
+                        for (let j = 0; j <= 7; j++)
+                            if (i < i0.width() && j < i0.height())
+                                i1.setPixel(7 - i, j, i0.pixel(i, j))
+                    return i1
+                }
+                default:
+                    return i0
             }
-        }
-
-
-        return i1
+        } // else
     }
 
     /* 
