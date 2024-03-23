@@ -43,9 +43,9 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 
 
-    // ========== group="OLED Display"
+    // ========== group="OLED Display I²C"
 
-    //% group="OLED Display"
+    //% group="OLED Display I²C"
     //% block="beim Start %pPages || invert %pInvert drehen %pFlip %pI2C" weight=9
     //% pInvert.shadow="toggleOnOff"
     //% pFlip.shadow="toggleOnOff"
@@ -98,7 +98,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         control.waitMicros(100000) // 100ms Delay Recommended
     }
 
-    //% group="OLED Display"
+    //% group="OLED Display I²C"
     //% block="Matrix auf Display schreiben || Zeilen von %fromPage bis %toPage %pI2C" weight=6
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=15

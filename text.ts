@@ -2,6 +2,10 @@
 namespace matrix {
 
 
+    //% blockId=matrix_charCode
+    //% block="%text" blockHidden=true
+    export function charCode(text: string) { return text.charCodeAt(0) }
+
 
     //% group="Text schreiben" subcategory="Text"
     //% block="Text %pText an x %x Page %page"
@@ -35,7 +39,7 @@ namespace matrix {
 
     //% group="Image Objekte" subcategory="Bilder"
     //% block="Bild 5x8 aus Zeichencode %charCode"
-    //% charCode.shadow="matrix_charCodeAt"
+    //% charCode.shadow="matrix_charCode"
     export function writeCharImage(charCode: number): Image {
 
         let i5x8 = createImage(`

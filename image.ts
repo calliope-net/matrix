@@ -1,5 +1,26 @@
 
-namespace matrix {
+namespace matrix { // image.ts
+
+    export enum eTransparent {
+        //% block="überschreiben"
+        u,
+        //% block="transparent"
+        t
+    }
+
+    export enum eFaktor {
+        //% block="* 1"
+        f1 = 1,
+        //% block="* 2"
+        f2 = 2,
+        //% block="* 3"
+        f3 = 3,
+        //% block="* 4"
+        f4 = 4,
+    }
+    //% blockId=oled_eFaktor block="%pFaktor" blockHidden=true
+    export function oled_eFaktor(pFaktor: eFaktor): number { return pFaktor }
+
 
 
     // ========== group="Image in Buffer zeichnen" subcategory="Bilder"
@@ -7,13 +28,13 @@ namespace matrix {
     //% group="Image in Buffer zeichnen" subcategory="Bilder"
     //% block="zeichne Bild %im x %xpos y %ypos || 0-Pixel löschen %del" weight=9 deprecated=1
     //% x.min=0 x.max=127 y.min=0 y.max=127
-    //% del.shadow="toggleYesNo"
+
     //% inlineInputMode=inline
-    export function writeImageOLED(im: Image, x: number, y: number, del = false) {
+    export function writeImageOLED(im: Image, x: number, y: number, pTransparent = eTransparent.u) {
 
         for (let iy = 0; iy <= im.height() - 1; iy++) {
             for (let ix = 0; ix <= im.width() - 1; ix++) {
-                if (del) // Pixel im Buffer an und aus schalten
+                if (pTransparent == eTransparent.u) // Pixel im Buffer überschreiben
                     setPixel(ix + x, iy + y, im.pixel(ix, iy))
                 else if ((im.pixel(ix, iy))) // Pixel nur an schalten (false lässt vorhandene Pixel unverändert)
                     setPixel(ix + x, iy + y, true)
@@ -22,39 +43,68 @@ namespace matrix {
     }
 
     //% group="Image in Buffer zeichnen" subcategory="Bilder"
-    //% block="zeichne Bild %im x %xpos y %ypos || Faktor %faktor 0-Pixel löschen %del" weight=8
+    //% block="zeichne Bild %im x %x y %y || Pixel %pTransparent vergrößern x %fx y %fy" weight=8
     //% x.min=0 x.max=127 y.min=0 y.max=127
-    //% faktor.min=1 faktor.max=8 faktor.defl=1
-    //% del.shadow="toggleYesNo"
+    //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
     //% inlineInputMode=inline
-    export function writeImage(im: Image, x: number, y: number, faktor = 1, del = false) {
+    export function writeImage(im: Image, x: number, y: number, pTransparent = eTransparent.u, fx = 1, fy = 1) {
         if (im) {
-            if (!between(faktor, 1, 16)) faktor = 1
-            if (!between(x, 0, cx - im.width() * faktor)) x = cx - im.width() * faktor
-            if (!between(y, 0, qy() - im.height() * faktor)) y = qy() - im.height() * faktor
+            if (!between(fx, 1, 16)) fx = 1
+            if (!between(fy, 1, 16)) fy = 1
+            if (!between(x, 0, cx - im.width() * fx)) x = cx - im.width() * fx
+            if (!between(y, 0, qy() - im.height() * fy)) y = qy() - im.height() * fy
 
             for (let iy = 0; iy <= im.height() - 1; iy++) {
                 for (let ix = 0; ix <= im.width() - 1; ix++) {
-                    if (del)  // Pixel im Buffer an und aus schalten
-                        setPixelFaktor(x, y, ix, iy, faktor, im.pixel(ix, iy))
+                    if (pTransparent == eTransparent.u) // Pixel im Buffer überschreiben
+                        setPixelFaktor(x, y, ix, iy, fx, fy, im.pixel(ix, iy))
                     else if ((im.pixel(ix, iy))) // Pixel nur an schalten (false lässt vorhandene Pixel unverändert)
-                        setPixelFaktor(x, y, ix, iy, faktor, true)
+                        setPixelFaktor(x, y, ix, iy, fx, fy, true)
                 }
             }
         }
     }
 
-    function setPixelFaktor(x: number, y: number, ix: number, iy: number, faktor = 1, pixel = true) {
-        if (faktor == 1)
+    function setPixelFaktor(x: number, y: number, ix: number, iy: number, faktorx = 1, faktory = 1, pixel = true) {
+        if (faktorx == 1 && faktory == 1)
             setPixel(ix + x, iy + y, pixel)
         else
-            for (let fy = 0; fy < faktor; fy++) {
+            for (let jy = 0; jy < faktory; jy++) {
+                //basic.showNumber(jy)
                 //setPixel(x + ix * faktor, y + iy * faktor + fy, pixel)
-                for (let fx = 0; fx < faktor; fx++) {
-                    setPixel(x + ix * faktor + fx, y + iy * faktor + fy, pixel)
+                for (let jx = 0; jx < faktorx; jx++) {
+                    setPixel(x + ix * faktorx + jx, y + iy * faktory + jy, pixel)
                 }
             }
     }
+
+
+
+    /* function setPixelFaktor(x: number, y: number, ix: number, iy: number, fx = 1, fy = 1, pixel = true) {
+        if (fx == 1 && fy == 1)
+            setPixel(ix + x, iy + y, pixel)
+        else
+            for (let jy = 0; jy < fy; jy++) {
+                basic.showNumber(jy)
+                 for (let ix = 0; ix < fx; ix++) {
+                    setPixel(x + ix * fx + ix, y + iy * fy + iy, pixel)
+                } 
+            }
+    } */
+
+
+
+    /*  function setPixelFaktor(x: number, y: number, ix: number, iy: number, fx = 1, fy = 1, pixel = true) {
+         if (fx == 1)
+             setPixel(ix + x, iy + y, pixel)
+         else
+             for (let fy = 0; fy < fx; fy++) {
+                 //setPixel(x + ix * faktor, y + iy * faktor + fy, pixel)
+                 for (let fx = 0; fx < fx; fx++) {
+                     setPixel(x + ix * fx + fx, y + iy * fx + fy, pixel)
+                 }
+             }
+     } */
 
 
 
