@@ -12,7 +12,8 @@
         "matrix.ts",
         "image.ts",
         "clock.ts",
-        "text.ts"
+        "text.ts",
+        "array.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -24,5 +25,5 @@
     "supportedTargets": [
         "calliopemini"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "blocksprj"
 }

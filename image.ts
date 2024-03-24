@@ -59,7 +59,7 @@ namespace matrix { // image.ts
             }
     }
 
-
+/* 
     //% group="Array (mehrere Bilder) in Buffer zeichnen" subcategory="Bilder"
     //% block="zeichne Array %im x %x y %y || Abstand x %dx y %dy" weight=6
     //% x.min=0 x.max=127 y.min=0 y.max=127
@@ -71,14 +71,16 @@ namespace matrix { // image.ts
         }
     }
 
-
+ */
 
     // ========== group="Bilder 8 Pixel" subcategory="Bilder" ==========
 
     //% group="Bilder 8 Pixel" subcategory="Bilder"
-    //% block="Bild 5x8 aus Zeichencode %charCode" weight=6
+    //% block="Zeichen 5x8 aus ASCII-Code %charCode" weight=6
     //% charCode.shadow="matrix_charCode"
     export function writeCharImage(charCode: number): Image {
+        return writeBufferImage5x8(getPixel_5x8(charCode))
+/* 
         let bu: Buffer = getPixel_5x8(charCode)
         let i5x8: Image
 
@@ -99,6 +101,37 @@ namespace matrix { // image.ts
             }
         }
 
+        return i5x8 */
+    }
+
+
+    //% group="Bilder 8 Pixel" subcategory="Bilder"
+    //% block="Zeichen 5x8 aus 10 HEX-Digits %hex" weight=5
+    //% hex.defl="00427F4000"
+    export function writeHexImage(hex: string): Image {
+        return writeBufferImage5x8(Buffer.fromHex(hex))
+    }
+
+
+    function writeBufferImage5x8(bu: Buffer): Image {
+        let i5x8: Image
+
+        i5x8 = matrix5x8(`
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            `)
+
+        for (let iy = 0; iy < i5x8.height(); iy++) {
+            for (let ix = 0; ix < i5x8.width(); ix++) {
+                i5x8.setPixel(ix, iy, (bu.getUint8(ix) & 2 ** (iy & 7)) != 0)
+            }
+        }
         return i5x8
     }
 
