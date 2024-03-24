@@ -4,7 +4,7 @@ namespace matrix { // text.ts
 
     //% blockId=matrix_charCode
     //% block="%text" blockHidden=true
-    //% text.defl="1"
+    //% text.defl="R"
     export function charCode(text: string) { return text.charCodeAt(0) }
 
 
@@ -24,8 +24,8 @@ namespace matrix { // text.ts
         xspiegeln
     }
 
-    //% group="Bilder 8 Pixel" subcategory="Bilder"
-    //% block="Bild 8x8 %i0 %pDrehen" weight=3
+    //% group="Bild in Buffer zeichnen" subcategory="Bilder"
+    //% block="8x8 %i0 %pDrehen" weight=7
     export function imageDrehen(i0: Image, pDrehen: eZeichenDrehen) {
         if (pDrehen == eZeichenDrehen.nicht)
             return i0
