@@ -17,6 +17,14 @@ namespace matrix { // image.ts
         f3 = 3,
         //% block="* 4"
         f4 = 4,
+        //% block="* 5"
+        f5 = 5,
+        //% block="* 6"
+        f6 = 6,
+        //% block="* 7"
+        f7 = 7,
+        //% block="* 8"
+        f8 = 8,
     }
     //% blockId=oled_eFaktor block="%pFaktor" blockHidden=true
     export function oled_eFaktor(pFaktor: eFaktor): number { return pFaktor }
