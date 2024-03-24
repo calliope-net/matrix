@@ -23,7 +23,7 @@ namespace matrix { // image.ts
 
 
 
-    // ========== group="Image in Buffer zeichnen" subcategory="Bilder"
+    // ========== group="Bild in Buffer zeichnen" subcategory="Bilder"
 
     //% group="Bild in Buffer zeichnen" subcategory="Bilder"
     //% block="zeichne Bild %im x %x y %y || %pTransparent x %fx y %fy" weight=8
@@ -61,23 +61,25 @@ namespace matrix { // image.ts
 
 
 
+
+
     // ========== group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder" ==========
 
     //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
     //% block="Zeichen aus ASCII-Code %charCode" weight=6
     //% charCode.shadow="matrix_charCode"
-    export function writeCharImage(charCode: number): Image {
-        return writeBufferImage5x8(getPixel_5x8(charCode))
+    export function charImage(charCode: number): Image {
+        return bufferImage5x8(getPixel_5x8(charCode))
     }
 
     //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
     //% block="Zeichen aus 10 HEX-Digits %hex" weight=5
     //% hex.defl="7F09192946"
-    export function writeHexImage(hex: string): Image {
-        return writeBufferImage5x8(Buffer.fromHex(hex))
+    export function hexImage(hex: string): Image {
+        return bufferImage5x8(Buffer.fromHex(hex))
     }
 
-    function writeBufferImage5x8(bu: Buffer): Image {
+    function bufferImage5x8(bu: Buffer): Image {
         let i5x8: Image
 
         i5x8 = matrix5x8(`
@@ -107,7 +109,7 @@ namespace matrix { // image.ts
     export function writeTextImageArray(text: string) {
         let ia: Image[] = []
         for (let j = 0; j < text.length; j++) {
-            ia.push(writeCharImage(text.charCodeAt(j)))
+            ia.push(charImage(text.charCodeAt(j)))
         }
         return ia
     }
@@ -117,6 +119,7 @@ namespace matrix { // image.ts
 
     //% group="Bilder 8 Pixel" subcategory="Bilder"
     //% block="Test Bild 8x8" weight=4
+    //% blockSetVariable=bild
     export function testBild8x8(): Image {
         let i1 = matrix.matrix8x8(`
         # . . . # # # #
@@ -143,7 +146,7 @@ namespace matrix { // image.ts
     //% block="Bild 8x8" weight=2
     //% imageLiteral=1 imageLiteralColumns=8 imageLiteralRows=8
     //% shim=images::createImage
-    //% blockSetVariable=m8
+    //% blockSetVariable=bild
     export function matrix8x8(i: string): Image {
         const im = <Image><any>i;
         return im
@@ -159,7 +162,7 @@ namespace matrix { // image.ts
     //% block="Bild 16x8" weight=7
     //% imageLiteral=1 imageLiteralColumns=16 imageLiteralRows=8
     //% shim=images::createImage
-    //% blockSetVariable=m8
+    //% blockSetVariable=bild
     export function matrix16x8(i: string): Image {
         const im = <Image><any>i;
         return im
