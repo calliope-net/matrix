@@ -7,12 +7,96 @@ namespace matrix { // array.ts
     //% dx.defl=8 dy.defl=0
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
     //% inlineInputMode=inline
-    export function writeImageArray(im: Image[], x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy = 1) {
+    export function writeImageArray(im: Image[], x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
         for (let iImage = 0; iImage < im.length; iImage++) {
             writeImage(im.get(iImage), x + iImage * dx, y + iImage * dy, ut, fx, fy)
         }
     }
 
 
+    //% group="Animation Beispiele" subcategory="Bilder Array"
+    //% block="Regen"
+    export function beispielRegen16x8(): Image[] {
+        let im: Image[]
+
+        im.push(matrix16x8(`
+        # # # # # # # # # # # # # # # #
+        . . . # . . . . # . . . . . # .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        `))
+
+        im.push(matrix16x8(`
+        # # # # # # # # # # # # # # # #
+        # . . # # . . . # . . # . # # .
+        # . . # . . . . # . . . . # # .
+        . . . . . . . . . . . . . # . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        `))
+
+        im.push(matrix16x8(`
+        # # # # # # # # # # # # # # # #
+        # . . # # . . . # . . # . # # .
+        # . . # # . . . # . . # . # # .
+        # . . # . . . . # . . . . # # .
+        . . . . . . . . . . . . . # . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        . . . . . . . . . . . . . . . .
+        `))
+
+        im.push(matrix16x8(`
+        # # # # # # # # # # # # # # # #
+        # # . # # . # . # . . # . # # .
+        # # . # # . # . # . . # . # # .
+        # . . # . . . . # . . # . # # .
+        # . . . . . . . # . . # . # # .
+        . . . . . . . . # . . . . # # .
+        . . . . . . . . . . . . . # . .
+        . . . . . . . . . . . . . . . .
+        `))
+
+        im.push(matrix16x8(`
+        # # # # # # # # # # # # # # # #
+        # # . # # # # . # . # # . # # #
+        # # . # # . # . # . # # . # # .
+        # # . # # . # . # . . # . # # .
+        # . . # . . . . # . . # . # # .
+        # . . . . . . . # . . . . # # .
+        . . . . . . . . # . . . . # . .
+        . . . . . . . . . . . . . . . .
+        `))
+
+        im.push(matrix16x8(`
+        # # # # # # # # # # # # # # # #
+        # # # # # # # # # # # # # # # #
+        # # # # # # # # # # # # # # # #
+        # # # # # # # . # . # # # # # #
+        # # . # # . # . # . # # . # # .
+        # . . # . . . . # . # . . # # .
+        # . . . . . . . # . . . . # # .
+        . . . . . . . . # . . . . # . .
+        `))
+
+        im.push(matrix16x8(`
+        # # # # # # # # # # # # # # # #
+        # # # # # # # # # # # # # # # #
+        # # # # # # # # # # # # # # # #
+        # # # # # # # # # # # # # # # #
+        # # # # # # # # # # # # # # # #
+        # # . # # # # . # # # # . # # .
+        # . . # . # . . # . # # . # # .
+        # . . . . . . . # . . # . # . .
+        `))
+
+        return im
+    }
 
 } // array.ts

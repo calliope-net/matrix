@@ -30,10 +30,10 @@ namespace matrix { // image.ts
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
     //% inlineInputMode=inline
-    export function writeImage(im: Image, x: number, y: number, ut = eTransparent.u, fx = 1, fy = 1) {
+    export function writeImage(im: Image, x: number, y: number, ut = eTransparent.u, fx = 1, fy?: number) {
         if (im) {
             if (!between(fx, 1, 16)) fx = 1
-            if (!between(fy, 1, 16)) fy = 1
+            if (!fy) fy = fx; else if (!between(fy, 1, 16)) fy = 1
             if (!between(x, 0, cx - im.width() * fx)) x = cx - im.width() * fx
             if (!between(y, 0, qy() - im.height() * fy)) y = qy() - im.height() * fy
 
@@ -67,7 +67,7 @@ namespace matrix { // image.ts
     //% dx.min=-10 dx.max=10 dx.defl=8 dy.min=-10 dy.max=10 dy.defl=0
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
     //% inlineInputMode=inline
-    export function writeTextImageArray(text: string, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy = 1) {
+    export function writeTextImageArray(text: string, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
         let ia: Image[] = []
         for (let j = 0; j < text.length; j++) {
             ia.push(charImage(text.charCodeAt(j)))
@@ -84,6 +84,7 @@ namespace matrix { // image.ts
     //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
     //% block="Zeichen aus ASCII-Code %charCode" weight=6
     //% charCode.shadow="matrix_charCode"
+    //% blockSetVariable=bild
     export function charImage(charCode: number): Image {
         return bufferImage5x8(getPixel_5x8(charCode))
     }
@@ -91,6 +92,7 @@ namespace matrix { // image.ts
     //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
     //% block="Zeichen aus 10 HEX-Digits %hex" weight=5
     //% hex.defl="7F09192946"
+    //% blockSetVariable=bild
     export function hexImage(hex: string): Image {
         return bufferImage5x8(Buffer.fromHex(hex))
     }
