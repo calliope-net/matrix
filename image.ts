@@ -26,11 +26,11 @@ namespace matrix { // image.ts
     // ========== group="Bild in Buffer zeichnen" subcategory="Bilder"
 
     //% group="Bild in Buffer zeichnen" subcategory="Bilder"
-    //% block="zeichne Bild %im x %x y %y || %pTransparent x %fx y %fy" weight=8
+    //% block="zeichne Bild %im x %x y %y || %ut x %fx y %fy" weight=8
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
     //% inlineInputMode=inline
-    export function writeImage(im: Image, x: number, y: number, pTransparent = eTransparent.u, fx = 1, fy = 1) {
+    export function writeImage(im: Image, x: number, y: number, ut = eTransparent.u, fx = 1, fy = 1) {
         if (im) {
             if (!between(fx, 1, 16)) fx = 1
             if (!between(fy, 1, 16)) fy = 1
@@ -39,7 +39,7 @@ namespace matrix { // image.ts
 
             for (let iy = 0; iy <= im.height() - 1; iy++) {
                 for (let ix = 0; ix <= im.width() - 1; ix++) {
-                    if (pTransparent == eTransparent.u) // Pixel im Buffer überschreiben
+                    if (ut == eTransparent.u) // Pixel im Buffer überschreiben
                         setPixelFaktor(x, y, ix, iy, fx, fy, im.pixel(ix, iy))
                     else if ((im.pixel(ix, iy))) // Pixel nur an schalten (false lässt vorhandene Pixel unverändert)
                         setPixelFaktor(x, y, ix, iy, fx, fy, true)
@@ -57,6 +57,22 @@ namespace matrix { // image.ts
                     setPixel(x + imagex * faktorx + jx, y + imagey * faktory + jy, pixel)
                 }
             }
+    }
+
+
+
+    //% group="Text in Buffer zeichnen" subcategory="Bilder"
+    //% block="zeichne Text %text x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=4
+    //% x.min=0 x.max=127 y.min=0 y.max=127
+    //% dx.min=-10 dx.max=10 dx.defl=8 dy.min=-10 dy.max=10 dy.defl=0
+    //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
+    //% inlineInputMode=inline
+    export function writeTextImageArray(text: string, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy = 1) {
+        let ia: Image[] = []
+        for (let j = 0; j < text.length; j++) {
+            ia.push(charImage(text.charCodeAt(j)))
+        }
+        writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
     }
 
 
@@ -101,18 +117,6 @@ namespace matrix { // image.ts
         return i5x8
     }
 
-
-
-
-    //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
-    //% block="Array 5x8 aus Text %text" weight=4
-    export function writeTextImageArray(text: string) {
-        let ia: Image[] = []
-        for (let j = 0; j < text.length; j++) {
-            ia.push(charImage(text.charCodeAt(j)))
-        }
-        return ia
-    }
 
 
 
