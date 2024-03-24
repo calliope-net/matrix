@@ -74,34 +74,61 @@ namespace matrix { // image.ts
 
 
     // ========== group="Bilder 8 Pixel" subcategory="Bilder" ==========
+    /* 
+        //% group="Bilder 8 Pixel" subcategory="Bilder"
+        //% block="Bild 5x8 aus Zeichencode %charCode" weight=6
+        //% charCode.shadow="matrix_charCode"
+        export function writeCharImage(charCode: number): Image {
+            let bu: Buffer = getPixel_5x8(charCode)
+            let i5x8: Image
+            //i5x8=testBild8x8()
+    
+            i5x8 = matrix5x8(`
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            . . . . .
+            `)
+    
+    
+    
+            for (let iy = 0; iy < i5x8.height(); iy++) {
+                for (let ix = 0; ix < i5x8.width(); ix++) {
+                    i5x8.setPixel(ix, iy, (bu.getUint8(ix) & 2 ** (iy & 7)) != 0)
+                }
+            }
+    
+            return i5x8
+        }
+     */
 
     //% group="Bilder 8 Pixel" subcategory="Bilder"
-    //% block="Bild 5x8 aus Zeichencode %charCode" weight=6
-    //% charCode.shadow="matrix_charCode"
-    export function writeCharImage(charCode: number): Image {
-
-        let i5x8 = createImage(`
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
-        . . . . .
+    //% block="Test Bild 8x8" weight=4
+    export function testBild8x8(): Image {
+        let i1 = matrix.matrix8x8(`
+        # . . . # # # #
+        . . . # # . . #
+        . . # . # . . .
+        . # . . # . . .
+        # . . . # . . .
+        . . . . # . . .
+        . . . . # . . .
+        # . . . # . . #
         `)
-
-        let bu = getPixel_5x8(charCode)
-
-        for (let iy = 0; iy < i5x8.height(); iy++) {
-            for (let ix = 0; ix < i5x8.width(); ix++) {
-                i5x8.setPixel(ix, iy, (bu.getUint8(ix) & 2 ** (iy & 7)) != 0)
-            }
-        }
-
-        return i5x8
+        return i1
     }
 
+
+    //% imageLiteral=1 imageLiteralColumns=5 imageLiteralRows=8
+    //% shim=images::createImage
+    export function matrix5x8(i: string): Image {
+        const im = <Image><any>i;
+        return im
+    }
 
     //% group="Bilder 8 Pixel" subcategory="Bilder"
     //% block="Bild 8x8" weight=2
@@ -114,17 +141,18 @@ namespace matrix { // image.ts
 
 
 
+
     // ========== group="Arrays (mehrere Bilder)" subcategory="Bilder"
 
     //% group="Arrays (mehrere Bilder)" subcategory="Bilder"
     //% block="Array 5x8 aus Text %text" weight=4
-    export function writeTextImageArray(text: string) {
+    /* export function writeTextImageArray(text: string) {
         let ia: Image[] = []
         for (let j = 0; j < text.length; j++) {
-            ia.push(writeCharImage(text.charCodeAt(j)))
+            ia.push(writeCharImage2(text.charCodeAt(j)))
         }
         return ia
-    }
+    } */
 
 
 

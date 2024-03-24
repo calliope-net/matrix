@@ -29,7 +29,7 @@ namespace matrix { // text.ts
         if (pDrehen == eZeichenDrehen.nicht)
             return i0
         else {
-            let i1 = createImage(`            
+            let i1 = matrix8x8(`            
         . . . . . . . .
         . . . . . . . .
         . . . . . . . .
@@ -39,25 +39,25 @@ namespace matrix { // text.ts
         . . . . . . . .
         . . . . . . . .
         `)
-        /* 
-            for (let i = 0; i <= 7; i++) {
-                for (let j = 0; j <= 7; j++) {
-                    if (i < i0.width() && j < i0.height()) {
-                        switch (pDrehen) {
-                            case eZeichenDrehen.links: {
-                                i1.setPixel(j, 7 - i, i0.pixel(i, j)) // (j,7-i) (i,j)
-                                break
-                            }
-                            case eZeichenDrehen.rechts: {
-                                i1.setPixel(7 - j, i, i0.pixel(i, j)) // (7-j,i) (i,j)
-                                break
+            /* 
+                for (let i = 0; i <= 7; i++) {
+                    for (let j = 0; j <= 7; j++) {
+                        if (i < i0.width() && j < i0.height()) {
+                            switch (pDrehen) {
+                                case eZeichenDrehen.links: {
+                                    i1.setPixel(j, 7 - i, i0.pixel(i, j)) // (j,7-i) (i,j)
+                                    break
+                                }
+                                case eZeichenDrehen.rechts: {
+                                    i1.setPixel(7 - j, i, i0.pixel(i, j)) // (7-j,i) (i,j)
+                                    break
+                                }
                             }
                         }
                     }
                 }
-            }
-            return i1
- */
+                return i1
+     */
 
             switch (pDrehen) {
                 case eZeichenDrehen.links: {
@@ -103,11 +103,46 @@ namespace matrix { // text.ts
     }
 
 
-    //% imageLiteral=1 shim=images::createImage
-    export function createImage(i: string): Image {
-        const im = <Image><any>i;
-        return im
+
+    //% group="Bilder 8 Pixel" subcategory="Bilder"
+    //% block="Bild2 5x8 aus Zeichencode %charCode" weight=6
+    // charCode.shadow="matrix_charCode"
+    export function writeCharImage2(charCode: number) {
+        let bu: Buffer = getPixel_5x8(charCode)
+        //let i5x8: Image //= testBild8x8()
+
+         let i5x8 = matrix5x8(`
+                 . . . . .
+                 . . . . .
+                 . . . . .
+                 . . . . .
+                 . . . . .
+                 . . . . .
+                 . . . . .
+                 . . . . .
+                 `)
+
+
+        /* 
+                for (let iy = 0; iy < i5x8.height(); iy++) {
+                    for (let ix = 0; ix < i5x8.width(); ix++) {
+                        i5x8.setPixel(ix, iy, (bu.getUint8(ix) & 2 ** (iy & 7)) != 0)
+                    }
+                } */
+
+        return i5x8
     }
+
+  /*   let i5x8 = matrix5x8(`
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                . . . . .
+                `) */
 
 
     export function getPixel_5x8(pCharCode: number): Buffer {
