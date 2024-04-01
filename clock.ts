@@ -40,18 +40,24 @@ namespace matrix {
     }
 
     //% group="Analog Uhr Zeiger"
-    //% block="zeichne Uhr Mittelpunkt x %x y %y (Radius 24)" weight=1
+    //% block="zeichne Uhr Mittelpunkt x %x y %y (Radius 24) Stunde %hour Minute %minute" weight=1
     //% x.min=24 x.max=103 x.defl=30 
     //% y.min=23 y.max=103 y.defl=23
-    export function writeClock_radius24(x: number, y: number) {
+    //% inlineInputMode=inline
+    export function writeClock_radius24(x: number, y: number, hour: number, minute: number) {
         rasterCircle(x, y, 24)//30, 23
+
+        for (let ih = 0; ih <= 11; ih++) {
+            hour_mark(ih, x, y, 20, 23)
+        }
 
         writeImage(imageDrehen(digitImage(3), eZeichenDrehen.rechts), x + 17, y - 2)//47, 21
         writeImage(digitImage(6), x - 2, y + 17)//28, 40
         writeImage(imageDrehen(digitImage(9), eZeichenDrehen.links), x - 24, y - 5)//6, 18
         writeImage(hexImage8x8("427F406251494946"), x - 4, y - 23)// 26, 0
-        //   writeDisplay(0, 15, eI2C.I2C_x3D)
 
+        hour_mark(hour, x, y, 0, 10)
+        minute_mark(minute, x, y, 0, 16)
     }
 
 } // clock.ts

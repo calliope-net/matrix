@@ -43,7 +43,7 @@ namespace matrix { // image.ts
             if (!between(fx, 1, 16)) fx = 1
             if (!fy) fy = fx; else if (!between(fy, 1, 16)) fy = 1
             if (!between(x, 0, cx - im.width() * fx)) x = cx - im.width() * fx
-            if (!between(y, 0, qy() - im.height() * fy)) y = qy() - im.height() * fy
+            if (!between(y, 0, 1 + qy() - im.height() * fy)) y = qy() - im.height() * fy
 
             for (let iy = 0; iy <= im.height() - 1; iy++) {
                 for (let ix = 0; ix <= im.width() - 1; ix++) {
@@ -89,8 +89,8 @@ namespace matrix { // image.ts
     //% dx.min=-10 dx.max=10 dx.defl=8 dy.min=-10 dy.max=10 dy.defl=0
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
     //% inlineInputMode=inline
-    export function writeDigitImageArray(zahl: number, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-        let text = zahl.toString()
+    export function writeDigitImageArray(zahl: any, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+        let text = convertToText(zahl)
         let ia: Image[] = []
         for (let j = 0; j < text.length; j++) {
             //ia.push(digitImage(zahl, j)) // nur Ziffern, Minus und Punkt (spart Programmcode)

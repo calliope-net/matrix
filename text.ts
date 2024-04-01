@@ -70,53 +70,11 @@ namespace matrix { // text.ts
                 }
             }
             return i1
-
-            /* 
-                        switch (pDrehen) {
-                            case eZeichenDrehen.links: {
-                                for (let i = 0; i <= 7; i++)  // 8x8 Bit 1/4 nach links drehen
-                                    for (let j = 0; j <= 7; j++)
-                                        if (i < i0.width() && j < i0.height())
-                                            //i1.setPixel(j, i, i0.pixel(7 - i, j)) // (j,i) (7-i,j)
-                                            i1.setPixel(j, 7 - i, i0.pixel(i, j)) // (j,7-i) (i,j)
-                                return i1
-                            }
-                            case eZeichenDrehen.rechts: {
-                                for (let i = 0; i <= 7; i++)  // 8x8 Bit 1/4 nach rechts drehen
-                                    for (let j = 0; j <= 7; j++)
-                                        if (i < i0.width() && j < i0.height())
-                                            i1.setPixel(7 - j, i, i0.pixel(i, j)) // (7-j,i) (i,j)
-                                return i1
-                            }
-                            case eZeichenDrehen.halb: {
-                                for (let i = 0; i <= 7; i++)  // 8x8 Bit 1/2 drehen
-                                    for (let j = 0; j <= 7; j++)
-                                        if (i < i0.width() && j < i0.height())
-                                            i1.setPixel(7 - i, 7 - j, i0.pixel(i, j)) // (7-i,7-j) (i,j)
-                                return i1
-                            }
-                            case eZeichenDrehen.yspiegeln: {
-                                for (let i = 0; i <= 7; i++)  // 8x8 Bit ↕ y spiegeln
-                                    for (let j = 0; j <= 7; j++)
-                                        if (i < i0.width() && j < i0.height())
-                                            i1.setPixel(7 - i, j, i0.pixel(i, j)) // (7-i,j) (i,j)
-                                return i1
-                            }
-                            case eZeichenDrehen.xspiegeln: {
-                                for (let i = 0; i <= 7; i++)  // 8x8 Bit ↔ x spiegeln
-                                    for (let j = 0; j <= 7; j++)
-                                        if (i < i0.width() && j < i0.height())
-                                            i1.setPixel(i, 7 - j, i0.pixel(i, j)) // (i,7-j) (i,j)
-                                return i1
-                            }
-                            default:
-                                return i0
-                        } */
         } // else
     }
 
     export function getDigit_5x8(pCharCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
-        if (between(pCharCode, 0x30, 0x39)) {
+        if (between(pCharCode, 0x30, 0x3A)) {
             return Buffer.fromHex([
                 "3E5149453E", // "0"
                 "00427F4000", // "1"
@@ -127,7 +85,8 @@ namespace matrix { // text.ts
                 "3C4A494930", // "6"
                 "0171090503", // "7"
                 "3649494936", // "8"
-                "064949291E"  // "9"
+                "064949291E", // "9"
+                "0036360000"  // ":"
             ].get(pCharCode & 0x0F))
         }
         else if (pCharCode == 0x2D) return Buffer.fromHex("0808080808") // "-"
