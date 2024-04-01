@@ -128,13 +128,13 @@ namespace matrix { // image.ts
     //% block="Bild 5x8 aus HEX %hex" weight=5
     //% hex.defl="7F09192946"
     //% blockSetVariable=bild
-    export function hexImage(hex: string): Image {
+    export function hexImage5x8(hex: string): Image {
         return bufferImage5x8(Buffer.fromHex(hex))
     }
 
     //% group="Bild aus HEX String" subcategory="Bilder"
     //% block="Bild 8x8 aus HEX %hex" weight=3
-    //% hex.defl="91080402FF010183"
+    //% hex.defl="427F406251494946"
     //% blockSetVariable=bild
     export function hexImage8x8(hex: string): Image {
         let bu = Buffer.fromHex(hex)

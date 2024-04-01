@@ -13,7 +13,8 @@
         "image.ts",
         "clock.ts",
         "text.ts",
-        "array.ts"
+        "array.ts",
+        "advanced.ts"
     ],
     "testFiles": [
         "test.ts"

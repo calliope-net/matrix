@@ -14,7 +14,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 
     // ========== Buffer ==========
-    let qArray: Buffer[] = [] // leeres Array Elemente Typ Buffer
+    export let qArray: Buffer[] = [] // leeres Array Elemente Typ Buffer
 
     export enum ePages {
         //% block="128x64"
@@ -247,37 +247,37 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         }
     }
 
-
-
-
-    // ========== group="Array: Buffer[]" advanced=true
-
-    //% group="Array: Buffer[]" advanced=true
-    //% block
-    export function getArray() { return qArray }
-
-
-    // ========== group="Logik (boolean)" advanced=true
-
-    //% group="Logik (boolean)" advanced=true
-    //% block="%i0 zwischen %i1 und %i2"
-    export function between(i0: number, i1: number, i2: number): boolean {
-        return (i0 >= i1 && i0 <= i2)
-    }
-
-    //% block advanced=true
-    export function pi() { return Math.PI }
-
-    //% group="Text // Kommentar" advanced=true
-    //% block="// %text"
-    export function comment(text: string): void { }
-
-
-    //% blockId=matrix_charCodeAt
-    //% group="Zahl (number)" advanced=true
-    //% block="charCodeAt %text index %index" weight=6
-    export function charCodeAt(text: string, index: number) {
-        return text.charCodeAt(index)
-    }
+    /*
+    
+    
+        // ========== group="Array: Buffer[]" advanced=true
+    
+        //% group="Array: Buffer[]" advanced=true
+        //% block
+        export function getArray() { return qArray }
+    
+    
+        // ========== group="Logik (boolean)" advanced=true
+    
+        //% group="Logik (boolean)" advanced=true
+        //% block="%i0 zwischen %i1 und %i2"
+        export function between(i0: number, i1: number, i2: number): boolean {
+            return (i0 >= i1 && i0 <= i2)
+        }
+    
+        //% block="π" advanced=true
+        export function pi() { return Math.PI }
+    
+        //% group="Text // Kommentar" advanced=true
+        //% block="// %text"
+        export function comment(text: string): void { }
+    
+    
+        //% blockId=matrix_charCodeAt
+        //% group="Zahl (number)" advanced=true
+        //% block="charCodeAt %text index %index" weight=6
+        export function charCodeAt(text: string, index: number) {
+            return text.charCodeAt(index)
+        } */
 
 } // matrix.ts

@@ -1,11 +1,16 @@
 
 namespace matrix { // array.ts
 
+ export   let qImages: Image[] = [] // leeres Array Elemente Typ Image
 
+    //% blockId=matrix_Images
+    //% block="Image[]" blockHidden=true
+    export function matrix_Images() { return qImages }
 
 
     //% group="OLED Display I²C" color="#007FFF" subcategory="Bilder Array"
     //% block="Animation auf Display schreiben %im x %x y %y || x %fx y %fy Pause(ms) %ms Zeilen %fromPage-%toPage %pI2C" weight=6
+    //% im.shadow=matrix_Images
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
     //% ms.shadow=timePicker
@@ -25,7 +30,8 @@ namespace matrix { // array.ts
 
 
     //% group="Array (mehrere Bilder) in Buffer zeichnen" subcategory="Bilder Array"
-    //% block="zeichne Array %im x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=6
+    //% block="zeichne Bilder %im x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=6
+    //% im.shadow=matrix_Images
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% dx.defl=8 dy.defl=0
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
@@ -37,6 +43,23 @@ namespace matrix { // array.ts
     }
 
 
+
+    //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
+    //% block="Bild %im anhängen" weight=8
+    export function pushImage(im: Image) { qImages.push(im) }
+
+    //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
+    //% block="Bild lesen an index %index" weight=7
+    export function getImage(index:number) {return qImages.get(index) }
+
+
+    //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
+    //% block="Image[] Länge" weight=3
+    export function lengthImages() {return qImages.length }
+
+    //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
+    //% block="Image[] löschen" weight=2
+    export function clearImages() { qImages = [] }
 
 
 
