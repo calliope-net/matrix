@@ -64,7 +64,7 @@ namespace matrix { // array.ts
 
 
     //% group="Animation Beispiele" subcategory="Bilder Array"
-    //% block="Regen"
+    //% block="Regen 16x8 (7 Bilder)"
     export function beispielRegen16x8(): Image[] {
         let im: Image[] = []
 
