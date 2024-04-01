@@ -186,10 +186,10 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
     export function line(x0: number, y0: number, x1: number, y1: number, pixel?: boolean) {
-        x0 = Math.trunc(x0)
-        y0 = Math.trunc(y0)
-        x1 = Math.trunc(x1)
-        y1 = Math.trunc(y1)
+        x0 = Math.round(x0)
+        y0 = Math.round(y0)
+        x1 = Math.round(x1)
+        y1 = Math.round(y1)
 
         // https://de.wikipedia.org/wiki/Bresenham-Algorithmus
         let dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
@@ -210,9 +210,9 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
     export function rasterCircle(x0: number, y0: number, radius: number, pixel?: boolean) {
-        x0 = Math.trunc(x0)
-        y0 = Math.trunc(y0)
-        radius = Math.trunc(radius)
+        x0 = Math.round(x0)
+        y0 = Math.round(y0)
+        radius = Math.round(radius)
 
         // https://de.wikipedia.org/wiki/Bresenham-Algorithmus
         let f = 1 - radius;

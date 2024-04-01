@@ -31,10 +31,10 @@ namespace matrix {
         let value = minute / 30 * Math.PI
 
         line(
-            Math.round(x + Math.cos(value) * l0), // x0
-            Math.round(y + Math.sin(value) * l0), // y0
-            Math.round(x + Math.cos(value) * l1), // x1
-            Math.round(y + Math.sin(value) * l1), // y1
+            x + Math.cos(value) * l0, // x0
+            y + Math.sin(value) * l0, // y0
+            x + Math.cos(value) * l1, // x1
+            y + Math.sin(value) * l1, // y1
             pixel
         )
     }
