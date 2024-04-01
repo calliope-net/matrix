@@ -41,7 +41,8 @@ namespace matrix {
 
     //% group="Analog Uhr Zeiger"
     //% block="zeichne Uhr Mittelpunkt x %x y %y (Radius 24)" weight=1
-    //% x.defl=30 y.defl=23
+    //% x.min=24 x.max=103 x.defl=30 
+    //% y.min=23 y.max=103 y.defl=23
     export function writeClock_radius24(x: number, y: number) {
         rasterCircle(x, y, 24)//30, 23
 
