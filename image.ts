@@ -78,7 +78,7 @@ namespace matrix { // image.ts
     export function writeTextImageArray(text: string, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
         let ia: Image[] = []
         for (let j = 0; j < text.length; j++) {
-            ia.push(charImage(text.charCodeAt(j)))
+            ia.push(charImage(text, j))
         }
         writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
     }
@@ -100,18 +100,20 @@ namespace matrix { // image.ts
     }
 
 
-    // ========== group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder" ==========
+    // ========== group="Bild 5x8 aus Text Zeichen" subcategory="Bilder" ==========
 
-    //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
-    //% block="Zeichen aus ASCII-Code %charCode" weight=7
-    //% charCode.shadow="matrix_charCode"
+    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
+    //% block="Bild aus Zeichen (ASCII) %text || index %index" weight=7
+    //% text.defl="R"
+    //% index.defl=0
     //% blockSetVariable=bild
-    export function charImage(charCode: number): Image {
-        return bufferImage5x8(getChar_5x8(charCode))
+    export function charImage(text: string, index = 0): Image {
+        return bufferImage5x8(getChar_5x8(text.charCodeAt(index)))
+        //return bufferImage5x8(getChar_5x8(charCode))
     }
 
-    //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
-    //% block="Zeichen aus Zahl %zahl || index %index" weight=6
+    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
+    //% block="Bild aus Ziffer %zahl || index %index" weight=6
     //% index.defl=0
     //% blockSetVariable=bild
     export function digitImage(zahl: number, index = 0): Image {
@@ -119,13 +121,33 @@ namespace matrix { // image.ts
         //  return bufferImage5x8(getDigit_5x8(charCode))
     }
 
-    //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
-    //% block="Zeichen aus HEX %hex" weight=5
+
+
+
+    //% group="Bild aus HEX String" subcategory="Bilder"
+    //% block="Bild 5x8 aus HEX %hex" weight=5
     //% hex.defl="7F09192946"
     //% blockSetVariable=bild
     export function hexImage(hex: string): Image {
         return bufferImage5x8(Buffer.fromHex(hex))
     }
+
+    //% group="Bild aus HEX String" subcategory="Bilder"
+    //% block="Bild 8x8 aus HEX %hex" weight=3
+    //% hex.defl="91080402FF010183"
+    //% blockSetVariable=bild
+    export function hexImage8x8(hex: string): Image {
+        let bu = Buffer.fromHex(hex)
+        let i8x8 = testBild8x8()
+        i8x8.clear()
+        for (let iy = 0; iy < i8x8.height(); iy++) {
+            for (let ix = 0; ix < i8x8.width(); ix++) {
+                i8x8.setPixel(ix, iy, (bu.getUint8(ix) & 2 ** (iy & 7)) != 0)
+            }
+        }
+        return i8x8
+    }
+
 
     function bufferImage5x8(bu: Buffer): Image {
         let i5x8: Image
@@ -153,8 +175,8 @@ namespace matrix { // image.ts
 
 
 
-    //% group="Bilder 8 Pixel" subcategory="Bilder"
-    //% block="Test Bild 8x8" weight=4
+    //% group="Bilder 8 Pixel" subcategory="Bilder 8"
+    //% block="Test Bild 8x8" weight=5
     //% blockSetVariable=bild
     export function testBild8x8(): Image {
         let i1 = matrix.matrix8x8(`
@@ -171,15 +193,8 @@ namespace matrix { // image.ts
     }
 
 
-    //% imageLiteral=1 imageLiteralColumns=5 imageLiteralRows=8
-    //% shim=images::createImage
-    function matrix5x8(i: string): Image {
-        const im = <Image><any>i;
-        return im
-    }
-
-    //% group="Bilder 8 Pixel" subcategory="Bilder"
-    //% block="Bild 8x8" weight=2
+    //% group="Bilder 8 Pixel" subcategory="Bilder 8"
+    //% block="Bild 8x8" weight=4
     //% imageLiteral=1 imageLiteralColumns=8 imageLiteralRows=8
     //% shim=images::createImage
     //% blockSetVariable=bild
@@ -188,6 +203,16 @@ namespace matrix { // image.ts
         return im
     }
 
+
+    //% group="Bilder 8 Pixel" subcategory="Bilder 8"
+    //% block="Bild 5x8" weight=3
+    //% imageLiteral=1 imageLiteralColumns=5 imageLiteralRows=8
+    //% shim=images::createImage
+    //% blockSetVariable=bild
+    export function matrix5x8(i: string): Image {
+        const im = <Image><any>i;
+        return im
+    }
 
 
 
