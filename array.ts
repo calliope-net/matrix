@@ -5,21 +5,20 @@ namespace matrix { // array.ts
 
 
     //% group="OLED Display I²C" color="#007FFF" subcategory="Bilder Array"
-    //% block="Animation auf Display schreiben %im x %x y %y || ⇔ %fx Pause(ms) %ms Zeilen %fromPage-%toPage %pI2C" weight=6
+    //% block="Animation auf Display schreiben %im x %x y %y || x %fx y %fy Pause(ms) %ms Zeilen %fromPage-%toPage %pI2C" weight=6
     //% x.min=0 x.max=127 y.min=0 y.max=127
-    //% fx.shadow="oled_eFaktor"
+    //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
     //% ms.shadow=timePicker
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=15
     //% inlineInputMode=inline
     // expandableArgumentMode="toggle"
-    export function writeDisplayAnimation(im: Image[], x: number, y: number, fx = 1, ms = 200, fromPage = 0, toPage = 15, pI2C = eI2C.I2C_x3C) {
+    export function writeDisplayAnimation(im: Image[], x: number, y: number, fx = 1, fy?: number, ms = 200, fromPage = 0, toPage = 15, pI2C = eI2C.I2C_x3C) {
         for (let iImage = 0; iImage < im.length; iImage++) {
-            writeImage(im.get(iImage), x, y, eTransparent.u, fx)
+            writeImage(im.get(iImage), x, y, eTransparent.u, fx, fy)
             writeDisplay(fromPage, toPage, pI2C)
             basic.pause(ms)
         }
-
     }
 
 

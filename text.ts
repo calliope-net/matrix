@@ -115,9 +115,28 @@ namespace matrix { // text.ts
         } // else
     }
 
+    export function getDigit_5x8(pCharCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
+        if (between(pCharCode, 0x30, 0x39)) {
+            return Buffer.fromHex([
+                "3E5149453E", // "0"
+                "00427F4000", // "1"
+                "6251494946", // "2"
+                "2241494936", // "3"
+                "1814127F10", // "4"
+                "2745454539", // "5"
+                "3C4A494930", // "6"
+                "0171090503", // "7"
+                "3649494936", // "8"
+                "064949291E"  // "9"
+            ].get(pCharCode & 0x0F))
+        }
+        else if (pCharCode == 0x2D) return Buffer.fromHex("0808080808") // "-"
+        else if (pCharCode == 0x2E) return Buffer.fromHex("6060000000") // "."
+        else return Buffer.fromHex("FFFFFFFFFF")
+    }
 
 
-    export function getPixel_5x8(pCharCode: number): Buffer {
+    export function getChar_5x8(pCharCode: number): Buffer {
 
         if (between(pCharCode, 0x20, 0x7F)) {
 

@@ -83,22 +83,44 @@ namespace matrix { // image.ts
         writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
     }
 
-
-
+    //% group="Text in Buffer zeichnen" subcategory="Bilder"
+    //% block="zeichne Zahl %zahl x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=3
+    //% x.min=0 x.max=127 y.min=0 y.max=127
+    //% dx.min=-10 dx.max=10 dx.defl=8 dy.min=-10 dy.max=10 dy.defl=0
+    //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
+    //% inlineInputMode=inline
+    export function writeDigitImageArray(zahl: number, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+        let text = zahl.toString()
+        let ia: Image[] = []
+        for (let j = 0; j < text.length; j++) {
+            //ia.push(digitImage(zahl, j)) // nur Ziffern, Minus und Punkt (spart Programmcode)
+            ia.push(bufferImage5x8(getDigit_5x8(text.charCodeAt(j))))
+        }
+        writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
+    }
 
 
     // ========== group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder" ==========
 
     //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
-    //% block="Zeichen aus ASCII-Code %charCode" weight=6
+    //% block="Zeichen aus ASCII-Code %charCode" weight=7
     //% charCode.shadow="matrix_charCode"
     //% blockSetVariable=bild
     export function charImage(charCode: number): Image {
-        return bufferImage5x8(getPixel_5x8(charCode))
+        return bufferImage5x8(getChar_5x8(charCode))
     }
 
     //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
-    //% block="Zeichen aus 10 HEX-Digits %hex" weight=5
+    //% block="Zeichen aus Zahl %zahl || index %index" weight=6
+    //% index.defl=0
+    //% blockSetVariable=bild
+    export function digitImage(zahl: number, index = 0): Image {
+        return bufferImage5x8(getDigit_5x8(zahl.toString().charCodeAt(index)))
+        //  return bufferImage5x8(getDigit_5x8(charCode))
+    }
+
+    //% group="Bilder aus Text Zeichen (5x8 Pixel)" subcategory="Bilder"
+    //% block="Zeichen aus HEX %hex" weight=5
     //% hex.defl="7F09192946"
     //% blockSetVariable=bild
     export function hexImage(hex: string): Image {
