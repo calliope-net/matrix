@@ -45,7 +45,7 @@ namespace matrix { // array.ts
 
 
     //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
-    //% block="Bild %im anhängen" weight=8
+    //% block="Bild anhängen %im" weight=8
     export function pushImage(im: Image) { qImages.push(im) }
 
     //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"

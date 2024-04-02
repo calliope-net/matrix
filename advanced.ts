@@ -40,4 +40,21 @@ namespace matrix { // advanced.ts
     export function pi() { return Math.PI }
 
 
+
+    //% group="Test Funktionen" advanced=true
+    //% block="alle ASCII Zeichen in Matrix schreiben"
+    export function writeCharset() {
+        //clearMatrix()
+        for (let i = 0; i <= 5; i++) {
+            clearImages()
+            for (let j = 0; j <= 15; j++) {
+                pushImage(asciiImage((i + 2) * 16 + j))
+            }
+            writeImageArray(matrix_Images(), 0, i * 8, 7)
+            //writeDisplay(0, 6, pI2C)
+        }
+        writeTextImageArray("ÄÖÜäöüß€°", 0, 7, 10)
+    }
+
+
 } // advanced.ts
