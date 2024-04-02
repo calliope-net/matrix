@@ -53,7 +53,7 @@ namespace matrix { // advanced.ts
             writeImageArray(matrix_Images(), 0, i * 8, 7)
             //writeDisplay(0, 6, pI2C)
         }
-        writeTextImageArray("ÄÖÜäöüß€°", 0, 7, 10)
+        writeTextImageArray("ÄÖÜäöüß€°", 0, 7 * 8, 10)
     }
 
 
