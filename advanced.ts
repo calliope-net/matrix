@@ -42,7 +42,7 @@ namespace matrix { // advanced.ts
 
 
     //% group="Test Funktionen" advanced=true
-    //% block="alle ASCII Zeichen in Matrix schreiben"
+    //% block="zeichne alle ASCII Zeichen in Matrix"
     export function writeCharset() {
         //clearMatrix()
         for (let i = 0; i <= 5; i++) {
