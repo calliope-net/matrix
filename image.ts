@@ -69,24 +69,12 @@ namespace matrix { // image.ts
 
 
 
-    //% group="Text in Buffer zeichnen" subcategory="Bilder"
-    //% block="zeichne Text %text x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=4
-    //% x.min=0 x.max=127 y.min=0 y.max=127
-    //% dx.min=-10 dx.max=10 dx.defl=8 dy.min=-10 dy.max=10 dy.defl=0
-    //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
-    //% inlineInputMode=inline
-    export function writeTextImageArray(text: string, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-        let ia: Image[] = []
-        for (let j = 0; j < text.length; j++) {
-            ia.push(charImage(text, j))
-        }
-        writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
-    }
+    // ========== group="Text in Buffer zeichnen" subcategory="Bilder"
 
     //% group="Text in Buffer zeichnen" subcategory="Bilder"
-    //% block="zeichne Zahl %zahl x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=3
+    //% block="zeichne Zahl/Zeit %zahl x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=5
     //% x.min=0 x.max=127 y.min=0 y.max=127
-    //% dx.min=-10 dx.max=10 dx.defl=8 dy.min=-10 dy.max=10 dy.defl=0
+    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
     //% inlineInputMode=inline
     export function writeDigitImageArray(zahl: any, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
@@ -100,10 +88,35 @@ namespace matrix { // image.ts
     }
 
 
+    //% group="Text in Buffer zeichnen" subcategory="Bilder"
+    //% block="zeichne Text %text x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=4
+    //% x.min=0 x.max=127 y.min=0 y.max=127
+    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
+    //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
+    //% inlineInputMode=inline
+    export function writeTextImageArray(text: string, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+        let ia: Image[] = []
+        for (let j = 0; j < text.length; j++) {
+            ia.push(charImage(text, j))
+        }
+        writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
+    }
+
+
+
     // ========== group="Bild 5x8 aus Text Zeichen" subcategory="Bilder" ==========
 
     //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
-    //% block="Bild aus Zeichen (ASCII) %text || index %index" weight=7
+    //% block="Bild aus Ziffer %zahl || index %index" weight=7
+    //% index.defl=0
+    //% blockSetVariable=bild
+    export function digitImage(zahl: number, index = 0): Image {
+        return bufferImage5x8(getDigit_5x8(zahl.toString().charCodeAt(index)))
+        //  return bufferImage5x8(getDigit_5x8(charCode))
+    }
+
+    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
+    //% block="Bild aus Zeichen (ASCII) %text || index %index" weight=6
     //% text.defl="R"
     //% index.defl=0
     //% blockSetVariable=bild
@@ -113,16 +126,16 @@ namespace matrix { // image.ts
     }
 
     //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
-    //% block="Bild aus Ziffer %zahl || index %index" weight=6
-    //% index.defl=0
+    //% block="Bild aus ASCII-Code %text" weight=5
+    //% charCode.min=32 charCode.max=127 charCode.defl=48
     //% blockSetVariable=bild
-    export function digitImage(zahl: number, index = 0): Image {
-        return bufferImage5x8(getDigit_5x8(zahl.toString().charCodeAt(index)))
-        //  return bufferImage5x8(getDigit_5x8(charCode))
+    export function asciiImage(charCode: number): Image {
+        return bufferImage5x8(getChar_5x8(charCode))
     }
 
 
 
+    // ========== group="Bild aus HEX String" subcategory="Bilder"
 
     //% group="Bild aus HEX String" subcategory="Bilder"
     //% block="Bild 5x8 aus HEX %hex" weight=5
@@ -173,9 +186,9 @@ namespace matrix { // image.ts
 
 
 
+    // ========== group="Image Objekte" subcategory="Bilder 8"
 
-
-    //% group="Bilder 8 Pixel" subcategory="Bilder 8"
+    //% group="Image Objekte" subcategory="Bilder 8"
     //% block="Test Bild 8x8" weight=5
     //% blockSetVariable=bild
     export function testBild8x8(): Image {
@@ -193,7 +206,7 @@ namespace matrix { // image.ts
     }
 
 
-    //% group="Bilder 8 Pixel" subcategory="Bilder 8"
+    //% group="Image Objekte" subcategory="Bilder 8"
     //% block="Bild 8x8" weight=4
     //% imageLiteral=1 imageLiteralColumns=8 imageLiteralRows=8
     //% shim=images::createImage
@@ -203,8 +216,7 @@ namespace matrix { // image.ts
         return im
     }
 
-
-    //% group="Bilder 8 Pixel" subcategory="Bilder 8"
+    //% group="Image Objekte" subcategory="Bilder 8"
     //% block="Bild 5x8" weight=3
     //% imageLiteral=1 imageLiteralColumns=5 imageLiteralRows=8
     //% shim=images::createImage
