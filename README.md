@@ -7,13 +7,15 @@
 
 > zeichnet Linien, Kreise oder eine analoge Uhr
 
-> Bilder verschiedener Größe 5x8 bis 64x64 Pixel mit Blöcken selbst malen und als Animation anzeigen
+> Bilder verschiedener Größe 5x8 bis 64x64 Pixel mit Blöcken selbst malen
 
 > Text pixelgenau positionieren, drehen, spiegeln, in verschiedene Richtungen zeichnen
 
 > Bilder (auch Text-Zeichen sind Bilder 5x8) vergrößern (in x und y Richtung getrennt strecken)
 
-> Displays mit verschiedenen I²C Adressen können gleichzeitig angeschlossen werden und verschiedene Bilder zeigen
+> mehrere Bilder als Animation anzeigen
+
+> zwei Displays mit verschiedenen I²C Adressen können verschiedene Bilder zeigen
 
 folgende OLED Displays wurden verwendet, die Erweiterug kann auch mit anderen Displays funktionieren:
 
