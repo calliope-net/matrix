@@ -1,7 +1,21 @@
 
 > Diese Seite bei [https://calliope-net.github.io/matrix/](https://calliope-net.github.io/matrix/) öffnen.
 
-### Calliope Erweiterung für I²C OLED Displays 128x64 und 128x128 Pixel
+### Calliope Erweiterung für I²C OLED Displays 128x128 und 128x64 Pixel
+
+> speichert alle Pixel im RAM (2048 oder 1024 Byte), deshalb Calliope mini ab V2 erforderlich
+
+> zeichnet Linien, Kreise oder eine analoge Uhr
+
+> Bilder verschiedener Größe 5x8 bis 64x64 Pixel mit Blöcken selbst malen und als Animation anzeigen
+
+> Text pixelgenau positionieren, drehen, spielgeln, in verschiedene Richtungen zeichnen
+
+> Bilder (auch Text-Zeichen sind Bilder 5x8) vergrößern (in x und y Richtung getrennt strecken)
+
+> Displays mit verschiedenen I²C Adressen können gleichzeitig angeschlossen werden und verschiedene Bilder zeigen
+
+> folgende OLED Displays wurden verwendet, die Erweiterug kann auch mit anderen Displays funktionieren
 
 * [Grove - OLED Display 1.12 (SH1107) V3.0 - SPI/IIC -3.3V/5V](https://wiki.seeedstudio.com/Grove-OLED-Display-1.12-SH1107_V3.0/)
 
