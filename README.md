@@ -126,12 +126,44 @@ Zeichnet einen Kreis mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS
 Block **12 Stunden** (Stunde, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
 
 Der Parameter *Stunde* bestimmt die Richtung (den Winkel) der Linie vom *Mittelpunkt x, y* (auf dem Zifferblatt einer Uhr).
-Der "kleine Zeiger" muss nicht im Mittelpunkt beginnen. Die Parameter *Linie von, bis* bestimmt Anfang und Ende des Zeigers (vom Mittelpunkt in Pixeln).
+Der "kleine Zeiger" muss nicht im Mittelpunkt beginnen. Die Parameter *Linie von, bis* bestimmen Anfang und Ende des Zeigers (vom Mittelpunkt in Pixeln).
+Mit *Pixel* AUS kann der Zeiger auch wieder gelöscht werden.
+
+Block **60 Minuten** (Minute, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
+
+Funktioniert wie **12 Stunden**, allerdings sind hier nicht 12, sondern 60 Positionen des Zeigers möglich.
+
+> Die Funktionen für die Uhrzeiger hat ein Schüler im GTA programmiert.
+
+Block **zeichne Uhr** (Mittelpunkt x, y, Stunde, Minute)
+
+Verwendet die oben beschriebenen Funktionen, um eine komplette analoge Uhr zu zeichnen.
 
 
 
+#### Bilder
 
 ![](bilder.png)
+
+Im Menüpunkt *Bilder* können Bilder (Image-Objekte) aus verschiedenen Quellen erzeugt und in Variablen gespeichert werden.
+Die Image-Objekte werden dann an einer bestimmten Position (x, y) in den RAM (Buffer) gezeichnet.
+
+##### Bild in Buffer zeichnen
+
+Block **zeichne Bild** (Image-Objekt, x, y, überschreiben, vergrößern x, y)
+
+In den 1. Parameter *Image-Objekt* muss eine Variable *bild* oder ein Block, der ein Image-Objekt zurück gibt, eingetragen werden.
+
+Die Koordinaten *x, y* sind die linke obere Ecke, wo das Bild aus dem Image-Objekt in die Matrix gezeichnet wird. 
+Dabei wird die volle Breite und Höhe des Bildes übertragen (bis zum Rand der Matrix).
+
+Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom Image-Objekt in den RAM gezeichnet.
+Mit Parameter *transparent* werden nur Pixel an geschaltet (die Einsen). Pixel, die vorher schon leuchten, werden nicht aus geschaltet.
+So bleibt der Hintergrund sichtbar (transparent).
+
+Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
+
+
 
 ![](bilder16.png)
 
@@ -167,7 +199,7 @@ Wenn die Bilder an Position x, y = (0,0) 8 Pixel hoch und nicht vergrößert sin
 
 ##### Array (mehrere Bilder) in Buffer zeichnen
 
-Block **zeichne Bilder** (Image[], Position x, y, Abstand x, y, überschreiben, Vergrößern x, y)
+Block **zeichne Bilder** (Image[], Position x, y, Abstand x, y, überschreiben, vergrößern x, y)
 
 Die Bilder im Array *Image[]* können an *Position x, y* beginnend versetzt in den RAM (Buffer) gezeichnet werden. Sonst würden sie sich überschreiben.
 Das wird z.B. für Text verwendet, weil jeder Buchstabe ein Bild 5x8 Pixel ist. Der *Abstand x, y* wäre für Text x=8 und y=0. 
