@@ -54,7 +54,7 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den I²C-Bus gibt es nur 3 Blöcke (hellblau):
 
 * **beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
-* **Matrix auf Display** schreiben (Zeilen von, bis,  I²C-Adresse)
+* **Matrix auf Display schreiben** (Zeilen von, bis,  I²C-Adresse)
 * **Animation auf Display schreiben** (Image[]-Array, Position x, y, Vergrößern x, y, Pause(ms), Zeilen von, bis,  I²C-Adresse)
 
 **beim Start** muss beim Start aufgerufen werden, um den RAM (die Matrix) und das Display zu initialisieren. 
@@ -67,6 +67,12 @@ Die optionalen Parameter können weg gelassen werden. Sie werden bei Bedarf mit 
 
 **Matrix auf Display schreiben** ist immer aufzurufen, wenn das in den RAM gezeichnete Bild angezeigt werden soll.
 Dabei wird normalerweise das komplette Display über den I²C-Bus neu geschrieben (1KB oder 2KB Pixel).
+Mit den optionalen Parametern ist es möglich, nur einen Teil des Displays zu aktualisieren. 
+Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit, füllt also die gesamte Breite des Displays.
+Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 hat 16 Zeilen (0-15).
+
+Die Zeilen im RAM und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
+
 
 
 
