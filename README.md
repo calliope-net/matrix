@@ -99,7 +99,7 @@ Für eine Animation werden mehrere Bilder mit kurzer Pause an der selben Stelle 
 Es wird jeweils 1 Bild in den RAM gezeichnet, *Matrix auf Display schreiben* aufgerufen und eine Zeit in Millisekunden gewartet.
 Das wiederholt sich, bis alle Elemente aus dem Array Image[] abgearbeitet sind.
 
-Als Parameter ist das interne Array Image[] eingestellt, es kann auch ein eigenes Array übergeben werden.
+Als Parameter ist das interne Array Image[] eingestellt, es kann auch ein eigenes Array mit Bildern übergeben werden.
 *Position x, y* ist die linke obere Ecke, wo alle Bilder aus dem Array nacheinander in die Matrix gezeichnet werden. 
 Dabei wird die volle Breite und Höhe jedes Bildes übertragen (bis zum Rand der Matrix).
 
@@ -110,13 +110,24 @@ Der Parameter *Pause(ms)* legt fest, wie lange jedes Bild während der Animation
 
 Die letzten Parameter *Zeilen von, bis* und *I²C-Adresse* entsprechen dem Block **Matrix auf Display schreiben**.
 Damit kann verhindert werden, dass immer das gesamte Display über den I²C-Bus neu geschrieben wird, wenn die Bilder der Animation kleiner sind.
+Wenn die Bilder an Position x, y = (0,0) 8 Pixel hoch und nicht vergrößert sind, reicht es die Zeile 0 zu aktualisieren.
+
+##### Image[]
+
+Block **zeichne Bilder** (Image[], Position x, y, Abstand x, y, überschreiben, Vergrößern x, y)
+
+Die Bilder im Array *Image[]* können an *Position x, y* beginnend versetzt in den RAM gezeichnet werden. Sonst würden sie sich überschreiben.
+Das wird z.B. für Text verwendet, weil jeder Buchstabe ein Bild 5x8 Pixel ist. Der *Abstand x, y* wäre für Text x=8 und y=0. 
+Es ist aber möglich die Buchstaben, oder auch größere Bilder aus dem Array, nach oben, unten und mit negativen x, y auch zurück zu versetzen.
+
+Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom Image-Objekt in den RAM gezeichnet.
+Mit Parameter *transparent* werden nur Pixel an geschaltet (die Einsen). Pixel, die vorher schon leuchten, werden nicht aus geschaltet.
+So bleibt der Hintergrund sichtbar (transparent).
+
+Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor *1 *2 *3 bis *8 vervielfacht werden, jede Richtung x und y getrennt.
+Der Faktor gilt für alle Bilder im Array. Gegebenenfalls müssen die Parameter *Abstand x, y* angepasst werden.
 
 
-
-
-Über den I²C-Bus zum Display werden nur komplette 'Pages' aus dem RAM gesendet.
-
-* Abc
 
 
 ### Erweiterungen
