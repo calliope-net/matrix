@@ -127,6 +127,27 @@ So bleibt der Hintergrund sichtbar (transparent).
 Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 Der Faktor gilt für alle Bilder im Array. Gegebenenfalls müssen die Parameter *Abstand x, y* angepasst werden.
 
+Block **Bild anhängen**
+
+Als Parameter ist ein Bild (Image-Objekt) zu übergeben, welches an das interne Array Image[] angehängt wird. Das kann eine - in den anderen
+Menüpunkten automatisch erzeugte - Variable *bild* sein oder direkt ein Bild-Block in dem die Pixel direkt angeklickt werden können.
+
+Block **Bild lesen an index** (index)
+
+Gibt ein Bild (ein Element aus dem Array Image[]) zurück.
+
+Block **Image[] Länge**
+
+Gibt die Anzahl der Elemente im internen Array zurück.
+
+Block **Image[] löschen**
+
+Setzt das interne Array Image[] auf ein leeres Array mit 0 Elementen.
+
+##### Animation Beispiele
+
+Hier können fertige Arrays mit Bildern abgerufen werden. Diese Beispiel-Arrays sind in den Block **Animation auf Display schreiben**
+einzufügen (und ersetzen dort Image[]).
 
 
 
