@@ -54,8 +54,8 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den I²C-Bus gibt es nur 3 Blöcke (hellblau):
 
 * **beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
-* **Matrix auf Display schreiben** (Zeilen von, bis,  I²C-Adresse)
-* **Animation auf Display schreiben** (Image[]-Array, Position x, y, Vergrößern x, y, Pause(ms), Zeilen von, bis,  I²C-Adresse)
+* **Matrix auf Display schreiben** (Zeilen von, bis, I²C-Adresse)
+* **Animation auf Display schreiben** (Image[]-Array, Position x, y, Vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
 **beim Start** muss beim Start aufgerufen werden, um den RAM (die Matrix) und das Display zu initialisieren. 
 Die eingestellte Größe entscheidet darüber, wieviel RAM reserviert wird. 128x64 reserviert 1KB und 128x128 2KB.
@@ -78,18 +78,30 @@ Die Zeilen im RAM und auf dem Display sind fest zugeordnet. Sie können nicht an
 
 
 
+![](bilder.png)
+
+![](bilder16.png)
+
+
 
 #### Bilder Array
 
-Block **Animation auf Display schreiben**
+![](bilderarray.png)
 
 Bilder-Array ist ein Array im RAM mit Elementen vom Typ Image. In den Blöcken ist dieses interne Array mit **Image[]** bezeichnet.
 Image ist in MakeCode ein Typ. Ein Image-Object kann eine bestimmte Anzahl Pixel in Breite und Höhe speichern, also ein Bild.
 
-Für eine Animation werden mehrere solche Bilder mit kurzer Pause an der selben Stelle angezeigt. Die Bilder sind im Array gespeichert.
-Es wird jeweils 1 Bild in den RAM gezeichnet, *Animation auf Display schreiben* aufgerufen und eine Zeit in Millisekunden gewartet.
+##### OLED Display I²C
+
+Block **Animation auf Display schreiben** (Image[], Position x, y, Vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
+
+Für eine Animation werden mehrere Bilder mit kurzer Pause an der selben Stelle angezeigt. Die Bilder sind in einem Array gespeichert.
+Es wird jeweils 1 Bild in den RAM gezeichnet, *Matrix auf Display schreiben* aufgerufen und eine Zeit in Millisekunden gewartet.
 Das wiederholt sich, bis alle Elemente aus dem Array Image[] abgearbeitet sind.
 
+Als Parameter ist das interne Array Image[] eingestellt, es kann auch ein eigenes Array übergeben werden.
+*Position x, y* ist die linke obere Ecke, wo alle Bilder aus dem Array nacheinander in die Matrix gezeichnet werden. 
+Dabei wird die volle Breite und Höhe jedes Bildes übertragen (bis zum Rand der Matrix).
 
 
 
@@ -98,13 +110,6 @@ Das wiederholt sich, bis alle Elemente aus dem Array Image[] abgearbeitet sind.
 Über den I²C-Bus zum Display werden nur komplette 'Pages' aus dem RAM gesendet.
 
 * Abc
-
-![](bilder.png)
-
-![](bilder16.png)
-
-![](bilderarray.png)
-
 
 
 ### Erweiterungen
