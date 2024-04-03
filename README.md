@@ -69,9 +69,12 @@ Die optionalen Parameter können weg gelassen werden. Sie werden bei Bedarf mit 
 Dabei wird normalerweise das komplette Display über den I²C-Bus neu geschrieben (1KB oder 2KB Pixel).
 Mit den optionalen Parametern ist es möglich, nur einen Teil des Displays zu aktualisieren. 
 Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit, füllt also die gesamte Breite des Displays.
-Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 hat 16 Zeilen (0-15).
+Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 Display hat 16 Zeilen (0-15).
 
 Die Zeilen im RAM und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
+
+**Animation auf Display schreiben** befindet sich im Menüpunkt **Bilder Array**. 
+Bilder-Array ist ein Array im RAM mit Elementen vom Typ Image. In den Blöcken ist dieses interne Array mit **Image[]** bezeichnet.
 
 
 
