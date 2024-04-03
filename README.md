@@ -9,7 +9,7 @@
 
 > Bilder verschiedener Größe 5x8 bis 64x64 Pixel mit Blöcken selbst malen und als Animation anzeigen
 
-> Text pixelgenau positionieren, drehen, spielgeln, in verschiedene Richtungen zeichnen
+> Text pixelgenau positionieren, drehen, spiegeln, in verschiedene Richtungen zeichnen
 
 > Bilder (auch Text-Zeichen sind Bilder 5x8) vergrößern (in x und y Richtung getrennt strecken)
 
