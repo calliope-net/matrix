@@ -41,15 +41,33 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 * klicke auf das Rechteck **matrix** (kann von der Tastatur verdeckt sein)
 * jetzt hat die Liste den neuen Eintrag **Matrix** bekommen
 
-## Dieses Projekt bearbeiten ![Build status badge](https://github.com/calliope-net/matrix/workflows/MakeCode/badge.svg)
 
-Um dieses Repository in MakeCode zu bearbeiten.
+![](blocks.png)
 
-* öffne [https://makecode.calliope.cc/](https://makecode.calliope.cc/)
-* klicke auf **Importieren** und dann auf **Importiere URL**
-* füge **https://github.com/calliope-net/matrix** ein und klicke auf Importieren
+### Beschreibung der Erweiterung 'Matrix'
 
-## Blocks preview
+Abc
+
+* Abc
+
+### Erweiterungen
+
+> [Upates für Erweiterungen; Erweiterungen aus einem Projekt löschen.](https://calliope-net.github.io/i2c-liste#updates)
+
+> [Alle i2c-Erweiterungen für MakeCode von calliope-net (Software).](https://calliope-net.github.io/i2c-liste#erweiterungen)
+
+#### Calliope-Apps, .hex-Dateien, Bildschirmfotos mit Blöcken
+
+> [Alle Beispiel-Projekte für MakeCode von calliope-net (Calliope-Apps).](https://calliope-net.github.io/i2c-liste#programmierbeispiele)
+
+> GitHub-Profil calliope-net: [https://github.com/calliope-net](https://github.com/calliope-net)
+
+### Bezugsquellen
+
+> [Alle i2c-Module und Bezugsquellen (Hardware).](https://calliope-net.github.io/i2c-liste#bezugsquellen)
+
+
+#### Blocks preview ![Build status badge](https://github.com/calliope-net/matrix/workflows/MakeCode/badge.svg)
 
 This image shows the blocks code from the last commit in master.
 This image may take a few minutes to refresh.
@@ -58,5 +76,5 @@ This image may take a few minutes to refresh.
 
 #### Metadaten (verwendet für Suche, Rendering)
 
-* for PXT/calliopemini
-<script src="https://makecode.com/gh-pages-embed.js"></script><script>makeCodeRender("{{ site.makecode.home_url }}", "{{ site.github.owner_name }}/{{ site.github.repository_name }}");</script>
+* Calliope mini
+* I²C
