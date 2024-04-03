@@ -96,7 +96,7 @@ Damit werden normalerweise alle Pixel im gesamten RAM (die Matrix) gelöscht.
 Mit den optionalen Parametern (Zeilen von, bis) ist es möglich, nur einen Teil der Matrix zu löschen.
 Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit.
 
-> Um das Display zu löschen, muss eine gelöschte Matrix noch mit dem Block **Matrix auf Display schreiben**
+> Um das Display zu löschen, muss eine gelöschte Matrix noch mit dem hellblauen Block **Matrix auf Display schreiben**
 > über den I²C-Bus an das Display gesendet werden.
 
 Block **set Pixel** (x, y, EIN/AUS)
