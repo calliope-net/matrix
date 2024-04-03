@@ -103,6 +103,13 @@ Als Parameter ist das interne Array Image[] eingestellt, es kann auch ein eigene
 *Position x, y* ist die linke obere Ecke, wo alle Bilder aus dem Array nacheinander in die Matrix gezeichnet werden. 
 Dabei wird die volle Breite und Höhe jedes Bildes übertragen (bis zum Rand der Matrix).
 
+Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor *1 *2 *3 bis *8 vervielfacht werden, jede Richtung x und y getrennt.
+So können kleine Bilder auch größer betrachtet werden.
+
+Der Parameter *Pause(ms)* legt fest, wie lange jedes Bild während der Animation angezeigt wird.
+
+Die letzten Parameter *Zeilen von, bis* und *I²C-Adresse* entsprechen dem Block **Matrix auf Display schreiben**.
+Damit kann verhindert werden, dass immer das gesamte Display über den I²C-Bus neu geschrieben wird, wenn die Bilder der Animation kleiner sind.
 
 
 
