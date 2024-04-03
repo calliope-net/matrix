@@ -54,7 +54,7 @@ Abc
 
 > [Upates für Erweiterungen; Erweiterungen aus einem Projekt löschen.](https://calliope-net.github.io/i2c-liste#updates)
 
-> [Alle i2c-Erweiterungen für MakeCode von calliope-net (Software).](https://calliope-net.github.io/i2c-liste#erweiterungen)
+> [Alle I²C-Erweiterungen für MakeCode von calliope-net (Software).](https://calliope-net.github.io/i2c-liste#erweiterungen)
 
 #### Calliope-Apps, .hex-Dateien, Bildschirmfotos mit Blöcken
 
@@ -64,7 +64,7 @@ Abc
 
 ### Bezugsquellen
 
-> [Alle i2c-Module und Bezugsquellen (Hardware).](https://calliope-net.github.io/i2c-liste#bezugsquellen)
+> [Alle I²C-Module und Bezugsquellen (Hardware).](https://calliope-net.github.io/i2c-liste#bezugsquellen)
 
 
 #### Blocks preview ![Build status badge](https://github.com/calliope-net/matrix/workflows/MakeCode/badge.svg)
