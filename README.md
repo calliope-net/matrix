@@ -15,7 +15,7 @@
 
 > Displays mit verschiedenen I²C Adressen können gleichzeitig angeschlossen werden und verschiedene Bilder zeigen
 
-> folgende OLED Displays wurden verwendet, die Erweiterug kann auch mit anderen Displays funktionieren
+folgende OLED Displays wurden verwendet, die Erweiterug kann auch mit anderen Displays funktionieren:
 
 * [Grove - OLED Display 1.12 (SH1107) V3.0 - SPI/IIC -3.3V/5V](https://wiki.seeedstudio.com/Grove-OLED-Display-1.12-SH1107_V3.0/)
 
