@@ -69,17 +69,39 @@ Die optionalen Parameter können weg gelassen werden. Sie werden bei Bedarf mit 
 
 > Wenn zwei Displays angeschlossen sind, muss der Block **beim Start** zweimal aufgerufen werden, mit verschiedenen I²C-Adressen.
 > RAM wird für das größere Display reserviert. Es gibt nur eine Matrix im RAM, die sich beide Displays teilen.
-> Um verschiedene Bilder anzuzeigen, wird die Matrix gelöscht und neu gezeichnet.
+> Um verschiedene Bilder auf zwei Displays anzuzeigen, wird die Matrix gelöscht und neu gezeichnet.
 
 Block **Matrix auf Display schreiben** ist immer aufzurufen, wenn das in den RAM gezeichnete Bild angezeigt werden soll.
 Dabei wird normalerweise das komplette Display über den I²C-Bus neu geschrieben (1KB oder 2KB Pixel).
-Mit den optionalen Parametern ist es möglich, nur einen Teil des Displays zu aktualisieren. 
+Mit den optionalen Parametern (von, bis) ist es möglich, nur einen Teil des Displays zu aktualisieren. 
 Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit, füllt also die gesamte Breite des Displays.
 Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 Display hat 16 Zeilen (0-15).
 
 Die Zeilen im RAM und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
 
 Block **Animation auf Display schreiben** befindet sich im Menüpunkt **Bilder Array** und wird dort beschrieben. 
+
+##### Matrix im Speicher
+
+Block **Matrix löschen** (Zeilen von, bis)
+
+Damit werden normalerweise alle Pixel im gesamten RAM (die Matrix) gelöscht.
+Mit den optionalen Parametern (Zeilen von, bis) ist es möglich, nur einen Teil der Matrix zu löschen.
+Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit.
+
+> Um das Display zu löschen, muss eine gelöschte Matrix noch mit dem Block **Matrix auf Display schreiben**
+> über den I²C-Bus an das Display gesendet werden.
+
+Block **set Pixel** (x, y, EIN/AUS)
+
+Schaltet ein Pixel (im RAM) EIN oder AUS. 
+
+> Für die Koordinate x sind Werte von 0 (links) bis 127 (rechts) erlaubt.
+> Für die Koordinate y sind Werte von 0 (oben) bis 63 oder 127 (unten) erlaubt.
+
+Block **get Pixel** (x, y) : boolean
+
+Liest ein Pixel aus dem RAM als boolean (wahr=EIN, falsch=aus).
 
 
 
