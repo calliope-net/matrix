@@ -49,7 +49,7 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 ### Beschreibung der Erweiterung 'Matrix'
 
-##### I²C
+#### I²C
 
 Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den I²C-Bus gibt es nur 3 Blöcke (hellblau):
 
@@ -57,15 +57,21 @@ Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den 
 * **Matrix auf Display schreiben** (Zeilen von, bis, I²C-Adresse)
 * **Animation auf Display schreiben** (Image[]-Array, Position x, y, Vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
-**beim Start** muss beim Start aufgerufen werden, um den RAM (die Matrix) und das Display zu initialisieren. 
+##### OLED Display I²C
+
+Block **beim Start** muss beim Start aufgerufen werden, um den RAM (die Matrix) und das Display zu initialisieren. 
 Die eingestellte Größe entscheidet darüber, wieviel RAM reserviert wird. 128x64 reserviert 1KB und 128x128 2KB.
 *invert* stellt ein, ob die Pixel leuchten oder der Hintergrund. 
 Mit *drehen* wird das Bild auf den Kopf gestellt, wenn das Display anders herum eingebaut ist.
 Die *I²C-Adresse* muss nur umgestellt werden, wenn ein zweites Display angeschlossen wird.
 
-Die optionalen Parameter können weg gelassen werden. Sie werden bei Bedarf mit dem + angezeigt. 
+Die optionalen Parameter können weg gelassen werden. Sie werden bei Bedarf mit dem + angezeigt.
 
-**Matrix auf Display schreiben** ist immer aufzurufen, wenn das in den RAM gezeichnete Bild angezeigt werden soll.
+> Wenn zwei Displays angeschlossen sind, muss der Block **beim Start** zweimal aufgerufen werden, mit verschiedenen I²C-Adressen.
+> RAM wird für das größere Display reserviert. Es gibt nur eine Matrix im RAM, die sich beide Displays teilen.
+> Um verschiedene Bilder anzuzeigen, wird die Matrix gelöscht und neu gezeichnet.
+
+Block **Matrix auf Display schreiben** ist immer aufzurufen, wenn das in den RAM gezeichnete Bild angezeigt werden soll.
 Dabei wird normalerweise das komplette Display über den I²C-Bus neu geschrieben (1KB oder 2KB Pixel).
 Mit den optionalen Parametern ist es möglich, nur einen Teil des Displays zu aktualisieren. 
 Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit, füllt also die gesamte Breite des Displays.
@@ -73,7 +79,7 @@ Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 Display hat 16 Zeilen (
 
 Die Zeilen im RAM und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
 
-**Animation auf Display schreiben** befindet sich im Menüpunkt **Bilder Array** und wird dort beschrieben. 
+Block **Animation auf Display schreiben** befindet sich im Menüpunkt **Bilder Array** und wird dort beschrieben. 
 
 
 
