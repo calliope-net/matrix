@@ -108,14 +108,18 @@ Schaltet ein Pixel (im RAM) EIN oder AUS.
 
 Block **get Pixel** (x, y) : boolean
 
-Liest ein Pixel aus dem RAM als boolean (wahr=EIN, falsch=aus).
+Liest ein Pixel aus dem RAM als boolean (wahr=EIN, falsch=AUS).
 
 Block **Linie** (von x, y, bis x, y, Pixel EIN/AUS)
 
-Zeichnet eine Linie mit den angegebenen Koordinaten. Mit *Pixel* AUS werden die Pixel gelöscht.
+Zeichnet eine Linie mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS werden die Pixel gelöscht.
 
+Block **Kreis** (Mittelpunkt x, y, Radius, Pixel EIN/AUS)
 
+Zeichnet einen Kreis mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS werden die Pixel gelöscht.
 
+> Für Linie und Kreis wird der Bresenham-Algorithmus verwendet:
+> [de.wikipedia.org/wiki/Bresenham-Algorithmus](https://de.wikipedia.org/wiki/Bresenham-Algorithmus)
 
 
 ![](bilder.png)
