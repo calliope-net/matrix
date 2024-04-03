@@ -49,7 +49,17 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 ### Beschreibung der Erweiterung 'Matrix'
 
-Abc
+#### I²C
+
+Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den I²C-Bus gibt es nur 3 Blöcke (hellblau):
+* beim Start (Display-Größe, invert, drehen, I²C-Adresse)
+* Matrix auf Display schreiben (Zeilen von, bis,  I²C-Adresse)
+* Animation auf Display schreiben (Image[]-Array, Position x, y, Vergrößern x, y, Pause(ms), Zeilen von, bis,  I²C-Adresse)
+
+
+
+
+Über den I²C-Bus zum Display werden nur komplette 'Pages' aus dem RAM gesendet.
 
 * Abc
 
