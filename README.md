@@ -112,11 +112,11 @@ Die letzten Parameter *Zeilen von, bis* und *I²C-Adresse* entsprechen dem Block
 Damit kann verhindert werden, dass immer das gesamte Display über den I²C-Bus neu geschrieben wird, wenn die Bilder der Animation kleiner sind.
 Wenn die Bilder an Position x, y = (0,0) 8 Pixel hoch und nicht vergrößert sind, reicht es die Zeile 0 zu aktualisieren.
 
-##### Image[]
+##### Array (mehrere Bilder) in Buffer zeichnen
 
 Block **zeichne Bilder** (Image[], Position x, y, Abstand x, y, überschreiben, Vergrößern x, y)
 
-Die Bilder im Array *Image[]* können an *Position x, y* beginnend versetzt in den RAM gezeichnet werden. Sonst würden sie sich überschreiben.
+Die Bilder im Array *Image[]* können an *Position x, y* beginnend versetzt in den RAM (Buffer) gezeichnet werden. Sonst würden sie sich überschreiben.
 Das wird z.B. für Text verwendet, weil jeder Buchstabe ein Bild 5x8 Pixel ist. Der *Abstand x, y* wäre für Text x=8 und y=0. 
 Es ist aber möglich die Buchstaben, oder auch größere Bilder aus dem Array, nach oben, unten und mit negativen x, y auch zurück zu versetzen.
 
@@ -127,10 +127,14 @@ So bleibt der Hintergrund sichtbar (transparent).
 Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 Der Faktor gilt für alle Bilder im Array. Gegebenenfalls müssen die Parameter *Abstand x, y* angepasst werden.
 
+> Um die in den RAM (Buffer) gezeichneten Bilder auf dem Display anzuzeigen, muss noch der hellblaue Block **Matrix auf Display schreiben** aufgerufen werden.
+
+##### Speicher für Bilder: Image[]
+
 Block **Bild anhängen**
 
 Als Parameter ist ein Bild (Image-Objekt) zu übergeben, welches an das interne Array Image[] angehängt wird. Das kann eine - in den anderen
-Menüpunkten automatisch erzeugte - Variable *bild* sein oder direkt ein Bild-Block in dem die Pixel direkt angeklickt werden können.
+Menüpunkten automatisch erzeugte - Variable *bild* sein oder direkt ein Bild-Block in dem die Pixel angeklickt werden können.
 
 Block **Bild lesen an index** (index)
 
