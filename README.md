@@ -103,7 +103,7 @@ Als Parameter ist das interne Array Image[] eingestellt, es kann auch ein eigene
 *Position x, y* ist die linke obere Ecke, wo alle Bilder aus dem Array nacheinander in die Matrix gezeichnet werden. 
 Dabei wird die volle Breite und Höhe jedes Bildes übertragen (bis zum Rand der Matrix).
 
-Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor *1 *2 *3 bis *8 vervielfacht werden, jede Richtung x und y getrennt.
+Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 So können kleine Bilder auch größer betrachtet werden.
 
 Der Parameter *Pause(ms)* legt fest, wie lange jedes Bild während der Animation angezeigt wird.
@@ -124,7 +124,7 @@ Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom
 Mit Parameter *transparent* werden nur Pixel an geschaltet (die Einsen). Pixel, die vorher schon leuchten, werden nicht aus geschaltet.
 So bleibt der Hintergrund sichtbar (transparent).
 
-Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor *1 *2 *3 bis *8 vervielfacht werden, jede Richtung x und y getrennt.
+Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 Der Faktor gilt für alle Bilder im Array. Gegebenenfalls müssen die Parameter *Abstand x, y* angepasst werden.
 
 
