@@ -121,6 +121,15 @@ Zeichnet einen Kreis mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS
 > Für Linie und Kreis wird der Bresenham-Algorithmus verwendet:
 > [de.wikipedia.org/wiki/Bresenham-Algorithmus](https://de.wikipedia.org/wiki/Bresenham-Algorithmus)
 
+##### Analog Uhr Zeiger
+
+Block **12 Stunden** (Stunde, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
+
+Der Parameter *Stunde* bestimmt die Richtung (den Winkel) der Linie vom *Mittelpunkt x, y* (auf dem Zifferblatt einer Uhr).
+Der "kleine Zeiger" muss nicht im Mittelpunkt beginnen. Die Parameter *Linie von, bis* bestimmt Anfang und Ende des Zeigers (vom Mittelpunkt in Pixeln).
+
+
+
 
 ![](bilder.png)
 
