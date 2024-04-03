@@ -73,8 +73,23 @@ Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 Display hat 16 Zeilen (
 
 Die Zeilen im RAM und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
 
-**Animation auf Display schreiben** befindet sich im Menüpunkt **Bilder Array**. 
+**Animation auf Display schreiben** befindet sich im Menüpunkt **Bilder Array** und wird dort beschrieben. 
+
+
+
+
+
+#### Bilder Array
+
+Block **Animation auf Display schreiben**
+
 Bilder-Array ist ein Array im RAM mit Elementen vom Typ Image. In den Blöcken ist dieses interne Array mit **Image[]** bezeichnet.
+Image ist in MakeCode ein Typ. Ein Image-Object kann eine bestimmte Anzahl Pixel in Breite und Höhe speichern, also ein Bild.
+
+Für eine Animation werden mehrere solche Bilder mit kurzer Pause an der selben Stelle angezeigt. Die Bilder sind im Array gespeichert.
+Es wird jeweils 1 Bild in den RAM gezeichnet, *Animation auf Display schreiben* aufgerufen und eine Zeit in Millisekunden gewartet.
+Das wiederholt sich, bis alle Elemente aus dem Array Image[] abgearbeitet sind.
+
 
 
 
