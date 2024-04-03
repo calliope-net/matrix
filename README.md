@@ -33,7 +33,8 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 * öffne Makecode in der App oder die Webseite [https://makecode.calliope.cc/](https://makecode.calliope.cc/)
 * klicke auf **Neues Projekt** und gib deinem Projekt einen Namen
-* wähle die zu deinem Calliope mini passende Hardware v2 oder v3; mit v1 funktioniert diese Erweiterung nicht
+* wähle die zu deinem Calliope mini passende Hardware v2 oder v3
+* mit Calliope 1.3 (v1) funktioniert diese Erweiterung nicht
 * klicke auf **Erweiterungen**
 * schreibe die folgende **Projekt-URL**:
 * **calliope-net/matrix**
