@@ -29,15 +29,17 @@ folgende OLED Displays wurden verwendet, die Erweiterug kann auch mit anderen Di
 
 ![](https://files.seeedstudio.com/wiki/Grove-OLED-Yellow&Blue-Display-0.96-(SSD1315)_V1.0/img/10402049_Preview-07.png)
 
-
-## Als Erweiterung verwenden
-
 Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
-* öffne [https://makecode.calliope.cc/](https://makecode.calliope.cc/)
-* klicke auf **Neues Projekt**
-* klicke auf **Erweiterungen** unter dem Zahnrad-Menü
-* nach **https://github.com/calliope-net/matrix** suchen und importieren
+* öffne Makecode in der App oder die Webseite [https://makecode.calliope.cc/](https://makecode.calliope.cc/)
+* klicke auf **Neues Projekt** und gib deinem Projekt einen Namen
+* wähle die zu deinem Calliope mini passende Hardware v2 oder v3; mit v1 funktioniert diese Erweiterung nicht
+* klicke auf **Erweiterungen**
+* schreibe die folgende **Projekt-URL**:
+* **calliope-net/matrix**
+* mit der Tastatur oben in das weiße Feld und klicke auf ENTER
+* klicke auf das Rechteck **matrix** (kann von der Tastatur verdeckt sein)
+* jetzt hat die Liste den neuen Eintrag **Matrix** bekommen
 
 ## Dieses Projekt bearbeiten ![Build status badge](https://github.com/calliope-net/matrix/workflows/MakeCode/badge.svg)
 
