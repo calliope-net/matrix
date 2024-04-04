@@ -51,19 +51,22 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 #### RAM
 
-> RAM ist der Datenspeicher im Computer. Im Gegensatz zum ROM (Read-Only-Memory) können die Daten im RAM jederzeit geändert werden
-> und werden gelöscht, wenn der Strom aus geschaltet wird. RAM ist also der Schreib-Lese-Speicher.
-> [de.wikipedia.org/wiki/Random-Access_Memory](https://de.wikipedia.org/wiki/Random-Access_Memory)
+> RAM ist der Datenspeicher im Computer. Im Gegensatz zum ROM (Read-Only-Memory) können die Daten im RAM jederzeit vom Programm geändert werden.
+
+→ [de.wikipedia.org/wiki/Random-Access_Memory](https://de.wikipedia.org/wiki/Random-Access_Memory)
 
 > Die Calliope mini Versionen haben unterschiedliche RAM Speicher Kapazität: 1.3=16kB | 2.0 und 2.1=32kB | 3.0=128kB.
-> [Technische Spezifikation](https://calliope-mini.github.io/v20/)
 > Der RAM wird auch vom Betriebssystem benutzt, so dass für eigene Programme nicht viel übrig bleibt.
 > Beim Calliope mini 1.3 reichen die 16kB jedenfalls nicht, um 1kB für die Matrix zu reservieren.
 
+→ [Technische Spezifikation](https://calliope-mini.github.io/v20/)
+
 > 1k steht für 2^10 = 1024 und B für Byte. 1 Byte hat immer 8 Bit. 1kB sind also 8192 Bit, so viele Pixel hat das 128x64 Display.
-> Und Pixel sind die kleinen Punkte, die leuchten oder nicht.
+> Und Pixel sind die kleinen Punkte, die leuchten oder nicht. Die Erweiterung 'Matrix' schaltet tausende Pixel an und aus, damit ein Bild entsteht.
 
 #### I²C
+
+→ [calliope-net.github.io/i2c](https://calliope-net.github.io/i2c/)
 
 Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den I²C-Bus gibt es nur 3 Blöcke (hellblau):
 
