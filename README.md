@@ -164,7 +164,7 @@ Block **zeichne Uhr** (Mittelpunkt x, y, Stunde, Minute)
 > Im Menüpunkt *Bilder* können Bilder (Image-Objekte) aus verschiedenen Quellen erzeugt und in Variablen gespeichert werden.
 > Die Image-Objekte werden dann an einer bestimmten Position (x, y) in den RAM (Matrix) gezeichnet.
 
-##### Bild in Buffer zeichnen
+##### Bild in Matrix zeichnen
 
 Block **zeichne Bild** (Image-Objekt, x, y, überschreiben, vergrößern x, y)
 
@@ -176,6 +176,31 @@ Dabei wird die volle Breite und Höhe des Bildes übertragen (bis zum Rand der M
 So bleibt der Hintergrund sichtbar (transparent).
 * Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 
+Block **8x8 drehen** (Image-Objekt, drehen oder spiegeln)
+
+* Dieser Block kann in den Block darüber **zeichne Bild** eingefügt werden, um ein *Image-Objekt* zu drehen oder zu spiegeln, bevor es in die Matrix gezeichnet wird.
+* Das neue Bild hat immer die Größe 8x8 Pixel. War das Original größer, wird nur die linke obere Ecke verwendet.
+* Der Block ist damit besonders für Text-Zeichen geeignet. Ziffern, Buchstaben u.a. sind 5x8 Images und werden auf 8x8 vergrößert (rechts 3 Pixel weißer Rand).
+* Diese Optionen stehen zur Verfügung: nicht drehen, links drehen, rechts drehen, halb drehen, y spiegeln, x spiegeln.
+
+##### Text in Matrix zeichnen
+
+Block **zeichne Zahl/Zeit** (Variable, x, y, Abstand x, y, überschreiben, vergrößern x, y)
+
+* Dieser Block kann mehrere Zeichen in die Matrix schreiben. Der Parameter *variable* kann eine Zahl oder ein Datum (als String) sein.
+* Die weiteren Parameter sind im nächsten Block **zeichne Text** beschrieben.
+
+> Hier werden nur die Zeichen 0 1 2 3 4 5 6 7 8 9 : . - als Image generiert. Der Zweck ist, Programmcode zu sparen. Der Compiler meldet einen Fehler,
+> wenn viele Blöcke benutzt werden und im Hintergrund der ganze ASCII Zeichensatz im Code steht. Wenn keine Buchstaben angezeigt werden sollen, ist dieser Block zu bevorzugen.
+> Werden auch Buchstaben angezeigt, sollte dieser Block nicht und stattdessen nur der folgende Block benutzt werden.
+
+Block **zeichne Text** (Text, x, y, Abstand x, y, überschreiben, vergrößern x, y)
+
+* Dieser Block kann mehrere Zeichen in die Matrix schreiben. Der Parameter *Text* kann alle ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
+* Die Koordinaten *x, y* sind die linke obere Ecke, wo das erste Zeichen in die Matrix gezeichnet wird.
+* Die optionalen Parameter *Abstand x, y* haben die Standardwerte x=8 und y=0. Das ist der Abstand zum nächsten Zeichen vom Beginn des letzten Zeichens.
+Die Standardwerte sind für Text geeignet. Die Zeichen können aber in verschiedene Richtungen, mit negativem Abstand auch rückwärts gezeichnet werden.
+* Die Parameter *überschreiben*, *vergrößern x, y* sind oben beim Block **zeichne Bild** erklärt. Bei vergrößern müssen die Parameter *Abstand x, y* angepasst werden.
 
 
 ![](bilder16.png)
