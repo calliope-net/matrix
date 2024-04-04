@@ -79,13 +79,13 @@ Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den 
 
 Block **beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
 
-muss beim Start aufgerufen werden, um den RAM (die Matrix) und das Display zu initialisieren. 
+* muss beim Start aufgerufen werden, um den RAM (die Matrix) und das Display zu initialisieren. 
 Die eingestellte *Display-Größe* entscheidet darüber, wieviel RAM reserviert wird. 128x64 reserviert 1KB und 128x128 2KB.
-*invert* stellt ein, ob die Pixel leuchten oder der Hintergrund. 
-Mit *drehen* wird das Bild auf den Kopf gestellt, wenn das Display anders herum eingebaut ist.
-Die *I²C-Adresse* muss nur umgestellt werden, wenn ein zweites Display angeschlossen wird.
+* Der Parameter *invert* stellt ein, ob die Pixel leuchten oder der Hintergrund. 
+* Mit *drehen* wird das Bild auf den Kopf gestellt, wenn das Display anders herum eingebaut ist.
+* Die *I²C-Adresse* muss nur umgestellt werden, wenn ein zweites Display angeschlossen wird.
 
-Die optionalen Parameter können weg gelassen werden. Sie werden bei Bedarf mit dem + angezeigt.
+* Die optionalen Parameter können weg gelassen werden. Sie werden bei Bedarf mit dem + angezeigt.
 
 > Wenn zwei Displays angeschlossen sind, muss der Block **beim Start** zweimal aufgerufen werden, mit verschiedenen I²C-Adressen.
 > RAM wird für das größere Display reserviert. Es gibt nur eine Matrix im RAM, die sich beide Displays teilen.
@@ -121,8 +121,8 @@ Block **set Pixel** (x, y, EIN/AUS)
 
 Schaltet ein Pixel (im RAM) EIN oder AUS. 
 
-> Für die Koordinate x sind Werte von 0 (links) bis 127 (rechts) erlaubt.
-> Für die Koordinate y sind Werte von 0 (oben) bis 63 oder 127 (unten) erlaubt.
+* Für die Koordinate x sind Werte von 0 (links) bis 127 (rechts) erlaubt.
+* Für die Koordinate y sind Werte von 0 (oben) bis 63 oder 127 (unten) erlaubt.
 
 Block **get Pixel** (x, y) : boolean
 
