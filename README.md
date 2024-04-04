@@ -60,6 +60,8 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 > Der RAM wird auch vom Betriebssystem benutzt, so dass für eigene Programme nicht viel übrig bleibt.
 > Beim Calliope mini 1.3 reichen die 16kB jedenfalls nicht, um 1kB für die Matrix zu reservieren.
 
+> 1k steht für 2^10 = 1024 und B für Byte. 1 Byte hat immer 8 Bit. 1kB sind also 8192 Bit, so viele Pixel hat das 128x64 Display.
+
 #### I²C
 
 Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den I²C-Bus gibt es nur 3 Blöcke (hellblau):
