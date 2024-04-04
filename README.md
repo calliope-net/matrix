@@ -86,7 +86,7 @@ Der Parameter *I²C-Adresse* bestimmt, an welches Display die Matrix gesendet wi
 
 > Die Zeilen im RAM und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
 
-Block **Animation auf Display schreiben** befindet sich im Menüpunkt **Bilder Array** und wird dort beschrieben. 
+Block **Animation auf Display schreiben** befindet sich im Menüpunkt **[Bilder Array](#bilder-array)** und wird dort beschrieben. 
 
 ##### Matrix im Speicher
 
