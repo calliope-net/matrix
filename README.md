@@ -83,6 +83,8 @@ Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den 
 * **Matrix auf Display schreiben** (Zeilen von, bis, I²C-Adresse)
 * **Animation auf Display schreiben** (Image[]-Array, Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
+## Blöcke und Parameter
+
 ##### OLED Display I²C
 
 Block **beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
