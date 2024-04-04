@@ -119,8 +119,8 @@ Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit.
 Block **set Pixel** (x, y, EIN/AUS)
 
 * Schaltet ein Pixel (im RAM) EIN oder AUS. 
-* Für die Koordinate x sind Werte von 0 (links) bis 127 (rechts) erlaubt.
-* Für die Koordinate y sind Werte von 0 (oben) bis 63 oder 127 (unten) erlaubt.
+* Für die Koordinate x sind Werte von 0 (links) bis 127 (rechts) möglich.
+* Für die Koordinate y sind Werte von 0 (oben) bis 63 oder 127 (unten) möglich.
 
 Block **get Pixel** (x, y) : boolean
 
@@ -295,26 +295,26 @@ So können kleine Bilder auch größer gezeichnet werden.
 Damit kann verhindert werden, dass immer das gesamte Display über den I²C-Bus neu geschrieben wird, wenn die Bilder der Animation kleiner sind.
 Wenn die Bilder an Position x, y = (0,0) 8 Pixel hoch und nicht vergrößert sind, reicht es die Zeile 0 zu aktualisieren.
 
-##### Array (mehrere Bilder) in Buffer zeichnen
+##### Array (mehrere Bilder) in Matrix zeichnen
 
 Block **zeichne Bilder** (Image[], Position x, y, Abstand x, y, überschreiben, vergrößern x, y)
 
-* Die Bilder im Array *Image[]* können an *Position x, y* beginnend versetzt in den RAM (Buffer) gezeichnet werden. Sonst würden sie sich überschreiben.
+* Die Bilder im Array *Image[]* werden an *Position x, y* beginnend versetzt in den RAM (Buffer) gezeichnet. Sonst würden sie sich überschreiben.
 Das wird z.B. für Text verwendet, weil jeder Buchstabe ein Bild 5x8 Pixel ist. Der *Abstand x, y* wäre für Text x=8 und y=0. 
-Es ist aber möglich die Buchstaben, oder auch größere Bilder aus dem Array, nach oben, unten und mit negativen x, y auch zurück zu versetzen.
+Es ist aber möglich die Buchstaben, oder auch größere Bilder aus dem Array, nach oben, unten und mit negativem Abstand auch zurück zu versetzen.
 
-* Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom Image-Objekt in den RAM gezeichnet.
+* Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom Image-Objekt in die Matrix gezeichnet.
 Mit Parameter *transparent* werden nur Pixel an geschaltet (die Einsen). Pixel, die vorher schon leuchten, werden nicht aus geschaltet.
 So bleibt der Hintergrund sichtbar (transparent).
 
 * Mit den Parametern *vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 Der Faktor gilt für alle Bilder im Array. Gegebenenfalls müssen die Parameter *Abstand x, y* angepasst werden.
 
-> Um die in den RAM (Buffer) gezeichneten Bilder auf dem Display anzuzeigen, muss noch der hellblaue Block **Matrix auf Display schreiben** aufgerufen werden.
+> Um die in den RAM (Matrix) gezeichneten Bilder auf dem Display anzuzeigen, muss noch der hellblaue Block **Matrix auf Display schreiben** aufgerufen werden.
 
 ##### Speicher für Bilder: Image[]
 
-Block **Bild anhängen**
+Block **Bild anhängen** (Image-Objekt)
 
 * Als Parameter ist ein Bild (Image-Objekt) zu übergeben, welches an das interne Array Image[] angehängt wird. Das kann eine - in den anderen
 Menüpunkten automatisch erzeugte - Variable *bild* sein oder direkt ein Bild-Block in dem die Pixel angeklickt werden können.
@@ -325,7 +325,7 @@ Block **Bild lesen an index** (index)
 
 Block **Image[] Länge**
 
-* Gibt die Anzahl der Elemente im internen Array zurück.
+* Gibt die Anzahl der Bilder im internen Array zurück.
 
 Block **Image[] löschen**
 
