@@ -287,7 +287,7 @@ Das wiederholt sich, bis alle Elemente aus dem Array Image[] abgearbeitet sind.
 wo alle Bilder aus dem Array nacheinander in die Matrix gezeichnet werden. Dabei wird die volle Breite und Höhe jedes Bildes übertragen (bis zum Rand der Matrix).
 
 * Mit den Parametern *vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
-So können kleine Bilder auch größer betrachtet werden.
+So können kleine Bilder auch größer gezeichnet werden.
 
 * Der Parameter *Pause(ms)* legt fest, wie lange jedes Bild während der Animation angezeigt wird.
 
