@@ -19,7 +19,9 @@
 
 ![](matrix_foto.jpg)
 
-![](matrix_schnappschuss.jpg)
+Im folgenden MakeCode Beispiel sind die Erweiterungen [calliope-net/matrix](https://github.com/calliope-net/matrix) und [calliope-net/rtc-uhr](https://github.com/calliope-net/rtc-uhr) geladen.
+
+![](matrix_schnappschuss.png)
 
 Diese Erweiterung unterstützt verschiedene OLED Displays, folgende wurden getestet:
 
