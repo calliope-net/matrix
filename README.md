@@ -261,7 +261,7 @@ Folgende Bild-Größen (in Pixel) stehen zum selbst malen zur Verfügung:
 * Bild 64x64
 
 > Jede Vorlage kann mehrmals verwendet und verschiedenen Variablen zugewiesen werden. Die zahlreichen Image-Objekte können dann mit **zeichne Bild**
-an verschiedenen Stellen in die Matrix gezeichnet werden. Dabei können kleine Bilder auch vergrößert werden.
+wie Kacheln an verschiedenen Stellen in die Matrix gezeichnet werden. Dabei können kleine Bilder auch vergrößert werden.
 
 > Die Bilder (Image-Objekte) können aber auch im Menüpunkt **Bilder Array** im internen Array Image[] gesammelt werden. Sie können dort über den Index einzeln abgerufen
 oder als Animation auf dem Display angezeigt werden.
@@ -272,27 +272,26 @@ oder als Animation auf dem Display angezeigt werden.
 
 ![](bilderarray.png)
 
-Bilder-Array ist ein Array im RAM mit Elementen vom Typ Image. In den Blöcken ist dieses interne Array mit **Image[]** bezeichnet.
+> Bilder-Array ist ein Array im RAM mit Elementen vom Typ Image. In den Blöcken ist dieses interne Array mit **Image[]** bezeichnet.
 Image ist in MakeCode ein Typ. Ein Image-Object kann eine bestimmte Anzahl Pixel in Breite und Höhe speichern, also ein Bild.
 
 ##### OLED Display I²C
 
 Block **Animation auf Display schreiben** (Image[], Position x, y, Vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
-Für eine Animation werden mehrere Bilder mit kurzer Pause an der selben Stelle angezeigt. Die Bilder sind in einem Array gespeichert.
+* Für eine Animation werden mehrere Bilder mit kurzer Pause an der selben Stelle angezeigt. Die Bilder sind in einem Array gespeichert.
 Es wird jeweils 1 Bild in den RAM gezeichnet, *Matrix auf Display schreiben* aufgerufen und eine Zeit in Millisekunden gewartet.
 Das wiederholt sich, bis alle Elemente aus dem Array Image[] abgearbeitet sind.
 
-Als Parameter ist das interne Array Image[] eingestellt, es kann auch ein eigenes Array mit Bildern übergeben werden.
-*Position x, y* ist die linke obere Ecke, wo alle Bilder aus dem Array nacheinander in die Matrix gezeichnet werden. 
-Dabei wird die volle Breite und Höhe jedes Bildes übertragen (bis zum Rand der Matrix).
+* Als Parameter ist das interne Array Image[] eingestellt, es kann auch ein eigenes Array mit Bildern übergeben werden. *Position x, y* ist die linke obere Ecke,
+wo alle Bilder aus dem Array nacheinander in die Matrix gezeichnet werden. Dabei wird die volle Breite und Höhe jedes Bildes übertragen (bis zum Rand der Matrix).
 
-Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
+* Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 So können kleine Bilder auch größer betrachtet werden.
 
-Der Parameter *Pause(ms)* legt fest, wie lange jedes Bild während der Animation angezeigt wird.
+* Der Parameter *Pause(ms)* legt fest, wie lange jedes Bild während der Animation angezeigt wird.
 
-Die letzten Parameter *Zeilen von, bis* und *I²C-Adresse* entsprechen dem Block **Matrix auf Display schreiben**.
+* Die letzten Parameter *Zeilen von, bis* und *I²C-Adresse* entsprechen dem Block **Matrix auf Display schreiben**.
 Damit kann verhindert werden, dass immer das gesamte Display über den I²C-Bus neu geschrieben wird, wenn die Bilder der Animation kleiner sind.
 Wenn die Bilder an Position x, y = (0,0) 8 Pixel hoch und nicht vergrößert sind, reicht es die Zeile 0 zu aktualisieren.
 
@@ -300,15 +299,15 @@ Wenn die Bilder an Position x, y = (0,0) 8 Pixel hoch und nicht vergrößert sin
 
 Block **zeichne Bilder** (Image[], Position x, y, Abstand x, y, überschreiben, vergrößern x, y)
 
-Die Bilder im Array *Image[]* können an *Position x, y* beginnend versetzt in den RAM (Buffer) gezeichnet werden. Sonst würden sie sich überschreiben.
+* Die Bilder im Array *Image[]* können an *Position x, y* beginnend versetzt in den RAM (Buffer) gezeichnet werden. Sonst würden sie sich überschreiben.
 Das wird z.B. für Text verwendet, weil jeder Buchstabe ein Bild 5x8 Pixel ist. Der *Abstand x, y* wäre für Text x=8 und y=0. 
 Es ist aber möglich die Buchstaben, oder auch größere Bilder aus dem Array, nach oben, unten und mit negativen x, y auch zurück zu versetzen.
 
-Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom Image-Objekt in den RAM gezeichnet.
+* Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom Image-Objekt in den RAM gezeichnet.
 Mit Parameter *transparent* werden nur Pixel an geschaltet (die Einsen). Pixel, die vorher schon leuchten, werden nicht aus geschaltet.
 So bleibt der Hintergrund sichtbar (transparent).
 
-Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
+* Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 Der Faktor gilt für alle Bilder im Array. Gegebenenfalls müssen die Parameter *Abstand x, y* angepasst werden.
 
 > Um die in den RAM (Buffer) gezeichneten Bilder auf dem Display anzuzeigen, muss noch der hellblaue Block **Matrix auf Display schreiben** aufgerufen werden.
@@ -317,24 +316,24 @@ Der Faktor gilt für alle Bilder im Array. Gegebenenfalls müssen die Parameter 
 
 Block **Bild anhängen**
 
-Als Parameter ist ein Bild (Image-Objekt) zu übergeben, welches an das interne Array Image[] angehängt wird. Das kann eine - in den anderen
+* Als Parameter ist ein Bild (Image-Objekt) zu übergeben, welches an das interne Array Image[] angehängt wird. Das kann eine - in den anderen
 Menüpunkten automatisch erzeugte - Variable *bild* sein oder direkt ein Bild-Block in dem die Pixel angeklickt werden können.
 
 Block **Bild lesen an index** (index)
 
-Gibt ein Bild (ein Element aus dem Array Image[]) zurück.
+* Gibt ein Bild (ein Element aus dem Array Image[]) zurück.
 
 Block **Image[] Länge**
 
-Gibt die Anzahl der Elemente im internen Array zurück.
+* Gibt die Anzahl der Elemente im internen Array zurück.
 
 Block **Image[] löschen**
 
-Setzt das interne Array Image[] auf ein leeres Array mit 0 Elementen.
+* Setzt das interne Array Image[] auf ein leeres Array mit 0 Elementen.
 
 ##### Animation Beispiele
 
-Hier können fertige Arrays mit Bildern abgerufen werden. Diese Beispiel-Arrays sind in den Block **Animation auf Display schreiben**
+* Hier können fertige Arrays mit Bildern abgerufen werden. Diese Beispiel-Arrays sind in den Block **Animation auf Display schreiben**
 einzufügen (und ersetzen dort Image[]).
 
 
