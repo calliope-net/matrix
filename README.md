@@ -94,13 +94,12 @@ Die eingestellte *Display-Größe* entscheidet darüber, wieviel RAM reserviert 
 
 Block **Matrix auf Display schreiben** (Zeilen von, bis, I²C-Adresse)
 
-ist immer aufzurufen, wenn das in den RAM gezeichnete Bild (die Matrix) angezeigt werden soll.
+* ist immer aufzurufen, wenn das in den RAM gezeichnete Bild (die Matrix) angezeigt werden soll.
 Dabei wird normalerweise das komplette Display über den I²C-Bus neu geschrieben (1KB oder 2KB Pixel).
-Mit den optionalen Parametern *Zeilen von, bis* ist es möglich, nur einen Teil des Displays zu aktualisieren. 
+* Mit den optionalen Parametern *Zeilen von, bis* ist es möglich, nur einen Teil des Displays zu aktualisieren. 
 Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit, füllt also die gesamte Breite des Displays.
 Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 Display hat 16 Zeilen (0-15).
-
-Der Parameter *I²C-Adresse* bestimmt, an welches Display die Matrix gesendet wird.
+* Der Parameter *I²C-Adresse* bestimmt, an welches Display die Matrix gesendet wird.
 
 > Die Zeilen im RAM und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
 
@@ -110,8 +109,8 @@ Block **Animation auf Display schreiben** befindet sich im Menüpunkt **[Bilder 
 
 Block **Matrix löschen** (Zeilen von, bis)
 
-Damit werden normalerweise alle Pixel im gesamten RAM (die Matrix) gelöscht.
-Mit den optionalen Parametern (Zeilen von, bis) ist es möglich, nur einen Teil der Matrix zu löschen.
+* Damit werden normalerweise alle Pixel im gesamten RAM (die Matrix) gelöscht.
+* Mit den optionalen Parametern (Zeilen von, bis) ist es möglich, nur einen Teil der Matrix zu löschen.
 Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit.
 
 > Um das Display zu löschen, muss eine gelöschte Matrix noch mit dem hellblauen Block **Matrix auf Display schreiben**
@@ -119,22 +118,21 @@ Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit.
 
 Block **set Pixel** (x, y, EIN/AUS)
 
-Schaltet ein Pixel (im RAM) EIN oder AUS. 
-
+* Schaltet ein Pixel (im RAM) EIN oder AUS. 
 * Für die Koordinate x sind Werte von 0 (links) bis 127 (rechts) erlaubt.
 * Für die Koordinate y sind Werte von 0 (oben) bis 63 oder 127 (unten) erlaubt.
 
 Block **get Pixel** (x, y) : boolean
 
-Liest ein Pixel aus dem RAM als boolean (wahr=EIN, falsch=AUS).
+* Liest ein Pixel aus dem RAM als boolean (wahr=EIN, falsch=AUS).
 
 Block **Linie** (von x, y, bis x, y, Pixel EIN/AUS)
 
-Zeichnet eine Linie mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS werden die Pixel gelöscht.
+* Zeichnet eine Linie mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS werden die Pixel gelöscht.
 
 Block **Kreis** (Mittelpunkt x, y, Radius, Pixel EIN/AUS)
 
-Zeichnet einen Kreis mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS werden die Pixel gelöscht.
+* Zeichnet einen Kreis mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS werden die Pixel gelöscht.
 
 > Für Linie und Kreis wird der Bresenham-Algorithmus verwendet:
 > [de.wikipedia.org/wiki/Bresenham-Algorithmus](https://de.wikipedia.org/wiki/Bresenham-Algorithmus)
@@ -143,19 +141,20 @@ Zeichnet einen Kreis mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS
 
 Block **12 Stunden** (Stunde, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
 
-Der Parameter *Stunde* bestimmt die Richtung (den Winkel) der Linie vom *Mittelpunkt x, y* (auf dem Zifferblatt einer Uhr).
-Der "kleine Zeiger" muss nicht im Mittelpunkt beginnen. Die Parameter *Linie von, bis* bestimmen Anfang und Ende des Zeigers (vom Mittelpunkt in Pixeln).
-Mit *Pixel* AUS kann der Zeiger auch wieder gelöscht werden.
+* Der Parameter *Stunde* bestimmt die Richtung (den Winkel) der Linie vom *Mittelpunkt x, y* (auf dem Zifferblatt einer Uhr).
+Der "kleine Zeiger" muss nicht im Mittelpunkt beginnen.
+* Die Parameter *Linie von, bis* bestimmen Anfang und Ende des Zeigers (vom Mittelpunkt in Pixeln).
+* Mit *Pixel* AUS kann der Zeiger auch wieder gelöscht werden.
 
 Block **60 Minuten** (Minute, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
 
-Funktioniert wie **12 Stunden**, allerdings sind hier nicht 12, sondern 60 Positionen des Zeigers möglich.
+* Funktioniert wie **12 Stunden**, allerdings sind hier nicht 12, sondern 60 Positionen des Zeigers möglich.
 
 > Die Funktionen für die Uhrzeiger hat ein Schüler im GTA programmiert.
 
 Block **zeichne Uhr** (Mittelpunkt x, y, Stunde, Minute)
 
-Verwendet die oben beschriebenen Funktionen, um eine komplette analoge Uhr zu zeichnen.
+* Verwendet die oben beschriebenen Funktionen, um eine komplette analoge Uhr zu zeichnen.
 
 
 
