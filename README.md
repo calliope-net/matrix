@@ -204,6 +204,26 @@ Weil alle Text-Zeichen nur 5 Pixel breit sind, können sie auch mit kleinerem Ab
 * Die Parameter *überschreiben*, *vergrößern x, y* sind oben beim Block **zeichne Bild** erklärt. Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
 
 
+##### Bild 5x8 aus Text Zeichen
+
+> Die folgenden Blöcke generieren ein Image-Objekt und weisen das direkt einer Variablen zu. Der Name *bild* wird bei wiederholter Verwendung mit einer Ziffer ergänzt,
+> so dass immer neue Variablen-Namen entstehen. Diese Variablen sind im Menüpunkt *Variablen* zu finden und können in Blöcken wie **zeichne Bild**, **8x8 drehen** oder **Bild anhängen**
+> verwendet werden.
+
+> Nachfolgend sind nur die blauen Blöcke beschrieben, die ein Image-Objekt zurück geben. Diese blauen Blöcke können auch aus **setze bild auf** heraus geschoben und direkt verwendet werden.
+
+Block **Bild aus Ziffer** (ziffer, index)
+
+* Generiert aus einer *ziffer* ein Bild 5x8 Pixel.
+* Um alle Ziffern, Vorzeichen und Dezimalpunkt in Bilder zu konvertieren, können (in einer Schleife) mit *index* die folgenden Zeichen ausgewählt werden.
+
+Block **Bild aus Zeichen** (ASCII) (text, index)
+
+* Generiert aus einem Zeichen in *text* ein Bild 5x8 Pixel. Mit *index* wird das Zeichen ausgewählt.
+
+
+
+
 ![](bilder16.png)
 
 
