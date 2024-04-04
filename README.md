@@ -201,7 +201,7 @@ Block **zeichne Text** (Text, x, y, Abstand x, y, überschreiben, vergrößern x
 * Die optionalen Parameter *Abstand x, y* haben die Standardwerte x=8 und y=0. Das ist der Abstand zum nächsten Zeichen vom Beginn des letzten Zeichens.
 Die Standardwerte sind für Text geeignet. Die Zeichen können aber in verschiedene Richtungen, mit negativem Abstand auch rückwärts gezeichnet werden.
 Weil alle Text-Zeichen nur 5 Pixel breit sind, können sie auch mit kleinerem Abstand als 8 gezeichnet werden.
-* Die Parameter *überschreiben*, *vergrößern x, y* sind oben beim Block **zeichne Bild** erklärt. Bei vergrößern müssen die Parameter *Abstand x, y* angepasst werden.
+* Die Parameter *überschreiben*, *vergrößern x, y* sind oben beim Block **zeichne Bild** erklärt. Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
 
 
 ![](bilder16.png)
