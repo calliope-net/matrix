@@ -174,7 +174,7 @@ Dabei wird die volle Breite und Höhe des Bildes übertragen (bis zum Rand der M
 * Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom Image-Objekt in den RAM gezeichnet.
 * Mit Parameter *transparent* werden nur Pixel an geschaltet (die Einsen). Pixel, die vorher schon leuchten, werden nicht aus geschaltet.
 So bleibt der Hintergrund sichtbar (transparent).
-* Mit den Parametern *Vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
+* Mit den Parametern *vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 
 Block **8x8 drehen** (Image-Objekt, drehen oder spiegeln)
 
