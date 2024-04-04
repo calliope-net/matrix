@@ -55,13 +55,13 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 → [de.wikipedia.org/wiki/Random-Access_Memory](https://de.wikipedia.org/wiki/Random-Access_Memory)
 
-> Die Calliope mini Versionen haben unterschiedliche RAM Speicher Kapazität: 1.3=16kB | 2.0 und 2.1=32kB | 3.0=128kB.
+> Die Calliope mini Versionen haben unterschiedliche RAM Speicher Kapazität: 1.3=16KB | 2.0 und 2.1=32KB | 3.0=128KB.
 > Der RAM wird auch vom Betriebssystem benutzt, so dass für eigene Programme nicht viel übrig bleibt.
-> Beim Calliope mini 1.3 reichen die 16kB jedenfalls nicht, um 1kB für die Matrix zu reservieren.
+> Beim Calliope mini 1.3 reichen die 16KB jedenfalls nicht, um 1KB für die Matrix zu reservieren.
 
 → [Technische Spezifikation](https://calliope-mini.github.io/v20/)
 
-> 1k steht für 2^10 = 1024 und B für Byte. 1 Byte hat immer 8 Bit. 1kB sind also 8192 Bit, so viele Pixel hat das 128x64 Display.
+> 1K steht für 2^10 = 1024 und B für Byte. 1 Byte hat immer 8 Bit. 1KB sind also 8192 Bit, so viele Pixel hat das 128x64 Display.
 > Und Pixel sind die kleinen Punkte, die leuchten oder nicht. Die Erweiterung 'Matrix' schaltet tausende Pixel an und aus, damit ein Bild entsteht.
 
 #### I²C
