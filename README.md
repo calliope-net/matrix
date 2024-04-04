@@ -62,7 +62,8 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 → [Technische Spezifikation](https://calliope-mini.github.io/v20/)
 
 > 1K steht für 2^10 = 1024 und B für Byte. 1 Byte hat immer 8 Bit. 1KB sind also 8192 Bit, so viele Pixel hat das 128x64 Display.
-> Und Pixel sind die kleinen Punkte, die leuchten oder nicht. Die Erweiterung 'Matrix' schaltet tausende Pixel an und aus, damit ein Bild entsteht.
+> Und Pixel sind die kleinen Punkte, die leuchten oder nicht. Weil Bits im RAM nicht leuchten, müssen sie an ein Display gesendet werden.
+> Das macht die Erweiterung 'Matrix'.
 
 #### I²C
 
