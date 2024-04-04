@@ -215,11 +215,31 @@ Weil alle Text-Zeichen nur 5 Pixel breit sind, können sie auch mit kleinerem Ab
 Block **Bild aus Ziffer** (ziffer, index)
 
 * Generiert aus einer *ziffer* ein Bild 5x8 Pixel.
-* Um alle Ziffern, Vorzeichen und Dezimalpunkt in Bilder zu konvertieren, können (in einer Schleife) mit *index* die folgenden Zeichen ausgewählt werden.
+* Um alle Ziffern, Vorzeichen und Dezimalpunkt einer Zahl in Bilder zu konvertieren, können (in einer Schleife) mit *index* alle Ziffen einzeln ausgewählt werden.
 
 Block **Bild aus Zeichen** (ASCII) (text, index)
 
 * Generiert aus einem Zeichen in *text* ein Bild 5x8 Pixel. Mit *index* wird das Zeichen ausgewählt.
+
+Block **Bild aus ASCII-Code** (code)
+
+* Generiert aus dem *code* ein Bild 5x8 Pixel mit dem entsprechenden ASCII-Zeichen. Gültige Wert für *code* sind 32 bis 127.
+
+##### Bild aus HEX String
+
+> Eine Ziffer einer Hexadezimalzahl kann 16 Werte annehmen: (0 1 2 3 4 5 6 7 8 9 A B C D E F). Das entspricht genau 4 Bit. Für ein Byte (8 Bit) werden 2 HEX-Ziffen geschrieben.
+> 5 Byte entstehen also aus 10 HEX-Ziffern und 8 Byte entstehen aus 16 HEX-Ziffern.
+
+Block **Bild 5x8 aus HEX** (Hexadezimalzahl)
+
+* Generiert aus 5 Byte in HEX-Darstellung ein Bild 5x8 Pixel. Das erste Byte bildet den linken Rand. Bit 0 ist oben, Bit 7 ist unten. Die anderen Bytes folgen rechts daneben.
+* Das Beispiel 7F09192946 zeichnet den Buchstabe R. 7F zeichnet den durchgehenden Strich 7 Pixel hoch. Das untere Pixel ist bei Text-Zeichen immer 0 (Zeilenabstand).
+
+Block **Bild 8x8 aus HEX** (Hexadezimalzahl)
+
+* Generiert aus 8 Byte in HEX-Darstellung ein Bild 8x8 Pixel. Dazu werden 16 HEX-Ziffern verarbeitet.
+* Das Beispiel 427F406251494946 zeichnet die Zahl 12 auf 8 Pixel zusammen gedrückt. Dieses Sonderzeichen wird in der Analog Uhr angezeigt.
+
 
 
 
