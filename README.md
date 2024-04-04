@@ -76,7 +76,7 @@ Die optionalen Parameter können weg gelassen werden. Sie werden bei Bedarf mit 
 
 Block **Matrix auf Display schreiben** (Zeilen von, bis, I²C-Adresse)
 
-ist immer aufzurufen, wenn das in den RAM gezeichnete Bild angezeigt werden soll.
+ist immer aufzurufen, wenn das in den RAM gezeichnete Bild (die Matrix) angezeigt werden soll.
 Dabei wird normalerweise das komplette Display über den I²C-Bus neu geschrieben (1KB oder 2KB Pixel).
 Mit den optionalen Parametern *Zeilen von, bis* ist es möglich, nur einen Teil des Displays zu aktualisieren. 
 Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit, füllt also die gesamte Breite des Displays.
