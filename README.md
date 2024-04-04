@@ -19,7 +19,7 @@
 
 ![](matrix_foto.jpg)
 
-Im folgenden MakeCode Beispiel sind die Erweiterungen [calliope-net/matrix](https://github.com/calliope-net/matrix) und [calliope-net/rtc-uhr](https://github.com/calliope-net/rtc-uhr) geladen.
+Im folgenden MakeCode Beispiel sind die Erweiterungen [calliope-net/matrix](https://calliope-net.github.io/matrix) und [calliope-net/rtc-uhr](https://calliope-net.github.io/rtc-uhr) geladen.
 
 ![](matrix_schnappschuss.png)
 
