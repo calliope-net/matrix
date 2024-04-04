@@ -1,7 +1,7 @@
 
 > Diese Seite bei [https://calliope-net.github.io/matrix/](https://calliope-net.github.io/matrix/) öffnen.
 
-### Calliope Erweiterung für I²C OLED Displays 128x128 und 128x64 Pixel
+### Calliope I²C Erweiterung für OLED Displays 128x128 und 128x64 Pixel
 
 > speichert alle Pixel im RAM (2048 oder 1024 Byte), deshalb Calliope mini ab V2 erforderlich
 
