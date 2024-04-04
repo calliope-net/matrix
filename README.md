@@ -196,7 +196,7 @@ Block **zeichne Zahl/Zeit** (Variable, x, y, Abstand x, y, überschreiben, vergr
 
 Block **zeichne Text** (Text, x, y, Abstand x, y, überschreiben, vergrößern x, y)
 
-* Dieser Block kann mehrere Zeichen in die Matrix schreiben. Der Parameter *Text* kann alle ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
+* Dieser Block kann mehrere Zeichen in die Matrix schreiben. Der Parameter *Text* kann alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
 * Die Koordinaten *x, y* sind die linke obere Ecke, wo das erste Zeichen in die Matrix gezeichnet wird.
 * Die optionalen Parameter *Abstand x, y* haben die Standardwerte x=8 und y=0. Das ist der Abstand zum nächsten Zeichen vom Beginn des letzten Zeichens.
 Die Standardwerte sind für Text geeignet. Die Zeichen können aber in verschiedene Richtungen, mit negativem Abstand auch rückwärts gezeichnet werden.
