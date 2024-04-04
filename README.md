@@ -134,8 +134,7 @@ Block **Kreis** (Mittelpunkt x, y, Radius, Pixel EIN/AUS)
 
 * Zeichnet einen Kreis mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS werden die Pixel gelöscht.
 
-> Für Linie und Kreis wird der Bresenham-Algorithmus verwendet:
-> [de.wikipedia.org/wiki/Bresenham-Algorithmus](https://de.wikipedia.org/wiki/Bresenham-Algorithmus)
+→ Für Linie und Kreis wird der Bresenham-Algorithmus verwendet: [de.wikipedia.org/wiki/Bresenham-Algorithmus](https://de.wikipedia.org/wiki/Bresenham-Algorithmus)
 
 ##### Analog Uhr Zeiger
 
@@ -150,7 +149,7 @@ Block **60 Minuten** (Minute, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
 
 * Funktioniert wie **12 Stunden**, allerdings sind hier nicht 12, sondern 60 Positionen des Zeigers möglich.
 
-> Die Funktionen für die Uhrzeiger hat ein Schüler im GTA programmiert.
+→ Die Funktionen für die Uhrzeiger hat ein Schüler im GTA programmiert.
 
 Block **zeichne Uhr** (Mittelpunkt x, y, Stunde, Minute)
 
