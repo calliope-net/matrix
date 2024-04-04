@@ -17,7 +17,9 @@
 
 > zwei Displays mit verschiedenen I²C Adressen können verschiedene Bilder zeigen
 
-![](matrix1.jpg)
+![](matrix_foto.jpg)
+
+![](matrix_schnappschuss.jpg)
 
 Diese Erweiterung unterstützt verschiedene OLED Displays, folgende wurden getestet:
 
