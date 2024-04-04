@@ -81,7 +81,7 @@ Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den 
 
 Block **beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
 
-* muss beim Start aufgerufen werden, um den RAM (die Matrix) und das Display zu initialisieren. 
+* muss beim Start aufgerufen werden, um die Matrix im RAM und das Display zu initialisieren. 
 Die eingestellte *Display-Größe* entscheidet darüber, wieviel RAM reserviert wird. 128x64 reserviert 1KB und 128x128 2KB.
 * Der Parameter *invert* stellt ein, ob die Pixel leuchten oder der Hintergrund. 
 * Mit *drehen* wird das Bild auf den Kopf gestellt, wenn das Display anders herum eingebaut ist.
@@ -92,18 +92,18 @@ Die eingestellte *Display-Größe* entscheidet darüber, wieviel RAM reserviert 
 > Wenn zwei Displays angeschlossen sind, muss der Block **beim Start** zweimal aufgerufen werden, mit verschiedenen I²C-Adressen.
 > RAM wird für das größere Display reserviert. Es gibt nur eine Matrix im RAM, die sich beide Displays teilen.
 > Um verschiedene Bilder auf zwei Displays anzuzeigen, wird die Matrix gelöscht, neu gezeichnet und mit dem folgenden Block
-> (mit Parameter I²C-Adresse) an ein bestimmtes Display gesendet.
+> (mit Parameter *I²C-Adresse*) an ein bestimmtes Display gesendet.
 
 Block **Matrix auf Display schreiben** (Zeilen von, bis, I²C-Adresse)
 
-* ist immer aufzurufen, wenn das in den RAM gezeichnete Bild (die Matrix) angezeigt werden soll.
+* ist immer aufzurufen, wenn das in die Matrix gezeichnete Bild auf dem Display angezeigt werden soll.
 Dabei wird normalerweise das komplette Display über den I²C-Bus neu geschrieben (1KB oder 2KB Pixel).
 * Mit den optionalen Parametern *Zeilen von, bis* ist es möglich, nur einen Teil des Displays zu aktualisieren. 
 Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit, füllt also die gesamte Breite des Displays.
 Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 Display hat 16 Zeilen (0-15).
 * Der Parameter *I²C-Adresse* bestimmt, an welches Display die Matrix gesendet wird.
 
-> Die Zeilen im RAM und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
+> Die Zeilen in der Matrix und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
 
 Block **Animation auf Display schreiben** befindet sich im Menüpunkt **[Bilder Array](#bilder-array)** und wird dort beschrieben. 
 
@@ -111,7 +111,7 @@ Block **Animation auf Display schreiben** befindet sich im Menüpunkt **[Bilder 
 
 Block **Matrix löschen** (Zeilen von, bis)
 
-* Damit werden normalerweise alle Pixel im gesamten RAM (die Matrix) gelöscht.
+* Damit werden normalerweise alle Pixel in der Matrix gelöscht.
 * Mit den optionalen Parametern (Zeilen von, bis) ist es möglich, nur einen Teil der Matrix zu löschen.
 Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit.
 
@@ -282,7 +282,7 @@ Image ist in MakeCode ein Typ. Ein Image-Object kann eine bestimmte Anzahl Pixel
 Block **Animation auf Display schreiben** (Image[], Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
 * Für eine Animation werden mehrere Bilder mit kurzer Pause an der selben Stelle angezeigt. Die Bilder sind in einem Array gespeichert.
-Es wird jeweils 1 Bild in den RAM gezeichnet, *Matrix auf Display schreiben* aufgerufen und eine Zeit in Millisekunden gewartet.
+Es wird jeweils 1 Bild in die Matrix gezeichnet, *Matrix auf Display schreiben* aufgerufen und eine Zeit in Millisekunden gewartet.
 Das wiederholt sich, bis alle Elemente aus dem Array Image[] abgearbeitet sind.
 
 * Als Parameter ist das interne Array Image[] eingestellt, es kann auch ein eigenes Array mit Bildern übergeben werden. *Position x, y* ist die linke obere Ecke,
@@ -301,7 +301,7 @@ Wenn die Bilder an Position x, y = (0,0) 8 Pixel hoch und nicht vergrößert sin
 
 Block **zeichne Bilder** (Image[], Position x, y, Abstand x, y, überschreiben, vergrößern x, y)
 
-* Die Bilder im Array *Image[]* werden an *Position x, y* beginnend versetzt in den RAM (Buffer) gezeichnet. Sonst würden sie sich überschreiben.
+* Die Bilder im Array *Image[]* werden an *Position x, y* beginnend versetzt in die Matrix gezeichnet. Sonst würden sie sich überschreiben.
 Das wird z.B. für Text verwendet, weil jeder Buchstabe ein Bild 5x8 Pixel ist. Der *Abstand x, y* wäre für Text x=8 und y=0. 
 Es ist aber möglich die Buchstaben, oder auch größere Bilder aus dem Array, nach oben, unten und mit negativem Abstand auch zurück zu versetzen.
 
@@ -312,7 +312,7 @@ So bleibt der Hintergrund sichtbar (transparent).
 * Mit den Parametern *vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 Der Faktor gilt für alle Bilder im Array. Gegebenenfalls müssen die Parameter *Abstand x, y* angepasst werden.
 
-> Um die in den RAM (Matrix) gezeichneten Bilder auf dem Display anzuzeigen, muss noch der hellblaue Block **Matrix auf Display schreiben** aufgerufen werden.
+> Um die in die Matrix gezeichneten Bilder auf dem Display anzuzeigen, muss noch der hellblaue Block **Matrix auf Display schreiben** aufgerufen werden.
 
 ##### Speicher für Bilder: Image[]
 
