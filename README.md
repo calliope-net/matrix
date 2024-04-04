@@ -49,6 +49,17 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 ### Beschreibung der Erweiterung 'Matrix'
 
+#### RAM
+
+> RAM ist der Datenspeicher im Computer. Im Gegensatz zum ROM (Read-Only-Memory) können die Daten im RAM jederzeit geändert werden
+> und werden gelöscht, wenn der Strom aus geschaltet wird. RAM ist also der Schreib-Lese-Speicher.
+> [de.wikipedia.org/wiki/Random-Access_Memory](https://de.wikipedia.org/wiki/Random-Access_Memory)
+
+> Die Calliope mini Versionen haben unterschiedliche RAM Speicher Kapazität: 1.3=16kB | 2.0 und 2.1=32kB | 3.0=128kB.
+> [Technische Spezifikation](https://calliope-mini.github.io/v20/)
+> Der RAM wird auch vom Betriebssystem benutzt, so dass für eigene Programme nicht viel übrig bleibt.
+> Beim Calliope mini 1.3 reichen die 16kB jedenfalls nicht, um 1kB für die Matrix zu reservieren.
+
 #### I²C
 
 Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den I²C-Bus gibt es nur 3 Blöcke (hellblau):
