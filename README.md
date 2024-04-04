@@ -19,7 +19,7 @@
 
 ![](matrix1.jpg)
 
-Erweiterung unterstützt verschiedene OLED Displays, folgende wurden getestet:
+Diese Erweiterung unterstützt verschiedene OLED Displays, folgende wurden getestet:
 
 * [Grove - OLED Display 1.12 (SH1107) V3.0 - SPI/IIC -3.3V/5V](https://wiki.seeedstudio.com/Grove-OLED-Display-1.12-SH1107_V3.0/)
 
