@@ -65,6 +65,8 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 > Und Pixel sind die kleinen Punkte, die leuchten oder nicht. Weil Bits im RAM nicht leuchten, müssen sie an ein Display gesendet werden.
 > Das macht die Erweiterung 'Matrix'.
 
+##### Der für die Pixel reservierte RAM wird in dieser Beschreibung 'Matrix' genannt.
+
 #### I²C
 
 → [calliope-net.github.io/i2c](https://calliope-net.github.io/i2c/)
@@ -73,7 +75,7 @@ Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den 
 
 * **beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
 * **Matrix auf Display schreiben** (Zeilen von, bis, I²C-Adresse)
-* **Animation auf Display schreiben** (Image[]-Array, Position x, y, Vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
+* **Animation auf Display schreiben** (Image[]-Array, Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
 ##### OLED Display I²C
 
@@ -118,21 +120,21 @@ Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit.
 
 Block **set Pixel** (x, y, EIN/AUS)
 
-* Schaltet ein Pixel (im RAM) EIN oder AUS. 
+* Schaltet ein Pixel (in der Matrix) EIN oder AUS. 
 * Für die Koordinate x sind Werte von 0 (links) bis 127 (rechts) möglich.
 * Für die Koordinate y sind Werte von 0 (oben) bis 63 oder 127 (unten) möglich.
 
 Block **get Pixel** (x, y) : boolean
 
-* Liest ein Pixel aus dem RAM als boolean (wahr=EIN, falsch=AUS).
+* Liest ein Pixel aus der Matrix als boolean (wahr=EIN, falsch=AUS).
 
 Block **Linie** (von x, y, bis x, y, Pixel EIN/AUS)
 
-* Zeichnet eine Linie mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS werden die Pixel gelöscht.
+* Zeichnet eine Linie mit den angegebenen Koordinaten. Mit *Pixel* AUS werden die Pixel gelöscht.
 
 Block **Kreis** (Mittelpunkt x, y, Radius, Pixel EIN/AUS)
 
-* Zeichnet einen Kreis mit den angegebenen Koordinaten in den RAM. Mit *Pixel* AUS werden die Pixel gelöscht.
+* Zeichnet einen Kreis mit den angegebenen Koordinaten. Mit *Pixel* AUS werden die Pixel gelöscht.
 
 → Für Linie und Kreis wird der Bresenham-Algorithmus verwendet: [de.wikipedia.org/wiki/Bresenham-Algorithmus](https://de.wikipedia.org/wiki/Bresenham-Algorithmus)
 
@@ -162,7 +164,7 @@ Block **zeichne Uhr** (Mittelpunkt x, y, Stunde, Minute)
 ![](bilder.png)
 
 > Im Menüpunkt *Bilder* können Bilder (Image-Objekte) aus verschiedenen Quellen erzeugt und in Variablen gespeichert werden.
-> Die Image-Objekte werden dann an einer bestimmten Position (x, y) in den RAM (Matrix) gezeichnet.
+> Die Image-Objekte werden dann an einer bestimmten Position (x, y) in die Matrix gezeichnet.
 
 ##### Bild in Matrix zeichnen
 
@@ -171,7 +173,7 @@ Block **zeichne Bild** (Image-Objekt, x, y, überschreiben, vergrößern x, y)
 * In den 1. Parameter *Image-Objekt* muss eine Variable *bild* oder ein Block, der ein Image-Objekt zurück gibt, eingetragen werden.
 * Die Koordinaten *x, y* sind die linke obere Ecke, wo das Bild aus dem Image-Objekt in die Matrix gezeichnet wird. 
 Dabei wird die volle Breite und Höhe des Bildes übertragen (bis zum Rand der Matrix).
-* Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom Image-Objekt in den RAM gezeichnet.
+* Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom Image-Objekt in die Matrix gezeichnet.
 * Mit Parameter *transparent* werden nur Pixel an geschaltet (die Einsen). Pixel, die vorher schon leuchten, werden nicht aus geschaltet.
 So bleibt der Hintergrund sichtbar (transparent).
 * Mit den Parametern *vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
@@ -181,7 +183,7 @@ Block **8x8 drehen** (Image-Objekt, drehen oder spiegeln)
 * Dieser Block kann in den Block darüber **zeichne Bild** eingefügt werden, um ein *Image-Objekt* zu drehen oder zu spiegeln, bevor es in die Matrix gezeichnet wird.
 * Das neue Bild hat immer die Größe 8x8 Pixel. War das Original größer, wird nur die linke obere Ecke verwendet.
 * Der Block ist damit besonders für Text-Zeichen geeignet. Ziffern, Buchstaben u.a. sind 5x8 Images und werden auf 8x8 vergrößert (rechts 3 Pixel weißer Rand).
-* Diese Optionen stehen zur Verfügung: nicht drehen, links drehen, rechts drehen, halb drehen, y spiegeln, x spiegeln.
+* Diese Optionen stehen zur Verfügung: nicht drehen, links ↶ drehen, rechts ↷ drehen, halb ⤸ drehen, ↔ y spiegeln, ↕ x spiegeln.
 
 ##### Text in Matrix zeichnen
 
