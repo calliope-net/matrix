@@ -133,15 +133,15 @@ namespace matrix { // image.ts
         return bufferImage5x8(getUTF8_5x8(charCode))
     }
 
-/* 
-    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
-    //% block="Bild aus ASCII-Code (fromUTF8) %charCode" weight=4
-    //% charCode.min=32 charCode.max=127 charCode.defl=48
-    //% blockSetVariable=bild
-    export function utf8Image(charCode: number): Image {
-        return bufferImage5x8(getUTF8_5x8(charCode))
-    }
- */
+    /* 
+        //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
+        //% block="Bild aus ASCII-Code (fromUTF8) %charCode" weight=4
+        //% charCode.min=32 charCode.max=127 charCode.defl=48
+        //% blockSetVariable=bild
+        export function utf8Image(charCode: number): Image {
+            return bufferImage5x8(getUTF8_5x8(charCode))
+        }
+     */
 
 
 
