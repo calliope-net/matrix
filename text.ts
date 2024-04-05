@@ -112,9 +112,12 @@ namespace matrix { // text.ts
                 "0036360000"  // ":"
             ].get(pCharCode & 0x0F)) */
         }
-        else if (pCharCode == 0x2D) return Buffer.fromHex("0808080808") // "-"
-        else if (pCharCode == 0x2E) return Buffer.fromHex("6060000000") // "."
-        else return Buffer.fromHex("FFFFFFFFFF")
+        else if (pCharCode == 0x2D) return Buffer.fromUTF8("\x08\x08\x08\x08\x08") // "-"
+        else if (pCharCode == 0x2E) return Buffer.fromUTF8("\x60\x60\x00\x00\x00") // "."
+        else return Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
+        //else if (pCharCode == 0x2D) return Buffer.fromHex("0808080808") // "-"
+        //else if (pCharCode == 0x2E) return Buffer.fromHex("6060000000") // "."
+        //else return Buffer.fromHex("FFFFFFFFFF")
     }
 
 
