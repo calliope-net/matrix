@@ -27,10 +27,10 @@ namespace matrix { // text.ts
     //% group="Bild in Buffer zeichnen" subcategory="Bilder"
     //% block="8x8 %i0 %pDrehen" weight=7
     export function imageDrehen(i0: Image, pDrehen: eZeichenDrehen) {
-        if (pDrehen == eZeichenDrehen.nicht)
-            return i0
-        else {
-            let i1 = matrix8x8(`            
+        //if (pDrehen == eZeichenDrehen.nicht)
+        //    return i0
+        //else {
+        let i1 = matrix8x8(`            
         . . . . . . . .
         . . . . . . . .
         . . . . . . . .
@@ -41,36 +41,40 @@ namespace matrix { // text.ts
         . . . . . . . .
         `)
 
-            for (let i = 0; i <= 7; i++) {
-                for (let j = 0; j <= 7; j++) {
-                    if (i < i0.width() && j < i0.height()) {
-                        switch (pDrehen) {
-                            case eZeichenDrehen.links: {
-                                i1.setPixel(j, 7 - i, i0.pixel(i, j)) // (j,7-i) (i,j)
-                                break
-                            }
-                            case eZeichenDrehen.rechts: {
-                                i1.setPixel(7 - j, i, i0.pixel(i, j)) // (7-j,i) (i,j)
-                                break
-                            }
-                            case eZeichenDrehen.halb: {
-                                i1.setPixel(7 - i, 7 - j, i0.pixel(i, j)) // (7-i,7-j) (i,j)
-                                break
-                            }
-                            case eZeichenDrehen.yspiegeln: {
-                                i1.setPixel(7 - i, j, i0.pixel(i, j)) // (7-i,j) (i,j)
-                                break
-                            }
-                            case eZeichenDrehen.xspiegeln: {
-                                i1.setPixel(i, 7 - j, i0.pixel(i, j)) // (i,7-j) (i,j)
-                                break
-                            }
+        for (let i = 0; i <= 7; i++) {
+            for (let j = 0; j <= 7; j++) {
+                if (i < i0.width() && j < i0.height()) {
+                    switch (pDrehen) {
+                        case eZeichenDrehen.nicht: { // nur in 8x8 kopieren
+                            i1.setPixel(i, j, i0.pixel(i, j)) // (i,j) (i,j)
+                            break
+                        }
+                        case eZeichenDrehen.links: {
+                            i1.setPixel(j, 7 - i, i0.pixel(i, j)) // (j,7-i) (i,j)
+                            break
+                        }
+                        case eZeichenDrehen.rechts: {
+                            i1.setPixel(7 - j, i, i0.pixel(i, j)) // (7-j,i) (i,j)
+                            break
+                        }
+                        case eZeichenDrehen.halb: {
+                            i1.setPixel(7 - i, 7 - j, i0.pixel(i, j)) // (7-i,7-j) (i,j)
+                            break
+                        }
+                        case eZeichenDrehen.yspiegeln: {
+                            i1.setPixel(7 - i, j, i0.pixel(i, j)) // (7-i,j) (i,j)
+                            break
+                        }
+                        case eZeichenDrehen.xspiegeln: {
+                            i1.setPixel(i, 7 - j, i0.pixel(i, j)) // (i,7-j) (i,j)
+                            break
                         }
                     }
                 }
             }
-            return i1
-        } // else
+        }
+        return i1
+        //} // else
     }
 
     export function getDigit_5x8(pCharCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)

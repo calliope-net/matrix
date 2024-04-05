@@ -31,9 +31,9 @@ namespace matrix { // image.ts
 
 
 
-    // ========== group="Bild in Buffer zeichnen" subcategory="Bilder"
+    // ========== group="Bild in Matrix zeichnen" subcategory="Bilder"
 
-    //% group="Bild in Buffer zeichnen" subcategory="Bilder"
+    //% group="Bild in Matrix zeichnen" subcategory="Bilder"
     //% block="zeichne Bild %im x %x y %y || %ut x %fx y %fy" weight=8
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
@@ -69,9 +69,9 @@ namespace matrix { // image.ts
 
 
 
-    // ========== group="Text in Buffer zeichnen" subcategory="Bilder"
+    // ========== group="Text in Matrix zeichnen" subcategory="Bilder"
 
-    //% group="Text in Buffer zeichnen" subcategory="Bilder"
+    //% group="Text in Matrix zeichnen" subcategory="Bilder"
     //% block="zeichne Zahl/Zeit %zahl x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=5
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
@@ -88,7 +88,7 @@ namespace matrix { // image.ts
     }
 
 
-    //% group="Text in Buffer zeichnen" subcategory="Bilder"
+    //% group="Text in Matrix zeichnen" subcategory="Bilder"
     //% block="zeichne Text %text x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=4
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
@@ -135,9 +135,9 @@ namespace matrix { // image.ts
 
 
 
-    // ========== group="Bild aus HEX String" subcategory="Bilder"
+    // ========== group="Bild aus Hexadezimalzahl" subcategory="Bilder"
 
-    //% group="Bild aus HEX String" subcategory="Bilder"
+    //% group="Bild aus Hexadezimalzahl" subcategory="Bilder"
     //% block="Bild 5x8 aus HEX %hex" weight=5
     //% hex.defl="7F09192946"
     //% blockSetVariable=bild
@@ -145,7 +145,7 @@ namespace matrix { // image.ts
         return bufferImage5x8(Buffer.fromHex(hex))
     }
 
-    //% group="Bild aus HEX String" subcategory="Bilder"
+    //% group="Bild aus Hexadezimalzahl" subcategory="Bilder"
     //% block="Bild 8x8 aus HEX %hex" weight=3
     //% hex.defl="427F406251494946"
     //% blockSetVariable=bild
