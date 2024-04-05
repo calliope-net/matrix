@@ -98,31 +98,31 @@ namespace matrix { // text.ts
         else if (pCharCode == 0x2E) return Buffer.fromHex("6060000000") // "."
         else return Buffer.fromHex("FFFFFFFFFF")
 
-/* 
-        if (between(pCharCode, 0x30, 0x3A)) {
-            return Buffer.fromUTF8([
-                "\x3E\x51\x49\x45\x3E", // "0"
-                "\x00\x42\x7F\x40\x00", // "1"
-                "\x62\x51\x49\x49\x46", // "2"
-                "\x22\x41\x49\x49\x36", // "3"
-                "\x18\x14\x12\x7F\x10", // "4"
-                "\x27\x45\x45\x45\x39", // "5"
-                "\x3C\x4A\x49\x49\x30", // "6"
-                "\x01\x71\x09\x05\x03", // "7"
-                "\x36\x49\x49\x49\x36", // "8"
-                "\x06\x49\x49\x29\x1E", // "9"
-                "\x00\x36\x36\x00\x00" // ":"
-            ].get(pCharCode & 0x0F))
-           
-        }
-        else if (pCharCode == 0x2D) return Buffer.fromUTF8("\x08\x08\x08\x08\x08") // "-"
-        else if (pCharCode == 0x2E) return Buffer.fromUTF8("\x60\x60\x00\x00\x00") // "."
-        else return Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
-*/
+        /* 
+                if (between(pCharCode, 0x30, 0x3A)) {
+                    return Buffer.fromUTF8([
+                        "\x3E\x51\x49\x45\x3E", // "0"
+                        "\x00\x42\x7F\x40\x00", // "1"
+                        "\x62\x51\x49\x49\x46", // "2"
+                        "\x22\x41\x49\x49\x36", // "3"
+                        "\x18\x14\x12\x7F\x10", // "4"
+                        "\x27\x45\x45\x45\x39", // "5"
+                        "\x3C\x4A\x49\x49\x30", // "6"
+                        "\x01\x71\x09\x05\x03", // "7"
+                        "\x36\x49\x49\x49\x36", // "8"
+                        "\x06\x49\x49\x29\x1E", // "9"
+                        "\x00\x36\x36\x00\x00" // ":"
+                    ].get(pCharCode & 0x0F))
+                   
+                }
+                else if (pCharCode == 0x2D) return Buffer.fromUTF8("\x08\x08\x08\x08\x08") // "-"
+                else if (pCharCode == 0x2E) return Buffer.fromUTF8("\x60\x60\x00\x00\x00") // "."
+                else return Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
+        */
     }
 
-
-    export function getChar_5x8(pCharCode: number): Buffer {
+/* 
+    function getChar_5x8(pCharCode: number): Buffer {
 
         if (between(pCharCode, 0x20, 0x7F)) {
 
@@ -273,7 +273,7 @@ namespace matrix { // text.ts
             return b
         }
     }
-
+ */
 
 
     // ========== Zeichensatz in String-Bytes
