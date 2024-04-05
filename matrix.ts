@@ -98,7 +98,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     }
 
     //% group="OLED Display I²C" color="#007FFF"
-    //% block="Matrix auf Display schreiben || Zeilen von %fromPage bis %toPage %pI2C" weight=6
+    //% block="Matrix auf Display anzeigen || Zeilen von %fromPage bis %toPage %pI2C" weight=6
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=15
     //% inlineInputMode=inline
