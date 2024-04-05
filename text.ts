@@ -78,7 +78,7 @@ namespace matrix { // text.ts
     }
 
     export function getDigit_5x8(pCharCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
-/* 
+
         if (between(pCharCode, 0x30, 0x3A)) {
             return Buffer.fromHex([
                 "3E5149453E", // "0"
@@ -97,8 +97,8 @@ namespace matrix { // text.ts
         else if (pCharCode == 0x2D) return Buffer.fromHex("0808080808") // "-"
         else if (pCharCode == 0x2E) return Buffer.fromHex("6060000000") // "."
         else return Buffer.fromHex("FFFFFFFFFF")
- */
 
+/* 
         if (between(pCharCode, 0x30, 0x3A)) {
             return Buffer.fromUTF8([
                 "\x3E\x51\x49\x45\x3E", // "0"
@@ -118,7 +118,7 @@ namespace matrix { // text.ts
         else if (pCharCode == 0x2D) return Buffer.fromUTF8("\x08\x08\x08\x08\x08") // "-"
         else if (pCharCode == 0x2E) return Buffer.fromUTF8("\x60\x60\x00\x00\x00") // "."
         else return Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
-
+*/
     }
 
 
@@ -419,16 +419,6 @@ namespace matrix { // text.ts
                         "\xFE\x09\x49\x36\x00", // "ß"
                         "\x14\x3E\x55\x55\x41", // "€" "143E5555551400"
                         "\x02\x05\x02\x00\x00"  // "°"
-
-                        //"7D0A090A7D", // "Ä"
-                        //"3D4241423D", // "Ö"
-                        //"3D4040403D", // "Ü"
-                        //"2154545578", // "ä"
-                        //"3944443900", // "ö"
-                        //"3D40407D00", // "ü"
-                        //"FE09493600", // "ß"
-                        //"143E555541", // "€" "143E5555551400"
-                        //"0205020000"  // "°"
                     ].get(j))
                     break
                 }
