@@ -78,6 +78,7 @@ namespace matrix { // text.ts
     }
 
     export function getDigit_5x8(pCharCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
+/* 
         if (between(pCharCode, 0x30, 0x3A)) {
             return Buffer.fromHex([
                 "3E5149453E", // "0"
@@ -96,8 +97,8 @@ namespace matrix { // text.ts
         else if (pCharCode == 0x2D) return Buffer.fromHex("0808080808") // "-"
         else if (pCharCode == 0x2E) return Buffer.fromHex("6060000000") // "."
         else return Buffer.fromHex("FFFFFFFFFF")
+ */
 
-/* 
         if (between(pCharCode, 0x30, 0x3A)) {
             return Buffer.fromUTF8([
                 "\x3E\x51\x49\x45\x3E", // "0"
@@ -117,7 +118,7 @@ namespace matrix { // text.ts
         else if (pCharCode == 0x2D) return Buffer.fromUTF8("\x08\x08\x08\x08\x08") // "-"
         else if (pCharCode == 0x2E) return Buffer.fromUTF8("\x60\x60\x00\x00\x00") // "."
         else return Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
- */
+
     }
 
 
