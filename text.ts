@@ -379,11 +379,40 @@ namespace matrix { // text.ts
                     ].get(pCharCode & 0x0F))
                 }
                 default:
-                    return Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF\xFF")
+                    return Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
             }
+        } else {
+            let b = Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
+            let s = "ÄÖÜäöüß€°"
+            for (let j = 0; j < s.length; j++) {
+                if (s.charCodeAt(j) == pCharCode) {
+                    b = Buffer.fromUTF8([
+                        "\x7D\x0A\x09\x0A\x7D", // "Ä"
+                        "\x3D\x42\x41\x42\x3D", // "Ö"
+                        "\x3D\x40\x40\x40\x3D", // "Ü"
+                        "\x21\x54\x54\x55\x78", // "ä"
+                        "\x39\x44\x44\x39\x00", // "ö"
+                        "\x3D\x40\x40\x7D\x00", // "ü"
+                        "\xFE\x09\x49\x36\x00", // "ß"
+                        "\x14\x3E\x55\x55\x41", // "€" "143E5555551400"
+                        "\x02\x05\x02\x00\x00"  // "°"
+
+                        //"7D0A090A7D", // "Ä"
+                        //"3D4241423D", // "Ö"
+                        //"3D4040403D", // "Ü"
+                        //"2154545578", // "ä"
+                        //"3944443900", // "ö"
+                        //"3D40407D00", // "ü"
+                        //"FE09493600", // "ß"
+                        //"143E555541", // "€" "143E5555551400"
+                        //"0205020000"  // "°"
+                    ].get(j))
+                    break
+                }
+            }
+            return b
+            //return Buffer.fromHex("FFFFFFFFFF")
         }
-        else
-            return Buffer.fromHex("FFFFFFFFFF")
     }
 
 } // text.ts
