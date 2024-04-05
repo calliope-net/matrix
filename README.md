@@ -80,8 +80,8 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den I²C-Bus gibt es nur 3 Blöcke (hellblau):
 
 * **beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
-* **Matrix auf Display schreiben** (Zeilen von, bis, I²C-Adresse)
-* **Animation auf Display schreiben** (Image[]-Array, Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
+* **Matrix auf Display anzeigen** (Zeilen von, bis, I²C-Adresse)
+* **Animation auf Display anzeigen** (Image[]-Array, Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
 ## Blöcke und Parameter
 
@@ -102,7 +102,7 @@ Die eingestellte *Display-Größe* entscheidet darüber, wieviel RAM reserviert 
 > Um verschiedene Bilder auf zwei Displays anzuzeigen, wird die Matrix gelöscht, neu gezeichnet und mit dem folgenden Block
 > (mit Parameter *I²C-Adresse*) an ein bestimmtes Display gesendet.
 
-Block **Matrix auf Display schreiben** (Zeilen von, bis, I²C-Adresse)
+Block **Matrix auf Display anzeigen** (Zeilen von, bis, I²C-Adresse)
 
 * ist immer aufzurufen, wenn das in die Matrix gezeichnete Bild auf dem Display angezeigt werden soll.
 Dabei wird normalerweise das komplette Display über den I²C-Bus neu geschrieben (1KB oder 2KB Pixel).
@@ -113,7 +113,7 @@ Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 Display hat 16 Zeilen (
 
 > Die Zeilen in der Matrix und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
 
-Block **Animation auf Display schreiben** befindet sich im Menüpunkt **[Bilder Array](#bilder-array)** und wird dort beschrieben. 
+Block **Animation auf Display anzeigen** befindet sich im Menüpunkt **[Bilder Array](#bilder-array)** und wird dort beschrieben. 
 
 ##### Matrix im Speicher
 
@@ -123,7 +123,7 @@ Block **Matrix löschen** (Zeilen von, bis)
 * Mit den optionalen Parametern (Zeilen von, bis) ist es möglich, nur einen Teil der Matrix zu löschen.
 Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit.
 
-> Um das Display zu löschen, muss eine gelöschte Matrix noch mit dem hellblauen Block **Matrix auf Display schreiben**
+> Um das Display zu löschen, muss eine gelöschte Matrix noch mit dem hellblauen Block **Matrix auf Display anzeigen**
 > über den I²C-Bus an das Display gesendet werden.
 
 Block **set Pixel** (x, y, EIN/AUS)
@@ -286,10 +286,10 @@ Folgende Bild-Größen (in Pixel) stehen zum selbst malen zur Verfügung:
 
 ##### OLED Display I²C
 
-Block **Animation auf Display schreiben** (Image[], Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
+Block **Animation auf Display anzeigen** (Image[], Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
 * Für eine Animation werden mehrere Bilder mit kurzer Pause an der selben Stelle angezeigt. Die Bilder sind in einem Array gespeichert.
-Es wird jeweils 1 Bild in die Matrix gezeichnet, *Matrix auf Display schreiben* aufgerufen und eine Zeit in Millisekunden gewartet.
+Es wird jeweils 1 Bild in die Matrix gezeichnet, **Matrix auf Display anzeigen** aufgerufen und eine Zeit in Millisekunden gewartet.
 Das wiederholt sich, bis alle Elemente aus dem Array Image[] abgearbeitet sind.
 
 * Als Parameter ist das interne Array Image[] eingestellt, es kann auch ein eigenes Array mit Bildern übergeben werden. *Position x, y* ist die linke obere Ecke,
@@ -300,7 +300,7 @@ So können kleine Bilder auch größer gezeichnet werden.
 
 * Der Parameter *Pause(ms)* legt fest, wie lange jedes Bild während der Animation angezeigt wird.
 
-* Die letzten Parameter *Zeilen von, bis* und *I²C-Adresse* entsprechen dem Block **Matrix auf Display schreiben**.
+* Die letzten Parameter *Zeilen von, bis* und *I²C-Adresse* entsprechen dem Block **Matrix auf Display anzeigen**.
 Damit kann verhindert werden, dass immer das gesamte Display über den I²C-Bus neu geschrieben wird, wenn die Bilder der Animation kleiner sind.
 Wenn die Bilder an Position x, y = (0,0) 8 Pixel hoch und nicht vergrößert sind, reicht es die Zeile 0 zu aktualisieren.
 
@@ -319,7 +319,7 @@ So bleibt der Hintergrund sichtbar (transparent).
 * Mit den Parametern *vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 Der Faktor gilt für alle Bilder im Array. Gegebenenfalls müssen die Parameter *Abstand x, y* angepasst werden.
 
-> Um die in die Matrix gezeichneten Bilder auf dem Display anzuzeigen, muss noch der hellblaue Block **Matrix auf Display schreiben** aufgerufen werden.
+> Um die in die Matrix gezeichneten Bilder auf dem Display anzuzeigen, muss noch der hellblaue Block **Matrix auf Display anzeigen** aufgerufen werden.
 
 ##### Speicher für Bilder: Image[]
 
@@ -342,7 +342,7 @@ Block **Image[] löschen**
 
 ##### Animation Beispiele
 
-* Hier können fertige Arrays mit Bildern abgerufen werden. Diese Beispiel-Arrays sind in den Block **Animation auf Display schreiben**
+* Hier können fertige Arrays mit Bildern abgerufen werden. Diese Beispiel-Arrays sind in den Block **Animation auf Display anzeigen**
 einzufügen (und ersetzen dort Image[]).
 
 
