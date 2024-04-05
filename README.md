@@ -151,8 +151,7 @@ Block **Kreis** (Mittelpunkt x, y, Radius, Pixel EIN/AUS)
 Block **12 Stunden** (Stunde, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
 
 * Der Parameter *Stunde* bestimmt die Richtung (den Winkel) der Linie vom *Mittelpunkt x, y* (auf dem Zifferblatt einer Uhr).
-Der "kleine Zeiger" muss nicht im Mittelpunkt beginnen.
-* Die Parameter *Linie von, bis* bestimmen Anfang und Ende des Zeigers (vom Mittelpunkt in Pixeln).
+* Der "kleine Zeiger" muss nicht im Mittelpunkt beginnen. Die Parameter *Linie von, bis* bestimmen Anfang und Ende des Zeigers (vom Mittelpunkt in Pixeln).
 * Mit *Pixel* AUS kann der Zeiger auch wieder gelöscht werden.
 
 Block **60 Minuten** (Minute, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
