@@ -230,11 +230,11 @@ Block **Bild aus Zeichen** (ASCII) (text, index)
 
 * Generiert aus einem Zeichen in *text* ein Bild 5x8 Pixel. Mit *index* wird das Zeichen ausgewählt.
 
-Block **Bild aus ASCII-Code** (code)
+Block **Bild aus ASCII-Code** (charCode)
 
-* Generiert aus dem *code* ein Bild 5x8 Pixel mit dem entsprechenden ASCII-Zeichen. Gültige Wert für *code* sind 32 bis 127.
+* Generiert aus dem *charCode* ein Bild 5x8 Pixel mit dem entsprechenden ASCII-Zeichen. Gültige Wert für *charCode* sind 32 bis 127.
 
-##### Bild aus HEX String
+##### Bild aus Hexadezimalzahl
 
 > Eine Ziffer einer Hexadezimalzahl kann 16 Werte annehmen: (0 1 2 3 4 5 6 7 8 9 A B C D E F). Das entspricht genau 4 Bit. Für ein Byte (8 Bit) werden 2 HEX-Ziffen geschrieben.
 > 5 Byte entstehen also aus 10 HEX-Ziffern und 8 Byte entstehen aus 16 HEX-Ziffern.
@@ -270,10 +270,10 @@ Folgende Bild-Größen (in Pixel) stehen zum selbst malen zur Verfügung:
 * Bild 64x64
 
 > Jede Vorlage kann mehrmals verwendet und verschiedenen Variablen zugewiesen werden. Die zahlreichen Image-Objekte können dann mit **zeichne Bild**
-wie Kacheln an verschiedenen Stellen in die Matrix gezeichnet werden. Dabei können kleine Bilder auch vergrößert werden.
+> wie Kacheln an verschiedenen Stellen in die Matrix gezeichnet werden. Dabei können kleine Bilder auch vergrößert werden.
 
-> Die Bilder (Image-Objekte) können aber auch im Menüpunkt **Bilder Array** im internen Array Image[] gesammelt werden. Sie können dort über den Index einzeln abgerufen
-oder als Animation auf dem Display angezeigt werden.
+> Die Bilder (Image-Objekte) können aber auch im Menüpunkt **Bilder Array** im internen Array Image[] gesammelt werden.
+> Sie können dort über den Index einzeln abgerufen oder als Animation auf dem Display angezeigt werden.
 
 
 
@@ -282,7 +282,7 @@ oder als Animation auf dem Display angezeigt werden.
 ![](bilderarray.png)
 
 > Bilder-Array ist ein Array im RAM mit Elementen vom Typ Image. In den Blöcken ist dieses interne Array mit **Image[]** bezeichnet.
-Image ist in MakeCode ein Typ. Ein Image-Object kann eine bestimmte Anzahl Pixel in Breite und Höhe speichern, also ein Bild.
+> Image ist in MakeCode ein Typ. Ein Image-Object kann eine bestimmte Anzahl Pixel in Breite und Höhe speichern, also ein Bild.
 
 ##### OLED Display I²C
 
