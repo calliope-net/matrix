@@ -103,7 +103,7 @@ namespace matrix { // text.ts
 
         if (between(pCharCode, 0x20, 0x7F)) {
 
-            switch (pCharCode & 0xF0) { // 16 string-Elemente je 5 Byte
+            switch (pCharCode & 0xF0) { // 16 HEX-String-Elemente je 5 Byte
                 case 0x20:
                     return Buffer.fromHex([
                         "0000000000", // " "
@@ -249,6 +249,42 @@ namespace matrix { // text.ts
             }
             return b
         }
+    }
+
+
+
+    // ========== Zeichensatz in String-Bytes
+
+    export function getUTF8_5x8(pCharCode: number) {
+        if (between(pCharCode, 0x20, 0x7F)) {
+            switch (pCharCode & 0xF0) { // 16 string-Elemente je 8 Byte = 128
+                case 0x20: {
+                    return Buffer.fromUTF8([
+                        "\x00\x00\x00\x00\x00\x00\x00\x00", // " "
+                        "\x00\x00\x5F\x00\x00\x00\x00\x00", // "!"
+                        "\x00\x00\x07\x00\x07\x00\x00\x00", // """
+                        "\x00\x14\x7F\x14\x7F\x14\x00\x00", // "#"
+                        "\x00\x24\x2A\x7F\x2A\x12\x00\x00", // "$"
+                        "\x00\x23\x13\x08\x64\x62\x00\x00", // "%"
+                        "\x00\x36\x49\x55\x22\x50\x00\x00", // "&"
+                        "\x00\x00\x05\x03\x00\x00\x00\x00", // "'"
+                        "\x00\x1C\x22\x41\x00\x00\x00\x00", // "("
+                        "\x00\x41\x22\x1C\x00\x00\x00\x00", // ")"
+                        "\x00\x08\x2A\x1C\x2A\x08\x00\x00", // "*"
+                        "\x00\x08\x08\x3E\x08\x08\x00\x00", // "+"
+                        "\x00\xA0\x60\x00\x00\x00\x00\x00", // ","
+                        "\x00\x08\x08\x08\x08\x08\x00\x00", // "-"
+                        "\x00\x60\x60\x00\x00\x00\x00\x00", // "."
+                        "\x00\x20\x10\x08\x04\x02\x00\x00" // "/"
+                    ].get(pCharCode & 0x0F))
+
+                }
+                default:
+                    return Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF")
+            }
+
+        }
+        return Buffer.fromHex("FFFFFFFFFFFFFFFF")
     }
 
 } // text.ts
