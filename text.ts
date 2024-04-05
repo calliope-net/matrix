@@ -79,6 +79,25 @@ namespace matrix { // text.ts
 
     export function getDigit_5x8(pCharCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
         if (between(pCharCode, 0x30, 0x3A)) {
+            return Buffer.fromUTF8([
+                "\x3E\x51\x49\x45\x3E", // "0"
+                "\x00\x42\x7F\x40\x00", // "1"
+                "\x62\x51\x49\x49\x46", // "2"
+                "\x22\x41\x49\x49\x36", // "3"
+                "\x18\x14\x12\x7F\x10", // "4"
+                "\x27\x45\x45\x45\x39", // "5"
+                "\x3C\x4A\x49\x49\x30", // "6"
+                "\x01\x71\x09\x05\x03", // "7"
+                "\x36\x49\x49\x49\x36", // "8"
+                "\x06\x49\x49\x29\x1E", // "9"
+                "\x00\x36\x36\x00\x00" // ":"
+            /*     "\x00\xAC\x6C\x00\x00", // ";"
+                "\x08\x14\x22\x41\x00", // "<"
+                "\x14\x14\x14\x14\x14", // "="
+                "\x41\x22\x14\x08\x00", // ">"
+                "\x02\x01\x51\x09\x06" // "?" */
+            ].get(pCharCode & 0x0F))
+/* 
             return Buffer.fromHex([
                 "3E5149453E", // "0"
                 "00427F4000", // "1"
@@ -91,7 +110,7 @@ namespace matrix { // text.ts
                 "3649494936", // "8"
                 "064949291E", // "9"
                 "0036360000"  // ":"
-            ].get(pCharCode & 0x0F))
+            ].get(pCharCode & 0x0F)) */
         }
         else if (pCharCode == 0x2D) return Buffer.fromHex("0808080808") // "-"
         else if (pCharCode == 0x2E) return Buffer.fromHex("6060000000") // "."
