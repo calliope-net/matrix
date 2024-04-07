@@ -298,7 +298,7 @@ namespace matrix { // text.ts
         return i5x8
     }
  */
-    export function get5x8image(pCharCode: number): Image {
+    export function get5x8Image(pCharCode: number): Image {
         let string5: string = "\xFF\xFF\xFF\xFF\xFF"
 
         if (between(pCharCode, 0x20, 0x7F)) {
