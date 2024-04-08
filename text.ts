@@ -86,7 +86,7 @@ namespace matrix { // text.ts
         else return image5x8fromString("\xFF\xFF\xFF\xFF\xFF")
     }
 
-    export function getDigit_5x8(charCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
+    export function getDigit_5x8_(charCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
         if (between(charCode, 0x30, 0x3A)) {
             return Buffer.fromHex([
                 "3E5149453E", // "0"

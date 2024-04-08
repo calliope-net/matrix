@@ -82,7 +82,8 @@ namespace matrix { // image.ts
         let ia: Image[] = []
         for (let j = 0; j < text.length; j++) {
             //ia.push(digitImage(zahl, j)) // nur Ziffern, Minus und Punkt (spart Programmcode)
-            ia.push(bufferImage5x8(getDigit_5x8(text.charCodeAt(j))))
+           // ia.push(bufferImage5x8(getDigit_5x8(text.charCodeAt(j))))
+            ia.push(get5x8DigitImage(text.charCodeAt(j)))
         }
         writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
     }
@@ -111,8 +112,8 @@ namespace matrix { // image.ts
     //% index.defl=0
     //% blockSetVariable=bild
     export function digitImage(zahl: number, index = 0): Image {
-        return bufferImage5x8(getDigit_5x8(zahl.toString().charCodeAt(index)))
-        //  return bufferImage5x8(getDigit_5x8(charCode))
+       // return bufferImage5x8(getDigit_5x8(zahl.toString().charCodeAt(index)))
+        return get5x8DigitImage(zahl.toString().charCodeAt(index))
     }
 
     //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
