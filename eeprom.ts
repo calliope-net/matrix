@@ -9,10 +9,14 @@ namespace matrix { // eeprom.ts
 
     // EEPROM nur lesen
     function i2cReadEEPROM(eeprom_location: number, size: number, pI2C = eI2Ceeprom.EEPROM_x50): Buffer {
-        let bu = Buffer.create(2)
-        bu.setNumber(NumberFormat.UInt16BE, 0, eeprom_location)
-        pins.i2cWriteBuffer(pI2C, bu, true)
-        return pins.i2cReadBuffer(pI2C, size)
+        if (between(eeprom_location, 0, 0xFFFF - size)) {
+            let bu = Buffer.create(2)
+            bu.setNumber(NumberFormat.UInt16BE, 0, eeprom_location)
+            pins.i2cWriteBuffer(pI2C, bu, true)
+            return pins.i2cReadBuffer(pI2C, size)
+        }
+        else
+            return Buffer.create(size)
     }
 
 
