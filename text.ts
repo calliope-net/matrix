@@ -319,73 +319,40 @@ namespace matrix { // text.ts
                     return stringImage5x8("\x01\x02\x04\x00\x00\x20\x54\x54\x54\x78\x7F\x48\x44\x44\x38\x38\x44\x44\x28\x00\x38\x44\x44\x48\x7F\x38\x54\x54\x54\x18\x08\x7E\x09\x02\x00\x18\xA4\xA4\xA4\x7C\x7F\x08\x04\x04\x78\x00\x7D\x00\x00\x00\x80\x84\x7D\x00\x00\x7F\x10\x28\x44\x00\x41\x7F\x40\x00\x00\x7C\x04\x18\x04\x78\x7C\x08\x04\x7C\x00\x38\x44\x44\x38\x00".substr((charCode & 0x0F) * 5, 5))
                 //                        (  "`"               , "a"               , "b"               , "c"               , "d"               , "e"               , "f"               ,"g"                , "h"               , "i"               , "j"               , "k"               , "l"               , "m"               , "n"               , "o"               )
 
-                case 0x70: {
-                    //    return stringImage5x8("".substr((charCode & 0x0F) * 5, 5))
-                    string5 = [
-                        "\xFC\x24\x24\x18\x00", // "p"
-                        "\x18\x24\x24\xFC\x00", // "q"
-                        "\x00\x7C\x08\x04\x00", // "r"
-                        "\x48\x54\x54\x24\x00", // "s"
-                        "\x04\x7F\x44\x00\x00", // "t"
-                        "\x3C\x40\x40\x7C\x00", // "u"
-                        "\x1C\x20\x40\x20\x1C", // "v"
-                        "\x3C\x40\x30\x40\x3C", // "w"
-                        "\x44\x28\x10\x28\x44", // "x"
-                        "\x1C\xA0\xA0\x7C\x00", // "y"
-                        "\x44\x64\x54\x4C\x44", // "z"
-                        "\x08\x36\x41\x00\x00", // "{"
-                        "\x00\x7F\x00\x00\x00", // "|"
-                        "\x41\x36\x08\x00\x00", // "}"
-                        "\x02\x01\x01\x02\x01", // "~"
-                        "\xFF\xFF\xFF\xFF\xFF"  // 127
-                    ].get(charCode & 0x0F)
-                    break
-                }
-                //default:
-                //    string5 = "\xFF\xFF\xFF\xFF\xFF"
-                //     break
+                case 0x70:
+                    return stringImage5x8("\xFC\x24\x24\x18\x00\x18\x24\x24\xFC\x00\x00\x7C\x08\x04\x00\x48\x54\x54\x24\x00\x04\x7F\x44\x00\x00\x3C\x40\x40\x7C\x00\x1C\x20\x40\x20\x1C\x3C\x40\x30\x40\x3C\x44\x28\x10\x28\x44\x1C\xA0\xA0\x7C\x00\x44\x64\x54\x4C\x44\x08\x36\x41\x00\x00\x00\x7F\x00\x00\x00\x41\x36\x08\x00\x00\x02\x01\x01\x02\x01\xFF\xFF\xFF\xFF\xFF".substr((charCode & 0x0F) * 5, 5))
+                //                        (  "p"               , "q"               , "r"               , "s"               , "t"               , "u"               , "v"               ,"w"                , "x"               , "y"               , "z"               , "{"               , "|"               , "}"               , "~"               , 127               )
+                default:
+                    return stringImage5x8("\xFF\xFF\xFF\xFF\xFF")
             }
         } else {
             //let b = Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
             let s = "ÄÖÜäöüß€°"
             for (let j = 0; j < s.length; j++) {
-                if (s.charCodeAt(j) == charCode) {
+                if (s.charCodeAt(j) == charCode)
                     return stringImage5x8("\x7D\x0A\x09\x0A\x7D\x3D\x42\x41\x42\x3D\x3D\x40\x40\x40\x3D\x21\x54\x54\x55\x78\x39\x44\x44\x39\x00\x3D\x40\x40\x7D\x00\xFE\x09\x49\x36\x00\x14\x3E\x55\x55\x41\x02\x05\x02\x00\x00".substr(j * 5, 5))
-                    //                    (  "Ä"               , "Ö"               , "Ü"               , "ä"               , "ö"               , "ü"               , "ß"               , "@"               , "°"               )
-                    /*  string5 = [
-                         "\x7D\x0A\x09\x0A\x7D", // "Ä"
-                         "\x3D\x42\x41\x42\x3D", // "Ö"
-                         "\x3D\x40\x40\x40\x3D", // "Ü"
-                         "\x21\x54\x54\x55\x78", // "ä"
-                         "\x39\x44\x44\x39\x00", // "ö"
-                         "\x3D\x40\x40\x7D\x00", // "ü"
-                         "\xFE\x09\x49\x36\x00", // "ß"
-                         "\x14\x3E\x55\x55\x41", // "€" "143E5555551400"
-                         "\x02\x05\x02\x00\x00"  // "°"
-                     ].get(j) */
-                    break
+                //                        (  "Ä"               , "Ö"               , "Ü"               , "ä"               , "ö"               , "ü"               , "ß"               , "@"               , "°"               )
+            }
+            return stringImage5x8("\xFF\xFF\xFF\xFF\xFF")
+        }
+        /* 
+                let i5x8: Image = matrix5x8(`
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    . . . . .
+                    `)
+        
+                for (let iy = 0; iy < i5x8.height(); iy++) {
+                    for (let ix = 0; ix < i5x8.width(); ix++) {
+                        i5x8.setPixel(ix, iy, (string5.charCodeAt(ix) & 2 ** (iy & 7)) != 0)
+                    }
                 }
-            }
-            //return b
-        }
-
-        let i5x8: Image = matrix5x8(`
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            . . . . .
-            `)
-
-        for (let iy = 0; iy < i5x8.height(); iy++) {
-            for (let ix = 0; ix < i5x8.width(); ix++) {
-                i5x8.setPixel(ix, iy, (string5.charCodeAt(ix) & 2 ** (iy & 7)) != 0)
-            }
-        }
-        return i5x8
+                return i5x8 */
     }
 
 
