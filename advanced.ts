@@ -49,7 +49,7 @@ namespace matrix { // advanced.ts
             clearImages()
             for (let j = 0; j <= 15; j++) {
                 //pushImage(asciiImage((i + 2) * 16 + j))
-                pushImage(get5x8Image((i + 2) * 16 + j))
+                pushImage(get5x8CharImage((i + 2) * 16 + j))
             }
             writeImageArray(matrix_Images(), 0, i * 8, 7)
             //writeDisplay(0, 6, pI2C)
