@@ -311,28 +311,10 @@ namespace matrix { // text.ts
                 case 0x40:
                     return stringImage5x8("\x32\x49\x79\x41\x3E\x7E\x09\x09\x09\x7E\x7F\x49\x49\x49\x36\x3E\x41\x41\x41\x22\x7F\x41\x41\x22\x1C\x7F\x49\x49\x49\x41\x7F\x09\x09\x09\x01\x3E\x41\x41\x51\x72\x7F\x08\x08\x08\x7F\x41\x7F\x41\x00\x00\x20\x40\x41\x3F\x01\x7F\x08\x14\x22\x41\x7F\x40\x40\x40\x40\x7F\x02\x0C\x02\x7F\x7F\x04\x08\x10\x7F\x3E\x41\x41\x41\x3E".substr((charCode & 0x0F) * 5, 5))
                 //                        (  "@"               , "A"               , "B"               , "C"               , "D"               , "E"               , "F"               , "G"               , "H"               , "I"               , "J"               , "K"               , "L"               , "M"               , "N"               , "O"               )
-                case 0x50: {
-                    //    return stringImage5x8("".substr((charCode & 0x0F) * 5, 5))
-                    string5 = [
-                        "\x7F\x09\x09\x09\x06", // "P"
-                        "\x3E\x41\x51\x21\x5E", // "Q"
-                        "\x7F\x09\x19\x29\x46", // "R"
-                        "\x26\x49\x49\x49\x32", // "S"
-                        "\x01\x01\x7F\x01\x01", // "T"
-                        "\x3F\x40\x40\x40\x3F", // "U"
-                        "\x1F\x20\x40\x20\x1F", // "V"
-                        "\x3F\x40\x38\x40\x3F", // "W"
-                        "\x63\x14\x08\x14\x63", // "X"
-                        "\x03\x04\x78\x04\x03", // "Y"
-                        "\x61\x51\x49\x45\x43", // "Z"
-                        "\x7F\x41\x41\x00\x00", // """
-                        "\x02\x04\x08\x10\x20", // "\"
-                        "\x41\x41\x7F\x00\x00", // """
-                        "\x04\x02\x01\x02\x04", // "^"
-                        "\x80\x80\x80\x80\x80" // "_"
-                    ].get(charCode & 0x0F)
-                    break
-                }
+                case 0x50:
+                    return stringImage5x8("\x7F\x09\x09\x09\x06\x3E\x41\x51\x21\x5E\x7F\x09\x19\x29\x46\x26\x49\x49\x49\x32\x01\x01\x7F\x01\x01\x3F\x40\x40\x40\x3F\x1F\x20\x40\x20\x1F\x3F\x40\x38\x40\x3F\x63\x14\x08\x14\x63\x03\x04\x78\x04\x03\x61\x51\x49\x45\x43\x7F\x41\x41\x00\x00\x02\x04\x08\x10\x20\x41\x41\x7F\x00\x00\x04\x02\x01\x02\x04\x80\x80\x80\x80\x80".substr((charCode & 0x0F) * 5, 5))
+                //                        (  "P"               , "Q"               , "R"               , "S"               , "T"               , "U"               , "V"               , "W"               , "X"               , "Y"               , "Z"               ,"["                , "\"               , "]"               , "^"               , "_"               )
+
                 case 0x60: {
                     //    return stringImage5x8("".substr((charCode & 0x0F) * 5, 5))
                     string5 = [
