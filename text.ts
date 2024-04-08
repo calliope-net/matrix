@@ -302,34 +302,15 @@ namespace matrix { // text.ts
 
         if (between(charCode, 0x20, 0x7F)) {
             switch (charCode & 0xF0) { // 16 string-Elemente je 8 Byte = 128
-                case 0x20: 
+                case 0x20:
                     return stringImage5x8("\x00\x00\xFF\x00\x00\x00\x5F\x00\x00\x00\x00\x07\x00\x07\x00\x14\x7F\x14\x7F\x14\x24\x2A\x7F\x2A\x12\x23\x13\x08\x64\x62\x36\x49\x55\x22\x50\x00\x05\x03\x00\x00\x1C\x22\x41\x00\x00\x41\x22\x1C\x00\x00\x08\x2A\x1C\x2A\x08\x08\x08\x3E\x08\x08\xA0\x60\x00\x00\x00\x08\x08\x08\x08\x08\x60\x60\x00\x00\x00\x20\x10\x08\x04\x02".substr((charCode & 0x0F) * 5, 5))
-                    //                    (  " "               , "!"               , """               , "#"               , "$"               , "%"               , "&"               , "'"               , "("               , ")"               , "*"               , "+"               , ","               , "-"               , "."               , "/"               )
-                case 0x30: 
+                //                        (  " "               , "!"               , """               , "#"               , "$"               , "%"               , "&"               , "'"               , "("               , ")"               , "*"               , "+"               , ","               , "-"               , "."               , "/"               )
+                case 0x30:
                     return stringImage5x8("\x3E\x51\x49\x45\x3E\x00\x42\x7F\x40\x00\x62\x51\x49\x49\x46\x22\x41\x49\x49\x36\x18\x14\x12\x7F\x10\x27\x45\x45\x45\x39\x3C\x4A\x49\x49\x30\x01\x71\x09\x05\x03\x36\x49\x49\x49\x36\x06\x49\x49\x29\x1E\x00\x36\x36\x00\x00\x00\xAC\x6C\x00\x00\x08\x14\x22\x41\x00\x14\x14\x14\x14\x14\x41\x22\x14\x08\x00\x02\x01\x51\x09\x06".substr((charCode & 0x0F) * 5, 5))
-                    //                    (  "0"               , "1"               , "2"               , "3"               , "4"               , "5"               , "6"               , "7"               , "8"               , "9"               , ":"               , ";"               , "<"               , "="               , ">"               , "?"               )
-                case 0x40: {
-                    //    return stringImage5x8("".substr((charCode & 0x0F) * 5, 5))
-                    string5 = [
-                        "\x32\x49\x79\x41\x3E", // "@""
-                        "\x7E\x09\x09\x09\x7E", // "A"
-                        "\x7F\x49\x49\x49\x36", // "B"
-                        "\x3E\x41\x41\x41\x22", // "C"
-                        "\x7F\x41\x41\x22\x1C", // "D"
-                        "\x7F\x49\x49\x49\x41", // "E"
-                        "\x7F\x09\x09\x09\x01", // "F"
-                        "\x3E\x41\x41\x51\x72", // "G"
-                        "\x7F\x08\x08\x08\x7F", // "H"
-                        "\x41\x7F\x41\x00\x00", // "I"
-                        "\x20\x40\x41\x3F\x01", // "J"
-                        "\x7F\x08\x14\x22\x41", // "K"
-                        "\x7F\x40\x40\x40\x40", // "L"
-                        "\x7F\x02\x0C\x02\x7F", // "M"
-                        "\x7F\x04\x08\x10\x7F", // "N"
-                        "\x3E\x41\x41\x41\x3E" // "O"
-                    ].get(charCode & 0x0F)
-                    break
-                }
+                //                        (  "0"               , "1"               , "2"               , "3"               , "4"               , "5"               , "6"               , "7"               , "8"               , "9"               , ":"               , ";"               , "<"               , "="               , ">"               , "?"               )
+                case 0x40:
+                    return stringImage5x8("\x32\x49\x79\x41\x3E\x7E\x09\x09\x09\x7E\x7F\x49\x49\x49\x36\x3E\x41\x41\x41\x22\x7F\x41\x41\x22\x1C\x7F\x49\x49\x49\x41\x7F\x09\x09\x09\x01\x3E\x41\x41\x51\x72\x7F\x08\x08\x08\x7F\x41\x7F\x41\x00\x00\x20\x40\x41\x3F\x01\x7F\x08\x14\x22\x41\x7F\x40\x40\x40\x40\x7F\x02\x0C\x02\x7F\x7F\x04\x08\x10\x7F\x3E\x41\x41\x41\x3E".substr((charCode & 0x0F) * 5, 5))
+                //                        (  "@"               , "A"               , "B"               , "C"               , "D"               , "E"               , "F"               , "G"               , "H"               , "I"               , "J"               , "K"               , "L"               , "M"               , "N"               , "O"               )
                 case 0x50: {
                     //    return stringImage5x8("".substr((charCode & 0x0F) * 5, 5))
                     string5 = [
