@@ -24,7 +24,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     }
 
     // 6 Bytes zur Cursor Positionierung vor den Daten + 1 Byte 0x40 Display Data
-    const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
+    export const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
 
     export const cx = 128 // max x Pixel (Bytes von links nach rechts)
     let qPages3C = ePages.y64 // Display Höhe (Pages) kann pro I²C Adresse verschieden sein
@@ -142,11 +142,11 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 
     // ========== group="Pixel (Buffer)"
-
+/* 
     export function writeBuffer(x: number, page: number, srcBuffer: Buffer) {
         qArray[page].write(cOffset + x, srcBuffer)
     }
-
+ */
     // group="Pixel (Buffer)" deprecated=true
     // block weight=9
     /* export function setPixel1(x: number, y: number, bit: boolean) {

@@ -17,36 +17,49 @@ namespace matrix { // eeprom.ts
 
 
 
-    // ========== group="kopiert 1024 Byte vom EEPROM auf ein Display (Text, Bild)"
+    // ========== group="EEPROM in Matrix zeichnen" color="#FF7F3F" subcategory="EEPROM"
 
     //% group="EEPROM in Matrix zeichnen" color="#FF7F3F" subcategory="EEPROM"
-    //% block="zeichne EEPROM %pEEPROM_Startadresse || von Zeile %vonZeile bis Zeile %bisZeile"
+    //% block="zeichne aus EEPROM %pEEPROM_Startadresse || Zeilen von %fromPage bis %toPage %pI2C"
     //% pEEPROM_Startadresse.shadow="matrix_eEEPROM_Startadresse"
-    //% vonZeile.min=0 vonZeile.max=15 vonZeile.defl=0
-    //% bisZeile.min=0 bisZeile.max=15 bisZeile.defl=7
+    //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
+    //% toPage.min=0 toPage.max=15 toPage.defl=7
     //% inlineInputMode=inline
-    export function fillScreen(pEEPROM_Startadresse: number, vonZeile?: number, bisZeile?: number) {
-        if (between(vonZeile, 0, 7) && between(bisZeile, 0, 7)) {
-        /*     let buEEPROM = i2cReadEEPROM(pEEPROM_Startadresse,128)
+    // expandableArgumentMode="toggle"
+    export function fillScreen(pEEPROM_Startadresse: number, fromPage = 0, toPage = 15, pI2C = eI2Ceeprom.EEPROM_x50) {
 
+        if (fromPage > qArray.length - 1) fromPage = qArray.length - 1
+        if (toPage > qArray.length - 1) toPage = qArray.length - 1
+        if (fromPage > toPage) fromPage = toPage
+
+        for (let page = fromPage; page <= toPage; page++) { // qArray.length ist die Anzahl der Pages 8 oder 16
+            // qArray[page].fill(0, cOffset) // löscht Buffer ab 7 bis zum Ende
+
+            qArray[page].write(cOffset, i2cReadEEPROM(pEEPROM_Startadresse + (page - fromPage), 128, pI2C))
+        }
+
+
+        // if (between(vonZeile, 0, 7) && between(bisZeile, 0, 7)) {
+        /*     let buEEPROM = i2cReadEEPROM(pEEPROM_Startadresse,128)
+ 
             //  let buDisplay = Buffer.create(135)
             //   let offsetDisplay = this.setCursorBuffer6(buDisplay, 0, 0, 0)
             //   buDisplay.setUint8(offsetDisplay++, eCONTROL.x40_Data) // CONTROL+DisplayData
-
+ 
             for (let page = vonZeile; page <= bisZeile; page++) {
-
+ 
                 buEEPROM.setNumber(NumberFormat.UInt16BE, 0, pEEPROM_Startadresse + page * 128)
-
+ 
                 buDisplay.setUint8(1, 0xB0 | page) // an offset=1 steht die page number (Zeile 0-7)
                 //offsetDisplay = 7 // offset 7-135 sind 128 Byte für die Pixel in einer Zeile
-
+ 
                 this.i2cWriteBuffer_EEPROM(buEEPROM)
-
+ 
                 buDisplay.write(7, this.i2cReadBuffer_EEPROM(128))
                 
                 this.i2cWriteBuffer_OLED(buDisplay)
             } */
-        }
+        // }
     }
 
 
