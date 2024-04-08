@@ -82,7 +82,7 @@ namespace matrix { // image.ts
         let ia: Image[] = []
         for (let j = 0; j < text.length; j++) {
             //ia.push(digitImage(zahl, j)) // nur Ziffern, Minus und Punkt (spart Programmcode)
-           // ia.push(bufferImage5x8(getDigit_5x8(text.charCodeAt(j))))
+            // ia.push(bufferImage5x8(getDigit_5x8(text.charCodeAt(j))))
             ia.push(get5x8DigitImage(text.charCodeAt(j)))
         }
         writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
@@ -112,7 +112,7 @@ namespace matrix { // image.ts
     //% index.defl=0
     //% blockSetVariable=bild
     export function digitImage(zahl: number, index = 0): Image {
-       // return bufferImage5x8(getDigit_5x8(zahl.toString().charCodeAt(index)))
+        // return bufferImage5x8(getDigit_5x8(zahl.toString().charCodeAt(index)))
         return get5x8DigitImage(zahl.toString().charCodeAt(index))
     }
 
@@ -122,7 +122,8 @@ namespace matrix { // image.ts
     //% index.defl=0
     //% blockSetVariable=bild
     export function charImage(text: string, index = 0): Image {
-        return bufferImage5x8(getUTF8_5x8(text.charCodeAt(index)))
+        //        return bufferImage5x8(getUTF8_5x8(text.charCodeAt(index)))
+        return get5x8CharImage(text.charCodeAt(index))
         //return bufferImage5x8(getChar_5x8(charCode))
     }
 
@@ -131,21 +132,22 @@ namespace matrix { // image.ts
     //% charCode.min=32 charCode.max=127 charCode.defl=48
     //% blockSetVariable=bild
     export function asciiImage(charCode: number): Image {
-        return bufferImage5x8(getUTF8_5x8(charCode))
-    }
-
-
-
-
-    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
-    //% block="Bild aus ASCII-Code (get5x8Image) %charCode" weight=4
-    //% charCode.min=32 charCode.max=127 charCode.defl=48
-    //% blockSetVariable=bild
-    export function utf8Image(charCode: number): Image {
+        // return bufferImage5x8(getUTF8_5x8(charCode))
         return get5x8CharImage(charCode)
-        //return bufferImage5x8(getUTF8_5x8(charCode))
     }
 
+
+
+    /* 
+        //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
+        //% block="Bild aus ASCII-Code (get5x8Image) %charCode" weight=4
+        //% charCode.min=32 charCode.max=127 charCode.defl=48
+        //% blockSetVariable=bild
+        export function utf8Image(charCode: number): Image {
+            return get5x8CharImage(charCode)
+            //return bufferImage5x8(getUTF8_5x8(charCode))
+        }
+     */
 
 
 
@@ -157,7 +159,7 @@ namespace matrix { // image.ts
     //% hex.defl="7F09192946"
     //% blockSetVariable=bild
     export function hexImage5x8(hex: string): Image {
-        return bufferImage5x8(Buffer.fromHex(hex))
+        return image5x8fromBuffer(Buffer.fromHex(hex))
     }
 
     //% group="Bild aus Hexadezimalzahl" subcategory="Bilder"
@@ -177,10 +179,8 @@ namespace matrix { // image.ts
     }
 
 
-    function bufferImage5x8(bu: Buffer): Image {
-        let i5x8: Image
-
-        i5x8 = matrix5x8(`
+    function image5x8fromBuffer(bu: Buffer): Image {
+        let i5x8 = matrix5x8(`
             . . . . .
             . . . . .
             . . . . .

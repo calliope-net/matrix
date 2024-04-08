@@ -85,8 +85,8 @@ namespace matrix { // text.ts
         else if (charCode == 0x2E) return image5x8fromString("\x60\x60\x00\x00\x00") // "."
         else return image5x8fromString("\xFF\xFF\xFF\xFF\xFF")
     }
-
-    export function getDigit_5x8_(charCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
+/* 
+    export function getDigit_5x8(charCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
         if (between(charCode, 0x30, 0x3A)) {
             return Buffer.fromHex([
                 "3E5149453E", // "0"
@@ -105,29 +105,8 @@ namespace matrix { // text.ts
         else if (charCode == 0x2D) return Buffer.fromHex("0808080808") // "-"
         else if (charCode == 0x2E) return Buffer.fromHex("6060000000") // "."
         else return Buffer.fromHex("FFFFFFFFFF")
-
-        /* 
-                if (between(pCharCode, 0x30, 0x3A)) {
-                    return Buffer.fromUTF8([
-                        "", // "0"
-                        "", // "1"
-                        "", // "2"
-                        "", // "3"
-                        "", // "4"
-                        "", // "5"
-                        "\x3C\x4A\x49\x49\x30\x01\x71\x09\x05\x03\x36\x49\x49\x49\x36\x06\x49\x49\x29\x1E\x00\x36\x36\x00\x00", // "6"
-                        "", // "7"
-                        "", // "8"
-                        "", // "9"
-                        "" // ":"
-                    ].get(pCharCode & 0x0F))
-                   
-                }
-                else if (pCharCode == 0x2D) return Buffer.fromUTF8("\x08\x08\x08\x08\x08") // "-"
-                else if (pCharCode == 0x2E) return Buffer.fromUTF8("\x60\x60\x00\x00\x00") // "."
-                else return Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
-        */
     }
+     */
 
     /* 
         function getChar_5x8(pCharCode: number): Buffer {
@@ -365,7 +344,7 @@ namespace matrix { // text.ts
 
 
     // ========== Zeichensatz in String-Bytes
-
+/* 
     export function getUTF8_5x8(pCharCode: number) {
         if (between(pCharCode, 0x20, 0x7F)) {
             switch (pCharCode & 0xF0) { // 16 string-Elemente je 8 Byte = 128
@@ -515,5 +494,5 @@ namespace matrix { // text.ts
             //return Buffer.fromHex("FFFFFFFFFF")
         }
     }
-
+ */
 } // text.ts
