@@ -14,7 +14,8 @@
         "clock.ts",
         "text.ts",
         "array.ts",
-        "advanced.ts"
+        "advanced.ts",
+        "eeprom.ts"
     ],
     "testFiles": [
         "test.ts"

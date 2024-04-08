@@ -1,5 +1,5 @@
-// clock.ts
-namespace matrix {
+
+namespace matrix { // clock.ts
 
     //% group="Analog Uhr Zeiger"
     //% block="12 Stunden %hour Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel" weight=3
