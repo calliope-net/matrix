@@ -302,35 +302,12 @@ namespace matrix { // text.ts
 
         if (between(charCode, 0x20, 0x7F)) {
             switch (charCode & 0xF0) { // 16 string-Elemente je 8 Byte = 128
-                case 0x20: {
-                    //basic.showNumber("\x00\x00\xFF\x00\x00\x00\x5F\x00\x00\x00\x00\x07\x00\x07\x00\x14\x7F\x14\x7F\x14\x24\x2A\x7F\x2A\x12\x23\x13\x08\x64\x62\x36\x49\x55\x22\x50\x00\x05\x03\x00\x00\x1C\x22\x41\x00\x00\x41\x22\x1C\x00\x00\x08\x2A\x1C\x2A\x08\x08\x08\x3E\x08\x08\xA0\x60\x00\x00\x00\x08\x08\x08\x08\x08\x60\x60\x00\x00\x00\x20\x10\x08\x04\x02".length)
+                case 0x20: 
                     return stringImage5x8("\x00\x00\xFF\x00\x00\x00\x5F\x00\x00\x00\x00\x07\x00\x07\x00\x14\x7F\x14\x7F\x14\x24\x2A\x7F\x2A\x12\x23\x13\x08\x64\x62\x36\x49\x55\x22\x50\x00\x05\x03\x00\x00\x1C\x22\x41\x00\x00\x41\x22\x1C\x00\x00\x08\x2A\x1C\x2A\x08\x08\x08\x3E\x08\x08\xA0\x60\x00\x00\x00\x08\x08\x08\x08\x08\x60\x60\x00\x00\x00\x20\x10\x08\x04\x02".substr((charCode & 0x0F) * 5, 5))
                     //                    (  " "               , "!"               , """               , "#"               , "$"               , "%"               , "&"               , "'"               , "("               , ")"               , "*"               , "+"               , ","               , "-"               , "."               , "/"               )
-
-
-                }
-                case 0x30: {
-                    //    return stringImage5x8("".substr((charCode & 0x0F) * 5, 5))
-                    string5 = [
-                        "\x3E\x51\x49\x45\x3E", // "0"
-                        "\x00\x42\x7F\x40\x00", // "1"
-                        "\x62\x51\x49\x49\x46", // "2"
-                        "\x22\x41\x49\x49\x36", // "3"
-                        "\x18\x14\x12\x7F\x10", // "4"
-                        "\x27\x45\x45\x45\x39", // "5"
-                        "\x3C\x4A\x49\x49\x30", // "6"
-                        "\x01\x71\x09\x05\x03", // "7"
-                        "\x36\x49\x49\x49\x36", // "8"
-                        "\x06\x49\x49\x29\x1E", // "9"
-                        "\x00\x36\x36\x00\x00", // ":"
-                        "\x00\xAC\x6C\x00\x00", // ";"
-                        "\x08\x14\x22\x41\x00", // "<"
-                        "\x14\x14\x14\x14\x14", // "="
-                        "\x41\x22\x14\x08\x00", // ">"
-                        "\x02\x01\x51\x09\x06" // "?"
-                    ].get(charCode & 0x0F)
-                    break
-                }
+                case 0x30: 
+                    return stringImage5x8("\x3E\x51\x49\x45\x3E\x00\x42\x7F\x40\x00\x62\x51\x49\x49\x46\x22\x41\x49\x49\x36\x18\x14\x12\x7F\x10\x27\x45\x45\x45\x39\x3C\x4A\x49\x49\x30\x01\x71\x09\x05\x03\x36\x49\x49\x49\x36\x06\x49\x49\x29\x1E\x00\x36\x36\x00\x00\x00\xAC\x6C\x00\x00\x08\x14\x22\x41\x00\x14\x14\x14\x14\x14\x41\x22\x14\x08\x00\x02\x01\x51\x09\x06".substr((charCode & 0x0F) * 5, 5))
+                    //                    (  "0"               , "1"               , "2"               , "3"               , "4"               , "5"               , "6"               , "7"               , "8"               , "9"               , ":"               , ";"               , "<"               , "="               , ">"               , "?"               )
                 case 0x40: {
                     //    return stringImage5x8("".substr((charCode & 0x0F) * 5, 5))
                     string5 = [
