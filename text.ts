@@ -275,11 +275,9 @@ namespace matrix { // text.ts
         }
      */
 
-/* 
-    function bufferImage5x8(bu: Buffer): Image {
-        let i5x8: Image
 
-        i5x8 = matrix5x8(`
+    function stringImage5x8(s5Byte: string): Image {
+        let i5x8 = matrix5x8(`
             . . . . .
             . . . . .
             . . . . .
@@ -289,23 +287,23 @@ namespace matrix { // text.ts
             . . . . .
             . . . . .
             `)
-
         for (let iy = 0; iy < i5x8.height(); iy++) {
             for (let ix = 0; ix < i5x8.width(); ix++) {
-                i5x8.setPixel(ix, iy, (bu.getUint8(ix) & 2 ** (iy & 7)) != 0)
+                i5x8.setPixel(ix, iy, (s5Byte.charCodeAt(ix) & 2 ** (iy & 7)) != 0)
+                // i5x8.setPixel(ix, iy, (bu.getUint8(ix) & 2 ** (iy & 7)) != 0)
             }
         }
         return i5x8
     }
- */
+
     export function get5x8Image(charCode: number): Image {
         let string5: string = "\xFF\xFF\xFF\xFF\xFF"
 
         if (between(charCode, 0x20, 0x7F)) {
             switch (charCode & 0xF0) { // 16 string-Elemente je 8 Byte = 128
                 case 0x20: {
-                    string5 = [
-                        "\x00\x00\x00\x00\x00", // " "
+                return stringImage5x8([
+                        "\x00\x00\x11\x00\x00", // " "
                         "\x00\x5F\x00\x00\x00", // "!"
                         "\x00\x07\x00\x07\x00", // """
                         "\x14\x7F\x14\x7F\x14", // "#"
@@ -321,8 +319,8 @@ namespace matrix { // text.ts
                         "\x08\x08\x08\x08\x08", // "-"
                         "\x60\x60\x00\x00\x00", // "."
                         "\x20\x10\x08\x04\x02" // "/"
-                    ].get(charCode & 0x0F)
-                    break
+                    ].get(charCode & 0x0F))
+                   
                 }
                 case 0x30: {
                     string5 = [
