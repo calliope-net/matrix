@@ -31,11 +31,9 @@ namespace matrix { // eeprom.ts
         if (fromPage > qArray.length - 1) fromPage = qArray.length - 1
         if (toPage > qArray.length - 1) toPage = qArray.length - 1
         if (fromPage > toPage) fromPage = toPage
-        let i = 0
+        //let i = 0
         for (let page = fromPage; page <= toPage; page++) { // qArray.length ist die Anzahl der Pages 8 oder 16
-            // qArray[page].fill(0, cOffset) // löscht Buffer ab 7 bis zum Ende
-
-            qArray[page].write(cOffset, i2cReadEEPROM(pEEPROM_Startadresse + (i++ * 128), 128, pI2C))
+            qArray[page].write(cOffset, i2cReadEEPROM(pEEPROM_Startadresse + (page - fromPage) * 128, 128, pI2C))
         }
 
 
