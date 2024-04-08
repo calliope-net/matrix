@@ -298,11 +298,11 @@ namespace matrix { // text.ts
         return i5x8
     }
  */
-    export function get5x8Image(pCharCode: number): Image {
+    export function get5x8Image(charCode: number): Image {
         let string5: string = "\xFF\xFF\xFF\xFF\xFF"
 
-        if (between(pCharCode, 0x20, 0x7F)) {
-            switch (pCharCode & 0xF0) { // 16 string-Elemente je 8 Byte = 128
+        if (between(charCode, 0x20, 0x7F)) {
+            switch (charCode & 0xF0) { // 16 string-Elemente je 8 Byte = 128
                 case 0x20: {
                     string5 = [
                         "\x00\x00\x00\x00\x00", // " "
@@ -321,7 +321,7 @@ namespace matrix { // text.ts
                         "\x08\x08\x08\x08\x08", // "-"
                         "\x60\x60\x00\x00\x00", // "."
                         "\x20\x10\x08\x04\x02" // "/"
-                    ].get(pCharCode & 0x0F)
+                    ].get(charCode & 0x0F)
                     break
                 }
                 case 0x30: {
@@ -342,7 +342,7 @@ namespace matrix { // text.ts
                         "\x14\x14\x14\x14\x14", // "="
                         "\x41\x22\x14\x08\x00", // ">"
                         "\x02\x01\x51\x09\x06" // "?"
-                    ].get(pCharCode & 0x0F)
+                    ].get(charCode & 0x0F)
                     break
                 }
                 case 0x40: {
@@ -363,7 +363,7 @@ namespace matrix { // text.ts
                         "\x7F\x02\x0C\x02\x7F", // "M"
                         "\x7F\x04\x08\x10\x7F", // "N"
                         "\x3E\x41\x41\x41\x3E" // "O"
-                    ].get(pCharCode & 0x0F)
+                    ].get(charCode & 0x0F)
                     break
                 }
                 case 0x50: {
@@ -384,7 +384,7 @@ namespace matrix { // text.ts
                         "\x41\x41\x7F\x00\x00", // """
                         "\x04\x02\x01\x02\x04", // "^"
                         "\x80\x80\x80\x80\x80" // "_"
-                    ].get(pCharCode & 0x0F)
+                    ].get(charCode & 0x0F)
                     break
                 }
                 case 0x60: {
@@ -405,7 +405,7 @@ namespace matrix { // text.ts
                         "\x7C\x04\x18\x04\x78", // "m"
                         "\x7C\x08\x04\x7C\x00", // "n"
                         "\x38\x44\x44\x38\x00" // "o"
-                    ].get(pCharCode & 0x0F)
+                    ].get(charCode & 0x0F)
                     break
                 }
                 case 0x70: {
@@ -426,7 +426,7 @@ namespace matrix { // text.ts
                         "\x41\x36\x08\x00\x00", // "}"
                         "\x02\x01\x01\x02\x01", // "~"
                         "\xFF\xFF\xFF\xFF\xFF"  // 127
-                    ].get(pCharCode & 0x0F)
+                    ].get(charCode & 0x0F)
                     break
                 }
                 //default:
@@ -437,7 +437,7 @@ namespace matrix { // text.ts
             //let b = Buffer.fromUTF8("\xFF\xFF\xFF\xFF\xFF")
             let s = "ÄÖÜäöüß€°"
             for (let j = 0; j < s.length; j++) {
-                if (s.charCodeAt(j) == pCharCode) {
+                if (s.charCodeAt(j) == charCode) {
                     string5 = [
                         "\x7D\x0A\x09\x0A\x7D", // "Ä"
                         "\x3D\x42\x41\x42\x3D", // "Ö"
