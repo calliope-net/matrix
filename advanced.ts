@@ -11,8 +11,8 @@ namespace matrix { // advanced.ts
     // ========== group="internen Speicher lesen" advanced=true
 
     //% group="internen Speicher lesen" advanced=true
-    //% block="get Buffer[]" weight=8
-    export function getArray() { return qArray }
+    //% block="get Matrix[]" weight=8
+    export function getMatrix() { return qMatrix }
 
 
     //% group="internen Speicher lesen" advanced=true
