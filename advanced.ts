@@ -49,12 +49,12 @@ namespace matrix { // advanced.ts
             clearImages()
             for (let j = 0; j <= 15; j++) {
                 //pushImage(asciiImage((i + 2) * 16 + j))
-                pushImage(get5x8CharImage((i + 2) * 16 + j))
+                pushImage(get5x8CharImage((2 + i) * 16 + j))
             }
-            writeImageArray(matrix_Images(), 0, i * 8, 7)
+            writeImageArray(matrix_Images(), 1, 16 + i * 8, 8)
             //writeDisplay(0, 6, pI2C)
         }
-        writeTextImageArray("ÄÖÜäöüß€°", 0, 7 * 8, 10)
+        writeTextImageArray("ÄÖÜäöüß€°", 0, 64, 10)
     }
 
 
