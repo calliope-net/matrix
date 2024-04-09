@@ -46,15 +46,19 @@ namespace matrix { // advanced.ts
     export function writeCharset() {
         //clearMatrix()
         for (let i = 0; i <= 5; i++) {
-            clearImages()
+            clearImages() // internes Array Images[]
             for (let j = 0; j <= 15; j++) {
-                //pushImage(asciiImage((i + 2) * 16 + j))
                 pushImage(get5x8CharImage((2 + i) * 16 + j))
             }
             writeImageArray(matrix_Images(), 1, 16 + i * 8, 8)
-            //writeDisplay(0, 6, pI2C)
         }
-        writeTextImageArray("ÄÖÜäöüß€°", 0, 64, 10)
+
+        let s = "ÄÖÜäöüß€°" // C4 D6 DC E4 F6 FC DF (20)AC B0
+        let charCode: number
+        for (let j = 0; j < s.length; j++) {
+            charCode = s.charCodeAt(j)
+            writeImage(asciiImage(charCode), 1 + (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
+        }
     }
 
 

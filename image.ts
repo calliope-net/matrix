@@ -42,8 +42,8 @@ namespace matrix { // image.ts
         if (im) {
             if (!between(fx, 1, 16)) fx = 1
             if (!fy) fy = fx; else if (!between(fy, 1, 16)) fy = 1
-            if (!between(x, 0, cx - im.width() * fx)) x = cx - im.width() * fx
-            if (!between(y, 0, 1 + qy() - im.height() * fy)) y = qy() - im.height() * fy
+            //if (!between(x, 0, cx - im.width() * fx)) x = cx - im.width() * fx
+            //if (!between(y, 0, 1 + qy() - im.height() * fy)) y = qy() - im.height() * fy
 
             for (let iy = 0; iy <= im.height() - 1; iy++) {
                 for (let ix = 0; ix <= im.width() - 1; ix++) {

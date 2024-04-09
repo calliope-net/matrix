@@ -265,7 +265,7 @@ namespace matrix { // text.ts
      */
 
 
-    function image5x8fromString(s5Byte: string): Image {
+  export  function image5x8fromString(s5Byte: string): Image {
 
         let i5x8 = matrix5x8(`
             . . . . .

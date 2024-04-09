@@ -86,12 +86,15 @@ namespace matrix { // eeprom.ts
 
 
     //% group="Bild 5x8 aus Text Zeichen" subcategory="EEPROM"
-    //% block="Bild aus ASCII-Code (EEPROM) %charCode" weight=4
+    //% block="Bild aus ASCII-Code (EEPROM) %charCode %pEEPROM_Startadresse || %pI2C" weight=4
     //% charCode.min=32 charCode.max=127 charCode.defl=48
+    //% pEEPROM_Startadresse.shadow="matrix_eEEPROM_Startadresse"
     //% blockSetVariable=bild
-    export function eepromImage(charCode: number): Image {
-        return get5x8CharImage(charCode)
-        //return bufferImage5x8(getUTF8_5x8(charCode))
+    export function eepromImage(charCode: number, pEEPROM_Startadresse: number, pI2C = eI2Ceeprom.EEPROM_x50): Image {
+
+        let bu = i2cReadEEPROM(pEEPROM_Startadresse + charCode * 8, 8, pI2C)
+
+        return image5x8fromString(bu.toString().substr(1, 5))
     }
 
 } // eeprom.ts
