@@ -21,9 +21,9 @@ namespace matrix { // eeprom.ts
 
 
 
-    // ========== group="EEPROM in Matrix zeichnen" color="#FF7F3F" subcategory="EEPROM"
+    // ========== group="Bild aus EEPROM in Matrix zeichnen" color="#FF7F3F" subcategory="EEPROM"
 
-    //% group="EEPROM in Matrix zeichnen" color="#FF7F3F" subcategory="EEPROM"
+    //% group="Bild aus EEPROM in Matrix zeichnen" color="#FF7F3F" subcategory="EEPROM"
     //% block="zeichne aus EEPROM %pEEPROM_Startadresse || Zeilen von %fromPage bis %toPage %pI2C"
     //% pEEPROM_Startadresse.shadow="matrix_eEEPROM_Startadresse"
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
@@ -39,10 +39,50 @@ namespace matrix { // eeprom.ts
         //let i = 0
         for (let page = fromPage; page <= toPage; page++) { // qArray.length ist die Anzahl der Pages 8 oder 16
             fillMatrix(page, page, i2cReadEEPROM(pEEPROM_Startadresse + (page - fromPage) * 128, 128, pI2C))
-           // qArray[page].write(cOffset, i2cReadEEPROM(pEEPROM_Startadresse + (page - fromPage) * 128, 128, pI2C))
+            // qArray[page].write(cOffset, i2cReadEEPROM(pEEPROM_Startadresse + (page - fromPage) * 128, 128, pI2C))
         }
     }
 
+
+    //% group="EEPROM aus Matrix brennen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="programmiere EEPROM HEX %hex Zeilen %fromPage - %toPage Bytes %length Code %code || %pI2C"
+    //% hex.defl="F800"
+    //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
+    //% toPage.min=0 toPage.max=15 toPage.defl=0
+    //% inlineInputMode=inline
+    export function burnEEPROM(hex: string, fromPage: number, toPage: number, length: number, code: number, pI2C = eI2Ceeprom.EEPROM_x50) {
+        // let buEEPROM_Startadresse = Buffer.fromHex(hex)
+        let a0 = Buffer.fromHex(hex).getNumber(NumberFormat.UInt16BE, 0)
+        if (between(a0, 0, 65407) && a0 % 128 == 0 && a0 == code && between(length, 1, 128) && between(fromPage, 0, qMatrix.length - 1) && between(toPage, fromPage, qMatrix.length - 1)) {
+            let bu = Buffer.create(2 + length)
+            for (let page = fromPage; page <= toPage; page++) {
+                bu.setNumber(NumberFormat.UInt16BE, 0, a0 + (page - fromPage) * 128)
+                bu.write(2, qMatrix[page].slice(cOffset, length))
+                if (pins.i2cWriteBuffer(pI2C, bu) != 0) {
+                    basic.showNumber(pI2C)
+                    return false
+                }
+            }
+            return true
+        } else
+            return false
+    }
+
+
+    //% group="EEPROM Leer Test" color="#FF7F3F" subcategory="EEPROM"
+    //% block="teste 128 Byte EEPROM %pEEPROM_Startadresse Byte %byte || %pI2C"
+    //% pEEPROM_Startadresse.shadow="matrix_eEEPROM_Startadresse"
+    //% inlineInputMode=inline
+    export function checkEEPROM(pEEPROM_Startadresse: number, byte: number, pI2C = eI2Ceeprom.EEPROM_x50) {
+        //  let a0 = Buffer.fromHex(hex).getNumber(NumberFormat.UInt16BE, 0)
+        let count = 0
+        let bu = i2cReadEEPROM(pEEPROM_Startadresse, 128, pI2C)
+        for (let off = 0; off < bu.length; off++) {
+            if (bu.getUint8(off) != byte)
+                count++
+        }
+        return count
+    }
 
 
     //% group="Bild 5x8 aus Text Zeichen" subcategory="EEPROM"
