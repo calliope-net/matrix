@@ -29,7 +29,7 @@ namespace matrix { // array.ts
 
 
 
-    //% group="Array (mehrere Bilder) in Buffer zeichnen" subcategory="Bilder Array"
+    //% group="Array (mehrere Bilder) in Matrix zeichnen" subcategory="Bilder Array"
     //% block="zeichne Bilder %im x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=6
     //% im.shadow=matrix_Images
     //% x.min=0 x.max=127 y.min=0 y.max=127

@@ -123,7 +123,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 
 
-    // ========== group="Matrix (Pixel im Speicher)"
+    // ========== group="Matrix im Speicher"
 
 
     //% group="Matrix im Speicher"
@@ -157,27 +157,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
                 qMatrix[page].fill(0, cOffset) // löscht eine Zeile der Matrix ab 7 bis zum Ende
         }
     }
-
-
-    // ========== group="Pixel (Buffer)"
-    /* 
-        export function writeBuffer(x: number, page: number, srcBuffer: Buffer) {
-            qArray[page].write(cOffset + x, srcBuffer)
-        }
-     */
-    // group="Pixel (Buffer)" deprecated=true
-    // block weight=9
-    /* export function setPixel1(x: number, y: number, bit: boolean) {
-        let page = Math.trunc(y / 8) // Page = y / 8
-        let exp = y % 8 // Rest von Division durch 8 = Bit 0..7 im Byte
-        let bu = qArray[page] // 1 Buffer von 16 aus dem Array
-        let byte = bu[x] // 1 Byte von 128 aus dem Buffer
-        if (bit)
-            bu[cOffset + x] |= (2 ** exp)
-        else
-            bu[cOffset + x] &= ~(2 ** exp)
-    } */
-
+  
     //% group="Matrix im Speicher"
     //% block="set Pixel x %x y %y %pixel" weight=8
     //% pixel.shadow="toggleOnOff" pixel.defl=1
@@ -265,37 +245,5 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         }
     }
 
-    /*
-    
-    
-        // ========== group="Array: Buffer[]" advanced=true
-    
-        //% group="Array: Buffer[]" advanced=true
-        //% block
-        export function getArray() { return qArray }
-    
-    
-        // ========== group="Logik (boolean)" advanced=true
-    
-        //% group="Logik (boolean)" advanced=true
-        //% block="%i0 zwischen %i1 und %i2"
-        export function between(i0: number, i1: number, i2: number): boolean {
-            return (i0 >= i1 && i0 <= i2)
-        }
-    
-        //% block="π" advanced=true
-        export function pi() { return Math.PI }
-    
-        //% group="Text // Kommentar" advanced=true
-        //% block="// %text"
-        export function comment(text: string): void { }
-    
-    
-        //% blockId=matrix_charCodeAt
-        //% group="Zahl (number)" advanced=true
-        //% block="charCodeAt %text index %index" weight=6
-        export function charCodeAt(text: string, index: number) {
-            return text.charCodeAt(index)
-        } */
 
 } // matrix.ts

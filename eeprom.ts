@@ -51,21 +51,20 @@ namespace matrix { // eeprom.ts
     //% toPage.min=0 toPage.max=15 toPage.defl=0
     //% inlineInputMode=inline
     export function burnEEPROM(hex: string, fromPage: number, toPage: number, length: number, code: number, pI2C = eI2Ceeprom.EEPROM_x50) {
-        // let buEEPROM_Startadresse = Buffer.fromHex(hex)
-        let a0 = Buffer.fromHex(hex).getNumber(NumberFormat.UInt16BE, 0)
+        let a0 = Buffer.fromHex(hex).getNumber(NumberFormat.UInt16BE, 0) // code muss der Dezimalwert von hex sein
         if (between(a0, 0, 65407) && a0 % 128 == 0 && a0 == code && between(length, 1, 128) && between(fromPage, 0, qMatrix.length - 1) && between(toPage, fromPage, qMatrix.length - 1)) {
-            let bu = Buffer.create(2 + length)
-            for (let page = fromPage; page <= toPage; page++) {
-                bu.setNumber(NumberFormat.UInt16BE, 0, a0 + (page - fromPage) * 128)
-                bu.write(2, qMatrix[page].slice(cOffset, length))
-                if (pins.i2cWriteBuffer(pI2C, bu) != 0) {
-                    basic.showNumber(pI2C)
-                    return false
+            let bu = Buffer.create(2 + length) // 2 Byte 16 Bit Adresse, dann die Daten Byte (length)
+            for (let page = fromPage; page <= toPage; page++) { // page ist in der Matrix 8 Pixel hoch (y) und 128 Pixel breit (x)
+                bu.setNumber(NumberFormat.UInt16BE, 0, a0 + (page - fromPage) * 128) // EEPROM Startadresse 16 Bit
+                bu.write(2, qMatrix[page].slice(cOffset, length)) // holt aus Matrix von links (x=0) 1 bis 128 Byte (length)
+                if (pins.i2cWriteBuffer(pI2C, bu) != 0) { // schreibt diese Bytes ab Startadresse in EEPROM
+                    basic.showNumber(pI2C) // bei I²C Fehler die I²C Adresse anzeigen
+                    return false // und Abbruch
                 }
             }
-            return true
+            return true // erfolgreich programmiert
         } else
-            return false
+            return false // nicht programmiert, weil nicht alle Bedingungen erfüllt
     }
 
 
