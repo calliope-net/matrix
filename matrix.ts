@@ -24,7 +24,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     }
 
     // 6 Bytes zur Cursor Positionierung vor den Daten + 1 Byte 0x40 Display Data
-   export const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
+    export const cOffset = 7 // Platz am Anfang des Buffer bevor die cx Pixel kommen
 
     export const cx = 128 // max x Pixel (Bytes von links nach rechts)
     let qPages3C = ePages.y64 // Display Höhe (Pages) kann pro I²C Adresse verschieden sein
@@ -98,12 +98,14 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     }
 
     //% group="OLED Display I²C" color="#007FFF"
-    //% block="Matrix auf Display anzeigen || Zeilen von %fromPage bis %toPage %pI2C" weight=6
+    //% block="Matrix auf Display anzeigen (depecated) || Zeilen von %fromPage bis %toPage %pI2C" deprecated=true
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=15
     //% inlineInputMode=inline
     //% expandableArgumentMode="toggle"
     export function writeDisplay(fromPage = 0, toPage = 15, pI2C = eI2C.I2C_x3C) {
+        displayMatrix(fromPage, toPage, pI2C)
+        /* 
         let lastPage = (pI2C == eI2C.I2C_x3D ? qPages3D : qPages3C) - 1
         fromPage = Math.constrain(fromPage, 0, lastPage)
         toPage = Math.constrain(toPage, fromPage, lastPage)
@@ -116,10 +118,26 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
             i2cWriteBuffer(pI2C, qMatrix[page])
             //control.waitMicros(50)
         }
-        control.waitMicros(50)
+        control.waitMicros(50) */
     }
 
+    //% group="OLED Display I²C" color="#007FFF"
+    //% block="Matrix auf Display anzeigen || Zeilen von %fromPage bis %toPage %pI2C" weight=6
+    //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
+    //% toPage.min=0 toPage.max=15 toPage.defl=15
+    //% inlineInputMode=inline
+    //% expandableArgumentMode="toggle"
+    export function displayMatrix(fromPage = 0, toPage = 15, pI2C = eI2C.I2C_x3C) {
+        let lastPage = (pI2C == eI2C.I2C_x3D ? qPages3D : qPages3C) - 1
+        fromPage = Math.constrain(fromPage, 0, lastPage)
+        toPage = Math.constrain(toPage, fromPage, lastPage)
 
+        for (let page = fromPage; page <= toPage; page++) {
+            i2cWriteBuffer(pI2C, qMatrix[page])
+            //control.waitMicros(50)
+        }
+        control.waitMicros(50)
+    }
 
 
 
@@ -147,8 +165,8 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
     export function fillMatrix(fromPage: number, toPage: number, bu?: Buffer) {
         //if (fromPage > qArray.length - 1) fromPage = qArray.length - 1
-       // if (toPage > qArray.length - 1) toPage = qArray.length - 1 // qArray.length ist die Anzahl der Pages 8 oder 16
-       // if (fromPage > toPage) fromPage = toPage
+        // if (toPage > qArray.length - 1) toPage = qArray.length - 1 // qArray.length ist die Anzahl der Pages 8 oder 16
+        // if (fromPage > toPage) fromPage = toPage
 
         for (let page = fromPage; page <= toPage; page++) {
             if (bu)
@@ -157,7 +175,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
                 qMatrix[page].fill(0, cOffset) // löscht eine Zeile der Matrix ab 7 bis zum Ende
         }
     }
-  
+
     //% group="Matrix im Speicher"
     //% block="set Pixel x %x y %y %pixel" weight=8
     //% pixel.shadow="toggleOnOff" pixel.defl=1
