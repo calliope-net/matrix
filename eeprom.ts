@@ -24,7 +24,7 @@ namespace matrix { // eeprom.ts
     // ========== group="Bild aus EEPROM in Matrix zeichnen" color="#FF7F3F" subcategory="EEPROM"
 
     //% group="Bild aus EEPROM in Matrix zeichnen (128 Byte pro Zeile)" color="#FF7F3F" subcategory="EEPROM"
-    //% block="zeichne aus EEPROM %eepromStartadresse || Zeilen von %fromPage bis %toPage %i2c"
+    //% block="zeichne aus EEPROM %eepromStartadresse || Zeilen %fromPage - %toPage %i2c"
     //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=7
