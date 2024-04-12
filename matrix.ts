@@ -46,12 +46,12 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     // ========== group="OLED Display I²C"
 
     //% group="OLED Display I²C" color="#007FFF"
-    //% block="beim Start %pPages || invert %pInvert drehen %pFlip %pI2C" weight=9
+    //% block="beim Start %pPages || invert %pInvert drehen %pFlip %i2c" weight=9
     //% pInvert.shadow="toggleOnOff"
     //% pFlip.shadow="toggleOnOff"
     //% inlineInputMode=inline
-    export function init(pPages: ePages, pInvert = false, pFlip = false, pI2C = eI2C.I2C_x3C) {
-        if (pI2C == eI2C.I2C_x3D) qPages3D = pPages; else qPages3C = pPages
+    export function init(pPages: ePages, pInvert = false, pFlip = false, i2c = eI2C.I2C_x3C) {
+        if (i2c == eI2C.I2C_x3D) qPages3D = pPages; else qPages3C = pPages
         //if (pI2C) qI2C = pI2C
         let bu: Buffer
         // pro Page einen Buffer(7+128) an Array anfügen (push)
@@ -93,7 +93,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         bu.setUint8(offset++, (pInvert ? 0xA7 : 0xA6))  // Set display not inverted / A6 Normal A7 Inverse display
         bu.setUint8(offset++, 0xAF)  // Set display ON (0xAE sleep mode)
 
-        i2cWriteBuffer(pI2C, bu)
+        i2cWriteBuffer(i2c, bu)
         control.waitMicros(100000) // 100ms Delay Recommended
     }
 
@@ -122,18 +122,18 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     }
 
     //% group="OLED Display I²C" color="#007FFF"
-    //% block="Matrix auf Display anzeigen || Zeilen von %fromPage bis %toPage %pI2C" weight=6
+    //% block="Matrix auf Display anzeigen || Zeilen %fromPage - %toPage %i2c" weight=6
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=15
     //% inlineInputMode=inline
     //% expandableArgumentMode="toggle"
-    export function displayMatrix(fromPage = 0, toPage = 15, pI2C = eI2C.I2C_x3C) {
-        let lastPage = (pI2C == eI2C.I2C_x3D ? qPages3D : qPages3C) - 1
+    export function displayMatrix(fromPage = 0, toPage = 15, i2c = eI2C.I2C_x3C) {
+        let lastPage = (i2c == eI2C.I2C_x3D ? qPages3D : qPages3C) - 1
         fromPage = Math.constrain(fromPage, 0, lastPage)
         toPage = Math.constrain(toPage, fromPage, lastPage)
 
         for (let page = fromPage; page <= toPage; page++) {
-            i2cWriteBuffer(pI2C, qMatrix[page])
+            i2cWriteBuffer(i2c, qMatrix[page])
             //control.waitMicros(50)
         }
         control.waitMicros(50)

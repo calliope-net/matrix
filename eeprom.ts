@@ -65,7 +65,7 @@ namespace matrix { // eeprom.ts
 
 
     //% group="EEPROM Leer Test" color="#FF7F3F" subcategory="EEPROM"
-    //% block="vergleiche 128 Byte ab %pEEPROM_Startadresse mit Byte %byte || %i2c"
+    //% block="vergleiche 128 Byte ab %eepromStartadresse mit Byte %byte || %i2c"
     //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
     //% inlineInputMode=inline
     export function checkEEPROM(eepromStartadresse: number, byte: number, i2c = eI2Ceeprom.EEPROM_x50) {
