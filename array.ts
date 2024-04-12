@@ -12,13 +12,13 @@ namespace matrix { // array.ts
     //% block="Animation auf Display anzeigen %im x %x y %y || x %fx y %fy Pause(ms) %ms Zeilen %fromPage-%toPage %i2c" weight=6
     //% im.shadow=matrix_Images
     //% x.min=0 x.max=127 y.min=0 y.max=127
-    //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
+    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
     //% ms.shadow=timePicker
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=15
     //% inlineInputMode=inline
     // expandableArgumentMode="toggle"
-    export function writeDisplayAnimation(im: Image[], x: number, y: number, fx = 1, fy?: number, ms = 200, fromPage = 0, toPage = 15, i2c = eI2C.I2C_x3C) {
+    export function displayAnimation(im: Image[], x: number, y: number, fx = 1, fy?: number, ms = 200, fromPage = 0, toPage = 15, i2c = eI2C.I2C_x3C) {
         for (let iImage = 0; iImage < im.length; iImage++) {
             writeImage(im.get(iImage), x, y, eTransparent.u, fx, fy)
             writeDisplay(fromPage, toPage, i2c)
@@ -34,7 +34,7 @@ namespace matrix { // array.ts
     //% im.shadow=matrix_Images
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% dx.defl=8 dy.defl=0
-    //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
+    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
     //% inlineInputMode=inline
     export function writeImageArray(im: Image[], x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
         for (let iImage = 0; iImage < im.length; iImage++) {
