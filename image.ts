@@ -136,7 +136,7 @@ namespace matrix { // image.ts
         //} // else
     }
 
-
+/* 
 
 
 
@@ -174,7 +174,7 @@ namespace matrix { // image.ts
         writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
     }
 
-
+ */
 
     // ========== group="Bild 5x8 aus Text Zeichen" subcategory="Bilder" ==========
 
@@ -230,7 +230,8 @@ namespace matrix { // image.ts
     //% hex.defl="7F09192946"
     //% blockSetVariable=bild
     export function hexImage5x8(hex: string): Image {
-        return image5x8fromBuffer(Buffer.fromHex(hex))
+        //return image5x8fromBuffer(Buffer.fromHex(hex))
+        return image5x8fromString(Buffer.fromHex(hex).toString())
     }
 
     //% group="Bild aus Hexadezimalzahl" subcategory="Bilder"
@@ -249,7 +250,7 @@ namespace matrix { // image.ts
         return i8x8
     }
 
-
+/* 
     function image5x8fromBuffer(bu: Buffer): Image {
         let i5x8 = matrix5x8(`
             . . . . .
@@ -269,7 +270,7 @@ namespace matrix { // image.ts
         }
         return i5x8
     }
-
+ */
 
 
     // ========== group="Image Objekte" subcategory="Bilder 8"
