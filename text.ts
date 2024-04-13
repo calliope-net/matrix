@@ -45,6 +45,21 @@ namespace matrix { // text.ts
         writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
     }
 
+    //% group="Text 16x8 anzeigen (Zeichensatz aus Programmcode)" subcategory="Text"
+    //% block="16x8 Text Zeile %row von %col bis %end %pText || %align" weight=8
+    //% row.min=0 row.max=15 col.min=0 col.max=15 end.min=0 end.max=15 end.defl=15
+    //% pText.shadow="matrix_text"
+    //% inlineInputMode=inline
+    export function writeText16x8(row: number, col: number, end: number, pText: any, align = eAlign.links) {
+        let len = end - col + 1
+        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 15) && between(len, 0, 16)) {
+            let text = formatText(pText, len, align)
+            for (let j = 0; j < text.length; j++) {
+                writeImage(get5x8CharImage(text.charCodeAt(j)), (col + j) * 8, row * 8)
+            }
+        }
+    }
+
 
 
     //% group="Text (string)" subcategory="Text"
