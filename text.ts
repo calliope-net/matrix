@@ -8,7 +8,46 @@ namespace matrix { // text.ts
     //% blockId=matrix_text block="%text" blockHidden=true
     export function matrix_text(text: string): string { return text }
 
-
+    export enum eDigit {
+        //% block="Leerzeichen"
+        x20 = 0x20,
+        //% block="0"
+        x30 = 0x30,
+        //% block="1"
+        x31,
+        //% block="2"
+        x32,
+        //% block="3"
+        x33,
+        //% block="4"
+        x34,
+        //% block="5"
+        x35,
+        //% block="6"
+        x36,
+        //% block="7"
+        x37,
+        //% block="8"
+        x38,
+        //% block="9"
+        x39,
+        //% block=":"
+        x3A,
+        //% block=";"
+        x3B,
+        //% block="<"
+        x3C,
+        //% block="="
+        x3D,
+        //% block=">"
+        x3E,
+        //% block="?"
+        x3F,
+        //% block="-"
+        x2D = 0x2D,
+        //% block="."
+        x2E = 0x2E,
+    }
 
     export function get5x8DigitImage(charCode: number): Image {
         if (between(charCode, 0x30, 0x3F))
