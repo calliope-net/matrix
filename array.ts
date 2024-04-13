@@ -1,7 +1,7 @@
 
 namespace matrix { // array.ts
 
- export   let qImages: Image[] = [] // leeres Array Elemente Typ Image
+    let qImages: Image[] = [] // leeres Array Elemente Typ Image
 
     //% blockId=matrix_Images
     //% block="Image[]" blockHidden=true

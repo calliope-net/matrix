@@ -527,6 +527,30 @@ namespace matrix { // text.ts
         }
      */
 
+
+
+    //% group="Test Funktionen" subcategory="Text"
+    //% block="zeichne alle Text-Zeichen in Matrix"
+    export function writeCharset() {
+        //clearMatrix()
+        for (let i = 0; i <= 5; i++) {
+            clearImages() // internes Array Images[]
+            for (let j = 0; j <= 15; j++) {
+                pushImage(get5x8CharImage((2 + i) * 16 + j))
+            }
+            writeImageArray(matrix_Images(), 1, 16 + i * 8, 8)
+        }
+
+        let s = "ÄÖÜäöüß€°" // C4 D6 DC E4 F6 FC DF (20)AC B0
+        let charCode: number
+        for (let j = 0; j < s.length; j++) {
+            charCode = s.charCodeAt(j)
+            writeImage(asciiImage(charCode), 1 + (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
+        }
+    }
+
+
+
     export enum eAlign {
         //% block="linksbündig"
         links,

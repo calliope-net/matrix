@@ -9,7 +9,7 @@ namespace matrix { // eeprom.ts
 
     // I2C EEPROM nur lesen -> in Buffer
     function i2cReadEEPROM(eeprom_location: number, size: number, i2c = eI2Ceeprom.EEPROM_x50): Buffer {
-        if (between(eeprom_location, 0, 0xFFFF - size)) {
+        if (between(eeprom_location, 0, 65536 - size)) {
             let bu = Buffer.create(2)
             bu.setNumber(NumberFormat.UInt16BE, 0, eeprom_location)
             pins.i2cWriteBuffer(i2c, bu, true) // sendet 2 Byte 16 Bit Adresse
@@ -102,16 +102,36 @@ namespace matrix { // eeprom.ts
     }
 
 
-    //% group="Bild 5x8 aus Text Zeichen" subcategory="EEPROM"
-    //% block="Bild aus ASCII-Code (EEPROM) %charCode %eepromStartadresse || %i2c" weight=4
+    //% group="Bild 5x8 aus Text Zeichen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="Bild aus ASCII-Code (EEPROM) %charCode || %eepromStartadresse %i2c" weight=4
     //% charCode.min=32 charCode.max=127 charCode.defl=48
     //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
     //% blockSetVariable=bild
-    export function get5x8EEPROMImage(charCode: number, eepromStartadresse: number, i2c = eI2Ceeprom.EEPROM_x50): Image {
-
+    export function get5x8EEPROMImage(charCode: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50): Image {
+        if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
         let bu = i2cReadEEPROM(eepromStartadresse + charCode * 8, 8, i2c)
-
         return image5x8fromString(bu.toString().substr(1, 5))
     }
+
+    //% group="Test Funktionen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="zeichne alle Text-Zeichen vom EEPROM in Matrix"
+    export function writeCharsetEEPROM() {
+        // charCode 0..127 in Matrix Zeilen 0..7
+        let images: Image[] = []
+        for (let i = 0; i <= 7; i++) {
+            for (let j = 0; j <= 15; j++)
+                writeImage(get5x8EEPROMImage(i * 16 + j), 1 + j * 8, i * 8)
+            // images.push(get5x8EEPROMImage(i * 16 + j))
+            //  writeImageArray(images, 1, i * 8, 8)
+        }
+        // charCode ab 128 in Matrix Zeilen 8..15 (nur im 128x128 Display zu sehen)
+        let s = "ÄÖÜäöüß€°" // C4 D6 DC E4 F6 FC DF (20)AC B0
+        let charCode: number
+        for (let j = 0; j < s.length; j++) {
+            charCode = s.charCodeAt(j)
+            writeImage(get5x8EEPROMImage(charCode), 1 + (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
+        }
+    }
+
 
 } // eeprom.ts

@@ -17,7 +17,7 @@ namespace matrix { // advanced.ts
 
     //% group="internen Speicher lesen" advanced=true
     //% block="get Image[]" weight=7
-    export function getImages() { return qImages }
+    export function getImages() { return matrix_Images() }
 
 
     // ========== group="Funktionen" advanced=true
@@ -39,7 +39,7 @@ namespace matrix { // advanced.ts
     //% block="π" weight=2
     export function pi() { return Math.PI }
 
-
+/* 
 
     //% group="Test Funktionen" advanced=true
     //% block="zeichne alle ASCII Zeichen in Matrix"
@@ -60,6 +60,6 @@ namespace matrix { // advanced.ts
             writeImage(asciiImage(charCode), 1 + (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
         }
     }
-
+ */
 
 } // advanced.ts
