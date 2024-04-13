@@ -9,42 +9,42 @@ namespace matrix { // text.ts
 
 
 
-/* 
-
-    // ========== group="Text in Matrix zeichnen" subcategory="Text"
-
-    //% group="Text in Matrix zeichnen" subcategory="Text"
-    //% block="zeichne Zahl/Zeit %zahl x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=5
-    //% x.min=0 x.max=127 y.min=0 y.max=127
-    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
-    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
-    //% inlineInputMode=inline
-    export function writeDigitImageArray(zahl: any, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-        let text = convertToText(zahl)
-        let ia: Image[] = []
-        for (let j = 0; j < text.length; j++) {
-            //ia.push(digitImage(zahl, j)) // nur Ziffern, Minus und Punkt (spart Programmcode)
-            // ia.push(bufferImage5x8(getDigit_5x8(text.charCodeAt(j))))
-            ia.push(get5x8DigitImage(text.charCodeAt(j)))
+    /* 
+    
+        // ========== group="Text in Matrix zeichnen" subcategory="Text"
+    
+        //% group="Text in Matrix zeichnen" subcategory="Text"
+        //% block="zeichne Zahl/Zeit %zahl x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=5
+        //% x.min=0 x.max=127 y.min=0 y.max=127
+        //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
+        //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
+        //% inlineInputMode=inline
+        export function writeDigitImageArray(zahl: any, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+            let text = convertToText(zahl)
+            let ia: Image[] = []
+            for (let j = 0; j < text.length; j++) {
+                //ia.push(digitImage(zahl, j)) // nur Ziffern, Minus und Punkt (spart Programmcode)
+                // ia.push(bufferImage5x8(getDigit_5x8(text.charCodeAt(j))))
+                ia.push(get5x8DigitImage(text.charCodeAt(j)))
+            }
+            writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
         }
-        writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
-    }
-
-
-    //% group="Text in Matrix zeichnen" subcategory="Text"
-    //% block="zeichne Text %text x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=4
-    //% x.min=0 x.max=127 y.min=0 y.max=127
-    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
-    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
-    //% inlineInputMode=inline
-    export function writeTextImageArray(text: string, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-        let ia: Image[] = []
-        for (let j = 0; j < text.length; j++) {
-            ia.push(charImage(text, j))
+    
+    
+        //% group="Text in Matrix zeichnen" subcategory="Text"
+        //% block="zeichne Text %text x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=4
+        //% x.min=0 x.max=127 y.min=0 y.max=127
+        //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
+        //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
+        //% inlineInputMode=inline
+        export function writeTextImageArray(text: string, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+            let ia: Image[] = []
+            for (let j = 0; j < text.length; j++) {
+                ia.push(charImage(text, j))
+            }
+            writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
         }
-        writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
-    }
- */
+     */
 
 
     //% group="Text in Matrix zeichnen (nur Zahlen und Zeit)" subcategory="Text"
@@ -93,17 +93,14 @@ namespace matrix { // text.ts
         if (text.length > len)
             return text.substr(0, len)
         else if (text.length < len && align == eAlign.rechts)
-            return "                ".substr(0, len - text.length) + text
+            return c25.substr(0, len - text.length) + text
         else if (text.length < len)
-            return text + "                ".substr(0, len - text.length)
+            return text + c25.substr(0, len - text.length)
         else
             return text
-        //if (pText.length > pLength) { return pText.substr(0, pLength) }
-        //else if (pText.length < pLength && pFormat == eAlign.left) { return pText + replicate(" ", pLength - pText.length) }
-        //else if (pText.length < pLength && pFormat == eAlign.right) { return replicate(" ", pLength - pText.length) + pText }
-        //else { return pText }
     }
 
+    const c25 = "                         " // 25 Leerzeichen
 
 
     export function get5x8DigitImage(charCode: number): Image {
@@ -114,7 +111,7 @@ namespace matrix { // text.ts
         //                        (  "0"               , "1"               , "2"               , "3"               , "4"               , "5"               , "6"               , "7"               , "8"               , "9"               , ":"               )
         else if (charCode == 0x2D) return image5x8fromString("\x08\x08\x08\x08\x08") // "-"
         else if (charCode == 0x2E) return image5x8fromString("\x60\x60\x00\x00\x00") // "."
-        else return image5x8fromString("\xFF\x81\x81\x81\xFF")
+        else return image5x8fromString("\x00\x00\x00\x00\x00") // " "
     }
     /* 
         export function getDigit_5x8(charCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
@@ -353,7 +350,8 @@ namespace matrix { // text.ts
                     return image5x8fromString("\x7D\x0A\x09\x0A\x7D\x3D\x42\x41\x42\x3D\x3D\x40\x40\x40\x3D\x21\x54\x54\x55\x78\x39\x44\x44\x39\x00\x3D\x40\x40\x7D\x00\xFE\x09\x49\x36\x00\x14\x3E\x55\x55\x41\x02\x05\x02\x00\x00".substr(j * 5, 5))
                 //                        (  "Ä"               , "Ö"               , "Ü"               , "ä"               , "ö"               , "ü"               , "ß"               , "@"               , "°"               )
             }
-            return image5x8fromString("\xFF\xFF\xFF\xFF\xFF")
+            return image5x8fromString("\xFF\x81\x81\x81\xFF")
+            // return image5x8fromString("\xFF\xFF\xFF\xFF\xFF")
         }
         /* 
                 let i5x8: Image = matrix5x8(`
