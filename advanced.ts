@@ -42,8 +42,8 @@ namespace matrix { // advanced.ts
 
 
 
-    //% group="Text (string)" advanced=true
-    //% block="formatiere %pText Länge %len || %align" weight=6
+    //% group="Funktionen" advanced=true
+    //% block="formatiere %pText Länge %len || %align" weight=5
     //% pText.shadow="matrix_text"
     //% inlineInputMode=inline
     export function formatText(pText: any, len: number, align = eAlign.links) {
