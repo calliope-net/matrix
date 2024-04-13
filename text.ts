@@ -47,6 +47,26 @@ namespace matrix { // text.ts
 
 
 
+    //% group="Text (string)" subcategory="Text"
+    //% block="formatiere %pText Länge %len || %align" weight=6
+    //% pText.shadow="matrix_text"
+    //% inlineInputMode=inline
+    export function formatText(pText: any, len: number, align = eAlign.links) {
+        let text: string = convertToText(pText)
+        if (text.length > len)
+            return text.substr(0, len)
+        else if (text.length < len && align == eAlign.rechts)
+            return "                ".substr(0, len - text.length) + text
+        else if (text.length < len)
+            return text + "                ".substr(0, len - text.length)
+        else
+            return text
+        //if (pText.length > pLength) { return pText.substr(0, pLength) }
+        //else if (pText.length < pLength && pFormat == eAlign.left) { return pText + replicate(" ", pLength - pText.length) }
+        //else if (pText.length < pLength && pFormat == eAlign.right) { return replicate(" ", pLength - pText.length) + pText }
+        //else { return pText }
+    }
+
 
 
     export function get5x8DigitImage(charCode: number): Image {
@@ -471,4 +491,16 @@ namespace matrix { // text.ts
             }
         }
      */
+
+    export enum eAlign {
+        //% block="linksbündig"
+        links,
+        //% block="rechtsbündig"
+        rechts
+    }
+
+
+    //% blockId=matrix_text block="%s" blockHidden=true
+    export function matrix_text(s: string): string { return s }
+
 } // text.ts
