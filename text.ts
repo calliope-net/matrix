@@ -532,15 +532,15 @@ namespace matrix { // text.ts
     //% group="Test Funktionen" subcategory="Text"
     //% block="zeichne alle Text-Zeichen in Matrix"
     export function writeCharset() {
-        //clearMatrix()
-        for (let i = 0; i <= 5; i++) {
-            clearImages() // internes Array Images[]
-            for (let j = 0; j <= 15; j++) {
-                pushImage(get5x8CharImage((2 + i) * 16 + j))
-            }
-            writeImageArray(matrix_Images(), 1, 16 + i * 8, 8)
-        }
+        // charCode 0..127 in Matrix Zeilen 0..7
+        for (let y = 2; y <= 7; y++)  // 0-1 Steuerzeichen ignorieren
+            for (let x = 0; x <= 15; x++)
+                writeImage(get5x8CharImage(y * 16 + x), 1 + x * 8, y * 8)
+        // writeImage(get5x8CharImage((2 + y) * 16 + x), 1 + x * 8, 16 + y * 8)
+        // pushImage(get5x8CharImage((2 + y) * 16 + x))
+        // writeImageArray(matrix_Images(), 1, 16 + y * 8, 8)
 
+        // charCode ab 128 in Matrix Zeilen 8..15 (nur im 128x128 Display zu sehen)
         let s = "ÄÖÜäöüß€°" // C4 D6 DC E4 F6 FC DF (20)AC B0
         let charCode: number
         for (let j = 0; j < s.length; j++) {

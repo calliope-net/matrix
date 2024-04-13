@@ -50,12 +50,13 @@ namespace matrix { // array.ts
 
     //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
     //% block="Image[] lesen an index %index" weight=7
-    export function getImage(index:number) {return qImages.get(index) }
+    //% blockSetVariable=bild
+    export function getImage(index: number) { return qImages.get(index) }
 
 
     //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
     //% block="Image[] Länge" weight=3
-    export function lengthImages() {return qImages.length }
+    export function lengthImages() { return qImages.length }
 
     //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
     //% block="Image[] löschen" weight=2

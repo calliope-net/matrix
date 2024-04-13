@@ -41,6 +41,37 @@ namespace matrix { // eeprom.ts
     }
 
 
+    //% group="Bild 5x8 aus Text Zeichen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="Image[] füllen aus Text %text || %eepromStartadresse %i2c" weight=5
+    //% text.shadow="matrix_text"
+    //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
+    //% inlineInputMode=inline
+    export function imageArrayEEPROM(text: any, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50) {
+        if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
+        let txt = convertToText(text)
+        // let images: Image[] = []
+        clearImages()
+        for (let j = 0; j < txt.length; j++) {
+            pushImage(get5x8EEPROMImage(txt.charCodeAt(j), eepromStartadresse, i2c))
+        }
+        // return images
+        //writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
+    }
+
+
+    //% group="Bild 5x8 aus Text Zeichen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="Bild aus ASCII-Code %charCode || %eepromStartadresse %i2c" weight=4
+    //% charCode.min=32 charCode.max=127 charCode.defl=48
+    //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
+    //% blockSetVariable=bild
+    export function get5x8EEPROMImage(charCode: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50): Image {
+        if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
+        let bu = i2cReadEEPROM(eepromStartadresse + charCode * 8 + 1, 5, i2c)
+        return image5x8fromString(bu.toString())
+        //let bu = i2cReadEEPROM(eepromStartadresse + charCode * 8, 8, i2c)
+        //return image5x8fromString(bu.toString().substr(1, 5))
+    }
+
 
 
 
@@ -63,6 +94,46 @@ namespace matrix { // eeprom.ts
     }
 
 
+
+    // ========== group="Test Funktionen" color="#FF7F3F" subcategory="EEPROM"
+
+    //% group="Test Funktionen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="zeichne alle Text-Zeichen vom EEPROM in Matrix" weight=5
+    export function writeCharsetEEPROM() {
+        // charCode 0..127 in Matrix Zeilen 0..7
+        for (let y = 0; y <= 7; y++)
+            for (let x = 0; x <= 15; x++)
+                writeImage(get5x8EEPROMImage(y * 16 + x), 1 + x * 8, y * 8)
+        // images.push(get5x8EEPROMImage(i * 16 + j))
+        //  writeImageArray(images, 1, i * 8, 8)
+
+        // charCode ab 128 in Matrix Zeilen 8..15 (nur im 128x128 Display zu sehen)
+        let s = "ÄÖÜäöüß€°" // C4 D6 DC E4 F6 FC DF (20)AC B0
+        let charCode: number
+        for (let j = 0; j < s.length; j++) {
+            charCode = s.charCodeAt(j)
+            writeImage(get5x8EEPROMImage(charCode), 1 + (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
+        }
+    }
+
+    //% group="Test Funktionen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="vergleiche 128 Byte ab %eepromStartadresse mit Byte %byte || %i2c" weight=4
+    //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
+    //% inlineInputMode=inline
+    export function checkEEPROM(eepromStartadresse: number, byte: number, i2c = eI2Ceeprom.EEPROM_x50) {
+        let count = 0
+        let bu = i2cReadEEPROM(eepromStartadresse, 128, i2c)
+        for (let off = 0; off < bu.length; off++) {
+            if (bu.getUint8(off) == byte)
+                count++
+        }
+        return count
+    }
+
+
+
+    // ========== group="EEPROM aus Matrix brennen" color="#FF7F3F" subcategory="EEPROM"
+
     //% group="EEPROM aus Matrix brennen" color="#FF7F3F" subcategory="EEPROM"
     //% block="programmiere EEPROM HEX %hex Zeilen %fromPage - %toPage Bytes %length Code %code || %i2c"
     //% hex.defl="F800"
@@ -84,53 +155,6 @@ namespace matrix { // eeprom.ts
             return true // erfolgreich programmiert
         } else
             return false // nicht programmiert, weil nicht alle Bedingungen erfüllt
-    }
-
-
-    //% group="EEPROM Leer Test" color="#FF7F3F" subcategory="EEPROM"
-    //% block="vergleiche 128 Byte ab %eepromStartadresse mit Byte %byte || %i2c"
-    //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
-    //% inlineInputMode=inline
-    export function checkEEPROM(eepromStartadresse: number, byte: number, i2c = eI2Ceeprom.EEPROM_x50) {
-        let count = 0
-        let bu = i2cReadEEPROM(eepromStartadresse, 128, i2c)
-        for (let off = 0; off < bu.length; off++) {
-            if (bu.getUint8(off) == byte)
-                count++
-        }
-        return count
-    }
-
-
-    //% group="Bild 5x8 aus Text Zeichen" color="#FF7F3F" subcategory="EEPROM"
-    //% block="Bild aus ASCII-Code (EEPROM) %charCode || %eepromStartadresse %i2c" weight=4
-    //% charCode.min=32 charCode.max=127 charCode.defl=48
-    //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
-    //% blockSetVariable=bild
-    export function get5x8EEPROMImage(charCode: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50): Image {
-        if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
-        let bu = i2cReadEEPROM(eepromStartadresse + charCode * 8, 8, i2c)
-        return image5x8fromString(bu.toString().substr(1, 5))
-    }
-
-    //% group="Test Funktionen" color="#FF7F3F" subcategory="EEPROM"
-    //% block="zeichne alle Text-Zeichen vom EEPROM in Matrix"
-    export function writeCharsetEEPROM() {
-        // charCode 0..127 in Matrix Zeilen 0..7
-        let images: Image[] = []
-        for (let i = 0; i <= 7; i++) {
-            for (let j = 0; j <= 15; j++)
-                writeImage(get5x8EEPROMImage(i * 16 + j), 1 + j * 8, i * 8)
-            // images.push(get5x8EEPROMImage(i * 16 + j))
-            //  writeImageArray(images, 1, i * 8, 8)
-        }
-        // charCode ab 128 in Matrix Zeilen 8..15 (nur im 128x128 Display zu sehen)
-        let s = "ÄÖÜäöüß€°" // C4 D6 DC E4 F6 FC DF (20)AC B0
-        let charCode: number
-        for (let j = 0; j < s.length; j++) {
-            charCode = s.charCodeAt(j)
-            writeImage(get5x8EEPROMImage(charCode), 1 + (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
-        }
     }
 
 
