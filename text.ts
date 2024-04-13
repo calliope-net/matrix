@@ -45,17 +45,20 @@ namespace matrix { // text.ts
         writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
     }
 
-    //% group="Text 16x8 anzeigen (Zeichensatz aus Programmcode)" subcategory="Text"
-    //% block="16x8 Text Zeile %row von %col bis %end %pText || %align" weight=8
+    //% group="Text in Matrix zeichnen (Zeichensatz aus Programmcode)" subcategory="Text"
+    //% block="Text Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=8
     //% row.min=0 row.max=15 col.min=0 col.max=15 end.min=0 end.max=15 end.defl=15
-    //% pText.shadow="matrix_text"
+    //% text.shadow="matrix_text"
+    //% x.min=0 x.max=127 y.min=0 y.max=127
+    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
+    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
     //% inlineInputMode=inline
-    export function writeText16x8(row: number, col: number, end: number, pText: any, align = eAlign.links) {
+    export function writeText16x8(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
         let len = end - col + 1
         if (between(row, 0, qMatrix.length - 1) && between(col, 0, 15) && between(len, 0, 16)) {
-            let text = formatText(pText, len, align)
-            for (let j = 0; j < text.length; j++) {
-                writeImage(get5x8CharImage(text.charCodeAt(j)), (col + j) * 8, row * 8)
+            let txt = formatText(text, len, align)
+            for (let j = 0; j < txt.length; j++) {
+                writeImage(get5x8CharImage(txt.charCodeAt(j)), (col * 8) + (j * dx), (row * 8) + (j * dy), ut, fx, fy)
             }
         }
     }
