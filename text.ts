@@ -9,7 +9,7 @@ namespace matrix { // text.ts
 
 
 
-
+/* 
 
     // ========== group="Text in Matrix zeichnen" subcategory="Text"
 
@@ -44,21 +44,40 @@ namespace matrix { // text.ts
         }
         writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
     }
+ */
 
-    //% group="Text in Matrix zeichnen (Zeichensatz aus Programmcode)" subcategory="Text"
-    //% block="Text Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=8
-    //% row.min=0 row.max=15 col.min=0 col.max=15 end.min=0 end.max=15 end.defl=15
+
+    //% group="Text in Matrix zeichnen (nur Zahlen und Zeit)" subcategory="Text"
+    //% block="Zahl/Zeit Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=8
+    //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
     //% text.shadow="matrix_text"
-    //% x.min=0 x.max=127 y.min=0 y.max=127
     //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
     //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
     //% inlineInputMode=inline
-    export function writeText16x8(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+    export function writeDigits(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
         let len = end - col + 1
-        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 15) && between(len, 0, 16)) {
+        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
             let txt = formatText(text, len, align)
             for (let j = 0; j < txt.length; j++) {
-                writeImage(get5x8CharImage(txt.charCodeAt(j)), (col * 8) + (j * dx), (row * 8) + (j * dy), ut, fx, fy)
+                writeImage(get5x8DigitImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
+            }
+        }
+    }
+
+
+    //% group="Text in Matrix zeichnen (Zeichensatz aus Programmcode)" subcategory="Text"
+    //% block="Text Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=7
+    //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
+    //% text.shadow="matrix_text"
+    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
+    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
+    //% inlineInputMode=inline
+    export function writeText(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+        let len = end - col + 1
+        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
+            let txt = formatText(text, len, align)
+            for (let j = 0; j < txt.length; j++) {
+                writeImage(get5x8CharImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
             }
         }
     }
@@ -95,7 +114,7 @@ namespace matrix { // text.ts
         //                        (  "0"               , "1"               , "2"               , "3"               , "4"               , "5"               , "6"               , "7"               , "8"               , "9"               , ":"               )
         else if (charCode == 0x2D) return image5x8fromString("\x08\x08\x08\x08\x08") // "-"
         else if (charCode == 0x2E) return image5x8fromString("\x60\x60\x00\x00\x00") // "."
-        else return image5x8fromString("\xFF\xFF\xFF\xFF\xFF")
+        else return image5x8fromString("\xFF\x81\x81\x81\xFF")
     }
     /* 
         export function getDigit_5x8(charCode: number) { // nur Ziffern, Minus und Punkt (spart Programmcode)
