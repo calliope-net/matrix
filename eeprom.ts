@@ -30,7 +30,8 @@ namespace matrix { // eeprom.ts
     //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
     //% inlineInputMode=inline
     export function writeEEPROM(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50) {
-        basic.showNumber(eepromStartadresse)
+        if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
+        matrix.eEEPROM_Startadresse.F800
         let len = end - col + 1
         if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
             let txt = formatText(text, len, align)
