@@ -81,7 +81,7 @@ namespace matrix { // array.ts
     export function pushImage(im: Image) { qImages.push(im) }
 
     //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
-    //% block="Image[] lesen an index %index" weight=3
+    //% block="Image[%index]" weight=3
     //% blockSetVariable=bild
     export function getImage(index: number) { return qImages.get(index) }
 
