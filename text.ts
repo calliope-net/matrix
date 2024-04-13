@@ -1,10 +1,12 @@
 
 namespace matrix { // text.ts
 
-    //% blockId=matrix_charCode
-    //% block="%text" blockHidden=true
-    //% text.defl="R"
-    export function charCodeAt0(text: string) { return text.charCodeAt(0) }
+    // blockId=matrix_charCode block="%text" blockHidden=true
+    // text.defl="R"
+    //function matrix_charCode(text: string) { return text.charCodeAt(0) }
+
+    //% blockId=matrix_text block="%text" blockHidden=true
+    export function matrix_text(text: string): string { return text }
 
 
 
@@ -46,7 +48,7 @@ namespace matrix { // text.ts
         }
      */
 
-
+/* 
     //% group="Text in Matrix zeichnen (nur Zahlen und Zeit)" subcategory="Text"
     //% block="Zahl/Zeit Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=8
     //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
@@ -83,7 +85,8 @@ namespace matrix { // text.ts
     }
 
 
-
+ */
+/* 
     //% group="Text (string)" subcategory="Text"
     //% block="formatiere %pText Länge %len || %align" weight=6
     //% pText.shadow="matrix_text"
@@ -101,7 +104,7 @@ namespace matrix { // text.ts
     }
 
     const c25 = "                         " // 25 Leerzeichen
-
+ */
 
     export function get5x8DigitImage(charCode: number): Image {
         if (between(charCode, 0x30, 0x3F))
@@ -528,7 +531,7 @@ namespace matrix { // text.ts
      */
 
 
-
+/* 
     //% group="Test Funktionen" subcategory="Text"
     //% block="zeichne alle Text-Zeichen in Matrix"
     export function writeCharset() {
@@ -557,9 +560,5 @@ namespace matrix { // text.ts
         //% block="rechtsbündig"
         rechts
     }
-
-
-    //% blockId=matrix_text block="%s" blockHidden=true
-    export function matrix_text(s: string): string { return s }
-
+ */
 } // text.ts

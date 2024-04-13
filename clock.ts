@@ -1,7 +1,7 @@
 
 namespace matrix { // clock.ts
 
-    //% group="Analog Uhr Zeiger"
+    //% group="Analog Uhr Zeiger" subcategory="Analog Uhr"
     //% block="12 Stunden %hour Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel" weight=3
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
@@ -15,7 +15,7 @@ namespace matrix { // clock.ts
     }
 
 
-    //% group="Analog Uhr Zeiger"
+    //% group="Analog Uhr Zeiger" subcategory="Analog Uhr"
     //% block="60 Minuten %minute Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel" weight=2
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
@@ -39,7 +39,7 @@ namespace matrix { // clock.ts
         )
     }
 
-    //% group="Analog Uhr Zeiger"
+    //% group="Uhr" subcategory="Analog Uhr"
     //% block="zeichne Uhr Mittelpunkt x %x y %y (Radius 24) Stunde %hour Minute %minute" weight=1
     //% x.min=24 x.max=103 x.defl=30 
     //% y.min=23 y.max=103 y.defl=23

@@ -44,24 +44,46 @@ namespace matrix { // array.ts
 
 
 
-    //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
-    //% block="Image[] anhängen %im" weight=8
-    export function pushImage(im: Image) { qImages.push(im) }
+    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder Array"
+    //% block="Image[] füllen aus Zahl/Zeit %text" weight=6
+    //% text.shadow="matrix_text"
+    export function imageArrayDigit(text: any) {
+        let txt = convertToText(text)
+        clearImages()
+        for (let j = 0; j < txt.length; j++)
+            pushImage(get5x8DigitImage(txt.charCodeAt(j))) // nur Zahl/Zeit Zeichen
+    }
+
+
+
+    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder Array"
+    //% block="Image[] füllen aus Text %text" weight=5
+    //% text.shadow="matrix_text"
+    export function imageArrayCharset(text: any) {
+        let txt = convertToText(text)
+        clearImages()
+        for (let j = 0; j < txt.length; j++)
+            pushImage(get5x8CharImage(txt.charCodeAt(j)))
+    }
+
+
 
     //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
-    //% block="Image[] lesen an index %index" weight=7
-    //% blockSetVariable=bild
-    export function getImage(index: number) { return qImages.get(index) }
-
+    //% block="Image[] löschen" weight=9
+    export function clearImages() { qImages = [] }
 
     //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
-    //% block="Image[] Länge" weight=3
+    //% block="Image[] Länge" weight=6
     export function lengthImages() { return qImages.length }
 
     //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
-    //% block="Image[] löschen" weight=2
-    export function clearImages() { qImages = [] }
+    //% block="Image[] anhängen %im" weight=4
+    export function pushImage(im: Image) { qImages.push(im) }
 
+    //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
+    //% block="Image[] lesen an index %index" weight=3
+    //% blockSetVariable=bild
+    export function getImage(index: number) { return qImages.get(index) }
 
 
     //% group="Animation Beispiele" subcategory="Bilder Array"

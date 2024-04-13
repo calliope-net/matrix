@@ -39,6 +39,59 @@ namespace matrix { // advanced.ts
     //% block="π" weight=2
     export function pi() { return Math.PI }
 
+
+
+
+    //% group="Text (string)" advanced=true
+    //% block="formatiere %pText Länge %len || %align" weight=6
+    //% pText.shadow="matrix_text"
+    //% inlineInputMode=inline
+    export function formatText(pText: any, len: number, align = eAlign.links) {
+        let text: string = convertToText(pText)
+        if (text.length > len)
+            return text.substr(0, len)
+        else if (text.length < len && align == eAlign.rechts)
+            return c25.substr(0, len - text.length) + text
+        else if (text.length < len)
+            return text + c25.substr(0, len - text.length)
+        else
+            return text
+    }
+
+    const c25 = "                         " // 25 Leerzeichen
+
+
+    export enum eAlign {
+        //% block="linksbündig"
+        links,
+        //% block="rechtsbündig"
+        rechts
+    }
+
+
+    //% group="Test Funktionen" advanced=true
+    //% block="zeichne alle Text-Zeichen in Matrix"
+    export function writeCharset() {
+        // charCode 0..127 in Matrix Zeilen 0..7
+        for (let y = 2; y <= 7; y++)  // 0-1 Steuerzeichen ignorieren
+            for (let x = 0; x <= 15; x++)
+                writeImage(get5x8CharImage(y * 16 + x), 1 + x * 8, y * 8)
+        // writeImage(get5x8CharImage((2 + y) * 16 + x), 1 + x * 8, 16 + y * 8)
+        // pushImage(get5x8CharImage((2 + y) * 16 + x))
+        // writeImageArray(matrix_Images(), 1, 16 + y * 8, 8)
+
+        // charCode ab 128 in Matrix Zeilen 8..15 (nur im 128x128 Display zu sehen)
+        let s = "ÄÖÜäöüß€°" // C4 D6 DC E4 F6 FC DF (20)AC B0
+        let charCode: number
+        for (let j = 0; j < s.length; j++) {
+            charCode = s.charCodeAt(j)
+            writeImage(asciiImage(charCode), 1 + (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
+        }
+    }
+
+
+
+
 /* 
 
     //% group="Test Funktionen" advanced=true
