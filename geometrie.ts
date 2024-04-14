@@ -124,9 +124,9 @@ namespace matrix { // geometrie.ts
             hour_mark(ih, x, y, 20, 23)
         }
 
-        writeImage(imageDrehen(digitImage(3), eZeichenDrehen.rechts), x + 17, y - 2)//47, 21
-        writeImage(digitImage(6), x - 2, y + 17)//28, 40
-        writeImage(imageDrehen(digitImage(9), eZeichenDrehen.links), x - 24, y - 5)//6, 18
+        writeImage(imageDrehen(digitImage(eDigit.x33), eZeichenDrehen.rechts), x + 17, y - 2)//47, 21
+        writeImage(digitImage(eDigit.x36), x - 2, y + 17)//28, 40
+        writeImage(imageDrehen(digitImage(eDigit.x39), eZeichenDrehen.links), x - 24, y - 5)//6, 18
         writeImage(hexImage8x8("427F406251494946"), x - 4, y - 23)// 26, 0
 
         hour_mark(hour, x, y, 0, 10)
