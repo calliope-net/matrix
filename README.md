@@ -56,9 +56,6 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 * klicke auf das Rechteck **matrix** (kann von der Tastatur verdeckt sein)
 * jetzt hat die Liste den neuen Eintrag **Matrix** bekommen
 
-
-![](blocks.png)
-
 ### Beschreibung der Erweiterung 'Matrix'
 
 #### RAM
@@ -91,9 +88,11 @@ Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den 
 
 ## Blöcke und Parameter
 
-##### OLED Display I²C
+![](blocks.png)
 
-Block **beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
+#### Matrix
+
+Block **I²C beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
 
 * muss beim Start aufgerufen werden, um die Matrix im RAM und das Display zu initialisieren. 
 Die eingestellte *Display-Größe* entscheidet darüber, wieviel RAM reserviert wird. 128x64 reserviert 1KB und 128x128 2KB.
@@ -108,7 +107,7 @@ Die eingestellte *Display-Größe* entscheidet darüber, wieviel RAM reserviert 
 > Um verschiedene Bilder auf zwei Displays anzuzeigen, wird die Matrix gelöscht, neu gezeichnet und mit dem folgenden Block
 > (mit Parameter *I²C-Adresse*) an ein bestimmtes Display gesendet.
 
-Block **Matrix auf Display anzeigen** (Zeilen von, bis, I²C-Adresse)
+Block **I²C Matrix auf Display anzeigen** (Zeilen von, bis, I²C-Adresse)
 
 * ist immer aufzurufen, wenn das in die Matrix gezeichnete Bild auf dem Display angezeigt werden soll.
 Dabei wird normalerweise das komplette Display über den I²C-Bus neu geschrieben (1KB oder 2KB Pixel).
@@ -119,7 +118,7 @@ Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 Display hat 16 Zeilen (
 
 > Die Zeilen in der Matrix und auf dem Display sind fest zugeordnet. Sie können nicht an eine andere Stelle geschrieben werden.
 
-Block **Animation auf Display anzeigen** befindet sich im Menüpunkt **[Bilder Array](#bilder-array)** und wird dort beschrieben. 
+Block **I²C Animation auf Display anzeigen** befindet sich im Menüpunkt **[Bilder Array](#bilder-array)** und wird dort beschrieben. 
 
 ##### Matrix: für Pixel reservierter RAM
 
@@ -292,7 +291,7 @@ Folgende Bild-Größen (in Pixel) stehen zum selbst malen zur Verfügung:
 
 ##### OLED Display I²C
 
-Block **Animation auf Display anzeigen** (Image[], Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
+Block **I²C Animation auf Display anzeigen** (Image[], Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
 * Für eine Animation werden mehrere Bilder mit kurzer Pause an der selben Stelle angezeigt. Die Bilder sind in einem Array gespeichert.
 Es wird jeweils 1 Bild in die Matrix gezeichnet, **Matrix auf Display anzeigen** aufgerufen und eine Zeit in Millisekunden gewartet.
