@@ -18,7 +18,7 @@
 > zwei Displays mit verschiedenen I²C Adressen können verschiedene Bilder zeigen
 
 > optional: Qwiic EEPROM an I²C anstecken
-> * speichert ASCII Zeichensatz und spart Programmcode
+> * speichert ASCII Zeichensatz + Umlaute und spart Programmcode
 > * Bilder speichern und direkt aus dem EEPROM in die Matrix kopieren
 
 ![](matrix_foto.jpg)
@@ -29,7 +29,7 @@ Auf dem Foto läuft das folgende Programm mit Hardware v2 und den Erweiterungen:
 
 ![](matrix_schnappschuss.png)
 
-Diese Erweiterung unterstützt zwei OLED Displays gleichzeitig, folgende wurden getestet:
+Die Erweiterung **calliope-net/matrix** unterstützt zwei OLED Displays gleichzeitig, folgende wurden getestet:
 
 * [Grove - OLED Display 1.12 (SH1107) V3.0 - SPI/IIC -3.3V/5V](https://wiki.seeedstudio.com/Grove-OLED-Display-1.12-SH1107_V3.0/) 
 * [Grove - OLED Display 0.96 inch](https://wiki.seeedstudio.com/Grove-OLED_Display_0.96inch/) 
@@ -85,9 +85,9 @@ Dieses Repository kann als **Erweiterung** in MakeCode hinzugefügt werden.
 
 Matrix speichert alle Pixel im RAM. Zur Kommunikation mit dem Display über den I²C-Bus gibt es nur 3 Blöcke (hellblau):
 
-* **beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
-* **Matrix auf Display anzeigen** (Zeilen von, bis, I²C-Adresse)
-* **Animation auf Display anzeigen** (Image[]-Array, Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
+* **I²C beim Start** (Display-Größe, invert, drehen, I²C-Adresse)
+* **I²C Matrix auf Display anzeigen** (Zeilen von, bis, I²C-Adresse)
+* **I²C Animation auf Display anzeigen** (Image[]-Array, Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
 ## Blöcke und Parameter
 
@@ -121,7 +121,7 @@ Das 128x64 Display hat damit 8 Zeilen (0-7), das 128x128 Display hat 16 Zeilen (
 
 Block **Animation auf Display anzeigen** befindet sich im Menüpunkt **[Bilder Array](#bilder-array)** und wird dort beschrieben. 
 
-##### Matrix im Speicher
+##### Matrix: für Pixel reservierter RAM
 
 Block **Matrix löschen** (Zeilen von, bis)
 
@@ -141,6 +141,35 @@ Block **set Pixel** (x, y, EIN/AUS)
 Block **get Pixel** (x, y) : boolean
 
 * Liest ein Pixel aus der Matrix als boolean (wahr=EIN, falsch=AUS).
+
+##### Text in Matrix zeichnen
+
+Block **Zahl/Zeit** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, vergrößern x, y)
+
+* Dieser Block schreibt Text in die Matrix. Der Parameter *Text* kann eine Zahl oder ein Datum (als String) sein.
+* Die weiteren Parameter sind im nächsten Block **zeichne Text** beschrieben.
+
+> Hier werden nur die Zeichen Leerzeichen 0 1 2 3 4 5 6 7 8 9 : ; < = > ? - . als Image generiert. Der Zweck ist, Programmcode zu sparen. Der Compiler meldet einen Fehler,
+> wenn viele Blöcke benutzt werden und im Hintergrund der ganze ASCII Zeichensatz im Code steht. Wenn keine Buchstaben angezeigt werden sollen, ist dieser Block zu bevorzugen.
+> Der Zeichensatz kann aus dem Code komplett entfernt werden, wenn ein EEPROM angeschlossen ist.
+
+Block **Text** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, vergrößern x, y)
+
+* Dieser Block schreibt Text in die Matrix. Der Parameter *Text* kann alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
+* Eine Zeile (0..7 oder 0..15) ist 8 Pixel hoch, eine Spalte (0..15) ist 8 Pixel breit. An der Stelle steht das erste Zeichen in der Matrix.
+* Die optionalen Parameter *Abstand x, y* haben die Standardwerte x=8 und y=0. Das ist der Abstand zum nächsten Zeichen vom Beginn des letzten Zeichens.
+Die Standardwerte sind für Text geeignet. Die Zeichen können aber in verschiedene Richtungen, mit negativem Abstand auch rückwärts gezeichnet werden.
+Weil alle Text-Zeichen nur 5 Pixel breit sind, können sie auch mit kleinerem Abstand als 8 gezeichnet werden.
+* Mit Parameter *überschreiben* werden alle Pixel (die Nullen und die Einsen) vom Image-Objekt in die Matrix gezeichnet.
+* Mit Parameter *transparent* werden nur Pixel an geschaltet (die Einsen). Pixel, die vorher schon leuchten, werden nicht aus geschaltet.
+So bleibt der Hintergrund sichtbar (transparent).
+* Mit den Parametern *vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
+Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
+
+> Die lila Blöcke brauchen den Zeichensatz im Programmcode, den der Compiler mit in die HEX Datei einpackt. Diese wird oft zu groß für den Calliope v2.
+> Es gibt insgesamt drei Blöcke zum Text schreiben. Ist der EEPROM angeschlossen, sollte *ausschließlich* der **Text** block aus **EEPROM** benutzt werden.
+> Sonst kann mit **Zahl/Zeit** Programmcode gespart (und auf die Buchstaben verzichtet) werden.
+
 
 Block **Linie** (von x, y, bis x, y, Pixel EIN/AUS)
 
