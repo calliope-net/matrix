@@ -151,7 +151,7 @@ Block **Zahl/Zeit** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, verg
 
 > Hier werden nur die Zeichen Leerzeichen 0 1 2 3 4 5 6 7 8 9 : ; < = > ? - . als Image generiert. Der Zweck ist, Programmcode zu sparen. Der Compiler meldet einen Fehler,
 > wenn viele Blöcke benutzt werden und im Hintergrund der ganze ASCII Zeichensatz im Code steht. Wenn keine Buchstaben angezeigt werden sollen, ist dieser Block zu bevorzugen.
-> Der Zeichensatz kann aus dem Code komplett entfernt werden, wenn ein EEPROM angeschlossen ist.
+> Der [orange **Text** block aus **EEPROM**](#eeprom) kann den Programmcode komplett einsparen, wenn ein EEPROM angeschlossen ist.
 
 Block **Text** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, vergrößern x, y)
 
@@ -167,7 +167,7 @@ So bleibt der Hintergrund sichtbar (transparent).
 Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
 
 > Die lila Blöcke brauchen den Zeichensatz im Programmcode, den der Compiler mit in die HEX Datei einpackt. Diese wird oft zu groß für den Calliope v2.
-> Es gibt deshalb drei Blöcke zum Text schreiben. Ist der EEPROM angeschlossen, sollte *ausschließlich* der orange **Text** block aus **EEPROM** benutzt werden.
+> Es gibt deshalb drei Blöcke zum Text schreiben. Ist der EEPROM angeschlossen, sollte *ausschließlich* der [orange **Text** block aus **EEPROM**](#eeprom) benutzt werden.
 > Sonst kann mit blau **Zahl/Zeit** Programmcode gespart (und auf die Buchstaben verzichtet) werden.
 
 
