@@ -5,7 +5,7 @@ namespace matrix { // text.ts
     // text.defl="R"
     //function matrix_charCode(text: string) { return text.charCodeAt(0) }
 
-    //% blockId=matrix_text block="%text" blockHidden=true
+    //% blockId=matrix_text block="%text" color="#FF0000" blockHidden=true
     export function matrix_text(text: string): string { return text }
 
     export enum eDigit {

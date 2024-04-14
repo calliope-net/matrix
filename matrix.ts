@@ -204,16 +204,16 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     // ========== group="Text in Matrix zeichnen"
 
     //% group="Text in Matrix zeichnen"
-    //% block="Zahl/Zeit Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=8
-    //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
+    //% block="Zahl/Zeit Zeile %row Spalte %col %text || Abstand x %dx y %dy %ut x %fx y %fy" weight=8
+    //% row.min=0 row.max=15 col.min=0 col.max=24
     //% text.shadow="matrix_text"
     //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
     //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
     //% inlineInputMode=inline
-    export function writeDigits(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-        let len = end - col + 1
-        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
-            let txt = formatText(text, len, align)
+    export function writeDigits(row: number, col: number,  text: any,  dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+       // let len = end - col + 1
+        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) ) {
+            let txt =convertToText(text)// formatText(text, len, align)
             for (let j = 0; j < txt.length; j++) {
                 writeImage(get5x8DigitImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
             }
@@ -221,8 +221,8 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     }
 
 
-    //% group="lila Blöcke brauchen viel Programmspeicher" color="#7E84F7"
-    //% block="Text Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=7
+    //% group="lila Blöcke brauchen viel Programmspeicher" color="#7E84F7" deprecated=true
+    //% block="# Text Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=7
     //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
     //% text.shadow="matrix_text"
     //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
@@ -239,74 +239,92 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     }
 
 
-
-/* 
-
-    //% group="Matrix im Speicher"
-    //% block="Linie von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel" weight=3
-    //% pixel.shadow="toggleOnOff" pixel.defl=1
+    //% group="lila Blöcke brauchen viel Programmspeicher" color="#7E84F7"
+    //% block="Text Zeile %row Spalte %col %text || Abstand x %dx y %dy %ut x %fx y %fy" weight=7
+    //% row.min=0 row.max=15 col.min=0 col.max=24
+    //% text.shadow="matrix_text"
+    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
+    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
     //% inlineInputMode=inline
-    export function line(x0: number, y0: number, x1: number, y1: number, pixel?: boolean) {
-        x0 = Math.round(x0)
-        y0 = Math.round(y0)
-        x1 = Math.round(x1)
-        y1 = Math.round(y1)
-
-        // https://de.wikipedia.org/wiki/Bresenham-Algorithmus
-        let dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-        let dy = -Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
-        let err = dx + dy, e2; // error value e_xy
-
-        while (true) {
-            setPixel(x0, y0, pixel)
-            if (x0 == x1 && y0 == y1) break;
-            e2 = 2 * err;
-            if (e2 > dy) { err += dy; x0 += sx; } // e_xy+e_x > 0
-            if (e2 < dx) { err += dx; y0 += sy; } // e_xy+e_y < 0
-        }
-    }
-
-    //% group="Matrix im Speicher"
-    //% block="Kreis Mittelpunkt x %x0 y %y0 Radius %radius || Pixel %pixel" weight=2
-    //% pixel.shadow="toggleOnOff" pixel.defl=1
-    //% inlineInputMode=inline
-    export function rasterCircle(x0: number, y0: number, radius: number, pixel?: boolean) {
-        x0 = Math.round(x0)
-        y0 = Math.round(y0)
-        radius = Math.round(radius)
-
-        // https://de.wikipedia.org/wiki/Bresenham-Algorithmus
-        let f = 1 - radius;
-        let ddF_x = 0;
-        let ddF_y = -2 * radius;
-        let x = 0;
-        let y = radius;
-
-        setPixel(x0, y0 + radius, pixel);
-        setPixel(x0, y0 - radius, pixel);
-        setPixel(x0 + radius, y0, pixel);
-        setPixel(x0 - radius, y0, pixel);
-
-        while (x < y) {
-            if (f >= 0) {
-                y -= 1;
-                ddF_y += 2;
-                f += ddF_y;
+    export function writeTextCharset(row: number, col: number, text: any, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+        // let len = end - col + 1
+        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24)) {
+            let txt = convertToText(text)// formatText(text, len, align)
+            for (let j = 0; j < txt.length; j++) {
+                writeImage(get5x8CharImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
             }
-            x += 1;
-            ddF_x += 2;
-            f += ddF_x + 1;
-
-            setPixel(x0 + x, y0 + y, pixel);
-            setPixel(x0 - x, y0 + y, pixel);
-            setPixel(x0 + x, y0 - y, pixel);
-            setPixel(x0 - x, y0 - y, pixel);
-            setPixel(x0 + y, y0 + x, pixel);
-            setPixel(x0 - y, y0 + x, pixel);
-            setPixel(x0 + y, y0 - x, pixel);
-            setPixel(x0 - y, y0 - x, pixel);
         }
     }
 
- */
+
+
+    /* 
+    
+        //% group="Matrix im Speicher"
+        //% block="Linie von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel" weight=3
+        //% pixel.shadow="toggleOnOff" pixel.defl=1
+        //% inlineInputMode=inline
+        export function line(x0: number, y0: number, x1: number, y1: number, pixel?: boolean) {
+            x0 = Math.round(x0)
+            y0 = Math.round(y0)
+            x1 = Math.round(x1)
+            y1 = Math.round(y1)
+    
+            // https://de.wikipedia.org/wiki/Bresenham-Algorithmus
+            let dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
+            let dy = -Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
+            let err = dx + dy, e2; // error value e_xy
+    
+            while (true) {
+                setPixel(x0, y0, pixel)
+                if (x0 == x1 && y0 == y1) break;
+                e2 = 2 * err;
+                if (e2 > dy) { err += dy; x0 += sx; } // e_xy+e_x > 0
+                if (e2 < dx) { err += dx; y0 += sy; } // e_xy+e_y < 0
+            }
+        }
+    
+        //% group="Matrix im Speicher"
+        //% block="Kreis Mittelpunkt x %x0 y %y0 Radius %radius || Pixel %pixel" weight=2
+        //% pixel.shadow="toggleOnOff" pixel.defl=1
+        //% inlineInputMode=inline
+        export function rasterCircle(x0: number, y0: number, radius: number, pixel?: boolean) {
+            x0 = Math.round(x0)
+            y0 = Math.round(y0)
+            radius = Math.round(radius)
+    
+            // https://de.wikipedia.org/wiki/Bresenham-Algorithmus
+            let f = 1 - radius;
+            let ddF_x = 0;
+            let ddF_y = -2 * radius;
+            let x = 0;
+            let y = radius;
+    
+            setPixel(x0, y0 + radius, pixel);
+            setPixel(x0, y0 - radius, pixel);
+            setPixel(x0 + radius, y0, pixel);
+            setPixel(x0 - radius, y0, pixel);
+    
+            while (x < y) {
+                if (f >= 0) {
+                    y -= 1;
+                    ddF_y += 2;
+                    f += ddF_y;
+                }
+                x += 1;
+                ddF_x += 2;
+                f += ddF_x + 1;
+    
+                setPixel(x0 + x, y0 + y, pixel);
+                setPixel(x0 - x, y0 + y, pixel);
+                setPixel(x0 + x, y0 - y, pixel);
+                setPixel(x0 - x, y0 - y, pixel);
+                setPixel(x0 + y, y0 + x, pixel);
+                setPixel(x0 - y, y0 + x, pixel);
+                setPixel(x0 + y, y0 - x, pixel);
+                setPixel(x0 - y, y0 - x, pixel);
+            }
+        }
+    
+     */
 } // matrix.ts
