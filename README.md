@@ -29,11 +29,12 @@ Auf dem Foto läuft das folgende Programm mit Hardware v2 und den Erweiterungen:
 
 ![](matrix_schnappschuss.png)
 
-Diese Erweiterung unterstützt verschiedene OLED Displays, folgende wurden getestet:
+Diese Erweiterung unterstützt zwei OLED Displays gleichzeitig, folgende wurden getestet:
 
 * [Grove - OLED Display 1.12 (SH1107) V3.0 - SPI/IIC -3.3V/5V](https://wiki.seeedstudio.com/Grove-OLED-Display-1.12-SH1107_V3.0/) 
 * [Grove - OLED Display 0.96 inch](https://wiki.seeedstudio.com/Grove-OLED_Display_0.96inch/) 
 * [Grove - OLED Yellow&Blue Display 0.96(SSD1315) - SPI/IIC -3.3V/5V](https://wiki.seeedstudio.com/Grove-OLED-Yellow&Blue-Display-0.96-SSD1315_V1.0/)
+* und optional den EEPROM
 * [SparkFun Qwiic EEPROM Breakout - 512Kbit](https://www.sparkfun.com/products/18355)
 
 <!--
