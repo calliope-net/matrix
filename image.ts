@@ -178,24 +178,15 @@ namespace matrix { // image.ts
 
     // ========== group="Bild 5x8 aus Text Zeichen" subcategory="Bilder" ==========
 
-    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
+    //% group="ein Zeichen in Bild 5x8 umwandeln" subcategory="Bilder"
     //% block="%zahl" weight=7
     //% blockSetVariable=bild
     export function digitImage(zahl: eDigit): Image {
         return get5x8DigitImage(zahl)
     }
 
-    // group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
-    // block="Bild aus Zeichen (ASCII) %text || index %index" weight=6
-    // text.defl="R"
-    // index.defl=0
-    // blockSetVariable=bild
-    //function charImage(text: string, index = 0): Image {
-    //    return get5x8CharImage(text.charCodeAt(index))
-    //}
 
-
-    //% group="Bild 5x8 aus Text Zeichen" color="#7E84F7" subcategory="Bilder"
+    //% group="ein Zeichen in Bild 5x8 umwandeln" color="#7E84F7" subcategory="Bilder"
     //% block="Bild aus ASCII-Code %charCode" weight=5
     //% charCode.min=32 charCode.max=127 charCode.defl=48
     //% blockSetVariable=bild
@@ -204,20 +195,6 @@ namespace matrix { // image.ts
 
         return get5x8CharImage(charCode)
     }
-
-
-
-    /* 
-        //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
-        //% block="Bild aus ASCII-Code (get5x8Image) %charCode" weight=4
-        //% charCode.min=32 charCode.max=127 charCode.defl=48
-        //% blockSetVariable=bild
-        export function utf8Image(charCode: number): Image {
-            return get5x8CharImage(charCode)
-            //return bufferImage5x8(getUTF8_5x8(charCode))
-        }
-     */
-
 
 
 

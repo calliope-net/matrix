@@ -41,7 +41,7 @@ namespace matrix { // eeprom.ts
     }
 
 
-    //% group="Bild 5x8 aus Text Zeichen" color="#FF7F3F" subcategory="EEPROM"
+    //% group="Text in Bilder 5x8 umwandeln" color="#FF7F3F" subcategory="EEPROM"
     //% block="Image[] füllen aus Text %text || %eepromStartadresse %i2c" weight=5
     //% text.shadow="matrix_text"
     //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
@@ -59,7 +59,7 @@ namespace matrix { // eeprom.ts
     }
 
 
-    //% group="Bild 5x8 aus Text Zeichen" color="#FF7F3F" subcategory="EEPROM"
+    //% group="Text in Bilder 5x8 umwandeln" color="#FF7F3F" subcategory="EEPROM"
     //% block="Bild aus ASCII-Code %charCode || %eepromStartadresse %i2c" weight=4
     //% charCode.min=32 charCode.max=127 charCode.defl=48
     //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
@@ -134,8 +134,8 @@ namespace matrix { // eeprom.ts
 
     // ========== group="EEPROM aus Matrix brennen" color="#FF7F3F" subcategory="EEPROM"
 
-    //% group="EEPROM aus Matrix brennen" color="#FF7F3F" subcategory="EEPROM"
-    //% block="programmiere EEPROM HEX %hex Zeilen %fromPage - %toPage Bytes %length Code %code || %i2c"
+    //% group="Zeilen aus Matrix auf EEPROM speichern" color="#FF7F3F" subcategory="EEPROM"
+    //% block="EEPROM ab %hex Zeilen %fromPage - %toPage Bytes %length Code %code || %i2c"
     //% hex.defl="F800"
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=0

@@ -45,8 +45,8 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
     // ========== group="OLED Display I²C"
 
-    //% group="OLED Display I²C" color="#007FFF"
-    //% block="beim Start %pPages || invert %pInvert drehen %pFlip %i2c" weight=9
+    //% group="Hilfe: calliope-net.github.io/matrix" color="#007FFF"
+    //% block="I²C beim Start %pPages || invert %pInvert drehen %pFlip %i2c" weight=9
     //% pInvert.shadow="toggleOnOff"
     //% pFlip.shadow="toggleOnOff"
     //% inlineInputMode=inline
@@ -97,8 +97,8 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         control.waitMicros(100000) // 100ms Delay Recommended
     }
 
-    //% group="OLED Display I²C" color="#007FFF"
-    //% block="Matrix auf Display anzeigen (depecated) || Zeilen von %fromPage bis %toPage %pI2C" deprecated=true
+    //% group="calliope-net.github.io/matrix" color="#007FFF"
+    //% block="I²C Matrix auf Display anzeigen (depecated) || Zeilen von %fromPage bis %toPage %pI2C" deprecated=true
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=15
     //% inlineInputMode=inline
@@ -121,8 +121,8 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         control.waitMicros(50) */
     }
 
-    //% group="OLED Display I²C" color="#007FFF"
-    //% block="Matrix auf Display anzeigen || Zeilen %fromPage - %toPage %i2c" weight=6
+    //% group="Hilfe: calliope-net.github.io/matrix" color="#007FFF"
+    //% block="I²C Matrix auf Display anzeigen || Zeilen %fromPage - %toPage %i2c" weight=6
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=15
     //% inlineInputMode=inline
@@ -141,50 +141,13 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 
 
-    // ========== group="Text in Matrix zeichnen"
-
-    //% group="Text in Matrix zeichnen"
-    //% block="Zahl/Zeit Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=8
-    //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
-    //% text.shadow="matrix_text"
-    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
-    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
-    //% inlineInputMode=inline
-    export function writeDigits(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-        let len = end - col + 1
-        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
-            let txt = formatText(text, len, align)
-            for (let j = 0; j < txt.length; j++) {
-                writeImage(get5x8DigitImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
-            }
-        }
-    }
-
-
-    //% group="Text in Matrix zeichnen" color="#7E84F7"
-    //% block="Text Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=7
-    //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
-    //% text.shadow="matrix_text"
-    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
-    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
-    //% inlineInputMode=inline
-    export function writeText(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-        let len = end - col + 1
-        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
-            let txt = formatText(text, len, align)
-            for (let j = 0; j < txt.length; j++) {
-                writeImage(get5x8CharImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
-            }
-        }
-    }
-
 
 
 
     // ========== group="Matrix im Speicher"
 
 
-    //% group="Matrix im Speicher"
+    //% group="Matrix: für Pixel reservierter RAM"
     //% block="Matrix löschen || Zeilen von %fromPage bis %toPage" weight=9
     //% fromPage.min=0 fromPage.max=15 fromPage.defl=0
     //% toPage.min=0 toPage.max=15 toPage.defl=15
@@ -216,7 +179,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         }
     }
 
-    //% group="Matrix im Speicher"
+    //% group="Matrix: für Pixel reservierter RAM"
     //% block="set Pixel x %x y %y %pixel" weight=8
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     export function setPixel(x: number, y: number, pixel: boolean) {
@@ -229,11 +192,53 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         }
     }
 
-    //% group="Matrix im Speicher"
+    //% group="Matrix: für Pixel reservierter RAM"
     //% block="get Pixel x %x y %y" weight=7
     export function getPixel(x: number, y: number) {
         return (qMatrix[y >> 3][cOffset + x] & (2 ** (y & 7))) != 0
     }
+
+
+
+
+    // ========== group="Text in Matrix zeichnen"
+
+    //% group="Text in Matrix zeichnen"
+    //% block="Zahl/Zeit Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=8
+    //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
+    //% text.shadow="matrix_text"
+    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
+    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
+    //% inlineInputMode=inline
+    export function writeDigits(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+        let len = end - col + 1
+        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
+            let txt = formatText(text, len, align)
+            for (let j = 0; j < txt.length; j++) {
+                writeImage(get5x8DigitImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
+            }
+        }
+    }
+
+
+    //% group="lila Blöcke brauchen viel Programmspeicher" color="#7E84F7"
+    //% block="Text Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=7
+    //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
+    //% text.shadow="matrix_text"
+    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
+    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
+    //% inlineInputMode=inline
+    export function writeText(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+        let len = end - col + 1
+        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
+            let txt = formatText(text, len, align)
+            for (let j = 0; j < txt.length; j++) {
+                writeImage(get5x8CharImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
+            }
+        }
+    }
+
+
 
 /* 
 

@@ -8,8 +8,8 @@ namespace matrix { // array.ts
     export function matrix_Images() { return qImages }
 
 
-    //% group="OLED Display I²C" color="#007FFF" subcategory="Bilder Array"
-    //% block="Animation auf Display anzeigen %im x %x y %y || x %fx y %fy Pause(ms) %ms Zeilen %fromPage-%toPage %i2c" weight=6
+    //% group="Hilfe: calliope-net.github.io/matrix" color="#007FFF" subcategory="Bilder Array"
+    //% block="I²C Animation auf Display anzeigen %im x %x y %y || x %fx y %fy Pause(ms) %ms Zeilen %fromPage-%toPage %i2c" weight=6
     //% im.shadow=matrix_Images
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
@@ -29,7 +29,29 @@ namespace matrix { // array.ts
 
 
 
-    //% group="Array (mehrere Bilder) in Matrix zeichnen" subcategory="Bilder Array"
+    //% group="Image[]: Array für Bilder" subcategory="Bilder Array"
+    //% block="Image[] löschen" weight=9
+    export function clearImages() { qImages = [] }
+
+    //% group="Image[]: Array für Bilder" subcategory="Bilder Array"
+    //% block="Image[] Länge" weight=6
+    export function lengthImages() { return qImages.length }
+
+    //% group="Image[]: Array für Bilder" subcategory="Bilder Array"
+    //% block="Image[] anhängen %im" weight=4
+    export function pushImage(im: Image) { qImages.push(im) }
+
+    //% group="Image[]: Array für Bilder" subcategory="Bilder Array"
+    //% block="Image[%index]" weight=3
+    //% blockSetVariable=bild
+    export function getImage(index: number) { return qImages.get(index) }
+
+
+
+
+
+
+    //% group="Image[] in Matrix zeichnen" subcategory="Bilder Array"
     //% block="zeichne Bilder %im x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=6
     //% im.shadow=matrix_Images
     //% x.min=0 x.max=127 y.min=0 y.max=127
@@ -44,7 +66,7 @@ namespace matrix { // array.ts
 
 
 
-    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder Array"
+    //% group="Text in Bilder 5x8 umwandeln" subcategory="Bilder Array"
     //% block="Image[] füllen aus Zahl/Zeit %text" weight=6
     //% text.shadow="matrix_text"
     export function imageArrayDigit(text: any) {
@@ -56,7 +78,7 @@ namespace matrix { // array.ts
 
 
 
-    //% group="Bild 5x8 aus Text Zeichen" color="#7E84F7" subcategory="Bilder Array"
+    //% group="Text in Bilder 5x8 umwandeln" color="#7E84F7" subcategory="Bilder Array"
     //% block="Image[] füllen aus Text %text" weight=5
     //% text.shadow="matrix_text"
     export function imageArrayCharset(text: any) {
@@ -67,23 +89,6 @@ namespace matrix { // array.ts
     }
 
 
-
-    //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
-    //% block="Image[] löschen" weight=9
-    export function clearImages() { qImages = [] }
-
-    //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
-    //% block="Image[] Länge" weight=6
-    export function lengthImages() { return qImages.length }
-
-    //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
-    //% block="Image[] anhängen %im" weight=4
-    export function pushImage(im: Image) { qImages.push(im) }
-
-    //% group="Speicher für Bilder: Image[]" subcategory="Bilder Array"
-    //% block="Image[%index]" weight=3
-    //% blockSetVariable=bild
-    export function getImage(index: number) { return qImages.get(index) }
 
 
     //% group="Animation Beispiele" subcategory="Bilder Array"
