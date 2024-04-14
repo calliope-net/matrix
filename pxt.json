@@ -12,11 +12,10 @@
         "matrix.ts",
         "image.ts",
         "array.ts",
-        "clock.ts",
+        "geometrie.ts",
         "text.ts",
         "advanced.ts",
-        "eeprom.ts",
-        "geometrie.ts"
+        "eeprom.ts"
     ],
     "testFiles": [
         "test.ts"
