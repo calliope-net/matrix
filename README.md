@@ -391,6 +391,33 @@ Block **zeichne Uhr** (Mittelpunkt x, y, Stunde, Minute)
 
 
 
+#### EEPROM
+
+![](eeprom.png)
+
+##### Text in Matrix zeichnen
+
+Block **Text** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, vergrößern x, y, EEPROM Startadresse, I²C Adresse)
+
+* Dieser Block schreibt Text in die Matrix. Der Parameter *Text* kann Zeichencodes von 0 bis 255 enthalten, wenn dafür Zeichen "Bitmuster" im EEPROM programmiert sind.
+Aktuell sind alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
+* Im EEPROM sind dafür die letzten 2 KB F800-FFFF reserviert. Diese *EEPROM Startadresse* kann geändert werden.
+* Ebenfalls kann die **I²C Adresse** das EEPROM geändert werden.
+* Die anderen Parameter sind weiter oben beschrieben.
+
+> Wenn ein EEPROM mit Zeichensatz angeschlossen ist, sollte ausschließlich der orange **Text** Block benutzt werden.
+> Der blaue und lila **Text** Block würden Speicherplatz verschwenden, der beim Programmcode fehlt.
+> **Auf einem MakeCode Bildschirm sollten also nie lila und orange Blöcke gleichzeitig sein!**
+
+##### Text in Bilder 5x8 umwandeln
+
+##### Bild aus EEPROM in Matrix zeichnen (128 Byte pro Zeile)
+
+##### Test Funktionen
+
+##### Zeilen aus Matrix im EEPROM speichern
+
+
 ### Erweiterungen
 
 > [Upates für Erweiterungen; Erweiterungen aus einem Projekt löschen.](https://calliope-net.github.io/i2c-liste#updates)
