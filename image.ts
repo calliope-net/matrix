@@ -29,8 +29,8 @@ namespace matrix { // image.ts
     //% blockId=matrix_eFaktor block="%pFaktor" blockHidden=true
     export function matrix_eFaktor(pFaktor: eFaktor): number { return pFaktor }
 
-    //% blockId=oled_eFaktor block="%pFaktor" blockHidden=true
-    export function oled_eFaktor(pFaktor: eFaktor): number { return pFaktor }
+    // blockId=oled_eFaktor block="%pFaktor" blockHidden=true
+    //export function oled_eFaktor(pFaktor: eFaktor): number { return pFaktor }
 
     // ========== group="Bild in Matrix zeichnen" subcategory="Bilder"
 
@@ -137,45 +137,7 @@ namespace matrix { // image.ts
         //} // else
     }
 
-    /* 
-    
-    
-    
-        // ========== group="Text in Matrix zeichnen" subcategory="Bilder"
-    
-        //% group="Text in Matrix zeichnen" subcategory="Bilder"
-        //% block="zeichne Zahl/Zeit %zahl x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=5
-        //% x.min=0 x.max=127 y.min=0 y.max=127
-        //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
-        //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
-        //% inlineInputMode=inline
-        export function writeDigitImageArray(zahl: any, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-            let text = convertToText(zahl)
-            let ia: Image[] = []
-            for (let j = 0; j < text.length; j++) {
-                //ia.push(digitImage(zahl, j)) // nur Ziffern, Minus und Punkt (spart Programmcode)
-                // ia.push(bufferImage5x8(getDigit_5x8(text.charCodeAt(j))))
-                ia.push(get5x8DigitImage(text.charCodeAt(j)))
-            }
-            writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
-        }
-    
-    
-        //% group="Text in Matrix zeichnen" subcategory="Bilder"
-        //% block="zeichne Text %text x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=4
-        //% x.min=0 x.max=127 y.min=0 y.max=127
-        //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
-        //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
-        //% inlineInputMode=inline
-        export function writeTextImageArray(text: string, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-            let ia: Image[] = []
-            for (let j = 0; j < text.length; j++) {
-                ia.push(charImage(text, j))
-            }
-            writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
-        }
-    
-     */
+   
 
     // ========== group="Bild 5x8 aus Text Zeichen" subcategory="Bilder" ==========
 

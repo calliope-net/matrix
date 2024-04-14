@@ -102,7 +102,7 @@ namespace matrix { // array.ts
 
 
     //% group="Text in Bilder 5x8 umwandeln" subcategory="Bilder Array"
-    //% block="# zeichne Zahl/Zeit %zahl x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=1
+    //% block="# zeichne Zahl/Zeit %zahl x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=1 deprecated=true
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
     //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
