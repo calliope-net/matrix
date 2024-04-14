@@ -104,21 +104,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% inlineInputMode=inline
     //% expandableArgumentMode="toggle"
     export function writeDisplay(fromPage = 0, toPage = 15, pI2C = eI2C.I2C_x3C) {
-        displayMatrix(fromPage, toPage, pI2C)
-        /* 
-        let lastPage = (pI2C == eI2C.I2C_x3D ? qPages3D : qPages3C) - 1
-        fromPage = Math.constrain(fromPage, 0, lastPage)
-        toPage = Math.constrain(toPage, fromPage, lastPage)
-
-        //if (fromPage > lastPage) fromPage = lastPage
-        //if (toPage > lastPage) toPage = lastPage
-       // if (fromPage > toPage) fromPage = toPage
-
-        for (let page = fromPage; page <= toPage; page++) { 
-            i2cWriteBuffer(pI2C, qMatrix[page])
-            //control.waitMicros(50)
-        }
-        control.waitMicros(50) */
+        displayMatrix(fromPage, toPage, pI2C) //deprecated=true
     }
 
     //% group="Hilfe: calliope-net.github.io/matrix" color="#007FFF"
@@ -155,29 +141,23 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     export function clearMatrix(fromPage = 0, toPage = 15) {
         fromPage = Math.constrain(fromPage, 0, qMatrix.length - 1)
         toPage = Math.constrain(toPage, fromPage, qMatrix.length - 1)
-
-        fillMatrix(fromPage, toPage)
-        /* if (fromPage > qArray.length - 1) fromPage = qArray.length - 1
-        if (toPage > qArray.length - 1) toPage = qArray.length - 1
-        if (fromPage > toPage) fromPage = toPage
-
-        for (let page = fromPage; page <= toPage; page++) { // qArray.length ist die Anzahl der Pages 8 oder 16
-            qArray[page].fill(0, cOffset) // löscht Buffer ab 7 bis zum Ende
-        } */
+        for (let page = fromPage; page <= toPage; page++) // löscht eine Zeile der Matrix ab 7 bis zum Ende
+            qMatrix[page].fill(0, cOffset)
+        // fillMatrix(fromPage, toPage)
     }
 
-    export function fillMatrix(fromPage: number, toPage: number, bu?: Buffer) {
+    /* export function fillMatrix_(fromPage: number, toPage: number, bu: Buffer) {
         //if (fromPage > qArray.length - 1) fromPage = qArray.length - 1
         // if (toPage > qArray.length - 1) toPage = qArray.length - 1 // qArray.length ist die Anzahl der Pages 8 oder 16
         // if (fromPage > toPage) fromPage = toPage
 
         for (let page = fromPage; page <= toPage; page++) {
-            if (bu)
-                qMatrix[page].write(cOffset, bu) // kopiert bu in eine Zeile der Matrix ab 7
-            else
-                qMatrix[page].fill(0, cOffset) // löscht eine Zeile der Matrix ab 7 bis zum Ende
+            //if (bu)
+            qMatrix[page].write(cOffset, bu) // kopiert bu in eine Zeile der Matrix ab 7
+            //else
+            //    qMatrix[page].fill(0, cOffset) // löscht eine Zeile der Matrix ab 7 bis zum Ende
         }
-    }
+    } */
 
     //% group="Matrix: für Pixel reservierter RAM"
     //% block="set Pixel x %x y %y %pixel" weight=8
@@ -210,10 +190,10 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
     //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
     //% inlineInputMode=inline
-    export function writeDigits(row: number, col: number,  text: any,  dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-       // let len = end - col + 1
-        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) ) {
-            let txt =convertToText(text)// formatText(text, len, align)
+    export function writeDigits(row: number, col: number, text: any, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+        // let len = end - col + 1
+        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24)) {
+            let txt = convertToText(text)// formatText(text, len, align)
             for (let j = 0; j < txt.length; j++) {
                 writeImage(get5x8DigitImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
             }
@@ -228,7 +208,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
     //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
     //% inlineInputMode=inline
-    export function writeText(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+    /* export function writeText(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
         let len = end - col + 1
         if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
             let txt = formatText(text, len, align)
@@ -236,7 +216,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
                 writeImage(get5x8CharImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
             }
         }
-    }
+    } */
 
 
     //% group="lila Blöcke brauchen viel Programmspeicher" color="#7E84F7"
@@ -250,81 +230,9 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         // let len = end - col + 1
         if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24)) {
             let txt = convertToText(text)// formatText(text, len, align)
-            for (let j = 0; j < txt.length; j++) {
+            for (let j = 0; j < txt.length; j++)
                 writeImage(get5x8CharImage(txt.charCodeAt(j)), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
-            }
         }
     }
 
-
-
-    /* 
-    
-        //% group="Matrix im Speicher"
-        //% block="Linie von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel" weight=3
-        //% pixel.shadow="toggleOnOff" pixel.defl=1
-        //% inlineInputMode=inline
-        export function line(x0: number, y0: number, x1: number, y1: number, pixel?: boolean) {
-            x0 = Math.round(x0)
-            y0 = Math.round(y0)
-            x1 = Math.round(x1)
-            y1 = Math.round(y1)
-    
-            // https://de.wikipedia.org/wiki/Bresenham-Algorithmus
-            let dx = Math.abs(x1 - x0), sx = x0 < x1 ? 1 : -1;
-            let dy = -Math.abs(y1 - y0), sy = y0 < y1 ? 1 : -1;
-            let err = dx + dy, e2; // error value e_xy
-    
-            while (true) {
-                setPixel(x0, y0, pixel)
-                if (x0 == x1 && y0 == y1) break;
-                e2 = 2 * err;
-                if (e2 > dy) { err += dy; x0 += sx; } // e_xy+e_x > 0
-                if (e2 < dx) { err += dx; y0 += sy; } // e_xy+e_y < 0
-            }
-        }
-    
-        //% group="Matrix im Speicher"
-        //% block="Kreis Mittelpunkt x %x0 y %y0 Radius %radius || Pixel %pixel" weight=2
-        //% pixel.shadow="toggleOnOff" pixel.defl=1
-        //% inlineInputMode=inline
-        export function rasterCircle(x0: number, y0: number, radius: number, pixel?: boolean) {
-            x0 = Math.round(x0)
-            y0 = Math.round(y0)
-            radius = Math.round(radius)
-    
-            // https://de.wikipedia.org/wiki/Bresenham-Algorithmus
-            let f = 1 - radius;
-            let ddF_x = 0;
-            let ddF_y = -2 * radius;
-            let x = 0;
-            let y = radius;
-    
-            setPixel(x0, y0 + radius, pixel);
-            setPixel(x0, y0 - radius, pixel);
-            setPixel(x0 + radius, y0, pixel);
-            setPixel(x0 - radius, y0, pixel);
-    
-            while (x < y) {
-                if (f >= 0) {
-                    y -= 1;
-                    ddF_y += 2;
-                    f += ddF_y;
-                }
-                x += 1;
-                ddF_x += 2;
-                f += ddF_x + 1;
-    
-                setPixel(x0 + x, y0 + y, pixel);
-                setPixel(x0 - x, y0 + y, pixel);
-                setPixel(x0 + x, y0 - y, pixel);
-                setPixel(x0 - x, y0 - y, pixel);
-                setPixel(x0 + y, y0 + x, pixel);
-                setPixel(x0 - y, y0 + x, pixel);
-                setPixel(x0 + y, y0 - x, pixel);
-                setPixel(x0 - y, y0 - x, pixel);
-            }
-        }
-    
-     */
 } // matrix.ts

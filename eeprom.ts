@@ -29,7 +29,7 @@ namespace matrix { // eeprom.ts
     //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
     //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
     //% inlineInputMode=inline
-    export function writeEEPROM(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50) {
+    /* export function writeEEPROM(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50) {
         if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
         let len = end - col + 1
         if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
@@ -38,7 +38,7 @@ namespace matrix { // eeprom.ts
                 writeImage(get5x8EEPROMImage(txt.charCodeAt(j), eepromStartadresse, i2c), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
             }
         }
-    }
+    } */
 
     //% group="Text in Matrix zeichnen (Zeichensatz aus EEPROM)" color="#FF7F3F" subcategory="EEPROM"
     //% block="Text Zeile %row Spalte %col %text || Abstand x %dx y %dy %ut x %fx y %fy %eepromStartadresse %i2c" weight=7
@@ -108,9 +108,9 @@ namespace matrix { // eeprom.ts
         fromPage = Math.constrain(fromPage, 0, qMatrix.length - 1) // qMatrix.length ist die Anzahl der Pages 8 oder 16
         toPage = Math.constrain(toPage, fromPage, qMatrix.length - 1)
 
-        for (let page = fromPage; page <= toPage; page++) {
-            fillMatrix(page, page, i2cReadEEPROM(eepromStartadresse + (page - fromPage) * 128, 128, i2c))
-        }
+        for (let page = fromPage; page <= toPage; page++) // kopiert bu in eine Zeile der Matrix ab 7
+            qMatrix[page].write(cOffset, i2cReadEEPROM(eepromStartadresse + (page - fromPage) * 128, 128, i2c)) 
+        //fillMatrix(page, page, i2cReadEEPROM(eepromStartadresse + (page - fromPage) * 128, 128, i2c))
     }
 
 
