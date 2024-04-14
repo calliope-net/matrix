@@ -20,26 +20,6 @@ namespace matrix { // eeprom.ts
     }
 
 
-
-    //% group="Text in Matrix zeichnen (Zeichensatz aus EEPROM)" color="#FF7F3F" subcategory="EEPROM" deprecated=true
-    //% block="# Text Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy %eepromStartadresse %i2c" weight=7
-    //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
-    //% text.shadow="matrix_text"
-    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
-    //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
-    //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
-    //% inlineInputMode=inline
-    /* export function writeEEPROM(row: number, col: number, end: number, text: any, align = eAlign.links, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50) {
-        if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
-        let len = end - col + 1
-        if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24) && between(len, 0, 25)) {
-            let txt = formatText(text, len, align)
-            for (let j = 0; j < txt.length; j++) {
-                writeImage(get5x8EEPROMImage(txt.charCodeAt(j), eepromStartadresse, i2c), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
-            }
-        }
-    } */
-
     //% group="Text in Matrix zeichnen (Zeichensatz aus EEPROM)" color="#FF7F3F" subcategory="EEPROM"
     //% block="Text Zeile %row Spalte %col %text || Abstand x %dx y %dy %ut x %fx y %fy %eepromStartadresse %i2c" weight=7
     //% row.min=0 row.max=15 col.min=0 col.max=24
