@@ -56,7 +56,7 @@ namespace matrix { // array.ts
 
 
 
-    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder Array"
+    //% group="Bild 5x8 aus Text Zeichen" color="#7E84F7" subcategory="Bilder Array"
     //% block="Image[] füllen aus Text %text" weight=5
     //% text.shadow="matrix_text"
     export function imageArrayCharset(text: any) {

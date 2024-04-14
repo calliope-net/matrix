@@ -161,7 +161,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     }
 
 
-    //% group="Text in Matrix zeichnen"
+    //% group="Text in Matrix zeichnen" color="#7E84F7"
     //% block="Text Zeile %row von %col bis %end %text || %align Abstand x %dx y %dy %ut x %fx y %fy" weight=7
     //% row.min=0 row.max=15 col.min=0 col.max=24 end.min=0 end.max=24 end.defl=15
     //% text.shadow="matrix_text"

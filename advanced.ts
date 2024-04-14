@@ -69,7 +69,7 @@ namespace matrix { // advanced.ts
     }
 
 
-    //% group="Test Funktionen" advanced=true
+    //% group="Test Funktionen" color="#7E84F7" advanced=true
     //% block="zeichne alle Text-Zeichen in Matrix"
     export function writeCharset() {
         // charCode 0..127 in Matrix Zeilen 0..7

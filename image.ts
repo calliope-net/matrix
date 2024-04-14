@@ -195,7 +195,7 @@ namespace matrix { // image.ts
     //}
 
 
-    //% group="Bild 5x8 aus Text Zeichen" subcategory="Bilder"
+    //% group="Bild 5x8 aus Text Zeichen" color="#7E84F7" subcategory="Bilder"
     //% block="Bild aus ASCII-Code %charCode" weight=5
     //% charCode.min=32 charCode.max=127 charCode.defl=48
     //% blockSetVariable=bild
