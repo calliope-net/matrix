@@ -33,7 +33,7 @@ namespace matrix { // image.ts
 
     // ========== group="Bild in Matrix zeichnen" subcategory="Bilder"
 
-    //% group="Bild in Matrix zeichnen" subcategory="Bilder"
+    //% group="ein Bild in Matrix zeichnen" subcategory="Bilder"
     //% block="zeichne Bild %im x %x y %y || %ut x %fx y %fy" weight=8
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
@@ -83,7 +83,7 @@ namespace matrix { // image.ts
         xspiegeln
     }
 
-    //% group="Bild in Matrix zeichnen" subcategory="Bilder"
+    //% group="ein Bild in Matrix zeichnen" subcategory="Bilder"
     //% block="8x8 %i0 %pDrehen" weight=7
     export function imageDrehen(i0: Image, pDrehen: eZeichenDrehen) {
         //if (pDrehen == eZeichenDrehen.nicht)

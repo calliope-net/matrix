@@ -52,16 +52,27 @@ namespace matrix { // array.ts
 
 
     //% group="Image[] in Matrix zeichnen" subcategory="Bilder Array"
-    //% block="zeichne Bilder %im x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=6
-    //% im.shadow=matrix_Images
+    //% block="zeichne Bilder %images x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=6
+    //% images.shadow=matrix_Images
     //% x.min=0 x.max=127 y.min=0 y.max=127
     //% dx.defl=8 dy.defl=0
     //% fx.shadow="matrix_eFaktor" fy.shadow="matrix_eFaktor"
     //% inlineInputMode=inline
-    export function writeImageArray(im: Image[], x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
-        for (let iImage = 0; iImage < im.length; iImage++) {
-            writeImage(im.get(iImage), x + iImage * dx, y + iImage * dy, ut, fx, fy)
+    export function writeImageArray(images: Image[], x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+        for (let iImage = 0; iImage < images.length; iImage++) {
+            writeImage(images.get(iImage), x + iImage * dx, y + iImage * dy, ut, fx, fy)
         }
+    }
+
+
+    //% group="Image[] in Matrix zeichnen" subcategory="Bilder Array"
+    //% block="8x8 %images %drehen" weight=5
+    export function imageArrayDrehen(images: Image[], drehen: eZeichenDrehen) {
+        let images1: Image[] = []
+        for (let i = 0; i < images.length; i++) {
+            images1.push(imageDrehen(images[i], drehen))
+        }
+        return images1
     }
 
 
