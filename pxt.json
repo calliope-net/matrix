@@ -11,9 +11,9 @@
         "README.md",
         "matrix.ts",
         "image.ts",
+        "array.ts",
         "clock.ts",
         "text.ts",
-        "array.ts",
         "advanced.ts",
         "eeprom.ts"
     ],
