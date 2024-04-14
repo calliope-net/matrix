@@ -167,37 +167,8 @@ So bleibt der Hintergrund sichtbar (transparent).
 Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
 
 > Die lila Blöcke brauchen den Zeichensatz im Programmcode, den der Compiler mit in die HEX Datei einpackt. Diese wird oft zu groß für den Calliope v2.
-> Es gibt insgesamt drei Blöcke zum Text schreiben. Ist der EEPROM angeschlossen, sollte *ausschließlich* der **Text** block aus **EEPROM** benutzt werden.
-> Sonst kann mit **Zahl/Zeit** Programmcode gespart (und auf die Buchstaben verzichtet) werden.
-
-
-Block **Linie** (von x, y, bis x, y, Pixel EIN/AUS)
-
-* Zeichnet eine Linie mit den angegebenen Koordinaten. Mit *Pixel* AUS werden die Pixel gelöscht.
-
-Block **Kreis** (Mittelpunkt x, y, Radius, Pixel EIN/AUS)
-
-* Zeichnet einen Kreis mit den angegebenen Koordinaten. Mit *Pixel* AUS werden die Pixel gelöscht.
-
-→ Für Linie und Kreis wird der Bresenham-Algorithmus verwendet: [de.wikipedia.org/wiki/Bresenham-Algorithmus](https://de.wikipedia.org/wiki/Bresenham-Algorithmus)
-
-##### Analog Uhr Zeiger
-
-Block **12 Stunden** (Stunde, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
-
-* Der Parameter *Stunde* bestimmt die Richtung (den Winkel) der Linie vom *Mittelpunkt x, y* (auf dem Zifferblatt einer Uhr).
-* Der "kleine Zeiger" muss nicht im Mittelpunkt beginnen. Die Parameter *Linie von, bis* bestimmen Anfang und Ende des Zeigers (vom Mittelpunkt in Pixeln).
-* Mit *Pixel* AUS kann der Zeiger auch wieder gelöscht werden.
-
-Block **60 Minuten** (Minute, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
-
-* Funktioniert wie **12 Stunden**, allerdings sind hier nicht 12, sondern 60 Positionen des Zeigers möglich.
-
-→ Die Funktionen für die Uhrzeiger hat ein Schüler im GTA programmiert.
-
-Block **zeichne Uhr** (Mittelpunkt x, y, Stunde, Minute)
-
-* Verwendet die oben beschriebenen Funktionen, um eine komplette analoge Uhr zu zeichnen.
+> Es gibt deshalb drei Blöcke zum Text schreiben. Ist der EEPROM angeschlossen, sollte *ausschließlich* der orange **Text** block aus **EEPROM** benutzt werden.
+> Sonst kann mit blau **Zahl/Zeit** Programmcode gespart (und auf die Buchstaben verzichtet) werden.
 
 
 
@@ -379,6 +350,44 @@ Block **Image[] löschen**
 
 * Hier können fertige Arrays mit Bildern abgerufen werden. Diese Beispiel-Arrays sind in den Block **Animation auf Display anzeigen**
 einzufügen (und ersetzen dort Image[]).
+
+
+
+#### Geometrie
+
+![](geometrie.png)
+
+##### Linie, Fläche in Matrix zeichnen
+
+Block **Linie** (von x, y, bis x, y, Pixel EIN/AUS)
+
+* Zeichnet eine Linie mit den angegebenen Koordinaten. Mit *Pixel* AUS werden die Pixel gelöscht.
+
+Block **Kreis** (Mittelpunkt x, y, Radius, Pixel EIN/AUS)
+
+* Zeichnet einen Kreis mit den angegebenen Koordinaten. Mit *Pixel* AUS werden die Pixel gelöscht.
+
+→ Für Linie und Kreis wird der Bresenham-Algorithmus verwendet: [de.wikipedia.org/wiki/Bresenham-Algorithmus](https://de.wikipedia.org/wiki/Bresenham-Algorithmus)
+
+##### Uhr Zeiger in Matrix zeichnen
+
+Block **12 Stunden** (Stunde, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
+
+* Der Parameter *Stunde* bestimmt die Richtung (den Winkel) der Linie vom *Mittelpunkt x, y* (auf dem Zifferblatt einer Uhr).
+* Der "kleine Zeiger" muss nicht im Mittelpunkt beginnen. Die Parameter *Linie von, bis* bestimmen Anfang und Ende des Zeigers (vom Mittelpunkt in Pixeln).
+* Mit *Pixel* AUS kann der Zeiger auch wieder gelöscht werden.
+
+Block **60 Minuten** (Minute, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
+
+* Funktioniert wie **12 Stunden**, allerdings sind hier nicht 12, sondern 60 Positionen des Zeigers möglich.
+
+→ Die Funktionen für die Uhrzeiger hat ein Schüler im GTA programmiert.
+
+##### Analog Uhr in Matrix zeichnen
+
+Block **zeichne Uhr** (Mittelpunkt x, y, Stunde, Minute)
+
+* Verwendet die oben beschriebenen Funktionen, um eine komplette analoge Uhr zu zeichnen.
 
 
 
