@@ -235,7 +235,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         return (qMatrix[y >> 3][cOffset + x] & (2 ** (y & 7))) != 0
     }
 
-
+/* 
 
     //% group="Matrix im Speicher"
     //% block="Linie von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel" weight=3
@@ -303,5 +303,5 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         }
     }
 
-
+ */
 } // matrix.ts

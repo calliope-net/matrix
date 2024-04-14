@@ -15,7 +15,8 @@
         "clock.ts",
         "text.ts",
         "advanced.ts",
-        "eeprom.ts"
+        "eeprom.ts",
+        "geometrie.ts"
     ],
     "testFiles": [
         "test.ts"
