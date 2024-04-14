@@ -29,7 +29,8 @@ namespace matrix { // image.ts
     //% blockId=matrix_eFaktor block="%pFaktor" blockHidden=true
     export function matrix_eFaktor(pFaktor: eFaktor): number { return pFaktor }
 
-
+    //% blockId=oled_eFaktor block="%pFaktor" blockHidden=true
+    export function oled_eFaktor(pFaktor: eFaktor): number { return pFaktor }
 
     // ========== group="Bild in Matrix zeichnen" subcategory="Bilder"
 

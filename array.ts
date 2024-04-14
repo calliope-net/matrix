@@ -77,6 +77,8 @@ namespace matrix { // array.ts
 
 
 
+    // ========== group="Text in Bilder 5x8 umwandeln" subcategory="Bilder Array"
+
     //% group="Text in Bilder 5x8 umwandeln" subcategory="Bilder Array"
     //% block="Image[] füllen aus Zahl/Zeit %text" weight=6
     //% text.shadow="matrix_text"
@@ -87,8 +89,6 @@ namespace matrix { // array.ts
             pushImage(get5x8DigitImage(txt.charCodeAt(j))) // nur Zahl/Zeit Zeichen
     }
 
-
-
     //% group="Text in Bilder 5x8 umwandeln" color="#7E84F7" subcategory="Bilder Array"
     //% block="Image[] füllen aus Text %text" weight=5
     //% text.shadow="matrix_text"
@@ -98,6 +98,29 @@ namespace matrix { // array.ts
         for (let j = 0; j < txt.length; j++)
             pushImage(get5x8CharImage(txt.charCodeAt(j)))
     }
+
+
+
+    //% group="Text in Bilder 5x8 umwandeln" subcategory="Bilder Array"
+    //% block="# zeichne Zahl/Zeit %zahl x %x y %y || Abstand x %dx y %dy %ut x %fx y %fy" weight=1
+    //% x.min=0 x.max=127 y.min=0 y.max=127
+    //% dx.min=-25 dx.max=25 dx.defl=8 dy.min=-25 dy.max=25 dy.defl=0
+    //% fx.shadow="oled_eFaktor" fy.shadow="oled_eFaktor"
+    //% inlineInputMode=inline
+    export function writeDigitImageArray(zahl: any, x: number, y: number, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number) {
+        let text = convertToText(zahl)
+        let ia: Image[] = []
+        for (let j = 0; j < text.length; j++) {
+            //ia.push(digitImage(zahl, j)) // nur Ziffern, Minus und Punkt (spart Programmcode)
+            // ia.push(bufferImage5x8(getDigit_5x8(text.charCodeAt(j))))
+            ia.push(get5x8DigitImage(text.charCodeAt(j)))
+        }
+        writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
+    }
+
+
+
+    // ========== group="Text in Matrix zeichnen" subcategory="Bilder Array"
 
 
 
