@@ -402,7 +402,7 @@ Block **Text** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, vergröß
 * Dieser Block schreibt Text in die Matrix. Der Parameter *Text* kann Zeichencodes von 0 bis 255 enthalten, wenn dafür Zeichen "Bitmuster" im EEPROM programmiert sind.
 Aktuell sind alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
 * Im EEPROM sind dafür die letzten 2 KB F800-FFFF reserviert. Diese *EEPROM Startadresse* kann geändert werden.
-* Ebenfalls kann die **I²C Adresse** das EEPROM geändert werden.
+* Ebenfalls kann die *I²C Adresse* das EEPROM geändert werden.
 * Die anderen Parameter sind [weiter oben](#text-in-matrix-zeichnen) beschrieben.
 
 > Wenn ein EEPROM mit Zeichensatz angeschlossen ist, sollte ausschließlich der orange **Text** Block benutzt werden.
