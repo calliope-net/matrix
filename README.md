@@ -167,7 +167,7 @@ Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
 > Die lila Blöcke brauchen den Zeichensatz im Programmcode, den der Compiler mit in die HEX Datei einpackt. Diese wird oft zu groß für den Calliope v2.
 > Es gibt deshalb drei Blöcke zum Text schreiben. 1. Ist der EEPROM angeschlossen, sollte *ausschließlich* der [orange **Text** Block aus **EEPROM**](#eeprom) benutzt werden.
 > 2. Der blaue Block **Zahl/Zeit** braucht weniger Programmcode, weil auf die Buchstaben verzichtet wird.
-> 3. Der lila Block **Text** verbraucht den meisten Programmspeicher. Bei vielen Blöcken kann der Compiler möglicherweise keine HEX Datei erzeugen.
+> 3. Der lila Block **Text** verbraucht den meisten Programmspeicher. Werden viele Blöcke in MakeCode benutzt, kann der Compiler möglicherweise keine HEX Datei erzeugen.
 
 #### Bilder
 
