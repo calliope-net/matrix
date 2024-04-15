@@ -153,7 +153,7 @@ Block **Zahl/Zeit** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, verg
 
 Block **Text** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, vergrößern x, y)
 
-* Dieser Block schreibt Text in die Matrix. Der Parameter *Text* kann alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
+* Der lila Block schreibt Text in die Matrix. Der Parameter *Text* kann alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
 * Eine Zeile (0..7 oder 0..15) ist 8 Pixel hoch, eine Spalte (0..15) ist 8 Pixel breit. An der Stelle steht das erste Zeichen in der Matrix.
 * Die optionalen Parameter *Abstand x, y* haben die Standardwerte x=8 und y=0. Das ist der Abstand zum nächsten Zeichen vom Beginn des letzten Zeichens.
 Die Standardwerte sind für Text geeignet. Die Zeichen können aber in verschiedene Richtungen, mit negativem Abstand auch rückwärts gezeichnet werden.
@@ -165,10 +165,9 @@ So bleibt der Hintergrund sichtbar (transparent).
 Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
 
 > Die lila Blöcke brauchen den Zeichensatz im Programmcode, den der Compiler mit in die HEX Datei einpackt. Diese wird oft zu groß für den Calliope v2.
-> Es gibt deshalb drei Blöcke zum Text schreiben. Ist der EEPROM angeschlossen, sollte *ausschließlich* der [orange **Text** Block aus **EEPROM**](#eeprom) benutzt werden.
-> Sonst kann mit blau **Zahl/Zeit** Programmcode gespart (und auf die Buchstaben verzichtet) werden.
-
-
+> Es gibt deshalb drei Blöcke zum Text schreiben. 1. Ist der EEPROM angeschlossen, sollte *ausschließlich* der [orange **Text** Block aus **EEPROM**](#eeprom) benutzt werden.
+> 2. Der blaue Block **Zahl/Zeit** braucht weniger Programmcode, weil auf die Buchstaben verzichtet wird.
+> 3. Der lila Block **Text** verbraucht den meisten Programmspeicher. Bei vielen Blöcken kann der Compiler möglicherweise keine HEX Datei erzeugen.
 
 #### Bilder
 
