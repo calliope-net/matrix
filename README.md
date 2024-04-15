@@ -99,7 +99,6 @@ Die eingestellte *Display-Größe* entscheidet darüber, wieviel RAM reserviert 
 * Der Parameter *invert* stellt ein, ob die Pixel leuchten oder der Hintergrund. 
 * Mit *drehen* wird das Bild auf den Kopf gestellt, wenn das Display anders herum eingebaut ist.
 * Die *I²C-Adresse* muss nur umgestellt werden, wenn ein zweites Display angeschlossen wird.
-
 * Die optionalen Parameter können weg gelassen werden. Sie werden bei Bedarf mit dem + angezeigt.
 
 > Wenn zwei Displays angeschlossen sind, muss der Block **beim Start** zweimal aufgerufen werden, mit verschiedenen I²C-Adressen.
