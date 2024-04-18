@@ -140,7 +140,7 @@ namespace matrix { // geometrie.ts
     }
 
 
-    //% group="Analog Uhr in Matrix zeichnen" subcategory="Geometrie" deprecated=true
+    //% group="Analog Uhr in Matrix zeichnen" subcategory="Geometrie"
     //% block="zeichne Uhr Mittelpunkt x %x y %y (Radius 24) Stunde %hour Minute %minute" weight=1
     //% x.min=24 x.max=103 x.defl=30 
     //% y.min=23 y.max=103 y.defl=23
@@ -163,4 +163,3 @@ namespace matrix { // geometrie.ts
 
 
 } // geometrie.ts
-
