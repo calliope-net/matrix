@@ -178,7 +178,7 @@ Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
 > Mit dem oberen Block **zeichne Bild** muss jedes Image-Objekt (Variable) dann an einer bestimmten Position (x, y) in die Matrix gezeichnet werden.
 > Blöcke für eine Folge von Bildern (Text, Animation) befinden sich im Menüpunkt **[Bilder Array](#bilder-array)**.
 
-##### Bild in Matrix zeichnen
+##### ein Bild in Matrix zeichnen
 
 Block **zeichne Bild** (Image-Objekt, x, y, überschreiben, vergrößern x, y)
 
