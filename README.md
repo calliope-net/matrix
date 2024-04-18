@@ -360,6 +360,10 @@ Block **Linie** (von x, y, bis x, y, Pixel EIN/AUS)
 
 * Zeichnet eine Linie mit den angegebenen Koordinaten. Mit *Pixel* AUS werden die Pixel gelöscht.
 
+Block **Rechteck** (von x, y, bis x, y, Pixel EIN/AUS)
+
+* Zeichnet ein Rechteck mit den angegebenen Koordinaten. Mit *Pixel* AUS werden die Pixel gelöscht.
+
 Block **Kreis** (Mittelpunkt x, y, Radius, Pixel EIN/AUS)
 
 * Zeichnet einen Kreis mit den angegebenen Koordinaten. Mit *Pixel* AUS werden die Pixel gelöscht.
@@ -382,7 +386,7 @@ Block **60 Minuten** (Minute, Mittelpunkt x, y, Linie von, bis, Pixel EIN/AUS)
 
 ##### Analog Uhr in Matrix zeichnen
 
-Block **zeichne Uhr** (Mittelpunkt x, y, Stunde, Minute)
+Block **zeichne Uhr** (Mittelpunkt x, y, Radius, Stunde, Minute)
 
 * Verwendet die oben beschriebenen Funktionen, um eine komplette analoge Uhr zu zeichnen.
 
