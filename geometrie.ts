@@ -131,8 +131,8 @@ namespace matrix { // geometrie.ts
 
     //% group="Analog Uhr in Matrix zeichnen" subcategory="Geometrie"
     //% block="zeichne Uhr Mittelpunkt x %x y %y Radius %radius Stunde %hour Minute %minute" weight=2
-    //% x.min=24 x.max=103 x.defl=30 
-    //% y.min=23 y.max=103 y.defl=23
+    //% x.min=8 x.max=120 x.defl=24 
+    //% y.min=8 y.max=120 y.defl=23
     //% radius.min=8 radius.max=64 radius.defl=24
     //% inlineInputMode=inline
     export function writeClock(x: number, y: number, radius: number, hour: number, minute: number) {
@@ -153,7 +153,7 @@ namespace matrix { // geometrie.ts
 
     //% group="Analog Uhr in Matrix zeichnen" subcategory="Geometrie"
     //% block="zeichne Uhr Mittelpunkt x %x y %y (Radius 24) Stunde %hour Minute %minute" weight=1
-    //% x.min=24 x.max=103 x.defl=30 
+    //% x.min=24 x.max=103 x.defl=24 
     //% y.min=23 y.max=103 y.defl=23
     //% inlineInputMode=inline
     export function writeClock_radius24(x: number, y: number, hour: number, minute: number) {
