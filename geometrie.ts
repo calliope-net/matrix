@@ -6,7 +6,7 @@ namespace matrix { // geometrie.ts
 
 
     //% group="Linie, Fläche in Matrix zeichnen" subcategory="Geometrie"
-    //% block="Linie von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel" weight=3
+    //% block="Linie von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel" weight=6
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
     export function line(x0: number, y0: number, x1: number, y1: number, pixel?: boolean) {
@@ -27,6 +27,17 @@ namespace matrix { // geometrie.ts
             if (e2 > dy) { err += dy; x0 += sx; } // e_xy+e_x > 0
             if (e2 < dx) { err += dx; y0 += sy; } // e_xy+e_y < 0
         }
+    }
+
+    //% group="Linie, Fläche in Matrix zeichnen" subcategory="Geometrie"
+    //% block="Rechteck von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel" weight=5
+    //% pixel.shadow="toggleOnOff" pixel.defl=1
+    //% inlineInputMode=inline
+    export function rectangle(x0: number, y0: number, x1: number, y1: number, pixel?: boolean) {
+        line(x0, y0, x1, y0, pixel)
+        line(x1, y0, x1, y1, pixel)
+        line(x1, y1, x0, y1, pixel)
+        line(x0, y1, x0, y0, pixel)
     }
 
     //% group="Linie, Fläche in Matrix zeichnen" subcategory="Geometrie"
@@ -80,14 +91,14 @@ namespace matrix { // geometrie.ts
     //% inlineInputMode=inline
     export function hour_mark(hour: number, x: number, y: number, l0: number, l1: number, pixel?: boolean) {
         minute_mark(Math.imul(hour, 5), x, y, l0, l1, pixel)
-      /* 
-        if (between(hour, 0, 11))
-            minute_mark(hour * 5, x, y, l0, l1, pixel)
-        else if (between(hour, 12, 23))
-            minute_mark((hour - 12) * 5, x, y, l0, l1, pixel)
-        else
-            minute_mark(0, x, y, l0, l1, pixel)
-             */
+        /* 
+          if (between(hour, 0, 11))
+              minute_mark(hour * 5, x, y, l0, l1, pixel)
+          else if (between(hour, 12, 23))
+              minute_mark((hour - 12) * 5, x, y, l0, l1, pixel)
+          else
+              minute_mark(0, x, y, l0, l1, pixel)
+               */
     }
 
 
