@@ -231,12 +231,17 @@ Block *setze bild auf* **Bild 8x8 aus HEX** (Hexadezimalzahl)
 * Das Beispiel 427F406251494946 zeichnet die Zahl 12 auf 8 Pixel zusammen gedrückt. Dieses Sonderzeichen ist für die Analog Uhr geeignet.
 
 
-#### Bilder 8 | Bilder 16 | Bilder 32 | Bilder 64
+##### Image Objekte
 
-![](bilder16.png)
+Block *setze bild auf* **Bild 8x8** (MATRIX)
+
+* Hier wird die 8x8 Matrix angezeigt. Weitere Größen befinden sich in den folgenden Menüpunkten: 
+
+
+#### Bilder 8 16 | Bilder 32 | Bilder 64
 
 > In den Menüpunkten **Bilder xx** stehen Blöcke zur Verfügung, in die eigene Bilder verschiedener Größe mit dem MakeCode Editor gemalt werden können.
-> Die blauen Blöcke geben ein Image-Objekt zurück, das entweder einer Variablen *bild* zugewiesen wird, oder in einem der Blöcke **zeichne Bild**, **8x8 drehen** oder **Bild anhängen**
+> Die blauen Blöcke geben ein Image-Objekt zurück, das entweder einer Variablen *bild* zugewiesen wird, oder in einem der Blöcke **zeichne Bild**, **8x8 drehen** oder **Image[] anhängen**
 > direkt verwendet werden kann.
 
 Folgende Bild-Größen (in Pixel) stehen zum selbst malen zur Verfügung:
@@ -255,7 +260,6 @@ Folgende Bild-Größen (in Pixel) stehen zum selbst malen zur Verfügung:
 
 > Die Bilder (Image-Objekte) können aber auch im Menüpunkt **Bilder Array** im internen Array Image[] gesammelt werden.
 > Sie können dort über den Index einzeln abgerufen oder als Animation auf dem Display angezeigt werden.
-
 
 
 #### Bilder Array
