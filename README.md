@@ -1,11 +1,11 @@
 
-> Diese Seite bei [https://calliope-net.github.io/matrix/](https://calliope-net.github.io/matrix/) öffnen.
+Diese Seite bei [https://calliope-net.github.io/matrix/](https://calliope-net.github.io/matrix/) öffnen.
 
 ### Calliope I²C Erweiterung für OLED Displays 128x128 und 128x64 Pixel
 
 > speichert alle Pixel im RAM (2048 oder 1024 Byte), deshalb Calliope mini ab V2 erforderlich
 
-> zeichnet Linien, Kreise oder eine analoge Uhr
+> zeichnet Linien, Rechtecke, Kreise oder eine analoge Uhr
 
 > Bilder verschiedener Größe 5x8 bis 64x64 Pixel mit Blöcken selbst malen
 
@@ -27,7 +27,7 @@ Auf dem Foto läuft das folgende Programm mit Hardware v2 und den Erweiterungen:
 * [calliope-net/matrix](https://calliope-net.github.io/matrix)
 * [calliope-net/rtc-uhr](https://calliope-net.github.io/rtc-uhr)
 
-![](matrix_schnappschuss.png)
+![](mini-matrix-rtc-62.png)
 
 Die Erweiterung **calliope-net/matrix** unterstützt zwei OLED Displays gleichzeitig, folgende wurden getestet:
 
