@@ -244,7 +244,7 @@ Block *setze bild auf* **Bild 8x8** (MATRIX)
 > Die blauen Blöcke geben ein Image-Objekt zurück, das entweder einer Variablen *bild* zugewiesen wird, oder in einem der Blöcke **zeichne Bild**, **8x8 drehen** oder **Image[] anhängen**
 > direkt verwendet werden kann.
 
-Folgende Bild-Größen (in Pixel) stehen zum selbst malen zur Verfügung:
+Folgende Bild-Größen (Breite x Höhe in Pixel) stehen zum selbst Malen zur Verfügung:
 
 * Bild 5x8
 * Bild 8x8
@@ -266,10 +266,8 @@ Folgende Bild-Größen (in Pixel) stehen zum selbst malen zur Verfügung:
 
 ![](bilderarray.png)
 
-> Bilder-Array ist ein Array im RAM mit Elementen vom Typ Image. In den Blöcken ist dieses interne Array mit **Image[]** bezeichnet.
-> Image ist in MakeCode ein Typ. Ein Image-Object kann eine bestimmte Anzahl Pixel in Breite und Höhe speichern, also ein Bild.
-
-##### OLED Display I²C
+> Bilder-Array ist ein Array im RAM mit Elementen vom Typ Image. Image ist in MakeCode ein Typ. In den Blöcken ist dieses interne Array mit **Image[]** bezeichnet.
+> Ein Image-Objekt kann eine bestimmte Anzahl Pixel in Breite und Höhe speichern, also ein Bild. (1 Bit pro Pixel.)
 
 Block **I²C Animation auf Display anzeigen** (Image[], Position x, y, vergrößern x, y, Pause(ms), Zeilen von, bis, I²C-Adresse)
 
@@ -277,7 +275,7 @@ Block **I²C Animation auf Display anzeigen** (Image[], Position x, y, vergröß
 Es wird jeweils 1 Bild in die Matrix gezeichnet, **Matrix auf Display anzeigen** aufgerufen und eine Zeit in Millisekunden gewartet.
 Das wiederholt sich, bis alle Elemente aus dem Array Image[] abgearbeitet sind.
 
-* Als Parameter ist das interne Array Image[] eingestellt, es kann auch ein eigenes Array mit Bildern übergeben werden. *Position x, y* ist die linke obere Ecke,
+* Als Parameter ist das interne Array Image[] eingestellt. Es kann auch ein eigenes Array mit Bildern übergeben werden. *Position x, y* ist die linke obere Ecke,
 wo alle Bilder aus dem Array nacheinander in die Matrix gezeichnet werden. Dabei wird die volle Breite und Höhe jedes Bildes übertragen (bis zum Rand der Matrix).
 
 * Mit den Parametern *vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
@@ -285,11 +283,32 @@ So können kleine Bilder auch größer gezeichnet werden.
 
 * Der Parameter *Pause(ms)* legt fest, wie lange jedes Bild während der Animation angezeigt wird.
 
-* Die letzten Parameter *Zeilen von, bis* und *I²C-Adresse* entsprechen dem Block **Matrix auf Display anzeigen**.
+* Die letzten Parameter *Zeilen von, bis* und *I²C-Adresse* entsprechen dem Block **I²C Matrix auf Display anzeigen**.
 Damit kann verhindert werden, dass immer das gesamte Display über den I²C-Bus neu geschrieben wird, wenn die Bilder der Animation kleiner sind.
 Wenn die Bilder an Position x, y = (0,0) 8 Pixel hoch und nicht vergrößert sind, reicht es die Zeile 0 zu aktualisieren.
 
-##### Array (mehrere Bilder) in Matrix zeichnen
+
+##### Image[]: Array für Bilder
+
+Block **Image[] löschen**
+
+* Setzt das interne Array Image[] auf ein leeres Array mit 0 Elementen.
+
+Block **Image[] Länge**
+
+* Gibt die Anzahl der Bilder im internen Array zurück.
+
+Block **Image[] anhängen** (Image-Objekt)
+
+* Als Parameter ist ein Bild (Image-Objekt) zu übergeben, welches an das interne Array Image[] angehängt wird. Das kann eine - in den anderen
+Menüpunkten automatisch erzeugte - Variable *bild* sein oder direkt ein Bild-Block in dem die Pixel angeklickt werden können.
+
+Block *setze bild auf* **Image[]** (index)
+
+* Gibt ein Bild (ein Element aus dem Array Image[]) zurück und weist es der Variable *bild* zu.
+
+
+##### Image[] in Matrix zeichnen
 
 Block **zeichne Bilder** (Image[], Position x, y, Abstand x, y, überschreiben, vergrößern x, y)
 
@@ -306,24 +325,28 @@ Der Faktor gilt für alle Bilder im Array. Gegebenenfalls müssen die Parameter 
 
 > Um die in die Matrix gezeichneten Bilder auf dem Display anzuzeigen, muss noch der hellblaue Block **Matrix auf Display anzeigen** aufgerufen werden.
 
-##### Speicher für Bilder: Image[]
+Block **8x8 drehen** (Image-Objekt, drehen oder spiegeln)
 
-Block **Bild anhängen** (Image-Objekt)
+* Dieser Block kann in den Block darüber **zeichne Bilder** eingefügt werden, um alle Bilder in einem Array zu drehen oder zu spiegeln, bevor sie in die Matrix gezeichnet werden.
+* Das neue Bild hat immer die Größe 8x8 Pixel. War das Original größer, wird nur die linke obere Ecke verwendet.
+* Der Block **8x8 drehen** ist damit besonders für Text-Zeichen geeignet. Ziffern, Buchstaben u.a. sind 5x8 Images und werden auf 8x8 vergrößert (rechts 3x8 Pixel weißer Rand).
+* Diese Optionen stehen zur Verfügung: nicht drehen, links ↶ drehen, rechts ↷ drehen, halb ⤸ drehen, ↔ y spiegeln, ↕ x spiegeln.
 
-* Als Parameter ist ein Bild (Image-Objekt) zu übergeben, welches an das interne Array Image[] angehängt wird. Das kann eine - in den anderen
-Menüpunkten automatisch erzeugte - Variable *bild* sein oder direkt ein Bild-Block in dem die Pixel angeklickt werden können.
 
-Block **Bild lesen an index** (index)
+##### Text in Bilder 5x8 umwandeln
 
-* Gibt ein Bild (ein Element aus dem Array Image[]) zurück.
+Block **Image[] füllen aus Zahl/Zeit** (Text:any)
 
-Block **Image[] Länge**
+* Dieser Block schreibt Text nicht direkt in die Matrix, sondern Zeichen für Zeichen als Bild in Image[].
+* Hier werden wieder, um Programmcode zu sparen, nur 0 1 2 3 4 5 6 7 8 9 : ; < = > ? - . als Image generiert.
 
-* Gibt die Anzahl der Bilder im internen Array zurück.
+Block **Image[] füllen aus Text** (Text:any)
 
-Block **Image[] löschen**
+* Dieser lila Block schreibt Text nicht direkt in die Matrix, sondern Zeichen für Zeichen als Bild in Image[].
+* Die einzelnen Bilder der Buchstaben können wie Bilder behandelt und z.B. pixelgenau positioniert werden. Mit den **Text** Blöcken geht das nur Zeilen- und Spaltenweise.
+* In den Text können selbst gemalte Zeichen (griechische, römische, ...) eingefügt werden.
+* Es gibt unter EEPROM einen orange Block mit gleicher Funktion, der Programmspeicher spart (und noch mehr Zeichen ermöglicht).
 
-* Setzt das interne Array Image[] auf ein leeres Array mit 0 Elementen.
 
 ##### Animation Beispiele
 
