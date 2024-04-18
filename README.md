@@ -18,7 +18,7 @@ Diese Seite bei [https://calliope-net.github.io/matrix/](https://calliope-net.gi
 > zwei Displays mit verschiedenen I²C Adressen können verschiedene Bilder zeigen
 
 > optional: Qwiic EEPROM an I²C anstecken
-> * speichert ASCII Zeichensatz + Umlaute und spart Programmcode
+> * speichert ASCII Zeichensatz + Umlaute und spart Programmspeicher
 > * Bilder speichern und direkt aus dem EEPROM in die Matrix kopieren
 
 ![](matrix_foto.jpg)
@@ -147,9 +147,9 @@ Block **Zahl/Zeit** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, verg
 * Dieser Block schreibt Text in die Matrix. Der Parameter *Text* kann eine Zahl oder ein Datum (als String) sein.
 * Die weiteren Parameter sind im nächsten Block **zeichne Text** beschrieben.
 
-> Hier werden nur die Zeichen Leerzeichen 0 1 2 3 4 5 6 7 8 9 : ; < = > ? - . als Image generiert. Der Zweck ist, Programmcode zu sparen. Der Compiler meldet einen Fehler,
+> Hier werden nur die Zeichen Leerzeichen 0 1 2 3 4 5 6 7 8 9 : ; < = > ? - . als Image generiert. Der Zweck ist, Programmspeicher zu sparen. Der Compiler meldet einen Fehler,
 > wenn viele Blöcke benutzt werden und im Hintergrund der ganze ASCII Zeichensatz im Code steht. Wenn keine Buchstaben angezeigt werden sollen, ist dieser Block zu bevorzugen.
-> Der [orange **Text** Block aus **EEPROM**](#eeprom) kann den Programmcode komplett einsparen, wenn ein EEPROM angeschlossen ist.
+> Der [orange **Text** Block aus **EEPROM**](#eeprom) kann den Programmspeicher komplett einsparen, wenn ein EEPROM angeschlossen ist.
 
 Block **Text** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, vergrößern x, y)
 
@@ -338,7 +338,7 @@ Block **8x8 drehen** (Image-Objekt, drehen oder spiegeln)
 Block **Image[] füllen aus Zahl/Zeit** (Text:any)
 
 * Dieser Block schreibt Text nicht direkt in die Matrix, sondern Zeichen für Zeichen als Bild in Image[].
-* Hier werden wieder, um Programmcode zu sparen, nur 0 1 2 3 4 5 6 7 8 9 : ; < = > ? - . als Image generiert.
+* Hier werden wieder, um Programmspeicher zu sparen, nur 0 1 2 3 4 5 6 7 8 9 : ; < = > ? - . als Image generiert.
 
 Block **Image[] füllen aus Text** (Text:any)
 
@@ -412,7 +412,7 @@ Aktuell sind alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
 * Die anderen Parameter sind [weiter oben](#text-in-matrix-zeichnen) beschrieben.
 
 > Wenn ein EEPROM mit Zeichensatz angeschlossen ist, sollte ausschließlich der orange **Text** Block benutzt werden.
-> Der blaue und lila **Text** Block würden Speicherplatz verschwenden, der beim Programmcode fehlt.
+> Der blaue und lila **Text** Block würden Speicherplatz verschwenden, der beim Programmspeicher fehlt.
 > **Auf einem MakeCode Bildschirm sollten also nie lila und orange Blöcke gleichzeitig sein!**
 
 ##### Text in Bilder 5x8 umwandeln
