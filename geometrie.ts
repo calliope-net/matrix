@@ -75,33 +75,38 @@ namespace matrix { // geometrie.ts
 
 
     //% group="Uhr Zeiger in Matrix zeichnen" subcategory="Geometrie"
-    //% block="12 Stunden %hour Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel" weight=3
+    //% block="12 Stunden %hour Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel" weight=8
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
     export function hour_mark(hour: number, x: number, y: number, l0: number, l1: number, pixel?: boolean) {
+        minute_mark(Math.imul(hour, 5), x, y, l0, l1, pixel)
+      /* 
         if (between(hour, 0, 11))
             minute_mark(hour * 5, x, y, l0, l1, pixel)
         else if (between(hour, 12, 23))
             minute_mark((hour - 12) * 5, x, y, l0, l1, pixel)
         else
             minute_mark(0, x, y, l0, l1, pixel)
+             */
     }
 
 
     //% group="Uhr Zeiger in Matrix zeichnen" subcategory="Geometrie"
-    //% block="60 Minuten %minute Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel" weight=2
+    //% block="60 Minuten %minute Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel" weight=7
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
     export function minute_mark(minute: number, x: number, y: number, l0: number, l1: number, pixel?: boolean) {
-
-        if (between(minute, 0, 14))
-            minute += 45
-        else if (between(minute, 15, 59))
-            minute -= 15
-        else
-            minute = 45
-
-        let value = minute / 30 * Math.PI
+        /* 
+                if (between(minute, 0, 14))
+                    minute += 45
+                else if (between(minute, 15, 59))
+                    minute -= 15
+                else
+                    minute = 45
+        
+                let value = minute / 30 * Math.PI
+         */
+        let value = (minute + 45) / 30 * Math.PI
 
         line(
             x + Math.cos(value) * l0, // x0
@@ -112,7 +117,30 @@ namespace matrix { // geometrie.ts
         )
     }
 
+
     //% group="Analog Uhr in Matrix zeichnen" subcategory="Geometrie"
+    //% block="zeichne Uhr Mittelpunkt x %x y %y Radius %radius Stunde %hour Minute %minute" weight=2
+    //% x.min=24 x.max=103 x.defl=30 
+    //% y.min=23 y.max=103 y.defl=23
+    //% radius.min=8 radius.max=64 radius.defl=24
+    //% inlineInputMode=inline
+    export function writeClock(x: number, y: number, radius: number, hour: number, minute: number) {
+        rasterCircle(x, y, radius)
+
+        for (let ih = 0; ih <= 11; ih++) {
+            minute_mark(ih * 5, x, y, radius * 0.85, radius)
+        }
+
+        // Minutenzeiger
+        minute_mark(minute, x, y, 0, radius * 0.7)
+
+        // Stundenzeiger
+        minute_mark(Math.imul(hour, 5) + Math.idiv(minute, 12), x, y, 0, radius * 0.5)
+        // imul idiv Ergebnis ist 32 bit signed integer (hour * 5 + minute / 12)
+    }
+
+
+    //% group="Analog Uhr in Matrix zeichnen" subcategory="Geometrie" deprecated=true
     //% block="zeichne Uhr Mittelpunkt x %x y %y (Radius 24) Stunde %hour Minute %minute" weight=1
     //% x.min=24 x.max=103 x.defl=30 
     //% y.min=23 y.max=103 y.defl=23
@@ -132,6 +160,7 @@ namespace matrix { // geometrie.ts
         hour_mark(hour, x, y, 0, 10)
         minute_mark(minute, x, y, 0, 16)
     }
+
 
 } // geometrie.ts
 
