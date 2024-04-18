@@ -29,7 +29,7 @@ Auf dem Foto läuft das folgende Programm mit Hardware v2 und den Erweiterungen:
 
 ![](mini-matrix-rtc-62.png)
 
-Die Erweiterung **calliope-net/matrix** unterstützt zwei OLED Displays gleichzeitig, folgende wurden getestet:
+Die Erweiterung **calliope-net/matrix** unterstützt zwei OLED Displays gleichzeitig, folgende wurden getestet und können beliebig kombiniert werden:
 
 * [Grove - OLED Display 1.12 (SH1107) V3.0 - SPI/IIC -3.3V/5V](https://wiki.seeedstudio.com/Grove-OLED-Display-1.12-SH1107_V3.0/) 
 * [Grove - OLED Display 0.96 inch](https://wiki.seeedstudio.com/Grove-OLED_Display_0.96inch/) 
@@ -165,7 +165,8 @@ So bleibt der Hintergrund sichtbar (transparent).
 Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
 
 > Die lila Blöcke brauchen den Zeichensatz im Programmcode, den der Compiler mit in die HEX Datei einpackt. Diese wird oft zu groß für den Calliope v2.
-> Es gibt deshalb drei Blöcke zum Text schreiben. 1. Ist der EEPROM angeschlossen, sollte *ausschließlich* der [orange **Text** Block aus **EEPROM**](#eeprom) benutzt werden.
+> Es gibt deshalb drei Blöcke zum Text schreiben.
+> 1. Ist der EEPROM angeschlossen, sollte *ausschließlich* der [orange **Text** Block aus **EEPROM**](#eeprom) benutzt werden.
 > 2. Der blaue Block **Zahl/Zeit** braucht weniger Programmcode, weil auf die Buchstaben verzichtet wird.
 > 3. Der lila Block **Text** verbraucht den meisten Programmspeicher. Werden viele Blöcke in MakeCode benutzt, kann der Compiler möglicherweise keine HEX Datei erzeugen.
 
@@ -173,8 +174,9 @@ Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
 
 ![](bilder.png)
 
-> Im Menüpunkt *Bilder* können Bilder (Image-Objekte) aus verschiedenen Quellen erzeugt und in Variablen gespeichert werden.
-> Die Image-Objekte werden dann an einer bestimmten Position (x, y) in die Matrix gezeichnet.
+> Im Menüpunkt **Bilder** können Bilder (Image-Objekte) aus verschiedenen Quellen erzeugt und in Variablen gespeichert werden.
+> Mit dem oberen Block **zeichne Bild** muss jedes Image-Objekt (Variable) dann an einer bestimmten Position (x, y) in die Matrix gezeichnet werden.
+> Blöcke für eine Folge von Bildern (Text, Animation) befinden sich im Menüpunkt **[Bilder Array](#bilder-array)**.
 
 ##### Bild in Matrix zeichnen
 
