@@ -194,65 +194,41 @@ Block **8x8 drehen** (Image-Objekt, drehen oder spiegeln)
 
 * Dieser Block kann in den Block darüber **zeichne Bild** eingefügt werden, um ein *Image-Objekt* zu drehen oder zu spiegeln, bevor es in die Matrix gezeichnet wird.
 * Das neue Bild hat immer die Größe 8x8 Pixel. War das Original größer, wird nur die linke obere Ecke verwendet.
-* Der Block ist damit besonders für Text-Zeichen geeignet. Ziffern, Buchstaben u.a. sind 5x8 Images und werden auf 8x8 vergrößert (rechts 3 Pixel weißer Rand).
+* Der Block ist damit besonders für Text-Zeichen geeignet. Ziffern, Buchstaben u.a. sind 5x8 Images und werden auf 8x8 vergrößert (rechts 3x8 Pixel weißer Rand).
 * Diese Optionen stehen zur Verfügung: nicht drehen, links ↶ drehen, rechts ↷ drehen, halb ⤸ drehen, ↔ y spiegeln, ↕ x spiegeln.
 
-##### Text in Matrix zeichnen
 
-Block **zeichne Zahl/Zeit** (Variable, x, y, Abstand x, y, überschreiben, vergrößern x, y)
+##### ein Zeichen in Bild 5x8 umwandeln
 
-* Dieser Block kann mehrere Zeichen in die Matrix schreiben. Der Parameter *variable* kann eine Zahl oder ein Datum (als String) sein.
-* Die weiteren Parameter sind im nächsten Block **zeichne Text** beschrieben.
-
-> Hier werden nur die Zeichen 0 1 2 3 4 5 6 7 8 9 : . - als Image generiert. Der Zweck ist, Programmcode zu sparen. Der Compiler meldet einen Fehler,
-> wenn viele Blöcke benutzt werden und im Hintergrund der ganze ASCII Zeichensatz im Code steht. Wenn keine Buchstaben angezeigt werden sollen, ist dieser Block zu bevorzugen.
-> Werden auch Buchstaben angezeigt, sollte dieser Block nicht und stattdessen nur der folgende Block benutzt werden.
-
-Block **zeichne Text** (Text, x, y, Abstand x, y, überschreiben, vergrößern x, y)
-
-* Dieser Block kann mehrere Zeichen in die Matrix schreiben. Der Parameter *Text* kann alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
-* Die Koordinaten *x, y* sind die linke obere Ecke, wo das erste Zeichen in die Matrix gezeichnet wird.
-* Die optionalen Parameter *Abstand x, y* haben die Standardwerte x=8 und y=0. Das ist der Abstand zum nächsten Zeichen vom Beginn des letzten Zeichens.
-Die Standardwerte sind für Text geeignet. Die Zeichen können aber in verschiedene Richtungen, mit negativem Abstand auch rückwärts gezeichnet werden.
-Weil alle Text-Zeichen nur 5 Pixel breit sind, können sie auch mit kleinerem Abstand als 8 gezeichnet werden.
-* Die Parameter *überschreiben*, *vergrößern x, y* sind oben beim Block **zeichne Bild** erklärt. Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
-
-
-##### Bild 5x8 aus Text Zeichen
-
-> Die folgenden Blöcke generieren ein Image-Objekt und weisen das direkt einer Variablen zu. Der Name *bild* wird bei wiederholter Verwendung mit einer Ziffer ergänzt,
-> so dass immer neue Variablen-Namen entstehen. Diese Variablen sind im Menüpunkt *Variablen* zu finden und können in Blöcken wie **zeichne Bild**, **8x8 drehen** oder **Bild anhängen**
+> Die folgenden Blöcke generieren ein Image-Objekt und weisen das direkt einer Variable zu. Der Name der Variable *bild* wird bei wiederholter Verwendung mit einer Ziffer ergänzt,
+> so dass immer neue Variablen-Namen entstehen. Diese Variablen sind im Menüpunkt *Variablen* zu finden und können in Blöcken wie **zeichne Bild**, **8x8 drehen** oder **Image[] anhängen**
 > verwendet werden.
 
-> Nachfolgend sind nur die blauen Blöcke beschrieben, die ein Image-Objekt zurück geben. Diese blauen Blöcke können auch aus **setze bild auf** heraus geschoben und direkt verwendet werden.
+Block *setze bild auf* **'Leerzeichen'** (zeichen)
 
-Block **Bild aus Ziffer** (ziffer, index)
+* Generiert aus einem *zeichen* in der DropDownList ein Bild 5x8 Pixel.
+* Hier werden nur die Zeichen Leerzeichen 0 1 2 3 4 5 6 7 8 9 : ; < = > ? - . als Image generiert, um Programmcode zu sparen.
 
-* Generiert aus einer *ziffer* ein Bild 5x8 Pixel.
-* Um alle Ziffern, Vorzeichen und Dezimalpunkt einer Zahl in Bilder zu konvertieren, können (in einer Schleife) mit *index* alle Ziffen einzeln ausgewählt werden.
+Block *setze bild auf* **Bild aus ASCII-Code** (charCode)
 
-Block **Bild aus Zeichen** (ASCII) (text, index)
+* Dieser lila Block generiert aus allen 96 ASCII Zeichen (*charCode* 32-127) und Umlauten ein Bild 5x8 Pixel.
+* Es gibt unter EEPROM einen orange Block mit gleicher Funktion, der Programmcode spart (und noch mehr Zeichen ermöglicht).
 
-* Generiert aus einem Zeichen in *text* ein Bild 5x8 Pixel. Mit *index* wird das Zeichen ausgewählt.
-
-Block **Bild aus ASCII-Code** (charCode)
-
-* Generiert aus dem *charCode* ein Bild 5x8 Pixel mit dem entsprechenden ASCII-Zeichen. Gültige Wert für *charCode* sind 32 bis 127.
 
 ##### Bild aus Hexadezimalzahl
 
 > Eine Ziffer einer Hexadezimalzahl kann 16 Werte annehmen: (0 1 2 3 4 5 6 7 8 9 A B C D E F). Das entspricht genau 4 Bit. Für ein Byte (8 Bit) werden 2 HEX-Ziffen geschrieben.
 > 5 Byte entstehen also aus 10 HEX-Ziffern und 8 Byte entstehen aus 16 HEX-Ziffern.
 
-Block **Bild 5x8 aus HEX** (Hexadezimalzahl)
+Block *setze bild auf* **Bild 5x8 aus HEX** (Hexadezimalzahl)
 
 * Generiert aus 5 Byte in HEX-Darstellung ein Bild 5x8 Pixel. Das erste Byte bildet den linken Rand. Bit 0 ist oben, Bit 7 ist unten. Die anderen Bytes folgen rechts daneben.
 * Das Beispiel 7F09192946 zeichnet den Buchstabe R. 7F zeichnet den durchgehenden Strich 7 Pixel hoch. Das untere Pixel ist bei Text-Zeichen immer 0 (Zeilenabstand).
 
-Block **Bild 8x8 aus HEX** (Hexadezimalzahl)
+Block *setze bild auf* **Bild 8x8 aus HEX** (Hexadezimalzahl)
 
 * Generiert aus 8 Byte in HEX-Darstellung ein Bild 8x8 Pixel. Dazu werden 16 HEX-Ziffern verarbeitet.
-* Das Beispiel 427F406251494946 zeichnet die Zahl 12 auf 8 Pixel zusammen gedrückt. Dieses Sonderzeichen wird in der Analog Uhr angezeigt.
+* Das Beispiel 427F406251494946 zeichnet die Zahl 12 auf 8 Pixel zusammen gedrückt. Dieses Sonderzeichen ist für die Analog Uhr geeignet.
 
 
 #### Bilder 8 | Bilder 16 | Bilder 32 | Bilder 64
