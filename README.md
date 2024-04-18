@@ -164,10 +164,10 @@ So bleibt der Hintergrund sichtbar (transparent).
 * Mit den Parametern *vergrößern x, y* kann jedes Pixel mit dem Faktor \*1 \*2 \*3 bis \*8 vervielfacht werden, jede Richtung x und y getrennt.
 Bei Vergrößerung >1 müssen die Parameter *Abstand x, y* angepasst werden.
 
-> Die lila Blöcke brauchen den Zeichensatz im Programmcode, den der Compiler mit in die HEX Datei einpackt. Diese wird oft zu groß für den Calliope v2.
+> Die lila Blöcke brauchen den Zeichensatz im Programmspeicher, den der Compiler mit in die HEX Datei einpackt. Diese wird oft zu groß für den Calliope v2.
 > Es gibt deshalb drei Blöcke zum Text schreiben.
 > 1. Ist der EEPROM angeschlossen, sollte *ausschließlich* der [orange **Text** Block aus **EEPROM**](#eeprom) benutzt werden.
-> 2. Der blaue Block **Zahl/Zeit** braucht weniger Programmcode, weil auf die Buchstaben verzichtet wird.
+> 2. Der blaue Block **Zahl/Zeit** braucht weniger Programmspeicher, weil auf die Buchstaben verzichtet wird.
 > 3. Der lila Block **Text** verbraucht den meisten Programmspeicher. Werden viele Blöcke in MakeCode benutzt, kann der Compiler möglicherweise keine HEX Datei erzeugen.
 
 #### Bilder
@@ -207,12 +207,12 @@ Block **8x8 drehen** (Image-Objekt, drehen oder spiegeln)
 Block *setze bild auf* **'Leerzeichen'** (zeichen)
 
 * Generiert aus einem *zeichen* in der DropDownList ein Bild 5x8 Pixel.
-* Hier werden nur die Zeichen Leerzeichen 0 1 2 3 4 5 6 7 8 9 : ; < = > ? - . als Image generiert, um Programmcode zu sparen.
+* Hier werden nur die Zeichen Leerzeichen 0 1 2 3 4 5 6 7 8 9 : ; < = > ? - . als Image generiert, um Programmspeicher zu sparen.
 
 Block *setze bild auf* **Bild aus ASCII-Code** (charCode)
 
 * Dieser lila Block generiert aus allen 96 ASCII Zeichen (*charCode* 32-127) und Umlauten ein Bild 5x8 Pixel.
-* Es gibt unter EEPROM einen orange Block mit gleicher Funktion, der Programmcode spart (und noch mehr Zeichen ermöglicht).
+* Es gibt unter EEPROM einen orange Block mit gleicher Funktion, der Programmspeicher spart (und noch mehr Zeichen ermöglicht).
 
 
 ##### Bild aus Hexadezimalzahl
