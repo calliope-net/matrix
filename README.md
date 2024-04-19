@@ -17,9 +17,12 @@ Diese Seite bei [https://calliope-net.github.io/matrix/](https://calliope-net.gi
 
 > zwei Displays mit verschiedenen I²C Adressen können verschiedene Bilder zeigen
 
-> optional: Qwiic EEPROM an I²C anstecken
+> optional: Qwiic EEPROM 64 KByte an I²C anstecken
 > * speichert ASCII Zeichensatz + Umlaute und spart Programmspeicher
-> * Bilder speichern und direkt aus dem EEPROM in die Matrix kopieren
+> * kann 256 Zeichen je 8x8 Pixel speichern (anstatt 96 Zeichen je 5x8 Pixel)
+> * viele Bilder speichern und direkt aus dem EEPROM in die Matrix kopieren
+> * umgekehrt den Inhalt der Matrix im EEPROM speichern und wieder verwenden
+> * EEPROM Blöcke sind in der Erweiterung **calliope-net/matrix** enthalten
 
 ![](matrix_foto.jpg)
 
