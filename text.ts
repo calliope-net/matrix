@@ -238,7 +238,6 @@ namespace matrix { // text.ts
 
 
     export function image5x8fromString(s5Byte: string): Image {
-
         let i5x8 = matrix5x8(`
             . . . . .
             . . . . .
@@ -249,13 +248,27 @@ namespace matrix { // text.ts
             . . . . .
             . . . . .
             `)
-        for (let iy = 0; iy < i5x8.height(); iy++) {
-            for (let ix = 0; ix < i5x8.width(); ix++) {
+        for (let iy = 0; iy < i5x8.height(); iy++) 
+            for (let ix = 0; ix < i5x8.width(); ix++) 
                 i5x8.setPixel(ix, iy, (s5Byte.charCodeAt(ix) & 2 ** (iy & 7)) != 0)
-                // i5x8.setPixel(ix, iy, (bu.getUint8(ix) & 2 ** (iy & 7)) != 0)
-            }
-        }
         return i5x8
+    }
+
+    export function image8x8fromBuffer(bu8: Buffer): Image {
+        let i8x8 = matrix8x8(`            
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        . . . . . . . .
+        `)
+        for (let iy = 0; iy < i8x8.height(); iy++)
+            for (let ix = 0; ix < i8x8.width(); ix++)
+                i8x8.setPixel(ix, iy, (bu8.getUint8(ix) & 2 ** (iy & 7)) != 0)
+        return i8x8
     }
 
 

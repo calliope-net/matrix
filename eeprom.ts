@@ -30,18 +30,18 @@ namespace matrix { // eeprom.ts
     //% inlineInputMode=inline
     export function writeTextEEPROM(row: number, col: number, text: any, dx = 8, dy = 0, ut = eTransparent.u, fx = 1, fy?: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50) {
         if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
-        //let len = end - col + 1
+
         if (between(row, 0, qMatrix.length - 1) && between(col, 0, 24)) {
-            let txt = convertToText(text)// formatText(text, len, align)
+            let txt = convertToText(text)
             for (let j = 0; j < txt.length; j++) {
-                writeImage(get5x8EEPROMImage(txt.charCodeAt(j), eepromStartadresse, i2c), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
+                writeImage(get8x8EEPROMImage(txt.charCodeAt(j), eepromStartadresse, i2c), col * 8 + j * dx, row * 8 + j * dy, ut, fx, fy)
             }
         }
     }
 
 
 
-    //% group="Text in Bilder 5x8 umwandeln" color="#FF7F3F" subcategory="EEPROM"
+    //% group="Text in Bilder 8x8 umwandeln" color="#FF7F3F" subcategory="EEPROM"
     //% block="Image[] füllen aus Text %text || %eepromStartadresse %i2c" weight=5
     //% text.shadow="matrix_text"
     //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
@@ -49,28 +49,32 @@ namespace matrix { // eeprom.ts
     export function imageArrayEEPROM(text: any, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50) {
         if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
         let txt = convertToText(text)
-        // let images: Image[] = []
+
         clearImages()
         for (let j = 0; j < txt.length; j++) {
-            pushImage(get5x8EEPROMImage(txt.charCodeAt(j), eepromStartadresse, i2c))
+            pushImage(get8x8EEPROMImage(txt.charCodeAt(j), eepromStartadresse, i2c))
         }
-        // return images
-        //writeImageArray(ia, x, y, dx, dy, ut, fx, fy)
     }
 
 
-    //% group="Text in Bilder 5x8 umwandeln" color="#FF7F3F" subcategory="EEPROM"
+    //% group="Text in Bilder 8x8 umwandeln" color="#FF7F3F" subcategory="EEPROM"
     //% block="Bild aus ASCII-Code %charCode || %eepromStartadresse %i2c" weight=4
     //% charCode.min=32 charCode.max=127 charCode.defl=48
     //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
     //% blockSetVariable=bild
-    export function get5x8EEPROMImage(charCode: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50): Image {
+    export function get8x8EEPROMImage(charCode: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50): Image {
+        if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
+        return image8x8fromBuffer(i2cReadEEPROM(eepromStartadresse + charCode * 8, 8, i2c))
+    }
+
+
+    /* export function get5x8EEPROMImage(charCode: number, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50): Image {
         if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
         let bu = i2cReadEEPROM(eepromStartadresse + charCode * 8 + 1, 5, i2c)
         return image5x8fromString(bu.toString())
         //let bu = i2cReadEEPROM(eepromStartadresse + charCode * 8, 8, i2c)
         //return image5x8fromString(bu.toString().substr(1, 5))
-    }
+    } */
 
 
 
@@ -89,7 +93,7 @@ namespace matrix { // eeprom.ts
         toPage = Math.constrain(toPage, fromPage, qMatrix.length - 1)
 
         for (let page = fromPage; page <= toPage; page++) {// kopiert bu in eine Zeile der Matrix ab 7
-            qMatrix[page].write(cOffset, i2cReadEEPROM(eepromStartadresse + (page - fromPage) * 128, 128, i2c)) 
+            qMatrix[page].write(cOffset, i2cReadEEPROM(eepromStartadresse + (page - fromPage) * 128, 128, i2c))
             qChangedPages[page] = true
         }
         //fillMatrix(page, page, i2cReadEEPROM(eepromStartadresse + (page - fromPage) * 128, 128, i2c))
@@ -104,17 +108,18 @@ namespace matrix { // eeprom.ts
     export function writeCharsetEEPROM() {
         // charCode 0..127 in Matrix Zeilen 0..7
         for (let y = 0; y <= 7; y++)
-            for (let x = 0; x <= 15; x++)
-                writeImage(get5x8EEPROMImage(y * 16 + x), 1 + x * 8, y * 8)
-        // images.push(get5x8EEPROMImage(i * 16 + j))
-        //  writeImageArray(images, 1, i * 8, 8)
+            for (let x = 0; x <= 15; x++) {
+                writeImage(get8x8EEPROMImage(y * 16 + x), x * 8, y * 8)
+                //writeImage(get5x8EEPROMImage(y * 16 + x), 1 + x * 8, y * 8)
+            }
 
         // charCode ab 128 in Matrix Zeilen 8..15 (nur im 128x128 Display zu sehen)
         let s = "ÄÖÜäöüß€°" // C4 D6 DC E4 F6 FC DF (20)AC B0
         let charCode: number
         for (let j = 0; j < s.length; j++) {
             charCode = s.charCodeAt(j)
-            writeImage(get5x8EEPROMImage(charCode), 1 + (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
+            writeImage(get8x8EEPROMImage(charCode), (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
+            //writeImage(get5x8EEPROMImage(charCode), 1 + (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
         }
     }
 
