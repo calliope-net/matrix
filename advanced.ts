@@ -62,13 +62,22 @@ namespace matrix { // advanced.ts
     }
 
     //% group="Funktionen" advanced=true
-    //% block="wandle %pNumber um in HEX %pFormat" weight=4
-    //% pFormat.defl=NumberFormat.UInt16BE
-    export function formatHex(pNumber: number, pFormat: NumberFormat) {
-        let bu = Buffer.create(Buffer.sizeOfNumberFormat(pFormat))
-        bu.setNumber(pFormat, 0, pNumber)
+    //% block="wandle %pNumber um in HEX %format" weight=4
+    //% format.defl=NumberFormat.UInt16BE
+    export function formatHex(pNumber: number, format: NumberFormat) {
+        let bu = Buffer.create(Buffer.sizeOfNumberFormat(format))
+        bu.setNumber(format, 0, pNumber)
         return bu.toHex()
     }
+
+    //% group="Funktionen" advanced=true
+    //% block="fromHex %hex %format" weight=3
+    //% hex.defl="F800"
+    //% format.defl=NumberFormat.UInt16BE
+    export function fromHex(hex: string, format: NumberFormat) {
+        return Buffer.fromHex(hex).getNumber(format, 0)
+    }
+
 
     //% group="Funktionen" advanced=true
     //% block="π" weight=2

@@ -141,7 +141,7 @@ namespace matrix { // eeprom.ts
 
 
 
-    // ========== group="EEPROM aus Matrix brennen" color="#FF7F3F" subcategory="EEPROM"
+    // ========== group="Zeilen aus Matrix auf EEPROM speichern" color="#FF7F3F" subcategory="EEPROM"
 
     //% group="Zeilen aus Matrix auf EEPROM speichern" color="#FF7F3F" subcategory="EEPROM"
     //% block="EEPROM ab %hex Zeilen %fromPage - %toPage Bytes %length Code %code || %i2c"
@@ -166,5 +166,28 @@ namespace matrix { // eeprom.ts
             return false // nicht programmiert, weil nicht alle Bedingungen erfüllt
     }
 
+
+
+    // ==========  group="EEPROM schreiben und lesen" color="#FF7F3F" subcategory="EEPROM"
+
+    //% group="EEPROM schreiben und lesen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="EEPROM 1 Byte schreiben Adresse %adr Byte %byte || %i2c"
+    //% byte.min=0 byte.max=255
+    export function progEEPROM(adr: number, byte: number, i2c = eI2Ceeprom.EEPROM_x50) {
+        let bu = Buffer.create(3)
+        bu.setNumber(NumberFormat.UInt16BE, 0, adr)
+        bu.setUint8(2, byte)
+        if (pins.i2cWriteBuffer(i2c, bu) != 0) { // schreibt diese Bytes ab Startadresse in EEPROM
+            basic.showNumber(i2c) // bei I²C Fehler die I²C Adresse anzeigen
+            return false // und Abbruch
+        } else
+            return true
+    }
+
+    //% group="EEPROM schreiben und lesen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="EEPROM 1 Byte lesen Adresse %adr || %i2c"
+    export function readEEPROM(adr: number, i2c = eI2Ceeprom.EEPROM_x50) {
+        return i2cReadEEPROM(adr, 1, i2c).getUint8(0)
+    }
 
 } // eeprom.ts
