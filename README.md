@@ -476,6 +476,7 @@ Block **EEPROM ab** (EEPROM Startadresse, Zeilen von, bis, Bytes, Code, I²C Adr
 > Mit dem folgenden MakeCode Programm kann der Zeichensatz aus dem Programmspeicher in einen EEPROM programmiert werden.
 * Das Programmieren würde auch ohne angeschlossenes Display funktionieren, weil nur die Matrix im RAM als Zwischenspeicher gebraucht wird.
 * Wichtig ist **beim Start 128x128** einzustellen, damit die Matrix mit maximaler Größe 2KByte angelegt wird.
+* **Knopf A+B geklickt** programmiert den EEPROM. Bei Erfolg leuchtet die RGB-LED grün.
 * **Knopf B geklickt** schreibt das Ergebnis vom Leertest auf das Display. Leer ist der EEPROM, wenn hinter jeder Adresse 128 steht. (Alle 128 Bytes haben den Wert FF bzw. alle Bits im EEPROM sind 1.)
 
 ![](mini-matrix-eeprom-prog-42.png)
