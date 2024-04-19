@@ -446,7 +446,34 @@ Block **zeichne aus EEPROM** (EEPROM Startadresse, Zeilen von, bis, I²C Adresse
 
 ##### Test Funktionen
 
+Block **zeichne alle Text-Zeichen vom EEPROM in Matrix**
+
+* Schreibt alle Zeichen mit den Zeichencodes 0 bis 127 in die Matrix. Das sind die ASCII-Zeichen.
+* Ist das große Display 128x128 eingestellt, werden auch die Zeichencodes 128 bis 255 sichtbar.
+
+Block **vergleiche 128 Byte ab** (EEPROM Startadresse, Byte, I²C Adresse)
+
+* Damit kann getestet werden, ob der Adressbereich im EEPROM leer ist.
+* Es werden die Bytes im EEPROM gezählt, die gleich dem angegebenen Byte sind.
+
+Block **F800**
+
+* Gibt die Dezimalzahl zur Hexadezimalzahl zurück.
+
+
 ##### Zeilen aus Matrix im EEPROM speichern
+
+Block **EEPROM ab** (EEPROM Startadresse, Zeilen von, bis, Bytes, Code, I²C Adresse)
+
+* Damit kann der aktuelle Inhalt der Matrix in den EEPROM programmiert werden. Bei Erfolg gibt die Funktion true zurück.
+* Damit das Programmieren nicht unbeabsichtigt passiert, werden alle Parameter geprüft.
+* Die *EEPROM Startadresse* ist als HEX-String einzugeben. Diese muss ein Vielfaches von 128 sein.
+* Die Anzahl *Bytes* wird ab der Startadresse in den EEPROM geschrieben. Bytes muss eine Zahl zwischen 1 und 128 sein.
+* *Zeilen von, bis* ist die Quelle der Daten in der Matrix. Es wird jede Zeile von links gelesen bis zur Anzahl *Bytes*.
+* Bei *Code* muss der Dezimalwert der *EEPROM Startadresse* wiederholt werden.
+* Ist ein Parameter ungültig oder unkompatibel, oder bei Fehler auf dem I²C-Bus, gibt die Funktion false zurück.
+
+![](mini-matrix-eeprom-prog-42.png)
 
 
 ### Erweiterungen
