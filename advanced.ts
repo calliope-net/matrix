@@ -83,7 +83,8 @@ namespace matrix { // advanced.ts
         let charCode: number
         for (let j = 0; j < s.length; j++) {
             charCode = s.charCodeAt(j)
-            writeImage(get5x8CharImage(charCode), (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
+            writeImage(get5x8CharImage(charCode), (charCode & 0x0F) << 3, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
+            //writeImage(get5x8CharImage(charCode), (charCode & 0x0F) * 8, (charCode & 0xF0) >>> 1) // y Bit 7654 * 8 = /2 = 1 Bit nach rechts
         }
     }
 
