@@ -180,8 +180,10 @@ namespace matrix { // eeprom.ts
         if (pins.i2cWriteBuffer(i2c, bu) != 0) { // schreibt diese Bytes ab Startadresse in EEPROM
             basic.showNumber(i2c) // bei I²C Fehler die I²C Adresse anzeigen
             return false // und Abbruch
-        } else
+        } else {
+            control.waitMicros(1000)
             return true
+        }
     }
 
     //% group="EEPROM schreiben und lesen" color="#FF7F3F" subcategory="EEPROM"
