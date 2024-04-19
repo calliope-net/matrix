@@ -3,19 +3,13 @@ Diese Seite bei [https://calliope-net.github.io/matrix/](https://calliope-net.gi
 
 ### Calliope I²C Erweiterung für OLED Displays 128x128 und 128x64 Pixel
 
-> speichert alle Pixel im RAM (2048 oder 1024 Byte), deshalb Calliope mini ab V2 erforderlich
-
-> zeichnet Linien, Rechtecke, Kreise oder eine analoge Uhr
-
-> Bilder verschiedener Größe 5x8 bis 64x64 Pixel mit Blöcken selbst malen
-
-> Text pixelgenau positionieren, drehen, spiegeln, in verschiedene Richtungen zeichnen
-
-> Bilder (auch Text-Zeichen sind Bilder) vergrößern (in x und y Richtung getrennt strecken)
-
-> mehrere Bilder als Animation anzeigen
-
-> zwei Displays mit verschiedenen I²C Adressen können verschiedene Bilder zeigen
+* speichert alle Pixel im RAM (2048 oder 1024 Byte), deshalb Calliope mini ab V2 erforderlich
+* zeichnet Linien, Rechtecke, Kreise oder eine analoge Uhr
+* Bilder verschiedener Größe 5x8 bis 64x64 Pixel mit Blöcken selbst malen
+* Text pixelgenau positionieren, drehen, spiegeln, in verschiedene Richtungen zeichnen
+* Bilder (auch Text-Zeichen sind Bilder) vergrößern (in x und y Richtung getrennt strecken)
+* mehrere Bilder als Animation anzeigen
+* zwei Displays mit verschiedenen I²C Adressen können verschiedene Bilder zeigen
 
 > optional: Qwiic EEPROM 64 KByte an I²C anstecken
 > * speichert ASCII Zeichensatz + Umlaute und spart Programmspeicher
