@@ -475,6 +475,7 @@ Block **EEPROM ab** (EEPROM Startadresse, Zeilen von, bis, Bytes, Code, I²C Adr
 
 > Mit dem folgenden MakeCode Programm kann der Zeichensatz aus dem Programmspeicher in einen EEPROM programmiert werden.
 * Das Programmieren würde auch ohne angeschlossenes Display funktionieren, weil nur die Matrix im RAM als Zwischenspeicher gebraucht wird.
+Wichtig ist **beim Start 128x128** einzustellen, damit auch die Umlaute mit übertragen werden.
 
 ![](mini-matrix-eeprom-prog-42.png)
 
