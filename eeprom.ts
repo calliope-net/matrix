@@ -181,7 +181,7 @@ namespace matrix { // eeprom.ts
             basic.showNumber(i2c) // bei I²C Fehler die I²C Adresse anzeigen
             return false // und Abbruch
         } else {
-            control.waitMicros(1000)
+            control.waitMicros(10000) // 10ms
             return true
         }
     }
