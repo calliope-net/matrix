@@ -154,8 +154,6 @@ namespace matrix { // image.ts
     //% charCode.min=32 charCode.max=127 charCode.defl=48
     //% blockSetVariable=bild
     export function asciiImage(charCode: number): Image {
-        // return bufferImage5x8(getUTF8_5x8(charCode))
-
         return get5x8CharImage(charCode)
     }
 
