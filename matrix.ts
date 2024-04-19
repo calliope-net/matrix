@@ -15,6 +15,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
     // ========== Buffer ==========
     export let qMatrix: Buffer[] = [] // leeres Array Elemente Typ Buffer
+    export let qChangedPages: boolean[] = []
 
     export enum ePages {
         //% block="128x64"
@@ -57,6 +58,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         // pro Page einen Buffer(7+128) an Array anfügen (push)
         if (qMatrix.length < pPages) {
             qMatrix = []
+            qChangedPages = []
             for (let page = 0; page < pPages; page++) { // Page 0..15 oder 0..7
                 //basic.showNumber(page)
                 bu = Buffer.create(cOffset + cx)
@@ -76,6 +78,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
                 bu.setUint8(6, eCONTROL.x40_Data) // CONTROL Byte 0x40: Display Data
 
                 qMatrix.push(bu) // Array aus 8 oder 16 Buffern je 128 Byte
+                qChangedPages.push(false)
             }
         }
 
@@ -120,7 +123,21 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
         for (let page = fromPage; page <= toPage; page++) {
             i2cWriteBuffer(i2c, qMatrix[page])
+            qChangedPages[page] = false
             //control.waitMicros(50)
+        }
+        control.waitMicros(50)
+    }
+
+
+    //% group="Hilfe: calliope-net.github.io/matrix" color="#007FFF" advanced=true
+    //% block="I²C Matrix auf Display anzeigen (nur geänderte Zeilen) || %i2c" weight=5
+    export function displayMatrixChangedPages(i2c = eI2C.I2C_x3C) {
+        for (let page = 0; page < (i2c == eI2C.I2C_x3D ? qPages3D : qPages3C); page++) {
+            if (qChangedPages[page]) {
+                i2cWriteBuffer(i2c, qMatrix[page])
+                qChangedPages[page] = false
+            }
         }
         control.waitMicros(50)
     }
@@ -141,8 +158,10 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     export function clearMatrix(fromPage = 0, toPage = 15) {
         fromPage = Math.constrain(fromPage, 0, qMatrix.length - 1)
         toPage = Math.constrain(toPage, fromPage, qMatrix.length - 1)
-        for (let page = fromPage; page <= toPage; page++) // löscht eine Zeile der Matrix ab 7 bis zum Ende
+        for (let page = fromPage; page <= toPage; page++) {// löscht eine Zeile der Matrix ab 7 bis zum Ende
             qMatrix[page].fill(0, cOffset)
+            qChangedPages[page] = true
+        }
         // fillMatrix(fromPage, toPage)
     }
 
@@ -152,11 +171,13 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     export function setPixel(x: number, y: number, pixel: boolean) {
         if (between(x, 0, cx - 1) && between(y, 0, qMatrix.length * 8 - 1)) {
+            let page = y >> 3 // um 3 Bit nach rechts entspricht Division durch 8
             let exp = y & 7 // bitwise AND letze 3 Bit = 0..7
             if (pixel)
-                qMatrix[y >> 3][cOffset + x] |= (2 ** exp) // um 3 Bit nach rechts entspricht Division durch 8
+                qMatrix[page][cOffset + x] |= (2 ** exp)
             else
-                qMatrix[y >> 3][cOffset + x] &= ~(2 ** exp)
+                qMatrix[page][cOffset + x] &= ~(2 ** exp)
+            qChangedPages[page] = true
         }
     }
 

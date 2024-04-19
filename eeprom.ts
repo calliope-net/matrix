@@ -88,8 +88,10 @@ namespace matrix { // eeprom.ts
         fromPage = Math.constrain(fromPage, 0, qMatrix.length - 1) // qMatrix.length ist die Anzahl der Pages 8 oder 16
         toPage = Math.constrain(toPage, fromPage, qMatrix.length - 1)
 
-        for (let page = fromPage; page <= toPage; page++) // kopiert bu in eine Zeile der Matrix ab 7
+        for (let page = fromPage; page <= toPage; page++) {// kopiert bu in eine Zeile der Matrix ab 7
             qMatrix[page].write(cOffset, i2cReadEEPROM(eepromStartadresse + (page - fromPage) * 128, 128, i2c)) 
+            qChangedPages[page] = true
+        }
         //fillMatrix(page, page, i2cReadEEPROM(eepromStartadresse + (page - fromPage) * 128, 128, i2c))
     }
 
