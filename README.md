@@ -473,6 +473,9 @@ Block **EEPROM ab** (EEPROM Startadresse, Zeilen von, bis, Bytes, Code, I²C Adr
 * Bei *Code* muss der Dezimalwert der *EEPROM Startadresse* wiederholt werden.
 * Ist ein Parameter ungültig oder unkompatibel, oder bei Fehler auf dem I²C-Bus, gibt die Funktion false zurück.
 
+> Mit dem folgenden MakeCode Programm kann der Zeichensatz aus dem Programmspeicher in einen EEPROM programmiert werden.
+* Das Programmieren würde auch ohne angeschlossenes Display funktionieren, weil nur die Matrix im RAM als Zwischenspeicher gebraucht wird.
+
 ![](mini-matrix-eeprom-prog-42.png)
 
 
