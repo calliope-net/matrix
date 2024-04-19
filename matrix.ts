@@ -44,7 +44,7 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 
 
-    // ========== group="OLED Display I²C"
+    // ========== group="Hilfe: calliope-net.github.io/matrix" color="#007FFF"
 
     //% group="Hilfe: calliope-net.github.io/matrix" color="#007FFF"
     //% block="I²C beim Start %pPages || invert %pInvert drehen %pFlip %i2c" weight=9
@@ -130,8 +130,11 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     }
 
 
+
+    // ========== group="Hilfe: calliope-net.github.io/matrix" color="#007FFF" advanced=true
+
     //% group="Hilfe: calliope-net.github.io/matrix" color="#007FFF" advanced=true
-    //% block="I²C Matrix auf Display anzeigen (nur geänderte Zeilen) || %i2c" weight=5
+    //% block="I²C in Matrix geänderte Zeilen auf Display anzeigen || %i2c" weight=5
     export function displayMatrixChangedPages(i2c = eI2C.I2C_x3C) {
         for (let page = 0; page < (i2c == eI2C.I2C_x3D ? qPages3D : qPages3C); page++) {
             if (qChangedPages[page]) {
@@ -141,9 +144,6 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         }
         control.waitMicros(50)
     }
-
-
-
 
 
 
