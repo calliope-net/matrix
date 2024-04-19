@@ -396,7 +396,7 @@ Block **zeichne Uhr** (Mittelpunkt x, y, Radius, Stunde, Minute)
 * Verwendet die oben beschriebenen Funktionen, um eine komplette analoge Uhr zu zeichnen.
 * *Stunde* und *Minute* geben die Stellung der Uhrzeiger an.
 * Für die aktuelle Zeit kann die Erweiterung [calliope-net/rtc-uhr](https://calliope-net.github.io/rtc-uhr) zusätzlich an den I²C-Bus angesteckt werden.
-
+Auf dem Foto oben ist alles zu sehen.
 
 
 #### EEPROM
