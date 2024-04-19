@@ -62,6 +62,15 @@ namespace matrix { // advanced.ts
     }
 
     //% group="Funktionen" advanced=true
+    //% block="wandle %pNumber um in HEX %pFormat" weight=4
+    //% pFormat.defl=NumberFormat.UInt16BE
+    export function formatHex(pNumber: number, pFormat: NumberFormat) {
+        let bu = Buffer.create(Buffer.sizeOfNumberFormat(pFormat))
+        bu.setNumber(pFormat, 0, pNumber)
+        return bu.toHex()
+    }
+
+    //% group="Funktionen" advanced=true
     //% block="π" weight=2
     export function pi() { return Math.PI }
 

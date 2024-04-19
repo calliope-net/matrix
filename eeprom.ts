@@ -4,9 +4,6 @@ namespace matrix { // eeprom.ts
     export enum eI2Ceeprom { EEPROM_x50 = 0x50 }
     export enum eEEPROM_Startadresse { F800 = 0xF800, FC00 = 0xFC00, F000 = 0xF000, F400 = 0xF400 }
 
-    //% blockId=matrix_eEEPROM_Startadresse block="%p" blockHidden=true
-    export function matrix_eEEPROM_Startadresse(p: eEEPROM_Startadresse): number { return p }
-
     // I2C EEPROM nur lesen -> in Buffer
     function i2cReadEEPROM(eeprom_location: number, size: number, i2c = eI2Ceeprom.EEPROM_x50): Buffer {
         if (between(eeprom_location, 0, 65536 - size)) {
@@ -136,6 +133,11 @@ namespace matrix { // eeprom.ts
         }
         return count
     }
+
+    //% blockId=matrix_eEEPROM_Startadresse 
+    //% group="Test Funktionen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="%p" weight=3
+    export function matrix_eEEPROM_Startadresse(p: eEEPROM_Startadresse): number { return p }
 
 
 
