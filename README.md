@@ -408,7 +408,7 @@ Auf dem Foto oben ist alles zu sehen.
 Block **Text** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, vergrößern x, y, EEPROM Startadresse, I²C Adresse)
 
 * Dieser Block schreibt Text in die Matrix. Der Parameter *Text* kann Zeichencodes von 0 bis 255 enthalten, wenn dafür Zeichen "Bitmuster" im EEPROM programmiert sind. Im EEPROM sind 8x8 Pixel pro Zeichen gespeichert.
-* Aktuell sind alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten. Diese Zeichen sind 5x8 Pixel breit + 3x8 Pixel weißer Rand.
+* Aktuell sind alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten. Diese Zeichen sind 5x8 Pixel breit + 3x8 Pixel rechter Rand.
 * Im EEPROM sind dafür die letzten 2 KB F800-FFFF reserviert. Die *EEPROM Startadresse* F800 kann geändert werden.
 * Die 96 ASCII-Zeichen belegen F900-FBFF. Die Umlaute stehen ab FC00 an ihrer entsprechenden Code-Position. (Calliope kennt nur 8-Bit Zeichencodes 0..255. Beim Simulator kann das anders sein!)
 * Ebenfalls kann die *I²C Adresse* des EEPROM geändert werden.
