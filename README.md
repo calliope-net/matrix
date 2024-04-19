@@ -11,7 +11,7 @@ Diese Seite bei [https://calliope-net.github.io/matrix/](https://calliope-net.gi
 
 > Text pixelgenau positionieren, drehen, spiegeln, in verschiedene Richtungen zeichnen
 
-> Bilder (auch Text-Zeichen sind Bilder 5x8) vergrößern (in x und y Richtung getrennt strecken)
+> Bilder (auch Text-Zeichen sind Bilder) vergrößern (in x und y Richtung getrennt strecken)
 
 > mehrere Bilder als Animation anzeigen
 
