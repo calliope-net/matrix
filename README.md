@@ -471,7 +471,7 @@ Block **EEPROM ab** (EEPROM Startadresse, Zeilen von, bis, Bytes, Code, I²C Adr
 * Die Anzahl *Bytes* wird ab der Startadresse in den EEPROM geschrieben. Bytes muss eine Zahl zwischen 1 und 128 sein.
 * *Zeilen von, bis* ist die Quelle der Daten in der Matrix. Es wird jede Zeile von links gelesen bis zur Anzahl *Bytes*.
 * Bei *Code* muss der Dezimalwert der *EEPROM Startadresse* wiederholt werden.
-* Ist ein Parameter ungültig oder unkompatibel, oder bei Fehler auf dem I²C-Bus, gibt die Funktion false zurück.
+* Ist ein Parameter ungültig oder inkompatibel, oder bei Fehler auf dem I²C-Bus, gibt die Funktion false zurück.
 
 > Mit dem folgenden MakeCode Programm kann der Zeichensatz aus dem Programmspeicher in einen EEPROM programmiert werden.
 * Das Programmieren würde auch ohne angeschlossenes Display funktionieren, weil nur die Matrix im RAM als Zwischenspeicher gebraucht wird.
