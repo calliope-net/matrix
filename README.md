@@ -409,6 +409,7 @@ Auf dem Foto oben ist alles zu sehen.
 
 > Die orange Blöcke funktionieren nur, wenn ein [SparkFun Qwiic EEPROM Breakout - 512Kbit](https://www.sparkfun.com/products/18355)
 > an den I²C-Bus angesteckt ist. Bestellt werden kann der EEPROM bei [digikey.de](https://www.digikey.de/de/products/detail/sparkfun-electronics/COM-18355/14825470) oder [mouser.de](https://www.mouser.de/ProductDetail/474-COM-18355).
+> Zwei [Qwiic Cable - Grove Adapter](https://www.mouser.de/ProductDetail/474-PRT-15109) müssen extra bestellt werden.
 
 ##### Text in Matrix zeichnen
 
