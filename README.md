@@ -407,9 +407,9 @@ Auf dem Foto oben ist alles zu sehen.
 
 Block **Text** (Zeile, Spalte, Text:any, Abstand x, y, überschreiben, vergrößern x, y, EEPROM Startadresse, I²C Adresse)
 
-* Dieser Block schreibt Text in die Matrix. Der Parameter *Text* kann Zeichencodes von 0 bis 255 enthalten, wenn dafür Zeichen "Bitmuster" im EEPROM programmiert sind.
-Aktuell sind alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
-* Im EEPROM sind dafür die letzten 2 KB F800-FFFF reserviert. Diese *EEPROM Startadresse* kann geändert werden.
+* Dieser Block schreibt Text in die Matrix. Der Parameter *Text* kann Zeichencodes von 0 bis 255 enthalten, wenn dafür Zeichen "Bitmuster" im EEPROM programmiert sind. Im EEPROM sind 8x8 Pixel pro Zeichen gespeichert.
+* Aktuell sind alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten. Diese Zeichen sind 5x8 Pixel breit + 3x8 Pixel weißer Rand.
+* Im EEPROM sind dafür die letzten 2 KB F800-FFFF reserviert. Die *EEPROM Startadresse* F800 kann geändert werden.
 * Die 96 ASCII-Zeichen belegen F900-FBFF. Die Umlaute stehen ab FC00 an ihrer entsprechenden Code-Position. (Calliope kennt nur 8-Bit Zeichencodes 0..255. Beim Simulator kann das anders sein!)
 * Ebenfalls kann die *I²C Adresse* des EEPROM geändert werden.
 * Die anderen Parameter sind [weiter oben](#text-in-matrix-zeichnen) beschrieben.
@@ -418,25 +418,25 @@ Aktuell sind alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € ° enthalten.
 > Der blaue und lila **Text** Block würden Speicherplatz verschwenden, der beim Programmspeicher fehlt.
 > **Auf einem MakeCode Bildschirm sollten also nie lila und orange Blöcke gleichzeitig sein!**
 
-##### Text in Bilder 5x8 umwandeln
+##### Text in Bilder 8x8 umwandeln
 
 Block **Image[] füllen aus Text** (Text:any, EEPROM Startadresse, I²C Adresse)
 
-* Dieser orange Block schreibt Text nicht direkt in die Matrix, sondern Zeichen für Zeichen als Bild in Image[].
+* Dieser orange Block schreibt Text nicht direkt in die Matrix, sondern Zeichen für Zeichen als Bild 8x8 in Image[].
 * Die einzelnen Bilder der Buchstaben können wie Bilder behandelt und z.B. pixelgenau positioniert werden. Mit den **Text** Blöcken geht das nur Zeilen- und Spaltenweise.
 * Dieser orange Block liest die "Bitmuster" der Text-Zeichen aus dem EEPROM und spart Programmspeicher.
 * Im EEPROM können 256 Zeichen je 8x8 Pixel programmiert werden.
 
+Block *setze bild auf* **Bild aus ASCII-Code** (charCode, EEPROM Startadresse, I²C Adresse)
 
-
-Block *setze bild auf* **Bild aus ASCII-Code** (charCode)
-
-* Dieser lila Block generiert aus allen 96 ASCII Zeichen (*charCode* 32-127) und Umlauten ein Bild 5x8 Pixel.
-* Es gibt unter EEPROM einen orange Block mit gleicher Funktion, der Programmspeicher spart (und noch mehr Zeichen ermöglicht).
-
+* Dieser orange Block generiert aus *charCode* 0..255 ein Bild 8x8 Pixel. Aktuell im EEPROM gespeichert sind nur alle 96 ASCII Zeichen und Ä Ö Ü ä ö ü ß € °
 
 
 ##### Bild aus EEPROM in Matrix zeichnen (128 Byte pro Zeile)
+
+Block **zeichne aus EEPROM** (EEPROM Startadresse, Zeilen von, bis, I²C Adresse)
+
+
 
 ##### Test Funktionen
 
