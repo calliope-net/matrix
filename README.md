@@ -436,7 +436,13 @@ Block *setze bild auf* **Bild aus ASCII-Code** (charCode, EEPROM Startadresse, I
 
 Block **zeichne aus EEPROM** (EEPROM Startadresse, Zeilen von, bis, I²C Adresse)
 
+* Kopiert aus dem EEPROM pro Zeile 128 Byte in die Matrix. Eine Zeile ist immer 8 Pixel hoch und 128 Pixel breit.
+* Das 128x64 Pixel Display hat 8 Zeilen = 1024 Byte. Damit können 1KB Daten aus dem EEPROM komplett in die Matrix kopiert werden.
+* Auf das 128x128 Pixel Display passen 2KB, das ist z.B. der gesamte Zeichensatz mit den Zeichencodes 0..255.
+* Der EEPROM bietet viel Speicherplatz, um mehrere Bilder, die das ganze Display füllen können, abzuspeichern.
 
+> Um die Daten aus dem EEPROM auf dem Display zu sehen, muss die Matrix noch mit dem hellblauen Block **Matrix auf Display anzeigen**
+> über den I²C-Bus an das Display gesendet werden.
 
 ##### Test Funktionen
 
