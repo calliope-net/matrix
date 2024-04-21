@@ -172,18 +172,19 @@ namespace matrix { // eeprom.ts
     // ==========  group="EEPROM schreiben und lesen" color="#FF7F3F" subcategory="EEPROM"
 
     //% group="EEPROM schreiben und lesen" color="#FF7F3F" subcategory="EEPROM"
-    //% block="EEPROM 1 Byte lesen Adresse %adr || %i2c" weight=6
-    export function readEEPROM(adr: number, i2c = eI2Ceeprom.EEPROM_x50) {
-        return i2cReadEEPROM(adr, 1, i2c).getUint8(0)
+    //% block="EEPROM lesen Adresse %adr Länge %size || %i2c" weight=6
+    export function readEEPROM(adr: number, size: number, i2c = eI2Ceeprom.EEPROM_x50): number[] {
+        return i2cReadEEPROM(adr, size, i2c).toArray(NumberFormat.UInt8LE)
     }
 
     //% group="EEPROM schreiben und lesen" color="#FF7F3F" subcategory="EEPROM"
-    //% block="EEPROM 1 Byte schreiben Adresse %adr Byte %byte || %i2c" weight=4
+    //% block="EEPROM schreiben Adresse %adr Bytes %bytes || %i2c" weight=4
     //% byte.min=0 byte.max=255
-    export function progEEPROM(adr: number, byte: number, i2c = eI2Ceeprom.EEPROM_x50) {
-        let bu = Buffer.create(3)
+    export function progEEPROM(adr: number, bytes: number[], i2c = eI2Ceeprom.EEPROM_x50) {
+        let bu = Buffer.create(2 + bytes.length)
         bu.setNumber(NumberFormat.UInt16BE, 0, adr)
-        bu.setUint8(2, byte)
+        bu.write(2, Buffer.fromArray(bytes))
+        // bu.setUint8(2, byte)
         if (pins.i2cWriteBuffer(i2c, bu) != 0) { // schreibt diese Bytes ab Startadresse in EEPROM
             basic.showNumber(i2c) // bei I²C Fehler die I²C Adresse anzeigen
             control.waitMicros(100000) // 100ms
