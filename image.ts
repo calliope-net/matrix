@@ -68,6 +68,20 @@ namespace matrix { // image.ts
             }
     }
 
+    // wird von EEPROM aufgerufen
+    export function writeImageinBuffer(im: Image): Buffer { // schreibt vom Image 8 Pixel hoch, geamte Breite, in Buffer
+        let bu = Buffer.create(im.width())
+        for (let ix = 0; ix < im.width(); ix++) { // x Breite des Image in Pixel
+            for (let iy = 0; iy < 8; iy++) {      // y Höhe wird nur 8 Pixel in 1 Byte geschrieben, Bit 0 ist oben
+                if (im.pixel(ix, iy))
+                    bu[ix] |= (2 ** iy) // 2^0 bis 2^7
+                //else
+                //    bu[ix] &= ~(2 ** iy) // kann weg gelassen werden, weil alle Bits 0 sind
+            }
+        }
+        return bu
+    }
+
 
     export enum eZeichenDrehen {
         //%block="nicht drehen"
@@ -137,7 +151,7 @@ namespace matrix { // image.ts
         //} // else
     }
 
-   
+
 
     // ========== group="Bild 5x8 aus Text Zeichen" subcategory="Bilder" ==========
 

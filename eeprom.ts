@@ -4,7 +4,7 @@ namespace matrix { // eeprom.ts
     export enum eI2Ceeprom { EEPROM_x50 = 0x50 }
     export enum eEEPROM_Startadresse { F800 = 0xF800, FC00 = 0xFC00, F000 = 0xF000, F400 = 0xF400 }
 
-    // I2C EEPROM nur lesen -> in Buffer
+    // I2C EEPROM lesen -> in Buffer
     function i2cReadEEPROM(eeprom_location: number, size: number, i2c = eI2Ceeprom.EEPROM_x50): Buffer {
         if (between(eeprom_location, 0, 65536 - size)) {
             let bu = Buffer.create(2)
@@ -14,6 +14,23 @@ namespace matrix { // eeprom.ts
         }
         else
             return Buffer.create(size)
+    }
+
+    // I2C  Buffer -> EEPROM programmieren
+    function i2cWriteEEPROM(eeprom_location: number, buData: Buffer, i2c = eI2Ceeprom.EEPROM_x50) {
+        if (between(eeprom_location, 0, 65536 - buData.length)) {
+            let bu = Buffer.create(2 + buData.length) // 2 Byte 16 Bit Adresse, dann die Daten Byte (length)
+            bu.setNumber(NumberFormat.UInt16BE, 0, eeprom_location)
+            bu.write(2, buData)
+            if (pins.i2cWriteBuffer(i2c, bu) != 0) { // schreibt diese Bytes ab Startadresse in EEPROM
+                basic.showNumber(i2c) // bei I²C Fehler die I²C Adresse anzeigen
+                control.waitMicros(100000) // 100ms
+                return false // und Abbruch
+            } else {
+                control.waitMicros(10000) // 10ms
+                return true
+            }
+        } else return false
     }
 
 
@@ -152,6 +169,17 @@ namespace matrix { // eeprom.ts
     export function burnEEPROM(hex: string, fromPage: number, toPage: number, length: number, code: number, i2c = eI2Ceeprom.EEPROM_x50) {
         let a0 = Buffer.fromHex(hex).getNumber(NumberFormat.UInt16BE, 0) // code muss der Dezimalwert von hex sein
         if (between(a0, 0, 65407) && a0 % 128 == 0 && a0 == code && between(length, 1, 128) && between(fromPage, 0, qMatrix.length - 1) && between(toPage, fromPage, qMatrix.length - 1)) {
+
+            for (let page = fromPage; page <= toPage; page++) { // page ist in der Matrix 8 Pixel hoch (y) und 128 Pixel breit (x)
+                if (!i2cWriteEEPROM(
+                    a0 + (page - fromPage) * 128, // EEPROM Startadresse 16 Bit
+                    qMatrix[page].slice(cOffset, length), i2c) // holt aus Matrix von links (x=0) 1 bis 128 Byte (length)
+                )
+                    return false // bei I²C Fehler die I²C Adresse anzeigen und Abbruch
+            }
+            return true // erfolgreich programmiert
+
+            /* 
             let bu = Buffer.create(2 + length) // 2 Byte 16 Bit Adresse, dann die Daten Byte (length)
             for (let page = fromPage; page <= toPage; page++) { // page ist in der Matrix 8 Pixel hoch (y) und 128 Pixel breit (x)
                 bu.setNumber(NumberFormat.UInt16BE, 0, a0 + (page - fromPage) * 128) // EEPROM Startadresse 16 Bit
@@ -163,8 +191,10 @@ namespace matrix { // eeprom.ts
                 control.waitMicros(10000) // 10ms
             }
             return true // erfolgreich programmiert
+             */
+
         } else
-            return false // nicht programmiert, weil nicht alle Bedingungen erfüllt
+            return false // nicht programmiert, weil nicht alle Bedingungen erfüllt sind
     }
 
 
@@ -181,18 +211,33 @@ namespace matrix { // eeprom.ts
     //% block="EEPROM schreiben Adresse %adr Bytes %bytes || %i2c" weight=4
     //% byte.min=0 byte.max=255
     export function progEEPROM(adr: number, bytes: number[], i2c = eI2Ceeprom.EEPROM_x50) {
-        let bu = Buffer.create(2 + bytes.length)
-        bu.setNumber(NumberFormat.UInt16BE, 0, adr)
-        bu.write(2, Buffer.fromArray(bytes))
-        // bu.setUint8(2, byte)
-        if (pins.i2cWriteBuffer(i2c, bu) != 0) { // schreibt diese Bytes ab Startadresse in EEPROM
-            basic.showNumber(i2c) // bei I²C Fehler die I²C Adresse anzeigen
-            control.waitMicros(100000) // 100ms
-            return false // und Abbruch
-        } else {
-            control.waitMicros(10000) // 10ms
-            return true
-        }
+        return i2cWriteEEPROM(adr, Buffer.fromArray(bytes), i2c)
+        /* 
+                let bu = Buffer.create(2 + bytes.length)
+                bu.setNumber(NumberFormat.UInt16BE, 0, adr)
+                bu.write(2, Buffer.fromArray(bytes))
+                // bu.setUint8(2, byte)
+                if (pins.i2cWriteBuffer(i2c, bu) != 0) { // schreibt diese Bytes ab Startadresse in EEPROM
+                    basic.showNumber(i2c) // bei I²C Fehler die I²C Adresse anzeigen
+                    control.waitMicros(100000) // 100ms
+                    return false // und Abbruch
+                } else {
+                    control.waitMicros(10000) // 10ms
+                    return true
+                } */
     }
+
+
+
+    //% group="EEPROM schreiben und lesen" color="#FF7F3F" subcategory="EEPROM"
+    //% block="eigenes Text-Zeichen programmieren charCode %charCode %im || %eepromStartadresse %i2c" weight=3
+    //% charCode.min=128 charCode.max=255 charCode.defl=128
+    //% eepromStartadresse.shadow="matrix_eEEPROM_Startadresse"
+    // inlineInputMode=inline
+    export function burnChar(charCode: number, im: Image, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50) {
+        if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
+        return i2cWriteEEPROM(eepromStartadresse + charCode * 8, writeImageinBuffer(im), i2c)
+    }
+
 
 } // eeprom.ts
