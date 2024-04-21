@@ -236,7 +236,10 @@ namespace matrix { // eeprom.ts
     // inlineInputMode=inline
     export function burnChar(charCode: number, im: Image, eepromStartadresse?: number, i2c = eI2Ceeprom.EEPROM_x50) {
         if (!eepromStartadresse) eepromStartadresse = eEEPROM_Startadresse.F800
-        return i2cWriteEEPROM(eepromStartadresse + charCode * 8, writeImageinBuffer(im), i2c)
+        if (between(charCode, 128, 255) || between(charCode, 0, 31))
+            return i2cWriteEEPROM(eepromStartadresse + charCode * 8, writeImageinBuffer(im), i2c)
+        else
+            return false
     }
 
 
