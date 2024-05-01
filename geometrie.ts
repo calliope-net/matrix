@@ -4,7 +4,7 @@ namespace matrix { // geometrie.ts
 
 
     //% group="Linie, Fläche in Matrix zeichnen" subcategory="Geometrie"
-    //% block="Linie von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel" weight=6
+    //% block="Linie von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel debug %debug" weight=6
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% debug.shadow="toggleOnOff"
     //% inlineInputMode=inline
