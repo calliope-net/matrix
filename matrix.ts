@@ -167,9 +167,11 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 
     //% group="Matrix: für Pixel reservierter RAM"
-    //% block="set Pixel x %x y %y %pixel" weight=8
+    //% block="set Pixel x %x y %y %pixel || debug %debug" weight=8
     //% pixel.shadow="toggleOnOff" pixel.defl=1
-    export function setPixel(x: number, y: number, pixel: boolean) {
+    //% debug.shadow="toggleOnOff"
+    //% inlineInputMode=inline
+    export function setPixel(x: number, y: number, pixel: boolean, debug = false) {
         if (between(x, 0, cx - 1) && between(y, 0, qMatrix.length * 8 - 1)) {
             let page = y >> 3 // um 3 Bit nach rechts entspricht Division durch 8
             let exp = y & 7 // bitwise AND letze 3 Bit = 0..7
@@ -178,6 +180,11 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
             else
                 qMatrix[page][cOffset + x] &= ~(2 ** exp)
             qChangedPages[page] = true
+        } else if (debug && !between(x, 0, cx - 1)) {
+            basic.showString("x " + x)
+        }
+        else if (debug && !between(y, 0, qMatrix.length * 8 - 1)) {
+            basic.showString("y " + y)
         }
     }
 

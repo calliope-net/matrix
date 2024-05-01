@@ -3,13 +3,12 @@ namespace matrix { // geometrie.ts
 
 
 
-
-
     //% group="Linie, Fläche in Matrix zeichnen" subcategory="Geometrie"
     //% block="Linie von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel" weight=6
     //% pixel.shadow="toggleOnOff" pixel.defl=1
+    //% debug.shadow="toggleOnOff"
     //% inlineInputMode=inline
-    export function line(x0: number, y0: number, x1: number, y1: number, pixel?: boolean) {
+    export function line(x0: number, y0: number, x1: number, y1: number, pixel = true, debug = false) {
         x0 = Math.round(x0)
         y0 = Math.round(y0)
         x1 = Math.round(x1)
@@ -21,7 +20,7 @@ namespace matrix { // geometrie.ts
         let err = dx + dy, e2; // error value e_xy
 
         while (true) {
-            setPixel(x0, y0, pixel)
+            setPixel(x0, y0, pixel, debug)
             if (x0 == x1 && y0 == y1) break;
             e2 = 2 * err;
             if (e2 > dy) { err += dy; x0 += sx; } // e_xy+e_x > 0
@@ -33,7 +32,7 @@ namespace matrix { // geometrie.ts
     //% block="Rechteck von x %x0 y %y0 bis x %x1 y %y1 || Pixel %pixel" weight=5
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
-    export function rectangle(x0: number, y0: number, x1: number, y1: number, pixel?: boolean) {
+    export function rectangle(x0: number, y0: number, x1: number, y1: number, pixel = true) {
         line(x0, y0, x1, y0, pixel)
         line(x1, y0, x1, y1, pixel)
         line(x1, y1, x0, y1, pixel)
@@ -44,7 +43,7 @@ namespace matrix { // geometrie.ts
     //% block="Kreis Mittelpunkt x %x0 y %y0 Radius %radius || Pixel %pixel" weight=2
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
-    export function rasterCircle(x0: number, y0: number, radius: number, pixel?: boolean) {
+    export function rasterCircle(x0: number, y0: number, radius: number, pixel = true) {
         x0 = Math.round(x0)
         y0 = Math.round(y0)
         radius = Math.round(radius)
@@ -89,7 +88,7 @@ namespace matrix { // geometrie.ts
     //% block="12 Stunden %hour Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel" weight=8
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
-    export function hour_mark(hour: number, x: number, y: number, l0: number, l1: number, pixel?: boolean) {
+    export function hour_mark(hour: number, x: number, y: number, l0: number, l1: number, pixel = true) {
         minute_mark(Math.imul(hour, 5), x, y, l0, l1, pixel)
         /* 
           if (between(hour, 0, 11))
@@ -106,7 +105,7 @@ namespace matrix { // geometrie.ts
     //% block="60 Minuten %minute Mittelpunkt x %x y %y Linie %l0 - %l1 || Pixel %pixel" weight=7
     //% pixel.shadow="toggleOnOff" pixel.defl=1
     //% inlineInputMode=inline
-    export function minute_mark(minute: number, x: number, y: number, l0: number, l1: number, pixel?: boolean) {
+    export function minute_mark(minute: number, x: number, y: number, l0: number, l1: number, pixel = true) {
         /* 
                 if (between(minute, 0, 14))
                     minute += 45
