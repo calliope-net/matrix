@@ -147,8 +147,22 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
 
 
 
-    // ========== group="Matrix im Speicher"
+    // ========== group="Matrix: für Pixel reservierter RAM" advanced=true
 
+    //% group="Matrix: für Pixel reservierter RAM" advanced=true
+    //% block="in Matrix geänderte Zeilen löschen" weight=4
+    export function clearMatrixChangedPages() {
+        for (let page = 0; page <= qMatrix.length - 1; page++) {
+            if (qChangedPages[page]) { // löscht eine geänderte Zeile der Matrix nur im Buffer ab offset 7 bis zum Ende
+                qMatrix[page].fill(0, cOffset)
+                // qChangedPages[page] = true
+            }
+        }
+    }
+
+
+
+    // ========== group="Matrix: für Pixel reservierter RAM"
 
     //% group="Matrix: für Pixel reservierter RAM"
     //% block="Matrix löschen || Zeilen von %fromPage bis %toPage" weight=9
@@ -158,25 +172,11 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
     export function clearMatrix(fromPage = 0, toPage = 15) {
         fromPage = Math.constrain(fromPage, 0, qMatrix.length - 1)
         toPage = Math.constrain(toPage, fromPage, qMatrix.length - 1)
-        for (let page = fromPage; page <= toPage; page++) {// löscht eine Zeile der Matrix ab 7 bis zum Ende
+        for (let page = fromPage; page <= toPage; page++) { // löscht eine Zeile der Matrix nur im Buffer ab offset 7 bis zum Ende
             qMatrix[page].fill(0, cOffset)
             qChangedPages[page] = true
         }
     }
-
-
-    //% group="Matrix: für Pixel reservierter RAM" advanced=true
-    //% block="in Matrix geänderte Zeilen löschen" weight=4
-    export function clearMatrixChangedPages() {
-        for (let page = 0; page <= qMatrix.length - 1; page++) {
-            if (qChangedPages[page]) {
-                qMatrix[page].fill(0, cOffset)
-                // qChangedPages[page] = true
-            }
-        }
-    }
-
-
 
     //% group="Matrix: für Pixel reservierter RAM"
     //% block="set Pixel x %x y %y %pixel || debug %debug" weight=8
