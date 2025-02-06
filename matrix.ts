@@ -160,6 +160,20 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
         }
     }
 
+    //% group="Matrix: für Pixel reservierter RAM" advanced=true
+    //% block="in Matrix nicht leere Zeilen löschen" weight=3
+    export function clearMatrixUnclearPages() {
+        for (let page = 0; page < qMatrix.length; page++) {
+            for (let offset = cOffset; offset < cOffset + cx; offset++) { // offset 7...135
+                if (qMatrix[page].getUint8(offset) != 0) {
+                    // wenn ein Byte in der Matrix nicht 0 ist, wird die ganze Zeile (page) gelöscht
+                    qMatrix[page].fill(0, cOffset)
+                    qChangedPages[page] = true
+                    break // beendet (hoffentlich nur) die eine for Schleife
+                }
+            }
+        }
+    }
 
 
     // ========== group="Matrix: für Pixel reservierter RAM"
