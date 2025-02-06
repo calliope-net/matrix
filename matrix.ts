@@ -162,8 +162,20 @@ https://files.seeedstudio.com/wiki/Grove-OLED-Display-1.12-(SH1107)_V3.0/res/SH1
             qMatrix[page].fill(0, cOffset)
             qChangedPages[page] = true
         }
-        // fillMatrix(fromPage, toPage)
     }
+
+
+    //% group="Matrix: für Pixel reservierter RAM" advanced=true
+    //% block="in Matrix geänderte Zeilen löschen" weight=4
+    export function clearMatrixChangedPages() {
+        for (let page = 0; page <= qMatrix.length - 1; page++) {
+            if (qChangedPages[page]) {
+                qMatrix[page].fill(0, cOffset)
+                // qChangedPages[page] = true
+            }
+        }
+    }
+
 
 
     //% group="Matrix: für Pixel reservierter RAM"
