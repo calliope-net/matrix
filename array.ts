@@ -67,6 +67,7 @@ namespace matrix { // array.ts
 
     //% group="Image[] in Matrix zeichnen" subcategory="Bilder Array"
     //% block="8x8 %images %drehen" weight=5
+    //% images.shadow=matrix_Images
     export function imageArrayDrehen(images: Image[], drehen: eZeichenDrehen) {
         let images1: Image[] = []
         for (let i = 0; i < images.length; i++) {
